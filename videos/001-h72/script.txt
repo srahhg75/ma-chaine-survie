@@ -1,0 +1,40 @@
+# H+72 — Partie 1 « Neuf litres » (même texte que script.md, section 1, avec les marqueurs du pipeline)
+@hook Que feriez-vous si votre robinet crachait de l'air ?
+@hook2 Et qu'il vous restait *neuf litres* d'eau ?
+@recap1 Trois jours sans électricité dans toute la ville.
+@recap2 Sans courant, la pompe de l'immeuble s'arrête.
+@recap3 L'eau ne monte plus au sixième, chez Inès.
+@promesse Inès connaît trois réserves cachées.
+@promesse2 La dernière vaut *deux cents litres*.
+@t1 Un : manger mouillé.
+@t1a Pêches au sirop, ananas, haricots en boîte.
+@t1b Leur jus hydrate.
+@t1c Et zéro _chips_, zéro _saucisson_.
+@t1d Le _sel_ donne soif.
+@t2 Deux : les toilettes.
+@t2a Une chasse d'eau, c'est *neuf litres*.
+@t2b Toute sa réserve, d'un coup.
+@t2c Alors elle se lave au-dessus d'une bassine.
+@t2d Et cette eau sale finit dans la cuvette.
+@t2e Versée d'un coup, la cuvette se vide.
+@t3 Trois : le ballon d'eau chaude.
+@t3a *Deux cents litres*, dans le placard.
+@t3b On coupe son disjoncteur.
+@t3c On ferme l'eau froide.
+@t3d On ouvre un robinet d'eau chaude.
+@t3e Et on vide par le robinet du bas.
+@t3f Un filtre à café retient les dépôts.
+@erreur Surtout, _jamais_ l'eau des radiateurs.
+@erreur2 Elle tourne en circuit fermé depuis des années.
+@erreur3 Brune, pleine de produits anti-rouille.
+@erreur4 Même bouillie, elle n'est _pas potable_.
+@calme Inès, elle, est tranquille.
+@calme2 Son ballon est plein.
+@garde Elle part pour *douze heures* de garde.
+@retour Six heures du matin. Elle rentre.
+@ouvre Elle ouvre le robinet du bas.
+@rien Pas une goutte.
+@chute > Le ballon est _vide_.
+@sec Le sol est sec.
+@vide Quelqu'un l'a vidé, pendant sa garde.
+@fin Elle a la _seule clé_.
