@@ -135,3 +135,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — Machine redémarrée (code 137, mémoire saturée) pendant un rendu `--concurrency=4`** (serveur 4 cœurs,
   15 Go, rendu 3D logiciel). Règle : ne jamais dépasser la concurrence par défaut (2) sur ce serveur ; rendre les
   longues vidéos par tranches (`--frames=a-b`) en tâche de fond, et sauvegarder (commit + push) avant chaque gros rendu.
+- **2026-10-24 — Voyant de la pompe passé au rouge APRÈS le départ de la caméra** (l'arrêt n'était jamais montré).
+  Règle : tout changement d'état qui raconte quelque chose (voyant, porte, niveau d'eau) se produit sur le plan tenu,
+  au plus tard 0,5 s avant le départ du plan suivant ; le vérifier sur une image prise juste avant ce départ.
+- **2026-10-24 — RÉCIDIVE `pkill -f` : ma propre commande tuée** (motif « final.sh » écrit dans la commande).
+  Règle (rappel) : `pgrep -a` dans une commande, puis `kill <pid>` dans une AUTRE commande ; jamais `pkill -f`.

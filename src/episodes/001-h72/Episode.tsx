@@ -172,9 +172,9 @@ const Immeuble: React.FC<{ eau: number; pompe: number; loin: boolean }> = ({ eau
         <Arrondi taille={[0.34, 0.42, 0.14]} position={[0.3, 1.25, -0.25]} rayon={0.02} couleur="#c9c6be" />
         <mesh position={[0.3, 1.33, -0.17]}>
           <sphereGeometry args={[0.035, 12, 12]} />
-          <meshBasicMaterial color={pompe > 0 ? "#3dff6a" : "#ff2a1e"} toneMapped={false} />
+          <meshBasicMaterial color={pompe >= 1 ? "#3dff6a" : "#ff2a1e"} toneMapped={false} />
         </mesh>
-        <pointLight position={[0.3, 1.33, 0.0]} intensity={0.6} distance={1.6} color={pompe > 0 ? "#3dff6a" : "#ff2a1e"} />
+        <pointLight position={[0.3, 1.33, 0.0]} intensity={0.6} distance={1.6} color={pompe >= 1 ? "#3dff6a" : "#ff2a1e"} />
         {/* raccord vers la colonne */}
         <mesh position={[0.3, 0.75, -0.25]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.04, 0.04, 0.6, 10]} />
