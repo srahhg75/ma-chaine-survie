@@ -126,7 +126,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   vérifier cette durée avec `tools/cadrage.ts` (colonne « a→b ») : au moins 0,8 s pour un plan qui porte une info.
 - **2026-10-24 — Fantôme entre la caméra et le sujet** (radiateur : le fantôme rouge remplissait tout l'écran en gros plan).
   Règle : le fantôme se place À CÔTÉ de l'objet du mauvais geste (de profil), jamais sur l'axe caméra → sujet.
-- **2026-10-24 — Lampe torche qui brûle l'image en plan rapproché.** Règle : `lampe.puissance` 0,3 environ pour une
+- **2026-10-24 — Lampe torche qui brûle l'image en plan rapproché.** Règle : `lampe.puissance` 0,07 à 0,3 pour une
   lampe portée dans un petit décor (salle d'eau, placard) ; regarder chaque plan de nuit en image fixe.
 - **2026-10-24 — Porte de placard ouverte qui masquait le lavabo pendant les étiquettes.** Règle : une porte qui
   s'ouvre pivote du côté opposé aux éléments à montrer (charnière côté mur ou côté hors champ).

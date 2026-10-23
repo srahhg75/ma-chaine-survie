@@ -24,3 +24,4 @@ qc/**/*.jpg
 qc/**/*.log
 qc/**/earshot_timeline.json
 sauvegardes/
+videos/**/tranches/

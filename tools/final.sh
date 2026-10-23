@@ -20,12 +20,13 @@ npx tsx tools/qc.ts "$EP" > /dev/null || { echo "Contrôle visuel en échec : vo
 .venv/bin/python tools/qc_audio.py "$EP" > /dev/null || { echo "Contrôle audio en échec : voir $QC/rapport_audio.md"; exit 1; }
 
 etape "2. Rendu pleine résolution"
-npx remotion render src/index.ts "$COMP" "$OUT/rendu.mp4" --log=error || exit 1
+# par tranches, avec reprise (un rendu complet dure des heures sans carte graphique)
+bash tools/rendu_tranches.sh "$EP" || exit 1
 
 etape "3. Encodage final (vidéo x264 ≤ 12 Mb/s + master audio mix.wav en AAC 320 kb/s)"
 # Vidéo réencodée en x264 CRF 18 plafonné à 12 Mb/s (le grain rend sinon le fichier énorme : ~46 Mb/s)
 ffmpeg -v error -y -i "$OUT/rendu.mp4" -i "public/$EP/mix.wav" -map 0:v -map 1:a -c:v libx264 -crf 18 -maxrate 12M -bufsize 24M -preset slow -pix_fmt yuv420p -profile:v high -c:a aac -b:a 320k -ar 48000 -shortest -movflags +faststart "$OUT/final.mp4" || exit 1
-rm -f "$OUT/rendu.mp4"
+rm -rf "$OUT/rendu.mp4" "$OUT/tranches"
 
 etape "4. Vérifications du fichier final"
 INFO=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 "$OUT/final.mp4")
