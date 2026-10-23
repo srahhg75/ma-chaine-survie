@@ -1,0 +1,57 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/03d83e6e4521.wav: downlifter/sub_sink seed 579362556: 1.787 s, onset 0.006 s, peak at 0.152 s, end 1.674 s, -1.0 dBFS, -8.3 LUFS momentary max; checks: clean",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/03d83e6e4521.wav",
+ "meta": {
+  "id": "downlifter/sub_sink",
+  "seed": 579362556,
+  "sr": 48000,
+  "onset_s": 0.0062,
+  "peak_s": 0.1525,
+  "end_s": 1.674,
+  "dur_s": 1.7871,
+  "peak_db": -1.0,
+  "lufs_m_max": -8.3,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "downlifter/sub_sink: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -147.9,
+    "ring_z": 3.4,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 1.6,
+    "attack_ms": 16.0,
+    "t40_ms": 1550.0,
+    "crest_db": 7.0,
+    "res_db": 4.5,
+    "res_hz": 1115,
+    "peak_dbfs": -1.0,
+    "live_ms": 1467.0
+   },
+   "glide": {
+    "tonal_share": 1.0,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.058
+    ],
+    "count": 1,
+    "pre_swell_ms": 10.0
+   },
+   "context": {
+    "category": "downlifter",
+    "sound": "downlifter/sub_sink"
+   }
+  }
+ }
+}

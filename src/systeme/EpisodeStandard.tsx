@@ -10,7 +10,8 @@ import { EclairageBase } from "./kit3d/Lumieres";
 import { PostProcess } from "./kit3d/PostProcess";
 import { Alignement } from "./mots";
 import { Bonhomme } from "./personnage/Bonhomme";
-import { etatPersonnage } from "./personnage/trajet";
+import { etatPersonnage, opaciteFantome } from "./personnage/trajet";
+import { Fantome } from "./kit3d/Fantome";
 import { SousTitres } from "./SousTitres";
 
 export type PropsEpisode = {
@@ -27,7 +28,14 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
     <>
       {r.personnages.map((p) => {
         const e = etatPersonnage(p, frame, fps);
-        return <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} taille={p.taille} variante={p.variante} />;
+        const corps = <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} taille={p.taille} variante={p.variante} />;
+        return p.fantome ? (
+          <Fantome key={p.id} opacite={opaciteFantome(p, frame, fps)}>
+            {corps}
+          </Fantome>
+        ) : (
+          corps
+        );
       })}
     </>
   );

@@ -16,10 +16,10 @@ export type ElementHud =
   | (Base & { type: "moodles"; moodles: { nom: NomMoodle; niveau: 1 | 2 | 3 | 4 }[] })
   | (Base & { type: "fiche"; icone: NomIcone; titre: string; lignes: string[]; point?: Vec3; cote?: "gauche" | "droite" })
   | (Base & { type: "tactique"; numero: number; total: number; titre: string })
-  | (Base & { type: "inventaire"; objets: { icone: NomIcone; quantite?: number; nom?: string }[]; surligne?: number })
+  | (Base & { type: "inventaire"; objets: { icone: NomIcone; quantite?: number; unite?: string; nom?: string }[]; surligne?: number })
   | (Base & { type: "compte"; secondes: number; titre?: string })
   | (Base & { type: "etiquette"; texte: string; point: Vec3; style?: StyleMot })
-  | (Base & { type: "carton"; partie: number; titre: string; verifie: string });
+  | (Base & { type: "carton"; partie: number; titre: string; verifie: string; question?: string; choix?: [string, string] });
 
 export type TypeHud = ElementHud["type"];
 export type ElementHudResolu = ElementHud & { fDe: number; fA: number; index: number };

@@ -29,8 +29,8 @@ src/systeme/              MOTEUR PARTAGÉ (réutilisé par tous les épisodes)
   camera.ts / CameraRig   images-clés « déplacement → plan tenu » (accélérations douces) + project() 3D -> pixels
   episode.ts              type DonneesEpisode (tout en données) + résolution des ancres en images
   EpisodeStandard.tsx     rendu complet d'un épisode (3D, personnages, post-traitement, HUD, sous-titres, son)
-  SousTitres.tsx          karaoké Montserrat 900, 2-4 mots, gris -> blanc, mots-clés jaune #FFC93C / rouge #FF3B30
-  kit3d/                  decor.ts (pièces en coupe, meubles, obstacles), textures procédurales, Piece, Meubles,
+  SousTitres.tsx          karaoké Montserrat 900, 2-4 mots, chaque mot apparaît quand il est dit, mots-clés jaune #FFC93C / rouge #FF3B30
+  kit3d/                  decor.ts (pièces en coupe, meubles, obstacles), textures procédurales, Piece, Meubles, Fantome (mauvais réflexe en rouge hachuré),
                           Exterieur (ville nocturne, ciel, neige), Lumieres (bougie, lampe torche), PostProcess
   personnage/             Bonhomme (personnage de la chaîne), poses.ts, trajet.ts (marche, pas de téléportation),
                           BancEssai (chaque pose sous 4 angles : composition « banc-essai »)

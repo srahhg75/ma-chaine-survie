@@ -111,3 +111,13 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   Règle : la voix se dépose via GitHub (« ··· » → Upload file, sur la branche de travail) ; Claude la convertit en
   `videos/NNN-nom/voix_brute.wav` (`ffmpeg -ar 48000 -c:a pcm_s16le`), la retire de la racine et note dans
   `videos/NNN-nom/script.md` le commit d'envoi pour la récupérer (`git show <commit>:"<nom>" > voix.mp3`).
+- **2026-10-24 — Sujet caché par un MEUBLE (H+72) : le frigo masquait le robinet du hook ; des bouteilles cachaient
+  le corps d'Inès.** `tools/qc.ts` ne testait que les murs. Règle : déclarer chaque meuble dans `decor.meubles`
+  (même dessiné à part, avec `invisible: true`) ; `tools/qc.ts` bloque désormais « Sujet caché par un meuble » ;
+  ne jamais poser d'objets hauts entre la caméra et le personnage (table : objets sur le côté, pas devant lui).
+- **2026-10-24 — Cadrage à tâtons trop lent (33 plans).** Règle : cadrer avec `plan(sujet, { azimut, elevation,
+  distance, fov, x, y })` de `src/systeme/camera.ts` (le sujet tombe où on veut à l'écran, par défaut x=500, y=620)
+  et contrôler avec `npx tsx tools/cadrage.ts NNN-nom` (position à l'écran de la tête, des pieds et des repères P).
+- **2026-10-24 — Mixage interrompu : `pitch` hors de la plage du son** (knock/wood en C3, plage 250-2600 Hz).
+  Règle : avant de donner un `pitch` à un bruitage, lire sa plage avec `earshot sfx render <id> --pitch <note>`
+  (le message d'erreur donne la plage) ; sans besoin précis, ne pas mettre de `pitch`.

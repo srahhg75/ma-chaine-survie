@@ -1,0 +1,75 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/be4c4c7090a9.wav: knock/desk seed 1: 0.221 s, onset 0.001 s, peak at 0.024 s, end 0.200 s, -1.0 dBFS, -20.0 LUFS momentary max; pitch C4; checks: pitch C4: no clear partial near it in the render; the knob did not land the note (tolerance 50 cents)",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/be4c4c7090a9.wav",
+ "meta": {
+  "id": "knock/desk",
+  "seed": 1,
+  "sr": 48000,
+  "onset_s": 0.0005,
+  "peak_s": 0.0235,
+  "end_s": 0.2,
+  "dur_s": 0.2206,
+  "peak_db": -1.0,
+  "lufs_m_max": -19.96,
+  "edits": {
+   "pitch": {
+    "target_hz": 261.626,
+    "note": "C4",
+    "native_hz": 699.2,
+    "semitones": -17.02,
+    "param": "f1",
+    "params": {
+     "f1": 261.626
+    },
+    "measured_hz": null,
+    "ok": false
+   }
+  },
+  "checks": {
+   "ok": false,
+   "warnings": [
+    {
+     "code": "pitch_off",
+     "msg": "pitch C4: no clear partial near it in the render; the knob did not land the note (tolerance 50 cents)"
+    }
+   ],
+   "notes": [],
+   "summary": "knock/desk: 1 warning: pitch C4: no clear partial near it in the render; the knob did not land the note (tolerance 50 cents)",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -123.7,
+    "ring_z": 5.9,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 2.7,
+    "attack_ms": 9.0,
+    "t40_ms": 120.0,
+    "crest_db": 12.2,
+    "res_db": 6.1,
+    "res_hz": 2540,
+    "peak_dbfs": -1.0,
+    "live_ms": 118.5
+   },
+   "glide": {
+    "tonal_share": 0.89,
+    "rise_st": 0.6,
+    "from_s": 0.091,
+    "to_s": 0.096
+   },
+   "layers": {
+    "attacks": [
+     0.028
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "knock",
+    "sound": "knock/desk"
+   }
+  }
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/9c572201f70b.wav: knock/wood seed 1: 0.147 s, onset 0.012 s, peak at 0.017 s, end 0.132 s, -1.0 dBFS, -24.4 LUFS momentary max; pitch C4 (measured 284.0 Hz); checks: pitch C4: measured C#4 +42c (284.0 Hz, +142 cents); the knob did not land the note (tolerance 50 cents)",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/9c572201f70b.wav",
+ "meta": {
+  "id": "knock/wood",
+  "seed": 1,
+  "sr": 48000,
+  "onset_s": 0.0122,
+  "peak_s": 0.0165,
+  "end_s": 0.132,
+  "dur_s": 0.1466,
+  "peak_db": -1.0,
+  "lufs_m_max": -24.37,
+  "edits": {
+   "pitch": {
+    "target_hz": 261.626,
+    "note": "C4",
+    "native_hz": 400.0,
+    "semitones": -7.35,
+    "param": "f1",
+    "params": {
+     "f1": 261.626
+    },
+    "measured_hz": 283.96,
+    "cents_off": 142,
+    "ok": false
+   }
+  },
+  "checks": {
+   "ok": false,
+   "warnings": [
+    {
+     "code": "pitch_off",
+     "msg": "pitch C4: measured C#4 +42c (284.0 Hz, +142 cents); the knob did not land the note (tolerance 50 cents)"
+    }
+   ],
+   "notes": [],
+   "summary": "knock/wood: 1 warning: pitch C4: measured C#4 +42c (284.0 Hz, +142 cents); the knob did not land the note (tolerance 50 cents)",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -116.2,
+    "ring_z": 4.1,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 1.5,
+    "t40_ms": 100.0,
+    "crest_db": 16.7,
+    "res_db": 3.6,
+    "res_hz": 275,
+    "peak_dbfs": -1.0,
+    "live_ms": 76.25
+   },
+   "glide": {
+    "tonal_share": 0.75,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.022
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "knock",
+    "sound": "knock/wood"
+   }
+  }
+ }
+}

@@ -24,6 +24,7 @@ export type DonneesPersonnage = {
   lampe?: { de: Ancre; a?: Ancre }; // lampe torche allumée dans la main droite
   taille?: number; // défaut 1
   variante?: "bonhomme" | "heroine"; // personnage de la chaîne ou héroïne
+  fantome?: { de: Ancre; a: Ancre }; // « fantôme » rouge du mauvais réflexe, visible seulement de `de` à `a`
 };
 
 type Segment = { points: Vec3[]; longueur: number; fDepart: number; fArrivee: number; orientationFin?: number; orientationDebut: number };
@@ -35,6 +36,7 @@ export type PersonnageResolu = {
   poses: { f: number; pose: Exclude<NomPose, "marche">; transition: number }[];
   lampe?: [number, number];
   variante: "bonhomme" | "heroine";
+  fantome?: [number, number];
 };
 
 export type EtatPersonnage = { position: Vec3; orientation: number; pose: Pose; marche: boolean; lampe: boolean; vitesse: number };
@@ -67,6 +69,7 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
     segments,
     poses: (p.poses ?? []).map((k) => ({ f: image(k.a, al, fps), pose: k.pose, transition: k.transition ?? 0.35 })),
     lampe: p.lampe ? [image(p.lampe.de, al, fps), p.lampe.a !== undefined ? image(p.lampe.a, al, fps) : Infinity] : undefined,
+    fantome: p.fantome ? [image(p.fantome.de, al, fps), image(p.fantome.a, al, fps)] : undefined,
   };
 };
 
@@ -155,4 +158,12 @@ export const contactsPas = (r: PersonnageResolu, fps: number): number[] => {
     prec = Math.floor((cumul / (FOULEE * r.taille)) * 2 + 0.5);
   }
   return res;
+};
+
+// Opacité d'un fantôme (fondu de 0,25 s à l'entrée et à la sortie) ; 1 pour un personnage normal
+export const opaciteFantome = (r: PersonnageResolu, frame: number, fps: number) => {
+  if (!r.fantome) return 1;
+  const [f0, f1] = r.fantome;
+  const k = 0.25 * fps;
+  return clamp(Math.min((frame - f0) / k, (f1 - frame) / k));
 };

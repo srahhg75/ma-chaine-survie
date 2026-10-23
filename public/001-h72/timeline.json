@@ -1,0 +1,364 @@
+{
+ "episode": "001-h72",
+ "fps": 30,
+ "duree": 78.43333333333334,
+ "sons": [
+  {
+   "t": 2.04,
+   "id": "impact/deep",
+   "gain": -12
+  },
+  {
+   "t": 3.42,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 5.07,
+   "id": "whoosh_big/swell",
+   "gain": -7
+  },
+  {
+   "t": 8.85,
+   "id": "pro_sub_drop/low",
+   "gain": -3
+  },
+  {
+   "t": 10.65,
+   "id": "whoosh_big/deep",
+   "gain": -9
+  },
+  {
+   "t": 15.63,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 16.56,
+   "id": "pro_impact/short",
+   "gain": -10
+  },
+  {
+   "t": 22.521,
+   "id": "whoosh_fast/heavy",
+   "gain": -10
+  },
+  {
+   "t": 25.44,
+   "id": "pro_impact/short",
+   "gain": -10
+  },
+  {
+   "t": 27.818,
+   "id": "whoosh_big/thump_deep",
+   "gain": -8
+  },
+  {
+   "t": 35.34,
+   "id": "whoosh_big/gust",
+   "gain": -12
+  },
+  {
+   "t": 37.11,
+   "id": "pro_impact/short",
+   "gain": -10
+  },
+  {
+   "t": 40.98,
+   "id": "knock/desk",
+   "gain": -12
+  },
+  {
+   "t": 42.57,
+   "id": "knock/wood",
+   "gain": -14
+  },
+  {
+   "t": 50.43,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 58.08,
+   "id": "downlifter/sub_sink",
+   "gain": -9
+  },
+  {
+   "t": 63.620000000000005,
+   "id": "knock/desk",
+   "gain": -10
+  },
+  {
+   "t": 64.38,
+   "id": "whoosh_big/thump_deep",
+   "gain": -7
+  },
+  {
+   "t": 68.22,
+   "id": "riser/dark",
+   "gain": -14
+  },
+  {
+   "t": 69.66,
+   "id": "knock/wood",
+   "gain": -8,
+   "pitch": "C4"
+  },
+  {
+   "t": 69.99,
+   "id": "pro_sub_drop/low",
+   "gain": -3
+  },
+  {
+   "t": 74.13,
+   "id": "pro_impact/deep",
+   "gain": -4
+  },
+  {
+   "t": 75.13000000000001,
+   "id": "impact/deep",
+   "gain": -8
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 78.43,
+   "niveau": -1,
+   "fondu": 1
+  },
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 78.43,
+   "niveau": -2,
+   "fondu": 1.5
+  },
+  {
+   "type": "ville",
+   "de": 4.53,
+   "a": 9.63,
+   "niveau": 0,
+   "fondu": 0.6
+  },
+  {
+   "type": "coeur",
+   "de": 67.92,
+   "a": 78.43,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 84
+  }
+ ],
+ "pas": [
+  {
+   "t": 3.533333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 3.8,
+   "personnage": "ines"
+  },
+  {
+   "t": 4.033333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 16.333333333333332,
+   "personnage": "ines"
+  },
+  {
+   "t": 16.533333333333335,
+   "personnage": "ines"
+  },
+  {
+   "t": 16.733333333333334,
+   "personnage": "ines"
+  },
+  {
+   "t": 17.466666666666665,
+   "personnage": "ines"
+  },
+  {
+   "t": 17.666666666666668,
+   "personnage": "ines"
+  },
+  {
+   "t": 17.866666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 25.4,
+   "personnage": "ines"
+  },
+  {
+   "t": 25.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 25.766666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 25.966666666666665,
+   "personnage": "ines"
+  },
+  {
+   "t": 26.166666666666668,
+   "personnage": "ines"
+  },
+  {
+   "t": 26.366666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 26.533333333333335,
+   "personnage": "ines"
+  },
+  {
+   "t": 26.766666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 30.366666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 30.566666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 32.53333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 36.766666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.06666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.266666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.46666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.7,
+   "personnage": "ines"
+  },
+  {
+   "t": 40.46666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 40.666666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 42.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 42.833333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 43.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 44.166666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 57.43333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 57.766666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 58.1,
+   "personnage": "ines"
+  },
+  {
+   "t": 58.4,
+   "personnage": "ines"
+  },
+  {
+   "t": 58.733333333333334,
+   "personnage": "ines"
+  },
+  {
+   "t": 62.13333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 62.333333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 62.53333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 63.03333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 63.166666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 63.333333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 63.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 65.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 65.8,
+   "personnage": "ines"
+  },
+  {
+   "t": 66.03333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 66.23333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 66.7,
+   "personnage": "ines"
+  },
+  {
+   "t": 66.86666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 67,
+   "personnage": "ines"
+  },
+  {
+   "t": 67.13333333333334,
+   "personnage": "ines"
+  },
+  {
+   "t": 67.3,
+   "personnage": "ines"
+  }
+ ]
+}

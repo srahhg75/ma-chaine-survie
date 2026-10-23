@@ -183,6 +183,11 @@ for (let f = 0; f < r.duree; f++) {
   // Sujets : visibles, jamais cachés par le HUD ou les sous-titres
   for (const { nom, p, point } of sujetsEcran) {
     for (const b of obs) if (b.nature === "mur" && b.plein && segmentTraverse(cam.position, point, b)) signaler("Sujet derrière un mur", `${nom} caché par ${b.id}`, f);
+    // Meubles (visibles ou dessinés à part) entre la caméra et le sujet : on raccourcit le segment de 12 cm
+    // côté sujet (le sujet peut être posé sur le meuble ou contre lui)
+    const d = distance(cam.position, point);
+    const avant: Vec3 = d > 0.2 ? [point[0] + ((cam.position[0] - point[0]) * 0.12) / d, point[1] + ((cam.position[1] - point[1]) * 0.12) / d, point[2] + ((cam.position[2] - point[2]) * 0.12) / d] : point;
+    for (const m of meubles) if (!dansBoite(point, m, 0.02) && segmentTraverse(cam.position, avant, m)) signaler("Sujet caché par un meuble", `${nom} caché par ${m.id}`, f);
     if (!p.devant || p.x < 40 || p.x > LARGEUR - 40 || p.y < 40 || p.y > HAUTEUR - 40) {
       signaler("Sujet hors champ", `${nom} n'est pas (entièrement) à l'image`, f);
       continue;

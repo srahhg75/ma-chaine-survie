@@ -152,7 +152,7 @@ export const Inventaire: React.FC<Props<"inventaire">> = ({ e, r }) => (
         </div>
         {o.quantite !== undefined && (
           <span style={{ position: "absolute", right: 14, bottom: 10, fontFamily: POLICE_TEXTE, fontWeight: 900, fontSize: 24, color: "white", textShadow: "0 2px 4px #000" }}>
-            ×{o.quantite}
+            {o.unite ? `${o.quantite} ${o.unite}` : `×${o.quantite}`}
           </span>
         )}
       </div>
@@ -219,6 +219,22 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
         PARTIE {e.partie}
       </div>
       <div style={{ fontWeight: 900, fontSize: 76, lineHeight: 1.02, textTransform: "uppercase", textShadow: "0 6px 24px rgba(0,0,0,0.8)" }}>{e.titre}</div>
+      {e.question && (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginTop: 4 }}>
+          <div style={{ fontWeight: 900, fontSize: 40, textShadow: "0 4px 16px rgba(0,0,0,0.8)" }}>{e.question}</div>
+          {e.choix && (
+            <div style={{ display: "flex", gap: 16 }}>
+              {e.choix.map((c, i) => (
+                <div key={i} style={{ fontWeight: 800, fontSize: 28, padding: "10px 18px", borderRadius: 12, background: PANNEAU, border: `2px solid ${JAUNE}` }}>
+                  <span style={{ color: JAUNE, marginRight: 8 }}>{i === 0 ? "A" : "B"}</span>
+                  {c}
+                </div>
+              ))}
+            </div>
+          )}
+          <div style={{ fontWeight: 600, fontSize: 24, opacity: 0.85 }}>Réponds en commentaire · réponse dans la partie {e.partie}</div>
+        </div>
+      )}
       <div style={{ fontWeight: 800, fontSize: 34, marginTop: 10, padding: "14px 26px", border: "2px solid rgba(255,255,255,0.6)", borderRadius: 999 }}>ABONNE-TOI POUR LA SUITE</div>
       <div style={{ fontWeight: 600, fontSize: 22, opacity: 0.75 }}>Fiction · conseils vérifiés le {e.verifie}</div>
     </div>

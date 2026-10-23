@@ -6,11 +6,11 @@ import { Y_SOUS_TITRES, ZONE_SURE } from "./format";
 import { blocsSousTitres, Mot } from "./mots";
 import { POLICE_TEXTE } from "./polices";
 
-const GRIS = "#8d9096";
 const COULEUR: Record<Mot["style"], string> = { normal: "#ffffff", ressource: JAUNE, danger: ROUGE };
 
 // Sous-titres karaoké : Montserrat 900 en majuscules, 2 à 4 mots par bloc, centrés à 60 % de la hauteur.
-// Chaque mot passe du gris à sa couleur (blanc, jaune ressource, rouge danger) au moment où il est prononcé.
+// Un mot n'apparaît QUE quand il est prononcé (analyse : ne jamais dévoiler la suite), dans sa couleur
+// (blanc, jaune ressource, rouge danger) ; la place des mots à venir est réservée (le bloc ne bouge pas).
 export const SousTitres: React.FC<{ mots: Mot[] }> = ({ mots }) => {
   const frame = useCurrentFrame();
   const blocs = useMemo(() => blocsSousTitres(mots), [mots]);
@@ -47,7 +47,7 @@ export const SousTitres: React.FC<{ mots: Mot[] }> = ({ mots }) => {
               const dit = frame >= m.fDebut;
               const enCours = dit && frame < m.fFin;
               return (
-                <span key={j} style={{ color: dit ? COULEUR[m.style] : GRIS, display: "inline-block", transform: `scale(${enCours ? 1.06 : 1})` }}>
+                <span key={j} style={{ color: COULEUR[m.style], opacity: dit ? 1 : 0, display: "inline-block", transform: `scale(${enCours ? 1.06 : 1})` }}>
                   {texte}
                   {j < ligne.length - 1 ? " " : ""}
                 </span>

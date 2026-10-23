@@ -112,3 +112,35 @@ export const project = (point: Vec3, e: EtatCamera, largeur = LARGEUR, hauteur =
   v.set(...point).project(cameraCalcul);
   return { x: ((v.x + 1) / 2) * largeur, y: ((1 - v.y) / 2) * hauteur, devant: v.z < 1 && v.z > -1 };
 };
+
+/*
+ * Cadrage par sujet : place la caméra autour d'un point 3D et calcule la visée pour que ce point tombe
+ * à l'endroit voulu de l'image (par défaut x = 500, y = 620 : au-dessus des sous-titres, hors colonne TikTok).
+ *   azimut   : d'où l'on filme, en degrés (0 = depuis le sud +Z, 90 = depuis l'est +X, -90 = depuis l'ouest)
+ *   elevation: hauteur de la caméra en degrés au-dessus de l'horizontale du sujet
+ *   distance : en mètres
+ */
+export type OptionsPlan = { azimut: number; elevation: number; distance: number; fov?: number; x?: number; y?: number };
+export const plan = (sujet: Vec3, o: OptionsPlan): { position: Vec3; cible: Vec3; fov: number } => {
+  const fov = o.fov ?? 40;
+  const rad = Math.PI / 180;
+  const az = o.azimut * rad;
+  const el = o.elevation * rad;
+  const position: Vec3 = [
+    sujet[0] + o.distance * Math.sin(az) * Math.cos(el),
+    sujet[1] + o.distance * Math.sin(el),
+    sujet[2] + o.distance * Math.cos(az) * Math.cos(el),
+  ];
+  // Angles (depuis l'axe optique) auxquels le sujet doit apparaître
+  const tv = Math.tan((fov * rad) / 2);
+  const th = tv * (LARGEUR / HAUTEUR);
+  const dy = Math.atan(((HAUTEUR / 2 - (o.y ?? 620)) / (HAUTEUR / 2)) * tv); // > 0 : sujet au-dessus du centre
+  const dx = Math.atan((((o.x ?? 500) - LARGEUR / 2) / (LARGEUR / 2)) * th); // > 0 : sujet à droite du centre
+  // Direction caméra -> sujet, puis on vise plus bas (dy) et plus à gauche (dx) pour décaler le sujet
+  const lacet = Math.atan2(sujet[0] - position[0], sujet[2] - position[2]);
+  const tangage = -el;
+  const l2 = lacet + dx;
+  const t2 = tangage - dy;
+  const cible: Vec3 = [position[0] + Math.sin(l2) * Math.cos(t2) * o.distance, position[1] + Math.sin(t2) * o.distance, position[2] + Math.cos(l2) * Math.cos(t2) * o.distance];
+  return { position, cible, fov };
+};
