@@ -45,3 +45,9 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   `@remotion/google-fonts` directement dans une composition.
 - **2026-10-23 — 3D impossible sans carte graphique (`angle`).**
   Règle : laisser `remotion.config.ts` choisir le moteur (`swangle` sur serveur sans GPU) ; ne pas forcer `--gl`.
+- **2026-10-23 — Liste des vidéos TikTok impossible avec yt-dlp** (« Failed to parse JSON », page profil
+  « Une erreur est survenue » depuis un serveur). Règle : récupérer les identifiants des vidéos via la page
+  d'intégration publique `https://www.tiktok.com/embed/@<compte>`, puis yt-dlp vidéo par vidéo ; analyser avec
+  `tools/analyser_reference.py`.
+- **2026-10-23 — Le dossier `analyse/` était entièrement exclu de Git** (le rapport aurait été perdu).
+  Règle : après chaque nouveau livrable, vérifier avec `git status` qu'il est bien suivi ; `reference/` reste exclu.

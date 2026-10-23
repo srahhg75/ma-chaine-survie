@@ -9,6 +9,11 @@ videos/**/*.mp4
 videos/**/*.wav
 public/**/*.wav
 public/**/*.mp3
+# Analyses : on garde les rapports .md, pas les fichiers lourds
 analyse/**
+!analyse/*.md
 !analyse/.gitkeep
+# Vidéos de référence d'autres chaînes : étude uniquement, jamais versionnées ni réutilisées
+reference/
 qc/_*.png
+__pycache__/
