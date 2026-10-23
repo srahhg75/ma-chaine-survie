@@ -184,3 +184,12 @@ première version, et ce qui a été corrigé (la version ci-dessus est déjà l
 
 **Ce qui reste à surveiller au montage :** la rafale 45-52 s (garder chaque étiquette ≥ 1,4 s sans chevauchement :
 si la voix est trop rapide, fusionner les étiquettes 2 et 3), et le silence de 0,6 s avant « Le ballon est vide ».
+
+---
+
+## 7. Voix enregistrée
+
+- Voix ElevenLabs reçue le 24/10/2026 (MP3, 88,9 s), déposée dans le commit `ea6d218` sous le nom « voix1.mp3 .mp3 ».
+  Pour la récupérer sur une nouvelle machine : `git show ea6d218:"voix1.mp3 .mp3" > voix1.mp3`, puis
+  `ffmpeg -i voix1.mp3 -ar 48000 -c:a pcm_s16le videos/001-h72/voix_brute.wav`.
+- Après coupe des blancs : **74,7 s**, 220 mots (≈ 177 mots/min), 39 phrases alignées ; texte lu conforme au script.

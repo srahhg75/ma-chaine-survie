@@ -106,3 +106,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   toujours comparer une image fixe à la même image du rendu (au moins une fois par scène).
 - **2026-10-23 — Cabine en tôle presque noire au rendu réel** (métal 1 + environnement faible). Règle : murs métalliques
   à `metal` 0,35–0,5 et teinte claire ; réserver `metal` 1 aux petites pièces (poignées, mains courantes).
+- **2026-10-24 — Voix déposée depuis le téléphone (session cloud) : nom bizarre (« voix1.mp3 .mp3 ») et fichiers audio
+  non versionnés (`*.wav` exclus de Git) : la voix aurait été perdue à la fermeture de la session.**
+  Règle : la voix se dépose via GitHub (« ··· » → Upload file, sur la branche de travail) ; Claude la convertit en
+  `videos/NNN-nom/voix_brute.wav` (`ffmpeg -ar 48000 -c:a pcm_s16le`), la retire de la racine et note dans
+  `videos/NNN-nom/script.md` le commit d'envoi pour la récupérer (`git show <commit>:"<nom>" > voix.mp3`).
