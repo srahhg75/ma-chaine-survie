@@ -120,7 +120,7 @@ export const donnees: DonneesEpisode = {
         { a: "t1:manger", position: [-0.72, 0, -0.92], orientation: 205, vitesse: 1.0 },
         { a: "t1a:peches", position: [-0.3, 0, -0.12], orientation: 0, vitesse: 1.1 },
         // t2 : la salle d'eau
-        { a: "t2a", position: [1.98, 0, -0.62], orientation: 120, vitesse: 1.3 },
+        { a: "t2a", position: [1.82, 0, -0.38], orientation: 95, vitesse: 1.3 },
         { a: "t2c:lave", position: [2.62, 0, -0.78], orientation: 0, vitesse: 1.0 },
         { a: "t2d:sale", position: [2.17, 0, -0.74], orientation: 180, vitesse: 0.9 },
         // t3 : le ballon
@@ -167,7 +167,7 @@ export const donnees: DonneesEpisode = {
         { a: "chute:vide", pose: "mainTendue", transition: 0.25 },
         { a: "sec", pose: "inquiet", transition: 0.4 },
       ],
-      lampe: { de: "retour:matin", a: "fin+6", puissance: 0.3 },
+      lampe: { de: "retour:matin", a: "fin+6", puissance: 0.07 },
     },
     {
       // Fantôme du mauvais réflexe : Inès à genoux qui vide le radiateur du salon dans une bouteille
@@ -221,7 +221,7 @@ export const donnees: DonneesEpisode = {
     // TWIST — 6 h du matin, elle rentre
     { a: "retour:rentre", ...plan([4.85, 0.95, -1.0], { azimut: 22, elevation: 16, distance: 3.6, fov: 42, y: 620 }), deplacement: 0.6 },
     { a: "ouvre:bas", ...plan([3.65, 0.4, -0.85], { azimut: 25, elevation: 22, distance: 3.6, fov: 38, y: 700 }), deplacement: 0.9 },
-    { a: "rien:goutte", ...plan(P.vidange, { azimut: 15, elevation: 25, distance: 1.1, fov: 32, y: 640 }), deplacement: 0.5 },
+    { a: "rien:goutte+0.2", ...plan(P.vidange, { azimut: 15, elevation: 55, distance: 1.2, fov: 32, y: 640 }), deplacement: 0.8 },
     { a: "chute:vide", ...plan([3.85, 1.0, -1.25], { azimut: 20, elevation: 15, distance: 3.0, fov: 40, y: 640 }), deplacement: 1.0 },
     { a: "sec:sec", ...plan([3.85, 0.02, -1.2], { azimut: 12, elevation: 45, distance: 1.7, fov: 36, y: 660 }), deplacement: 1.0 },
     { a: "vide:quelqu'un", ...plan([3.45, 1.0, -0.6], { azimut: 35, elevation: 12, distance: 3.3, fov: 40, y: 600, x: 460 }), deplacement: 0.9 },

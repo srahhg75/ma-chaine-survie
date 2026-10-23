@@ -132,3 +132,6 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   s'ouvre pivote du côté opposé aux éléments à montrer (charnière côté mur ou côté hors champ).
 - **2026-10-24 — Caméra placée DANS le personnage** (gros plan du filtre à café : Inès entre la caméra et l'objet).
   Règle : en gros plan d'objet, filmer depuis le côté où le personnage n'est pas (azimut négatif = depuis le sud-ouest).
+- **2026-10-24 — Machine redémarrée (code 137, mémoire saturée) pendant un rendu `--concurrency=4`** (serveur 4 cœurs,
+  15 Go, rendu 3D logiciel). Règle : ne jamais dépasser la concurrence par défaut (2) sur ce serveur ; rendre les
+  longues vidéos par tranches (`--frames=a-b`) en tâche de fond, et sauvegarder (commit + push) avant chaque gros rendu.

@@ -12,8 +12,8 @@ i=0
 for f in $(ls "$DOSSIER"/*.png | grep -v _guide | sort -t/ -k4 -g); do
   nom=$(basename "$f" .png)
   ffmpeg -v error -y -i "$f" -vf "scale=270:480,\
-drawbox=x=0:y=0:w=iw:h=45:color=red@0.3:t=fill,drawbox=x=0:y=375:w=iw:h=105:color=red@0.3:t=fill,\
-drawbox=x=230:y=45:w=40:h=330:color=red@0.3:t=fill,drawbox=x=0:y=287:w=iw:h=2:color=yellow@0.8:t=fill,\
+drawbox=x=0:y=0:w=iw:h=45:color=red@0.15:t=fill,drawbox=x=0:y=375:w=iw:h=105:color=red@0.15:t=fill,\
+drawbox=x=230:y=45:w=40:h=330:color=red@0.15:t=fill,drawbox=x=0:y=287:w=iw:h=2:color=yellow@0.8:t=fill,\
 drawtext=text='${nom}s':x=6:y=50:fontsize=26:fontcolor=yellow:box=1:boxcolor=black@0.7" "$TMP/$(printf %03d $i).png"
   i=$((i + 1))
 done

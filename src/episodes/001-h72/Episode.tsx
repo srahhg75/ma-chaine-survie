@@ -549,7 +549,7 @@ const BouteilleBrune: React.FC<{ niveau: number; echelle: number }> = ({ niveau,
     <group position={[-2.95, 0, -1.3]} scale={echelle}>
       <mesh position={[0, 0.16, 0]}>
         <cylinderGeometry args={[0.05, 0.05, 0.3, 18, 1, true]} />
-        <meshStandardMaterial color="#d6e6f0" transparent opacity={0.3} roughness={0.05} side={DoubleSide} depthWrite={false} />
+        <meshStandardMaterial color="#ffffff" transparent opacity={0.12} roughness={0.05} side={DoubleSide} depthWrite={false} />
       </mesh>
       <mesh position={[0, 0.33, 0]}>
         <cylinderGeometry args={[0.018, 0.045, 0.06, 12]} />
@@ -558,7 +558,7 @@ const BouteilleBrune: React.FC<{ niveau: number; echelle: number }> = ({ niveau,
       {niveau > 0.01 && (
         <mesh position={[0, 0.01 + 0.14 * niveau, 0]}>
           <cylinderGeometry args={[0.046, 0.046, 0.28 * niveau, 18]} />
-          <meshStandardMaterial color="#5a3315" roughness={0.3} emissive="#2a1206" emissiveIntensity={0.3} />
+          <meshStandardMaterial color="#7a3d0e" roughness={0.35} emissive="#4a2006" emissiveIntensity={0.8} />
         </mesh>
       )}
       {/* filet brun qui tombe de la purge */}
@@ -612,7 +612,8 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
   const eauCuvette = 1 - 0.7 * vidangeCuvette + 0.7 * entre("t2e:vide", 0.8);
 
   // Tactique 3 : placard, disjoncteur, vanne, robinet d'eau chaude, vidange, seau, carafe
-  const portePlacard = entre("t3", "t3:ballon");
+  // ouverte à la tactique 3, refermée par Inès avant de partir (calme), rouverte au retour (ouvre)
+  const portePlacard = t < a("calme") - 0.6 ? entre("t3", "t3:ballon") : t < a("ouvre") - 0.5 ? 1 - entre("calme-0.6", 0.5) : entre("ouvre-0.5", "ouvre:robinet");
   const coupe = entre("t3b:coupe", 0.25);
   const vanne = entre("t3c:ferme", 0.4);
   const robinetChaud = entre("t3d:ouvre", 0.4) * (1 - entre("t3f", 0.4));
