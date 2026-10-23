@@ -1,0 +1,168 @@
+{
+ "fps": 30,
+ "duree": 9.289,
+ "mots": [
+  {
+   "mot": "Que",
+   "debut": 0.0,
+   "fin": 0.27,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 0,
+   "fFin": 8
+  },
+  {
+   "mot": "feriez-vous",
+   "debut": 0.3,
+   "fin": 1.05,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 9,
+   "fFin": 32
+  },
+  {
+   "mot": "si",
+   "debut": 1.11,
+   "fin": 1.41,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 33,
+   "fFin": 42
+  },
+  {
+   "mot": "l'eau",
+   "debut": 1.5,
+   "fin": 1.74,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 45,
+   "fFin": 52
+  },
+  {
+   "mot": "du",
+   "debut": 1.8,
+   "fin": 2.04,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 54,
+   "fFin": 61
+  },
+  {
+   "mot": "robinet",
+   "debut": 2.13,
+   "fin": 2.64,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 64,
+   "fFin": 79
+  },
+  {
+   "mot": "s'arrêtait",
+   "debut": 2.79,
+   "fin": 3.3,
+   "conf": 0.59,
+   "source": "vosk",
+   "fDebut": 84,
+   "fFin": 99
+  },
+  {
+   "mot": "demain",
+   "debut": 3.36,
+   "fin": 3.72,
+   "conf": 0.59,
+   "source": "vosk",
+   "fDebut": 101,
+   "fFin": 112
+  },
+  {
+   "mot": "matin ?",
+   "debut": 3.78,
+   "fin": 4.288001,
+   "conf": 0.76,
+   "source": "vosk",
+   "fDebut": 113,
+   "fFin": 129
+  },
+  {
+   "mot": "Premier",
+   "debut": 4.35,
+   "fin": 4.89,
+   "conf": 0.8,
+   "source": "vosk",
+   "fDebut": 130,
+   "fFin": 147
+  },
+  {
+   "mot": "réflexe :",
+   "debut": 4.98,
+   "fin": 5.67,
+   "conf": 0.7,
+   "source": "vosk",
+   "fDebut": 149,
+   "fFin": 170
+  },
+  {
+   "mot": "remplissez",
+   "debut": 5.67,
+   "fin": 6.48,
+   "conf": 0.0,
+   "source": "interpole",
+   "fDebut": 170,
+   "fFin": 194
+  },
+  {
+   "mot": "la",
+   "debut": 6.48,
+   "fin": 6.72,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 194,
+   "fFin": 202
+  },
+  {
+   "mot": "baignoire,",
+   "debut": 6.75,
+   "fin": 7.47,
+   "conf": 0.97,
+   "source": "vosk",
+   "fDebut": 202,
+   "fFin": 224
+  },
+  {
+   "mot": "puis",
+   "debut": 7.47,
+   "fin": 7.95,
+   "conf": 0.0,
+   "source": "interpole",
+   "fDebut": 224,
+   "fFin": 238
+  },
+  {
+   "mot": "gardez",
+   "debut": 7.95,
+   "fin": 8.43,
+   "conf": 0.0,
+   "source": "interpole",
+   "fDebut": 238,
+   "fFin": 253
+  },
+  {
+   "mot": "chaque",
+   "debut": 8.43,
+   "fin": 8.829085,
+   "conf": 0.99,
+   "source": "vosk",
+   "fDebut": 253,
+   "fFin": 265
+  },
+  {
+   "mot": "goutte.",
+   "debut": 8.91,
+   "fin": 9.27,
+   "conf": 0.67,
+   "source": "vosk",
+   "fDebut": 267,
+   "fFin": 278
+  }
+ ]
+}

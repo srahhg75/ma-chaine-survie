@@ -1,0 +1,14 @@
+node_modules/
+.venv/
+tools/models/
+tools/earshot/
+out/
+*.log
+# Rendus et fichiers lourds (gardés localement)
+videos/**/*.mp4
+videos/**/*.wav
+public/**/*.wav
+public/**/*.mp3
+analyse/**
+!analyse/.gitkeep
+qc/_*.png

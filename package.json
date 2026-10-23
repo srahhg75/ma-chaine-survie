@@ -1,0 +1,33 @@
+{
+  "name": "studio-survie",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chaîne TikTok faceless FR : séries de survie apocalyptiques 3D (« Que feriez-vous si… »)",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "build": "remotion render",
+    "typecheck": "tsc --noEmit",
+    "installer": "bash tools/installer.sh",
+    "polices": "tsx tools/telecharger_polices.ts",
+    "test-rendu": "remotion render src/index.ts ep000-test videos/000-test/test.mp4"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@remotion/cli": "4.0.538",
+    "@remotion/google-fonts": "4.0.538",
+    "@remotion/renderer": "4.0.538",
+    "@remotion/three": "4.0.538",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.538",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}
