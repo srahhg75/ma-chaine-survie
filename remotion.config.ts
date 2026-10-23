@@ -9,4 +9,6 @@ Config.setVideoImageFormat("jpeg");
 Config.setJpegQuality(92);
 Config.setCodec("h264");
 Config.setPixelFormat("yuv420p");
+// Qualité visuellement sans perte, poids raisonnable (~6-10 Mb/s) : TikTok recompresse de toute façon
+Config.setCrf(18);
 Config.setOverwriteOutput(true);

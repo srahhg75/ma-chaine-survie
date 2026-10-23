@@ -6,7 +6,7 @@ export const donnees: DonneesEpisode = {
   id: "000-demo",
   titre: "Démonstration du moteur",
   demonstration: true,
-  queue: 1.6,
+  queue: 2.3,
   decor: {
     pieces: [
       {
@@ -43,7 +43,7 @@ export const donnees: DonneesEpisode = {
     {
       id: "bob",
       depart: { position: [0.45, 0, -1.15], orientation: 180 },
-      trajet: [{ a: "regle:piece", position: [0.05, 0, -0.25], orientation: 90 }],
+      trajet: [{ a: "regle:vivre", position: [0.05, 0, -0.25], orientation: 90 }],
       poses: [
         { a: 0, pose: "froid" },
         { a: "hook.fin", pose: "debout" },
@@ -56,36 +56,40 @@ export const donnees: DonneesEpisode = {
     // Plan large en plongée, puis on descend vers la fenêtre dès la 1re image (ça démarre en mouvement)
     { a: 0, position: [4.4, 3.6, 4.6], cible: [0.2, 0.6, -0.7], fov: 46 },
     { a: "hook:appartement", position: [2.3, 1.9, 2.3], cible: [0.3, 0.3, -0.9], fov: 46, deplacement: 1.9 },
-    // Recadrage sur la table et la porte pendant la tactique
-    { a: "regle:vivre", position: [2.6, 1.95, 2.3], cible: [-0.2, 0.3, -0.5], fov: 52, deplacement: 1.2 },
-    // Chute : on se rapproche du personnage
-    { a: "chute:jamais", position: [1.5, 1.35, 1.3], cible: [0.1, 0.55, -0.4], fov: 44, deplacement: 0.85 },
+    // Recadrage depuis l'est pendant la tactique : la porte reste visible à côté du personnage
+    { a: "regle:vivre", position: [3.0, 2.1, 1.0], cible: [-0.3, 0.3, -0.6], fov: 52, deplacement: 1.2 },
+    // Chute : on se rapproche du personnage, face à son visage
+    { a: "chute:jamais", position: [1.9, 1.4, 0.7], cible: [0.0, 0.62, -0.3], fov: 46, deplacement: 0.7 },
   ],
   hud: [
     { type: "montre", jour: 3, heure: "21:47", temperature: 4 },
     { type: "moodles", de: "hook:degres-0.2", a: "regle-0.05", moodles: [{ nom: "froid", niveau: 2 }] },
     { type: "tactique", de: "regle", a: "chute-0.1", numero: 1, total: 3, titre: "Une seule pièce chauffée" },
-    { type: "etiquette", de: "regle:seule-0.1", a: "regle.fin-0.15", texte: "Porte fermée", point: [-1.2, 1.1, -1.62], style: "ressource" },
+    { type: "etiquette", de: "regle:seule+0.06", a: "regle.fin+0.05", texte: "Porte fermée", point: [-1.2, 1.1, -1.62], style: "ressource" },
     {
       type: "fiche",
       de: "chute:monoxyde-0.2",
       a: "fin+0.1",
       icone: "danger",
+      cote: "gauche",
       titre: "Monoxyde de carbone",
       lignes: ["Invisible, sans odeur", "Barbecue, brasero : dehors"],
     },
-    { type: "carton", de: "fin+0.15", partie: 2, titre: "Le froid", verifie: "23/10/2026" },
+    { type: "carton", de: "fin+0.7", partie: 2, titre: "Le froid", verifie: "23/10/2026" },
   ],
   sons: [
     { a: "hook:appartement", id: "whoosh_big/deep", gain: -8 },
     { a: "regle", id: "cut_hit/rumble", gain: -6 },
     { a: "chute:jamais", id: "pro_sub_drop/low", gain: -2 },
-    { a: "fin+0.15", id: "pro_impact/deep", gain: -4 },
+    { a: "fin+0.7", id: "pro_impact/deep", gain: -4 },
   ],
   ambiances: [
     { type: "vent", de: 0, a: "fin+2", niveau: 0 },
     { type: "drone", de: 0, a: "fin+2", niveau: -2 },
     { type: "coeur", de: "chute-0.5", a: "fin+1", niveau: -1, bpm: 78 },
   ],
-  sujets: [{ de: 0, a: "fin", personnage: "bob", hauteur: 0.75 }],
+  sujets: [
+    { de: 0, a: "fin", personnage: "bob", hauteur: 0.75 }, // buste
+    { de: 0, a: "fin", personnage: "bob", hauteur: 1.12 }, // visage
+  ],
 };

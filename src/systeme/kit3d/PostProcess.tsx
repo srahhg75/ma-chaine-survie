@@ -48,7 +48,7 @@ const VignetteGrain = {
     }`,
 };
 
-export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.55, seuilBloom = 0.85, vignette = 0.45, grain = 0.05, occlusion = true }) => {
+export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 0.92, vignette = 0.45, grain = 0.05, occlusion = true }) => {
   const { gl, scene, camera, size } = useThree();
   const frame = useCurrentFrame();
 

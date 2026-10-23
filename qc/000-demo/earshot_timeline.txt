@@ -1,0 +1,33 @@
+brouillon.mp4: 0:00.00-0:11.37 (11.4 s). Loudness -14.0 LUFS integrated, true peak -1.4 dBTP, LRA 2.6 LU; loudest 0:06.00-0:09.00 (-13.3 LUFS short-term). 3 stop-down(s)/gap(s): 0:00.90 0.3 s drop, 0:05.60 0.5 s drop, 0:09.00 0.3 s drop. Quiet tail 1.0 s (drop). No steady beat grid (pulse clarity 0.12 < 0.15). 1 section(s): 0:00.00-0:11.37 also: speech synthesizer, computer keyboard, rattle (AST) | voice: voice-over narration. 74 events (6.5/s); 20 tagged (9 ui, 5 voice, 2 foley, 1 note, 1 key, 1 hit, 1 drum; tags are hints). Strongest accents over a running bed: 0:04.52 +41 dB (spoken word), 0:03.62 +40 dB (spoken word), 0:00.03 +34 dB (chat message pop). Sync to 1 cuts: 0% have an onset within 1 frame (chance 48%), 100% within 100 ms, median |offset| 37 ms; 0% land on a strong accent (>= 17 dB over the bed) within 1 frame (chance 16%).
+
+SECTIONS
+  0:00.00-0:11.37  also: speech synthesizer, computer keyboard, rattle (AST) | voice: voice-over narration  -14 LUFS  [AST music 0.02, speech 0.54]
+
+TRANSCRIPT   time  kind   what (CLAP tag / runner-up)                     peak  over bed  length  centroid  | sync
+== 0:00.00-0:11.37  also: speech synthesizer, computer keyboard, rattle (AST) | voice: voice-over narration  (+54 untagged onsets, 4.7/s)
+ 0:00.03  UI     chat message pop / bubble pop                    -1.5 dBFS +34.4 dB   155 ms   329 Hz  | strong accent (summary)
+ 0:00.74  NOTE?  piano note / short vocal sound                   -1.5 dBFS  +4.3 dB   115 ms   447 Hz
+ 0:00.90  GAP    drop 0.35 s (-41 LUFS)
+ 0:01.29  UI     chat message pop / plastic click                 -1.5 dBFS +32.0 dB    49 ms   516 Hz
+ 0:01.90  VOICE  speech (AST 0.59) / punchy impact hit            -1.5 dBFS  +7.0 dB   118 ms   290 Hz  [AST Speech 0.59]  | cut -37 ms near
+ 0:02.88  KEY    mechanical keyboard key press / soft UI button   -1.5 dBFS +27.8 dB    22 ms   354 Hz
+ 0:03.23  FOLEY  wooden block hit / punchy impact hit             -1.5 dBFS +12.8 dB    74 ms   324 Hz
+ 0:03.62  VOICE  spoken word / sub bass drop                      -1.5 dBFS +40.3 dB  2000 ms   285 Hz  | strong accent (summary)
+ 0:03.90  VOICE? spoken word / chat message pop                   -1.5 dBFS  +8.0 dB   433 ms  1.6 kHz
+ 0:04.17  UI?    chat message pop                                 -1.4 dBFS  +7.8 dB   165 ms  3.6 kHz
+ 0:04.24  UI?    chat message pop / piano note                    -1.4 dBFS  +4.4 dB   114 ms   322 Hz
+ 0:04.52  VOICE  spoken word / chat message pop                   -1.5 dBFS +41.1 dB   120 ms  1.4 kHz  | strong accent (summary)
+ 0:05.00  FOLEY  bubble pop / short vocal sound                   -1.5 dBFS +31.1 dB   118 ms   355 Hz
+ 0:05.33  UI?    chat message pop / mechanical keyboard key pre   -1.5 dBFS +11.0 dB   242 ms   350 Hz
+ 0:05.60  GAP    drop 0.45 s (-37 LUFS)
+ 0:06.36  UI     chat message pop / sub bass drop                 -1.5 dBFS +22.6 dB   616 ms  3.1 kHz
+ 0:07.07  UI?    chat message pop / short vocal sound             -1.5 dBFS  +9.7 dB   173 ms   534 Hz
+ 0:07.87  UI     chat message pop / mechanical keyboard key pre   -1.5 dBFS +28.3 dB   272 ms   302 Hz
+ 0:08.61  VOICE? spoken word / chat message pop                   -1.5 dBFS +11.2 dB   381 ms  1.0 kHz
+ 0:08.66  UI?    chat message pop / bubble pop                    -1.5 dBFS  +9.5 dB   313 ms   344 Hz
+ 0:09.00  GAP    drop 0.30 s (-35 LUFS)
+ 0:09.67  HIT?   deep cinematic boom / hi-hat                    -13.2 dBFS  +8.5 dB   557 ms    66 Hz
+ 0:10.34  DRUM?  drum hit / whip pan whoosh transition           -21.1 dBFS  +3.2 dB    34 ms  3.7 kHz
+ 0:10.40  GAP    drop 0.97 s (-57 LUFS) = tail
+
+NOTES  times, levels, loudness and sync offsets are measurements. Event kinds / tags are CLAP guesses: '?' = the event is less than 12 dB over its bed, so its excerpt is mostly bed and the tag a weak hint (right kind about 1 in 4 on the tuning mixes, 1 in 2 for exposed events; often wrong on music and voice). Where AST ran, its speech overrides the kind with VOICE. Section genres marked ? are weak. 'over bed' = how far the event rises over the level just before it; 'silent' = that bed was below -60 (after a gap the rise means nothing). Full data: --json.

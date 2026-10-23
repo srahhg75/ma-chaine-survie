@@ -49,7 +49,9 @@ export const boiteHud = (e: ElementHudResolu, cam?: EtatCamera): Rect & { ancre?
         const p = project(e.point, cam);
         return { ...presDuPoint(p.x, p.y, HUD.fiche.l, HUD.fiche.h), ancre: { x: p.x, y: p.y } };
       }
-      return { x: ZONE_SURE.droite - HUD.fiche.l, y: 336, l: HUD.fiche.l, h: HUD.fiche.h };
+      // Sans point 3D : sous la montre (gauche) ou sous le bandeau (droite, par défaut)
+      const x = e.cote === "gauche" ? ZONE_SURE.gauche : ZONE_SURE.droite - HUD.fiche.l;
+      return { x, y: 336, l: HUD.fiche.l, h: HUD.fiche.h };
     }
     case "inventaire": {
       const l = e.objets.length * HUD.inventaire.case + 24;

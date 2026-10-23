@@ -37,7 +37,7 @@ export const Bougie: React.FC<{ position: [number, number, number]; allumee?: bo
   const { fps } = useVideoConfig();
   const t = frame / fps;
   const vac = bruitFractal(graine, t * 7);
-  const intensite = 3.2 * puissance * (1 + 0.18 * vac);
+  const intensite = 1.3 * puissance * (1 + 0.18 * vac);
   const etire = 1 + 0.2 * bruitFractal(`${graine}e`, t * 9);
   const penche = 0.06 * bruitFractal(`${graine}p`, t * 4);
   return (

@@ -101,6 +101,38 @@ for (let f = 0; f < r.duree; f++) {
   }
   dirPrec = dir;
 
+  // Personnages et sujets projetés à l'écran (servent aux contrôles HUD et sujets)
+  const etats = new Map(r.personnages.map((p) => [p.id, { p, e: etatPersonnage(p, f, fps) }]));
+  const sujetsEcran = r.sujets
+    .filter((s) => f >= s.fDe && f < s.fA)
+    .map((s) => {
+      let point = s.point;
+      if (s.personnage) {
+        const x = etats.get(s.personnage);
+        if (!x) return null;
+        const h = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules * 0.6) * x.p.taille;
+        point = [x.e.position[0], s.hauteur ?? h, x.e.position[2]];
+      }
+      return point ? { nom: `${s.personnage ?? "sujet"}${s.hauteur ? ` (h=${s.hauteur} m)` : ""}`, p: project(point, cam) } : null;
+    })
+    .filter((x): x is { nom: string; p: ReturnType<typeof project> } => x !== null);
+
+  // Encombrement à l'écran de chaque personnage déclaré comme sujet (des pieds au sommet de la tête)
+  const silhouettes = [...new Set(r.sujets.filter((s) => s.personnage && f >= s.fDe && f < s.fA).map((s) => s.personnage!))]
+    .map((id) => {
+      const x = etats.get(id);
+      if (!x) return null;
+      const k = x.p.taille;
+      const sommet = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules + CORPS.cou + 2 * CORPS.rayonTete + 0.06) * k;
+      const [px, , pz] = x.e.position;
+      const coins = [-1, 1].flatMap((dx) => [-1, 1].flatMap((dz) => [0.02, sommet].map((y) => project([px + dx * 0.28 * k, y, pz + dz * 0.28 * k], cam))));
+      const xs = coins.map((c) => c.x);
+      const ys = coins.map((c) => c.y);
+      return { id, b: { x: Math.min(...xs), y: Math.min(...ys), l: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) } as Rect };
+    })
+    .filter((x): x is { id: string; b: Rect } => x !== null);
+  for (const { id: nom, b } of silhouettes) if (b.y < 0) signaler("Sujet coupé", `le haut de la tête de ${nom} sort du cadre`, f);
+
   // HUD actif
   const actifs = r.hud.filter((e) => f >= e.fDe && f < e.fA);
   const blocsHud = actifs.filter((e) => e.type !== "montre");
@@ -112,6 +144,9 @@ for (let f = 0; f < r.duree; f++) {
       const p = b.ancre;
       const visible = p.x >= ZONE_SURE.gauche && p.x <= ZONE_SURE.droite && p.y >= ZONE_SURE.haut && p.y <= ZONE_SURE.bas;
       if (!visible) signaler("Étiquette sans cible", `${nomHud(e)} pointe hors de l'image utile`, f);
+      // La cible ne doit pas être masquée par le sujet (sinon l'étiquette semble désigner le personnage)
+      for (const si of silhouettes)
+        if (contient(si.b, p.x, p.y, 15)) signaler("Étiquette sur le sujet", `${nomHud(e)} pointe sur ${si.id} (cible cachée ou ambiguë)`, f);
     }
     if ((e.type === "etiquette" || (e.type === "fiche" && e.point)) && cam.phase !== "tenu") signaler("Étiquette pendant un déplacement", `${nomHud(e)} visible pendant un mouvement de caméra`, f);
   }
@@ -120,11 +155,10 @@ for (let f = 0; f < r.duree; f++) {
   for (let i = 0; i < boites.length; i++) {
     for (let j = i + 1; j < boites.length; j++)
       if (chevauche(boites[i].b, boites[j].b, 8)) signaler("HUD : chevauchement", `${nomHud(boites[i].e)} / ${nomHud(boites[j].e)}`, f);
-    if (boiteST && boites[i].e.type !== "carton" && chevauche(boites[i].b, boiteST, 8)) signaler("HUD : chevauchement", `${nomHud(boites[i].e)} / sous-titres`, f);
+    if (boiteST && chevauche(boites[i].b, boiteST, 8)) signaler("HUD : chevauchement", `${nomHud(boites[i].e)} / sous-titres`, f);
   }
 
   // Personnages : pas de téléportation, pas dans un meuble
-  const etats = new Map(r.personnages.map((p) => [p.id, { p, e: etatPersonnage(p, f, fps) }]));
   for (const { p, e } of etats.values()) {
     const avant = posPrec.get(p.id);
     if (avant && distance(avant, e.position) * fps > VITESSE_MAX_M_S * 1.05) signaler("Téléportation", `${p.id} se déplace à plus de ${VITESSE_MAX_M_S} m/s`, f);
@@ -133,22 +167,13 @@ for (let f = 0; f < r.duree; f++) {
   }
 
   // Sujets : visibles, jamais cachés par le HUD ou les sous-titres
-  for (const s of r.sujets.filter((s) => f >= s.fDe && f < s.fA)) {
-    let point = s.point;
-    if (s.personnage) {
-      const x = etats.get(s.personnage);
-      if (!x) continue;
-      const h = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules * 0.6) * x.p.taille;
-      point = [x.e.position[0], s.hauteur ?? h, x.e.position[2]];
-    }
-    if (!point) continue;
-    const p = project(point, cam);
-    const nom = s.personnage ?? "sujet";
-    if (!p.devant || p.x < 0 || p.x > LARGEUR || p.y < 0 || p.y > HAUTEUR) {
-      signaler("Sujet hors champ", `${nom} n'est pas à l'image`, f);
+  for (const { nom, p } of sujetsEcran) {
+    if (!p.devant || p.x < 40 || p.x > LARGEUR - 40 || p.y < 40 || p.y > HAUTEUR - 40) {
+      signaler("Sujet hors champ", `${nom} n'est pas (entièrement) à l'image`, f);
       continue;
     }
     for (const { e, b } of boites) if (e.type !== "carton" && contient(b, p.x, p.y, 30)) signaler("Sujet caché", `${nom} caché par ${nomHud(e)}`, f);
+    if (p.x > ZONE_SURE.droite) signaler("Sujet sous les boutons TikTok", `${nom} dans la colonne de droite (x > ${ZONE_SURE.droite})`, f);
     if (boiteST && contient(boiteST, p.x, p.y, 30)) signaler("Sujet caché", `${nom} caché par les sous-titres (cadrer le sujet entre y=${BANDE_SUJET.haut} et ${BANDE_SUJET.bas})`, f);
     else if (p.y < BANDE_SUJET.haut || p.y > BANDE_SUJET.bas) signaler("Cadrage du sujet", `${nom} hors de la bande conseillée y=${BANDE_SUJET.haut}-${BANDE_SUJET.bas}`, f, false);
   }

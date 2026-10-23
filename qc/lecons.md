@@ -71,3 +71,20 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-23 — `pkill -f <motif>` a tué ma propre commande** (le motif figurait dans la ligne de commande).
   Règle : arrêter un rendu par PID (`pgrep -x chrome-headless`, puis `kill -9 <pid>`), jamais `pkill -f` avec un motif
   écrit dans la même commande ; les processus de navigateur fantômes ralentissent tous les rendus suivants.
+- **2026-10-23 — Visage brûlé en blanc par la bougie en plan rapproché** (lumière trop forte + halo trop fort).
+  Règle : bougie à 1,3 (défaut du moteur), bloom 0,35 / seuil 0,92 ; vérifier les plans rapprochés à l'œil sur des
+  images pleine résolution (`tools/images.ts`), pas seulement sur la planche.
+- **2026-10-23 — Carton de fin affiché par-dessus le dernier sous-titre.**
+  Règle : le carton démarre à `fin+0.7` au plus tôt (le dernier bloc reste 0,6 s) ; `tools/qc.ts` contrôle désormais
+  aussi le chevauchement carton / sous-titres.
+- **2026-10-23 — Étiquette dont la cible était cachée derrière le personnage, et tête coupée en haut du cadre.**
+  Les contrôles par simple point ne voyaient rien. Règle : déclarer chaque personnage-sujet (buste + visage) ;
+  `tools/qc.ts` calcule sa silhouette à l'écran : « Étiquette sur le sujet » et « Sujet coupé » sont bloquants.
+- **2026-10-23 — Fiche d'objet sur le visage après un recadrage.**
+  Règle : après chaque changement de caméra, relancer `tools/qc.ts` ; une fiche sans point 3D se place avec
+  `cote: "gauche"` ou `"droite"` du côté opposé au visage.
+- **2026-10-23 — Personnage passé dans la colonne des boutons TikTok pendant un déplacement de caméra.**
+  Règle : `tools/qc.ts` bloque « Sujet sous les boutons TikTok » (x > 920) ; faire partir le personnage avant que
+  le cadrage ne le pousse au bord, ou viser plus à droite.
+- **2026-10-23 — Vidéo finale de 70 Mo pour 11 s (49 Mb/s)** : le grain change à chaque image et ne se compresse pas.
+  Règle : `tools/final.sh` réencode en x264 CRF 18 plafonné à 12 Mb/s ; vérifier le poids (≈ 1,5 Mo par seconde).

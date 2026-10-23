@@ -14,7 +14,7 @@ export type ElementHud =
   // Montre LCD permanente (ne compte pas dans la limite de 2 blocs). `changements` : l'heure avance aux ancres.
   | (Base & { type: "montre"; jour: number; heure: string; temperature: number; changements?: { a: Ancre; jour?: number; heure?: string; temperature?: number }[] })
   | (Base & { type: "moodles"; moodles: { nom: NomMoodle; niveau: 1 | 2 | 3 | 4 }[] })
-  | (Base & { type: "fiche"; icone: NomIcone; titre: string; lignes: string[]; point?: Vec3 })
+  | (Base & { type: "fiche"; icone: NomIcone; titre: string; lignes: string[]; point?: Vec3; cote?: "gauche" | "droite" })
   | (Base & { type: "tactique"; numero: number; total: number; titre: string })
   | (Base & { type: "inventaire"; objets: { icone: NomIcone; quantite?: number; nom?: string }[]; surligne?: number })
   | (Base & { type: "compte"; secondes: number; titre?: string })
