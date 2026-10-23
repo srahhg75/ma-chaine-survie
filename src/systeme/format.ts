@@ -1,4 +1,4 @@
-// Format de la chaîne et zones sûres TikTok (voir qc/lecons.md).
+// Format de la chaîne et règles chiffrées de qc/lecons.md (source unique pour le rendu ET le contrôle qualité).
 export const LARGEUR = 1080;
 export const HAUTEUR = 1920;
 export const FPS = 30;
@@ -7,7 +7,7 @@ export const FPS = 30;
 export const DUREE_MIN_S = 70;
 export const DUREE_MAX_S = 120;
 
-// Zones sûres : rien d'important au-dessus de HAUT, sous BAS, ni dans la colonne de droite.
+// Zones sûres TikTok : rien d'important au-dessus de HAUT, sous BAS, ni dans la colonne de droite.
 export const ZONE_SURE = {
   haut: 180,
   bas: 1500,
@@ -17,6 +17,8 @@ export const ZONE_SURE = {
 
 // Sous-titres centrés à 60 % de la hauteur
 export const Y_SOUS_TITRES = Math.round(HAUTEUR * 0.6);
+// Bande où cadrer le sujet (au-dessus des sous-titres)
+export const BANDE_SUJET = { haut: 250, bas: 1000 } as const;
 
 // HUD : au plus 2 blocs en plus des sous-titres et de la montre ; étiquette visible ≥ 1,4 s
 export const HUD_BLOCS_MAX = 2;
@@ -26,5 +28,8 @@ export const ETIQUETTE_MIN_S = 1.4;
 export const CAMERA_ROTATION_MAX_DEG_S = 160;
 export const RYTHME_MIN_S = 1.5;
 export const RYTHME_MAX_S = 2.5;
+
+// Personnages : vitesse de marche max (au-delà = téléportation)
+export const VITESSE_MAX_M_S = 2.2;
 
 export const s = (secondes: number) => Math.round(secondes * FPS);

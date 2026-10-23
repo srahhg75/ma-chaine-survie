@@ -1,27 +1,45 @@
 import React from "react";
-import { Composition } from "remotion";
-import { Episode as Episode000, EPISODE as ID000, PropsEpisode } from "./episodes/000-test/Episode";
+import { Composition, staticFile } from "remotion";
+import { EPISODES } from "./episodes/registre";
+import { PropsEpisode } from "./systeme/EpisodeStandard";
 import { FPS, HAUTEUR, LARGEUR } from "./systeme/format";
-import { chargerMots } from "./systeme/mots";
+import { Alignement, ALIGNEMENT_VIDE } from "./systeme/mots";
+import { BancEssai, IMAGES_PAR_POSE, POSES_BANC } from "./systeme/personnage/BancEssai";
+import { instant } from "./systeme/timeline";
 
-// Chaque épisode est enregistré ici (une Composition par épisode).
+const existe = async (chemin: string) => {
+  try {
+    return (await fetch(staticFile(chemin), { method: "HEAD" })).ok;
+  } catch {
+    return false;
+  }
+};
+
+// Une Composition par épisode (id = "ep" + NNN-nom), durée calculée depuis mots.json.
 export const Racine: React.FC = () => (
   <>
-    <Composition
-      id={`ep${ID000}`}
-      component={Episode000}
-      width={LARGEUR}
-      height={HAUTEUR}
-      fps={FPS}
-      durationInFrames={FPS * 10}
-      defaultProps={{ mots: [], guide: false } as PropsEpisode}
-      calculateMetadata={async ({ props }) => {
-        const a = await chargerMots(ID000);
-        return {
-          durationInFrames: Math.ceil((a.duree + 0.5) * FPS),
-          props: { ...props, mots: a.mots },
-        };
-      }}
-    />
+    {EPISODES.map(({ donnees, Composant }) => (
+      <Composition
+        key={donnees.id}
+        id={`ep${donnees.id}`}
+        component={Composant}
+        width={LARGEUR}
+        height={HAUTEUR}
+        fps={FPS}
+        durationInFrames={FPS * 10}
+        defaultProps={{ alignement: ALIGNEMENT_VIDE, audio: "voix", guide: false } as PropsEpisode}
+        calculateMetadata={async ({ props }) => {
+          const r = await fetch(staticFile(`${donnees.id}/mots.json`));
+          if (!r.ok) throw new Error(`public/${donnees.id}/mots.json absent : lancer l'alignement de la voix`);
+          const alignement: Alignement = await r.json();
+          const audio: PropsEpisode["audio"] = props.audio === "aucun" ? "aucun" : (await existe(`${donnees.id}/mix.wav`)) ? "mix" : "voix";
+          return {
+            durationInFrames: Math.ceil((instant("fin", alignement) + (donnees.queue ?? 2)) * FPS),
+            props: { ...props, alignement, audio },
+          };
+        }}
+      />
+    ))}
+    <Composition id="banc-essai" component={BancEssai} width={LARGEUR} height={HAUTEUR} fps={FPS} durationInFrames={IMAGES_PAR_POSE * POSES_BANC.length} />
   </>
 );

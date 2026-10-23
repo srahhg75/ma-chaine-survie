@@ -1,0 +1,4 @@
+# Démonstration technique du moteur (≈ 10 s) — ne pas publier
+@hook Jour 3 sans courant. *4 degrés* dans l'appartement.
+@regle Tactique 1 : vivre dans *une seule pièce*, porte fermée.
+@chute > Mais _jamais_ de barbecue à l'intérieur : le _monoxyde_ tue sans bruit.

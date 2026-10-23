@@ -23,51 +23,67 @@ qu'il fait, et ne pose que les questions indispensables.
 
 ## Arborescence
 ```
-src/systeme/            moteur partagé (format.ts, mots.ts, SousTitres.tsx, polices.ts, GuideZonesSures.tsx…)
-src/episodes/NNN-nom/   code de l'épisode (Episode.tsx, timeline…) — enregistré dans src/Root.tsx
-public/NNN-nom/         fichiers lus pendant le rendu : voix.wav, mots.json, sons…
-public/polices/         polices locales
-videos/NNN-nom/         script.txt, voix_brute.wav, voix.wav, vidéo finale .mp4
-tools/                  scripts (couper_blancs.py, aligner.py, telecharger_polices.ts), models/, earshot/
-qc/                     lecons.md + images/rapports de contrôle qualité
-analyse/                analyses (chaînes concurrentes, statistiques, mesures earshot…)
+src/systeme/              MOTEUR PARTAGÉ (réutilisé par tous les épisodes)
+  format.ts               format + règles chiffrées de qc/lecons.md (zones sûres, 160°/s, 1,4 s, 2 blocs…)
+  mots.ts / timeline.ts   mots.json (alignement) + ANCRES : "hook", "hook.fin", "hook:mot", "chute+0.5"…
+  camera.ts / CameraRig   images-clés « déplacement → plan tenu » (accélérations douces) + project() 3D -> pixels
+  episode.ts              type DonneesEpisode (tout en données) + résolution des ancres en images
+  EpisodeStandard.tsx     rendu complet d'un épisode (3D, personnages, post-traitement, HUD, sous-titres, son)
+  SousTitres.tsx          karaoké Montserrat 900, 2-4 mots, gris -> blanc, mots-clés jaune #FFC93C / rouge #FF3B30
+  kit3d/                  decor.ts (pièces en coupe, meubles, obstacles), textures procédurales, Piece, Meubles,
+                          Exterieur (ville nocturne, ciel, neige), Lumieres (bougie, lampe torche), PostProcess
+  personnage/             Bonhomme (personnage de la chaîne), poses.ts, trajet.ts (marche, pas de téléportation),
+                          BancEssai (chaque pose sous 4 angles : composition « banc-essai »)
+  hud/                    HUD « jeu de survie » en données : montre LCD, moodles, fiche d'objet, Tactique n/N,
+                          inventaire, compte à rebours, étiquette 3D, carton « PARTIE N » ; boites.ts = positions
+src/episodes/NNN-nom/     donnees.ts (décor, personnages, caméra, HUD, sons, ambiances, sujets) + Episode.tsx
+src/episodes/registre.ts  liste des épisodes (une Composition « epNNN-nom » chacun)
+public/NNN-nom/           voix.wav, mots.json, timeline.json, mix.wav, stems/, sons/ (lus pendant le rendu)
+videos/NNN-nom/           script.txt, voix_brute.wav, final.mp4
+tools/                    voix, alignement, mixage, contrôles, rendus (voir le pipeline) ; models/, earshot/
+qc/                       lecons.md + qc/NNN-nom/ (rapports, planches, brouillon, images)
+analyse/                  analyses (chaînes de référence…) ; reference/ (vidéos étudiées, jamais versionnées)
 ```
-`src/episodes/000-test` est un épisode technique de vérification (ne pas publier).
+`src/episodes/000-demo` est la démonstration technique du moteur (ne pas publier).
+
+## Format du script (`videos/NNN-nom/script.txt`)
+Une ligne = une phrase de la timeline. `@id` en début de ligne = identifiant (sinon p1, p2…) ; `>` = phrase-chute
+(0,6 s de silence avant) ; `*mots*` = mot-clé ressource/chiffre (jaune) ; `_mot_` = danger (rouge) ; `# …` commentaire ;
+`[…]` indication non lue. Ex. : `@chute > Mais _jamais_ de barbecue à l'intérieur.`
 
 ## Pipeline d'un épisode
-0. **Relire `qc/lecons.md`.** Choisir `NNN-nom` (ex. `001-plus-d-eau`), créer les 3 dossiers.
-1. **Script** → `videos/NNN-nom/script.txt`. Accroche « Que feriez-vous si… » dès la 1re phrase,
-   ~170 mots/minute (70–120 s ≈ 200–340 mots). Faits de survie **vérifiés**, aucun conseil dangereux
-   présenté comme sûr. Lignes `#` = commentaires, `[crochets]` = indications non lues.
-2. **Voix** → `videos/NNN-nom/voix_brute.wav` (fournie ou générée).
-3. **Blancs coupés** →
-   `.venv/bin/python tools/couper_blancs.py videos/NNN-nom/voix_brute.wav videos/NNN-nom/voix.wav`
-   puis copier `voix.wav` dans `public/NNN-nom/`.
-4. **Alignement mot à mot** →
-   `.venv/bin/python tools/aligner.py public/NNN-nom/voix.wav --script videos/NNN-nom/script.txt -o public/NNN-nom/mots.json`
-   (orthographe du script, temps de Vosk ; si > 15 % de mots interpolés : vérifier).
-5. **Timeline** : découper l'épisode en plans calés sur les mots (un nouvel état d'image toutes les
-   1,5–2,5 s, plans « déplacement → plan tenu », étiquettes uniquement sur plans tenus).
-6. **3D + HUD + sous-titres** dans `src/episodes/NNN-nom/` en réutilisant `src/systeme/`.
-   Enregistrer la Composition `epNNN-nom` dans `src/Root.tsx` (durée calculée depuis `mots.json`).
-7. **Sons** : bruitages sombres depuis earshot (`earshot sfx list`, `earshot sfx render ID -o x.wav --dur … --apex …`,
-   `earshot kit …`), placés sur la timeline ; ambiance ≥ 10 dB sous la voix ; master −14 LUFS, TP < −1 dB.
-8. **Boucle qualité** (recommencer tant qu'un point échoue) :
-   - `npx tsc --noEmit` ;
-   - images fixes avec le calque de zones : `npx remotion still src/index.ts epNNN-nom qc/NNN/f.png --frame=N --props='{"guide":true}'`
-     sur une image toutes les ~2 s → les regarder et cocher chaque règle de `qc/lecons.md` ;
-   - son : `tools/earshot/.venv/bin/earshot measure <fichier>` (LUFS, true peak),
-     `earshot timeline <fichier> --video <mp4>` (synchro son/image), `earshot describe` pour vérifier qu'un bruitage est bien sombre ;
-   - toute erreur trouvée → corriger **et** ajouter une leçon.
-9. **Relire `qc/lecons.md`**, puis **rendu final** :
-   `npx remotion render src/index.ts epNNN-nom videos/NNN-nom/NNN-nom.mp4`
-   puis contrôle final (ffprobe : 1080×1920, 30 i/s, durée 70–120 s ; earshot measure : −14 LUFS ±1, TP < −1 dB).
+0. **Relire `qc/lecons.md`.** Choisir `NNN-nom`, créer `videos/`, `public/`, `src/episodes/` à ce nom.
+1. **Script** → `videos/NNN-nom/script.txt` (format ci-dessus). Accroche « Que feriez-vous si… » dès la 1re phrase,
+   ~170 mots/minute (70–120 s ≈ 200–340 mots). Faits de survie **vérifiés**, aucun conseil dangereux présenté comme sûr.
+2. **Voix** → `videos/NNN-nom/voix_brute.wav` (fournie). Pour monter avant la vraie voix :
+   `.venv/bin/python tools/voix_provisoire.py videos/NNN-nom/script.txt videos/NNN-nom/voix_brute.wav` (jamais publiée).
+3. **Blancs coupés + alignement mot à mot** (une seule commande) :
+   `.venv/bin/python tools/couper_blancs.py videos/NNN-nom/voix_brute.wav --script videos/NNN-nom/script.txt -o public/NNN-nom/voix.wav --mots public/NNN-nom/mots.json`
+   (pauses ramenées à 0,1–0,3 s, 0,6 s avant la chute, fondus 12 ms, jamais de coupe dans un mot ; puis
+   réalignement Vosk + alignement caractère par caractère sur le texte exact du script, insensible aux accents).
+   **Changer de voix = relancer cette commande, rien d'autre.**
+4. **Timeline / 3D / HUD / sons** dans `src/episodes/NNN-nom/donnees.ts`, tout calé par ancres sur les phrases et mots ;
+   éléments 3D propres à l'épisode dans `Episode.tsx` ; ajouter l'épisode à `src/episodes/registre.ts`.
+5. **Boucle qualité** : `bash tools/boucle.sh NNN-nom` — typecheck, `tools/qc.ts` (durée et chevauchement des
+   étiquettes, zones sûres, caméra hors des murs, téléportations, rotation ≤ 160°/s, rythme, sujet jamais caché),
+   `tools/mix.py` + `tools/qc_audio.py` (voix ≥ 10 dB au-dessus du fond mot par mot, −14 LUFS, TP < −1),
+   brouillon demi-résolution, planches contact `qc/NNN-nom/planche-*.jpg` (à REGARDER), écoute earshot.
+   Images précises : `npx tsx tools/images.ts NNN-nom 2.5 "chute:jamais" --guide`.
+   Toute erreur trouvée → corriger **et** ajouter une leçon. Recommencer jusqu'à 0 erreur.
+6. **Relire `qc/lecons.md`**, puis **rendu final** : `bash tools/final.sh NNN-nom` (contrôles bloquants, rendu,
+   master, vérifs 1080×1920/30 i/s/durée/−14 LUFS, copie dans « Vidéos TikTok » sur le bureau).
+
+## Pièges techniques connus
+- `@react-three/postprocessing` rend noir sous Remotion → `kit3d/PostProcess.tsx` (EffectComposer de three).
+- Jamais `Math.random()` → `random()` de Remotion (ou `bruit()` de `maths.ts`).
+- Un NaN dans un shader noircit toute l'image → `max(x, 0.)` avant `pow`.
+- Jamais de hook React après un `return` anticipé.
+- Les données d'épisode (`donnees.ts`) ne doivent importer que des fichiers sans JSX (lus par `tools/qc.ts` hors navigateur).
 
 ## Commandes utiles
 - Tout réinstaller (nouvelle machine) : `npm run installer` (ou `bash tools/installer.sh`)
-- Aperçu interactif : `npm run studio`
-- Rendu de vérification technique : `npm run test-rendu`
-- Vérifier le code : `npm run typecheck`
+- Aperçu interactif : `npm run studio` ; vérifier le code : `npm run typecheck`
+- Banc d'essai du personnage : `npx tsx tools/images.ts banc-essai 0.5 2.5 4.5 6.5 8.5 10.5 12.5 14.5`
 - earshot (bruitages / écoute) : `tools/earshot/.venv/bin/earshot <commande>` ; `doctor --load` pour vérifier l'installation.
-  `measure`, `sfx`, `kit` sont rapides (sans modèle) ; les autres chargent les modèles (~20–40 s par appel) :
-  pour beaucoup d'appels, un seul script Python avec `from earshot import api`.
+  `measure`, `sfx`, `kit` sont rapides (sans modèle) ; les autres chargent les modèles (~20–40 s par appel).
+  Sons autorisés (sombres) : `tools/sons_autorises.json`.

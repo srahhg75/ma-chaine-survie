@@ -1,52 +1,59 @@
 import React, { useMemo } from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
-import { LARGEUR, Y_SOUS_TITRES, ZONE_SURE } from "./format";
-import { grouperMots, Mot } from "./mots";
-import { chargerPolice } from "./polices";
+import { HUD, lignesSousTitre } from "./hud/boites";
+import { JAUNE, ROUGE } from "./hud/Composants";
+import { Y_SOUS_TITRES, ZONE_SURE } from "./format";
+import { blocsSousTitres, Mot } from "./mots";
+import { POLICE_TEXTE } from "./polices";
 
-const fontFamily = chargerPolice("Anton");
+const GRIS = "#8d9096";
+const COULEUR: Record<Mot["style"], string> = { normal: "#ffffff", ressource: JAUNE, danger: ROUGE };
 
-const COULEUR_ACTIVE = "#ffcf3f";
-
-// Sous-titres mot à mot, centrés à 60 % de la hauteur, le mot prononcé surligné.
+// Sous-titres karaoké : Montserrat 900 en majuscules, 2 à 4 mots par bloc, centrés à 60 % de la hauteur.
+// Chaque mot passe du gris à sa couleur (blanc, jaune ressource, rouge danger) au moment où il est prononcé.
 export const SousTitres: React.FC<{ mots: Mot[] }> = ({ mots }) => {
   const frame = useCurrentFrame();
-  const groupes = useMemo(() => grouperMots(mots), [mots]);
-
-  // Le groupe reste affiché jusqu'au début du suivant (pas de clignotement entre deux phrases)
-  const idx = groupes.findIndex((g, i) => {
-    const fin = groupes[i + 1] ? groupes[i + 1][0].fDebut : g[g.length - 1].fFin + 15;
-    return frame >= g[0].fDebut && frame < fin;
-  });
-  if (idx < 0) return null;
-  const groupe = groupes[idx];
-  const entree = interpolate(frame - groupe[0].fDebut, [0, 4], [0.85, 1], { extrapolateRight: "clamp" });
-
+  const blocs = useMemo(() => blocsSousTitres(mots), [mots]);
+  const bloc = blocs.find((b) => frame >= b.fDebut && frame < b.fFin);
+  if (!bloc) return null;
+  const lignes = lignesSousTitre(bloc);
+  const pop = interpolate(frame - bloc.fDebut, [0, 3, 6], [0.9, 1.04, 1], { extrapolateRight: "clamp" });
+  let k = 0;
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
       <div
         style={{
           position: "absolute",
           top: Y_SOUS_TITRES,
           left: ZONE_SURE.gauche,
           width: ZONE_SURE.droite - ZONE_SURE.gauche,
-          transform: `translateY(-50%) scale(${entree})`,
+          transform: `translateY(-50%) scale(${pop})`,
           textAlign: "center",
-          fontFamily,
-          fontSize: LARGEUR * 0.085,
-          lineHeight: 1.1,
+          fontFamily: POLICE_TEXTE,
+          fontWeight: 900,
+          fontSize: HUD.sousTitres.taille,
+          lineHeight: `${HUD.sousTitres.interligne}px`,
           textTransform: "uppercase",
-          color: "white",
-          WebkitTextStroke: "10px black",
+          letterSpacing: -0.5,
+          WebkitTextStroke: "12px rgba(0,0,0,0.92)",
           paintOrder: "stroke fill",
-          textShadow: "0 6px 18px rgba(0,0,0,0.6)",
+          textShadow: "0 8px 0 rgba(0,0,0,0.55), 0 12px 30px rgba(0,0,0,0.75)",
         }}
       >
-        {groupe.map((m, i) => (
-          <span key={i} style={{ color: frame >= m.fDebut && frame < m.fFin ? COULEUR_ACTIVE : "white" }}>
-            {m.mot}
-            {i < groupe.length - 1 ? " " : ""}
-          </span>
+        {lignes.map((ligne, i) => (
+          <div key={i}>
+            {ligne.map((texte, j) => {
+              const m = bloc.mots[k++];
+              const dit = frame >= m.fDebut;
+              const enCours = dit && frame < m.fFin;
+              return (
+                <span key={j} style={{ color: dit ? COULEUR[m.style] : GRIS, display: "inline-block", transform: `scale(${enCours ? 1.06 : 1})` }}>
+                  {texte}
+                  {j < ligne.length - 1 ? " " : ""}
+                </span>
+              );
+            })}
+          </div>
         ))}
       </div>
     </AbsoluteFill>

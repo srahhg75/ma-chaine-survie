@@ -17,3 +17,9 @@ analyse/**
 reference/
 qc/_*.png
 __pycache__/
+# Contrôle qualité : on garde les rapports (.md), pas les médias lourds
+qc/**/*.mp4
+qc/**/*.png
+qc/**/*.jpg
+qc/**/*.log
+qc/**/earshot_timeline.json

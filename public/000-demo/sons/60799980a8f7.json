@@ -1,0 +1,57 @@
+{
+ "summary": "wrote /home/user/public/000-demo/sons/60799980a8f7.wav: whoosh_big/deep seed 254919109: 2.038 s, onset 0.253 s, peak at 0.749 s, end 1.675 s, -1.0 dBFS, -14.4 LUFS momentary max; checks: clean",
+ "file": "/home/user/public/000-demo/sons/60799980a8f7.wav",
+ "meta": {
+  "id": "whoosh_big/deep",
+  "seed": 254919109,
+  "sr": 48000,
+  "onset_s": 0.2532,
+  "peak_s": 0.7485,
+  "end_s": 1.675,
+  "dur_s": 2.0383,
+  "peak_db": -1.0,
+  "lufs_m_max": -14.42,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "whoosh_big/deep: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -120.8,
+    "ring_z": 6.1,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 5.9,
+    "attack_ms": 7.5,
+    "t40_ms": 690.0,
+    "crest_db": 9.6,
+    "res_db": 4.8,
+    "res_hz": 1008,
+    "peak_dbfs": -1.0,
+    "live_ms": 1138.0
+   },
+   "glide": {
+    "tonal_share": 0.75,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.738
+    ],
+    "count": 1,
+    "pre_swell_ms": 425.0
+   },
+   "context": {
+    "category": "whoosh_big",
+    "sound": "whoosh_big/deep"
+   }
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "lufs": -14.03,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "1 :",
+   "t": 3.36,
+   "baisse_db": 13.4
+  },
+  {
+   "mot": "Mais",
+   "t": 6.27,
+   "baisse_db": 5.8
+  },
+  {
+   "mot": "jamais",
+   "t": 6.42,
+   "baisse_db": 1.6
+  }
+ ],
+ "sons": [
+  "whoosh_big/deep",
+  "cut_hit/rumble",
+  "pro_sub_drop/low",
+  "pro_impact/deep"
+ ],
+ "pas": 3
+}

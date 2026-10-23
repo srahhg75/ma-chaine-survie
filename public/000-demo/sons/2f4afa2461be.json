@@ -1,0 +1,62 @@
+{
+ "summary": "wrote /home/user/public/000-demo/sons/2f4afa2461be.wav: cut_hit/rumble seed 4104: 1.400 s, onset 0.000 s, peak at 0.072 s, end 1.396 s, -1.0 dBFS, -12.7 LUFS momentary max; checks: clean",
+ "file": "/home/user/public/000-demo/sons/2f4afa2461be.wav",
+ "meta": {
+  "id": "cut_hit/rumble",
+  "seed": 4104,
+  "sr": 48000,
+  "onset_s": 0.0,
+  "peak_s": 0.0725,
+  "end_s": 1.396,
+  "dur_s": 1.4,
+  "peak_db": -1.0,
+  "lufs_m_max": -12.65,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [
+    {
+     "code": "tail",
+     "msg": "the tail rises again by 43 dB (a second event, a roll or a double member)"
+    }
+   ],
+   "summary": "cut_hit/rumble: clean (the tail rises again by 43 dB (a second event, a roll or a double member))",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -95.3,
+    "ring_z": 4.0,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 43.4,
+    "attack_ms": 3.25,
+    "t40_ms": 610.0,
+    "crest_db": 7.6,
+    "res_db": 1.6,
+    "res_hz": 469,
+    "peak_dbfs": -1.0,
+    "live_ms": 927.75
+   },
+   "glide": {
+    "tonal_share": 0.94,
+    "rise_st": 0.8,
+    "from_s": 0.741,
+    "to_s": 0.746
+   },
+   "layers": {
+    "attacks": [
+     0.068
+    ],
+    "count": 1,
+    "pre_swell_ms": 10.0
+   },
+   "context": {
+    "category": "cut_hit",
+    "sound": "cut_hit/rumble"
+   }
+  }
+ }
+}

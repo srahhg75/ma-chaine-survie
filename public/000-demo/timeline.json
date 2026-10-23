@@ -1,0 +1,65 @@
+{
+ "episode": "000-demo",
+ "fps": 30,
+ "duree": 10.666666666666666,
+ "sons": [
+  {
+   "t": 1.95,
+   "id": "whoosh_big/deep",
+   "gain": -8
+  },
+  {
+   "t": 2.82,
+   "id": "cut_hit/rumble",
+   "gain": -6
+  },
+  {
+   "t": 6.42,
+   "id": "pro_sub_drop/low",
+   "gain": -2
+  },
+  {
+   "t": 9.21,
+   "id": "pro_impact/deep",
+   "gain": -4
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 10.66,
+   "niveau": 0,
+   "fondu": 1
+  },
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 10.66,
+   "niveau": -2,
+   "fondu": 1
+  },
+  {
+   "type": "coeur",
+   "de": 5.77,
+   "a": 10.06,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 78
+  }
+ ],
+ "pas": [
+  {
+   "t": 3.6333333333333333,
+   "personnage": "bob"
+  },
+  {
+   "t": 3.8666666666666667,
+   "personnage": "bob"
+  },
+  {
+   "t": 4.066666666666666,
+   "personnage": "bob"
+  }
+ ]
+}

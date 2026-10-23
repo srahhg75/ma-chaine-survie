@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "installer": "bash tools/installer.sh",
     "polices": "tsx tools/telecharger_polices.ts",
-    "test-rendu": "remotion render src/index.ts ep000-test videos/000-test/test.mp4"
+    "boucle": "bash tools/boucle.sh",
+    "final": "bash tools/final.sh",
+    "qc": "tsx tools/qc.ts"
   },
   "dependencies": {
     "@react-three/fiber": "9.8.2",

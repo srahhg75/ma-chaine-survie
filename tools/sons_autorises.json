@@ -1,0 +1,12 @@
+{
+  "_regle": "qc/lecons.md : sons uniquement sombres (souffles graves, impacts lourds, grincements). Jamais de carillon, ding, shimmer ou pop.",
+  "prefixes_autorises": [
+    "impact/", "pro_impact/", "cut_hit/", "sub_drop/", "pro_sub_drop/",
+    "downlifter/sub_sink", "downlifter/tape", "downlifter/air_fall",
+    "whoosh_big/deep", "whoosh_big/thump", "whoosh_big/gust", "whoosh_big/swell", "whoosh_big/reverse", "whoosh_big/cape",
+    "pro_whoosh_big/gritty", "pro_whoosh_big/windy", "pro_whoosh_big/long", "pro_whoosh_big/swell",
+    "whoosh_fast/heavy", "reverse_swell/dark", "reverse_swell/breath",
+    "riser/dark", "riser/tension", "knock/wood", "knock/desk", "swipe/cloth"
+  ],
+  "mots_interdits": ["bell", "pop", "shimmer", "sting", "notify", "ding", "chime", "glock", "celesta", "marimba", "kalimba", "pluck", "mallet", "tink", "ping"]
+}
