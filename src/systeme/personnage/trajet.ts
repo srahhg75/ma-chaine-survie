@@ -21,7 +21,7 @@ export type DonneesPersonnage = {
   depart: { position: Vec3; orientation: number };
   trajet?: CleTrajet[];
   poses?: ClePose[];
-  lampe?: { de: Ancre; a?: Ancre }; // lampe torche allumée dans la main droite
+  lampe?: { de: Ancre; a?: Ancre; puissance?: number }; // lampe torche allumée dans la main droite (puissance 1 par défaut)
   taille?: number; // défaut 1
   variante?: "bonhomme" | "heroine"; // personnage de la chaîne ou héroïne
   fantome?: { de: Ancre; a: Ancre }; // « fantôme » rouge du mauvais réflexe, visible seulement de `de` à `a`
@@ -35,6 +35,7 @@ export type PersonnageResolu = {
   segments: Segment[];
   poses: { f: number; pose: Exclude<NomPose, "marche">; transition: number }[];
   lampe?: [number, number];
+  puissanceLampe: number;
   variante: "bonhomme" | "heroine";
   fantome?: [number, number];
 };
@@ -69,6 +70,7 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
     segments,
     poses: (p.poses ?? []).map((k) => ({ f: image(k.a, al, fps), pose: k.pose, transition: k.transition ?? 0.35 })),
     lampe: p.lampe ? [image(p.lampe.de, al, fps), p.lampe.a !== undefined ? image(p.lampe.a, al, fps) : Infinity] : undefined,
+    puissanceLampe: p.lampe?.puissance ?? 1,
     fantome: p.fantome ? [image(p.fantome.de, al, fps), image(p.fantome.a, al, fps)] : undefined,
   };
 };

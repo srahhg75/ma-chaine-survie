@@ -121,3 +121,14 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — Mixage interrompu : `pitch` hors de la plage du son** (knock/wood en C3, plage 250-2600 Hz).
   Règle : avant de donner un `pitch` à un bruitage, lire sa plage avec `earshot sfx render <id> --pitch <note>`
   (le message d'erreur donne la plage) ; sans besoin précis, ne pas mettre de `pitch`.
+- **2026-10-24 — Plan du hook2 (les 6 bouteilles) visible 0,05 s** : le déplacement suivant (1,6 s) partait juste
+  après l'arrivée. Règle : un plan est tenu de son arrivée jusqu'à `arrivée du suivant − deplacement du suivant` ;
+  vérifier cette durée avec `tools/cadrage.ts` (colonne « a→b ») : au moins 0,8 s pour un plan qui porte une info.
+- **2026-10-24 — Fantôme entre la caméra et le sujet** (radiateur : le fantôme rouge remplissait tout l'écran en gros plan).
+  Règle : le fantôme se place À CÔTÉ de l'objet du mauvais geste (de profil), jamais sur l'axe caméra → sujet.
+- **2026-10-24 — Lampe torche qui brûle l'image en plan rapproché.** Règle : `lampe.puissance` 0,3 environ pour une
+  lampe portée dans un petit décor (salle d'eau, placard) ; regarder chaque plan de nuit en image fixe.
+- **2026-10-24 — Porte de placard ouverte qui masquait le lavabo pendant les étiquettes.** Règle : une porte qui
+  s'ouvre pivote du côté opposé aux éléments à montrer (charnière côté mur ou côté hors champ).
+- **2026-10-24 — Caméra placée DANS le personnage** (gros plan du filtre à café : Inès entre la caméra et l'objet).
+  Règle : en gros plan d'objet, filmer depuis le côté où le personnage n'est pas (azimut négatif = depuis le sud-ouest).

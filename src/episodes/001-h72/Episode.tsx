@@ -362,10 +362,10 @@ const PlacardBallon: React.FC<{ porte: number; vanne: number; vidange: number; j
           <Arrondi key={k} taille={[0.03, h, p]} position={[k * (l / 2 - 0.015), h / 2, 0]} rayon={0.008} materiau={bois} />
         ))}
         <Arrondi taille={[l, 0.03, p]} position={[0, h - 0.015, 0]} rayon={0.008} materiau={bois} />
-        {/* porte, charnière à l'ouest, s'ouvre vers le sud-ouest */}
-        <group position={[-l / 2, 0, p / 2]} rotation={[0, -1.9 * porte, 0]}>
-          <Arrondi taille={[l - 0.01, h - 0.04, 0.025]} position={[l / 2, h / 2, 0.012]} rayon={0.008} materiau={bois} />
-          <Arrondi taille={[0.02, 0.16, 0.03]} position={[l - 0.08, 1.05, 0.04]} rayon={0.006} couleur="#9a9c9e" metal={0.8} rugosite={0.3} />
+        {/* porte, charnière à l'est, s'ouvre vers le sud-est (elle ne masque jamais le lavabo) */}
+        <group position={[l / 2, 0, p / 2]} rotation={[0, 1.9 * porte, 0]}>
+          <Arrondi taille={[l - 0.01, h - 0.04, 0.025]} position={[-l / 2, h / 2, 0.012]} rayon={0.008} materiau={bois} />
+          <Arrondi taille={[0.02, 0.16, 0.03]} position={[-(l - 0.08), 1.05, 0.04]} rayon={0.006} couleur="#9a9c9e" metal={0.8} rugosite={0.3} />
         </group>
       </group>
       {/* ballon électrique de 200 L */}
@@ -698,7 +698,7 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       </group>
       <Carafe niveau={carafe} goutte={goutte} t={t} />
       <Bassine position={bassinePos} orientation={bassineOrient} inclinaison={verse * (1 - depose)} niveau={niveauBassine} />
-      <Lanterne position={[2.62, 0.9, -1.36]} allumee={lanternes} portee={3.4} />
+      <Lanterne position={[2.15, 0.975, -1.47]} allumee={lanternes} portee={3.0} puissance={0.5} />
 
       {/* ---- salon ---- */}
       <CanapeTissu position={[-4.6, 0, 0.55]} rotation={90} couleur="#6d4a3e" />

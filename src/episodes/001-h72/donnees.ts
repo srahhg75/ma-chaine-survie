@@ -27,7 +27,7 @@ export const P = {
   vanne: [3.68, 0.24, -1.12] as Vec3,
   vidange: [3.98, 0.3, -1.04] as Vec3,
   seau: [3.98, 0, -0.78] as Vec3,
-  carafe: [3.35, 0, -0.95] as Vec3,
+  carafe: [2.66, 0.9, -1.28] as Vec3, // posée sur le lavabo
   radiateur: [-3.4, 0.12, -1.5] as Vec3,
   purge: [-2.98, 0.6, -1.45] as Vec3,
   porte: [5.0, 0, -1.6] as Vec3, // porte d'entrée (mur nord de l'entrée), charnière à l'ouest
@@ -120,7 +120,7 @@ export const donnees: DonneesEpisode = {
         { a: "t1:manger", position: [-0.72, 0, -0.92], orientation: 205, vitesse: 1.0 },
         { a: "t1a:peches", position: [-0.3, 0, -0.12], orientation: 0, vitesse: 1.1 },
         // t2 : la salle d'eau
-        { a: "t2a", position: [2.0, 0, -0.62], orientation: 150, vitesse: 1.3 },
+        { a: "t2a", position: [1.98, 0, -0.62], orientation: 120, vitesse: 1.3 },
         { a: "t2c:lave", position: [2.62, 0, -0.78], orientation: 0, vitesse: 1.0 },
         { a: "t2d:sale", position: [2.17, 0, -0.74], orientation: 180, vitesse: 0.9 },
         // t3 : le ballon
@@ -167,13 +167,13 @@ export const donnees: DonneesEpisode = {
         { a: "chute:vide", pose: "mainTendue", transition: 0.25 },
         { a: "sec", pose: "inquiet", transition: 0.4 },
       ],
-      lampe: { de: "retour:matin", a: "fin+6" },
+      lampe: { de: "retour:matin", a: "fin+6", puissance: 0.3 },
     },
     {
       // Fantôme du mauvais réflexe : Inès à genoux qui vide le radiateur du salon dans une bouteille
       id: "fantome-radiateur",
       variante: "heroine",
-      depart: { position: [-3.05, 0, -0.98], orientation: 180 },
+      depart: { position: [-2.55, 0, -1.18], orientation: -90 },
       poses: [{ a: 0, pose: "accroupi" }],
       fantome: { de: "erreur", a: "erreur4.fin+0.2" },
     },
@@ -185,7 +185,7 @@ export const donnees: DonneesEpisode = {
     // hook2 — recul : Inès, la table et les 6 bouteilles
     { a: "hook2:neuf", ...plan([-0.3, 0.95, -0.12], { azimut: 18, elevation: 24, distance: 4.3, fov: 40, y: 600 }), deplacement: 0.9 },
     // RÉCAP — on sort : tout l'immeuble, noir, dans la ville sans courant
-    { a: "recap1:sans", position: [7.5, -2.0, 30.0], cible: [0.6, -7.6, 0], fov: 44, deplacement: 1.6, par: [5.0, 4.0, 14.0] },
+    { a: "recap1:electricite", position: [7.5, -2.0, 30.0], cible: [0.6, -7.6, 0], fov: 44, deplacement: 1.0, par: [5.0, 4.0, 14.0] },
     // la pompe du sous-sol
     { a: "recap2:pompe", ...plan(P.pompe, { azimut: 35, elevation: 24, distance: 3.6, fov: 40, y: 600 }), deplacement: 1.0 },
     // remontée le long de la colonne d'eau jusqu'au 6e
@@ -198,24 +198,24 @@ export const donnees: DonneesEpisode = {
     { a: "t1:mouille", ...plan([-0.95, 0.9, -1.1], { azimut: 24, elevation: 16, distance: 3.6, fov: 40, y: 660 }), deplacement: 1.0 },
     { a: "t1a:sirop", ...plan([-0.3, 0.95, -0.12], { azimut: 14, elevation: 22, distance: 3.9, fov: 40, y: 650 }), deplacement: 0.9 },
     { a: "t1b:jus", ...plan([-0.12, 0.84, 0.33], { azimut: 22, elevation: 34, distance: 1.35, fov: 34, y: 640 }), deplacement: 0.7 },
-    { a: "t1c:chips", ...plan([-0.3, 0.85, 0.3], { azimut: 14, elevation: 30, distance: 2.6, fov: 38, y: 660 }), deplacement: 0.7 },
+    { a: "t1c:chips", ...plan([-0.3, 0.85, 0.15], { azimut: 14, elevation: 26, distance: 3.6, fov: 38, y: 640 }), deplacement: 0.7 },
     // TACTIQUE 2 — les toilettes
-    { a: "t2:toilettes", ...plan([2.2, 0.85, -0.9], { azimut: 24, elevation: 22, distance: 3.6, fov: 42, y: 660 }), deplacement: 1.3 },
+    { a: "t2:toilettes", ...plan([2.15, 0.8, -0.85], { azimut: 0, elevation: 22, distance: 4.0, fov: 42, y: 660, x: 560 }), deplacement: 1.3 },
     { a: "t2c:lave", ...plan([2.62, 0.72, -0.62], { azimut: 10, elevation: 20, distance: 3.7, fov: 40, y: 660 }), deplacement: 0.9 },
-    { a: "t2d:cuvette", ...plan([2.17, 0.72, -1.0], { azimut: 70, elevation: 22, distance: 2.9, fov: 40, y: 640 }), deplacement: 1.3 },
+    { a: "t2d:cuvette", ...plan([2.17, 0.72, -1.0], { azimut: -60, elevation: 22, distance: 2.9, fov: 40, y: 640 }), deplacement: 1.3 },
     // TACTIQUE 3 — le ballon (placard qui s'ouvre)
-    { a: "t3:ballon", ...plan([3.85, 1.0, -1.3], { azimut: 24, elevation: 15, distance: 3.3, fov: 40, y: 660, x: 560 }), deplacement: 1.2 },
+    { a: "t3:ballon", ...plan([3.85, 1.0, -1.3], { azimut: 12, elevation: 15, distance: 3.3, fov: 40, y: 660, x: 560 }), deplacement: 1.7 },
     // les 4 gestes, en un seul plan tenu (étiquettes numérotées)
     { a: "t3b", ...plan([3.28, 0.8, -1.1], { azimut: 10, elevation: 14, distance: 4.6, fov: 46, y: 620, x: 520 }), deplacement: 0.5 },
-    { a: "t3f:cafe", ...plan([3.35, 0.22, -0.95], { azimut: 24, elevation: 30, distance: 1.5, fov: 36, y: 640 }), deplacement: 0.5 },
+    { a: "t3f:cafe", ...plan([2.66, 1.1, -1.28], { azimut: -20, elevation: 25, distance: 1.5, fov: 36, y: 640 }), deplacement: 0.5 },
     // ERREUR — les radiateurs du salon (fantôme)
-    { a: "erreur:jamais", ...plan([-3.1, 0.45, -1.15], { azimut: 30, elevation: 22, distance: 3.0, fov: 40, y: 640, x: 470 }), deplacement: 1.3 },
-    { a: "erreur2:circuit", ...plan([-3.3, 0.45, -1.45], { azimut: 25, elevation: 15, distance: 1.9, fov: 36, y: 640 }), deplacement: 0.8 },
-    { a: "erreur3:pleine", ...plan([-2.95, 0.18, -1.3], { azimut: 30, elevation: 25, distance: 1.3, fov: 34, y: 640, x: 600 }), deplacement: 0.6 },
-    { a: "erreur4:bouillie", ...plan([-3.1, 0.45, -1.15], { azimut: 30, elevation: 22, distance: 3.4, fov: 40, y: 640, x: 600 }), deplacement: 0.9 },
+    { a: "erreur:jamais", ...plan([-2.95, 0.45, -1.25], { azimut: -20, elevation: 20, distance: 3.3, fov: 40, y: 640, x: 470 }), deplacement: 1.3 },
+    { a: "erreur2:circuit", ...plan([-3.4, 0.45, -1.45], { azimut: -15, elevation: 15, distance: 2.1, fov: 36, y: 640 }), deplacement: 0.8 },
+    { a: "erreur3:pleine", ...plan([-2.95, 0.18, -1.3], { azimut: -25, elevation: 25, distance: 1.5, fov: 34, y: 640, x: 600 }), deplacement: 0.6 },
+    { a: "erreur4:bouillie", ...plan([-2.95, 0.45, -1.25], { azimut: -20, elevation: 22, distance: 3.7, fov: 40, y: 640, x: 560 }), deplacement: 0.9 },
     // FAUSSE SÉCURITÉ — Inès dans l'entrée, tranquille
     { a: "calme", ...plan([4.62, 1.0, -0.32], { azimut: 15, elevation: 12, distance: 3.5, fov: 38, y: 620, x: 520 }), deplacement: 1.4 },
-    { a: "calme2:ballon", ...plan([4.25, 0.9, -0.8], { azimut: 20, elevation: 18, distance: 4.4, fov: 42, y: 640 }), deplacement: 0.8 },
+    { a: "calme2:ballon", ...plan([4.2, 0.9, -0.65], { azimut: -20, elevation: 18, distance: 4.4, fov: 42, y: 640 }), deplacement: 0.8 },
     // la porte qui se referme et le verrou qui tourne (objet planté) ; la nuit passe sur ce plan fixe
     { a: "garde:heures", ...plan(P.verrou, { azimut: 18, elevation: 8, distance: 1.6, fov: 36, y: 640, x: 480 }), deplacement: 0.7 },
     // TWIST — 6 h du matin, elle rentre
@@ -291,19 +291,20 @@ export const donnees: DonneesEpisode = {
   ],
   sujets: [
     { de: 0, a: "hook2", point: P.robinetCuisine },
-    { de: "hook2.fin", a: "recap1:sans-1.6", personnage: INES, hauteur: 0.85 },
+    { de: "hook2.fin", a: "recap1:electricite-1.0", personnage: INES, hauteur: 0.85 },
     { de: "recap2:pompe", a: "recap3", point: P.pompe },
     { de: "promesse:connait", a: "promesse2", personnage: INES, hauteur: 1.05 },
     { de: "t1a:sirop", a: "t1b:jus-0.7", personnage: INES, hauteur: 1.0 },
     { de: "t1b:jus", a: "t1c", point: [-0.12, 0.84, 0.33] },
-    { de: "t1c:chips", a: "t2:toilettes-1.3", point: [-0.3, 0.85, 0.3] },
+    { de: "t1c:chips", a: "t2:toilettes-1.3", personnage: INES, hauteur: 1.0 },
     { de: "t2c:lave", a: "t2d", personnage: INES, hauteur: 0.75 },
     { de: "t3:ballon", a: "t3f", point: P.ballon },
     { de: "t3b", a: "t3f", personnage: INES, hauteur: 0.75 },
-    { de: "t3f:cafe", a: "erreur:jamais-1.3", point: [3.35, 0.22, -0.95] },
-    { de: "erreur:jamais", a: "erreur3:pleine-0.6", point: [-3.05, 0.45, -1.1] },
+    { de: "t3f:cafe", a: "erreur:jamais-1.3", point: [2.66, 1.1, -1.28] },
+    { de: "erreur:jamais", a: "erreur2:circuit-0.8", point: [-2.95, 0.45, -1.25] },
+    { de: "erreur2:circuit", a: "erreur3:pleine-0.6", point: [-3.4, 0.45, -1.45] },
     { de: "erreur3:pleine", a: "erreur4:bouillie-0.9", point: [-2.95, 0.18, -1.3] },
-    { de: "erreur4:bouillie", a: "calme-1.4", point: [-3.05, 0.45, -1.1] },
+    { de: "erreur4:bouillie", a: "calme-1.4", point: [-2.95, 0.45, -1.25] },
     { de: "calme", a: "garde", personnage: INES, hauteur: 1.0 },
     { de: "ouvre", a: "ouvre:bas-0.9", personnage: INES, hauteur: 0.9 },
     { de: "ouvre:bas+0.4", a: "rien:goutte-0.5", personnage: INES, hauteur: 0.7 },

@@ -28,7 +28,7 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
     <>
       {r.personnages.map((p) => {
         const e = etatPersonnage(p, frame, fps);
-        const corps = <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} taille={p.taille} variante={p.variante} />;
+        const corps = <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} taille={p.taille} variante={p.variante} />;
         return p.fantome ? (
           <Fantome key={p.id} opacite={opaciteFantome(p, frame, fps)}>
             {corps}

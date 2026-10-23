@@ -57,7 +57,7 @@ const Jambe: React.FC<{ cote: 1 | -1; hanche: [number, number]; genou: number; c
   </group>
 );
 
-const Bras: React.FC<{ cote: 1 | -1; epaule: [number, number]; coude: number; c: Couleurs; lampe?: boolean }> = ({ cote, epaule, coude, c, lampe }) => (
+const Bras: React.FC<{ cote: 1 | -1; epaule: [number, number]; coude: number; c: Couleurs; lampe?: boolean; puissanceLampe?: number }> = ({ cote, epaule, coude, c, lampe, puissanceLampe = 1 }) => (
   <group position={[cote * CORPS.ecartEpaules, 0, 0]} rotation={[-rad(epaule[0]), 0, cote * rad(epaule[1])]}>
     <mesh position={[0, -CORPS.brasHaut / 2, 0]} castShadow>
       <capsuleGeometry args={[0.052, CORPS.brasHaut - 0.03, 6, 12]} />
@@ -76,7 +76,7 @@ const Bras: React.FC<{ cote: 1 | -1; epaule: [number, number]; coude: number; c:
       {lampe && (
         // La lampe pointe dans le prolongement de l'avant-bras
         <group position={[0, -CORPS.avantBras - 0.04, 0.02]} rotation={[Math.PI / 2, 0, 0]}>
-          <LampeTorche />
+          <LampeTorche puissance={puissanceLampe} />
         </group>
       )}
     </group>
@@ -205,10 +205,11 @@ export const Bonhomme: React.FC<{
   position: Vec3;
   orientation: number; // degrés
   lampe?: boolean;
+  puissanceLampe?: number; // 1 = lampe torche standard ; baisser pour les plans rapprochés (image brûlée)
   taille?: number;
   couleurs?: Partial<Couleurs>;
   variante?: Variante;
-}> = ({ pose, position, orientation, lampe = false, taille = 1, couleurs, variante = "bonhomme" }) => {
+}> = ({ pose, position, orientation, lampe = false, puissanceLampe = 1, taille = 1, couleurs, variante = "bonhomme" }) => {
   const c = { ...(variante === "heroine" ? COULEURS_HEROINE : COULEURS_DEFAUT), ...couleurs };
   const yBassin = hauteurBassin(pose);
   return (
@@ -253,7 +254,7 @@ export const Bonhomme: React.FC<{
           </mesh>
           <group position={[0, CORPS.bassinVersEpaules - 0.04, 0]}>
             <Bras cote={1} epaule={pose.epauleG} coude={pose.coudeG} c={c} />
-            <Bras cote={-1} epaule={pose.epauleD} coude={pose.coudeD} c={c} lampe={lampe} />
+            <Bras cote={-1} epaule={pose.epauleD} coude={pose.coudeD} c={c} lampe={lampe} puissanceLampe={puissanceLampe} />
           </group>
           <group position={[0, CORPS.bassinVersEpaules, 0]}>
             <Tete pose={pose} c={c} variante={variante} />
