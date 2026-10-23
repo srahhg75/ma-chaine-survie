@@ -1,0 +1,57 @@
+{
+ "lufs": -14.0,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "s'arrête.",
+   "t": 8.85,
+   "baisse_db": 5.1
+  },
+  {
+   "mot": "potable.",
+   "t": 58.08,
+   "baisse_db": 3.8
+  },
+  {
+   "mot": "vide.",
+   "t": 69.66,
+   "baisse_db": 9.5
+  },
+  {
+   "mot": "seule",
+   "t": 73.89,
+   "baisse_db": 3.1
+  },
+  {
+   "mot": "clé.",
+   "t": 74.13,
+   "baisse_db": 10.0
+  }
+ ],
+ "sons": [
+  "impact/deep",
+  "cut_hit/sub",
+  "whoosh_big/swell",
+  "pro_sub_drop/low",
+  "whoosh_big/deep",
+  "reverse_swell/dark",
+  "pro_impact/short",
+  "whoosh_fast/heavy",
+  "pro_impact/short",
+  "whoosh_big/thump_deep",
+  "whoosh_big/gust",
+  "pro_impact/short",
+  "knock/desk",
+  "knock/wood",
+  "pro_impact/deep",
+  "downlifter/sub_sink",
+  "knock/desk",
+  "whoosh_big/thump_deep",
+  "riser/dark",
+  "knock/wood",
+  "pro_sub_drop/low",
+  "pro_impact/deep",
+  "impact/deep"
+ ],
+ "pas": 52
+}
