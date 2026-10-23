@@ -15,9 +15,7 @@ export const Decor: React.FC<{ decor: DonneesDecor }> = ({ decor }) => {
       {decor.pieces.map((p) => (
         <Piece key={p.id} piece={p} />
       ))}
-      {decor.meubles.map((m, i) => (
-        <Meuble key={m.id ?? i} meuble={m} />
-      ))}
+      {decor.meubles.map((m, i) => (m.invisible ? null : <Meuble key={m.id ?? i} meuble={m} />))}
       {ext?.ciel && <Ciel type={ext.ciel} />}
       {ext?.ville && <VilleNocturne allumees={ext.ville.allumees} distance={ext.ville.distance} neige={!!neige} />}
       {neige && <Neige densite={neige.densite} vent={neige.vent} centre={[0, 6, fond - 10]} taille={[30, 14, 20]} />}

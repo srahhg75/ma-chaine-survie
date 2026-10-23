@@ -78,8 +78,14 @@ const debutEnAction =
   (r.camera[1] && r.camera[1].fDepart <= 2) || r.personnages.some((p) => (p.segments[0]?.fDepart ?? 99) <= 2) || r.personnages.some((p) => p.poses.some((k) => k.f <= 2 && k.pose !== "debout"));
 if (!debutEnAction) signaler("Rythme", "la 1re image n'est pas en action (ni caméra ni personnage ne bougent)", 0);
 
-// ---------- Image par image ----------
 const obs = obstacles(donnees.decor);
+// Côté extérieur d'un mur : une caméra de ce côté ne voit que son dos (en vue en coupe, on filme le côté intérieur)
+const derriere = (b: (typeof obs)[number], p: Vec3) => {
+  const cote = (b as { cote?: string }).cote;
+  return cote === "nord" ? p[2] < b.min[2] : cote === "sud" ? p[2] > b.max[2] : cote === "ouest" ? p[0] < b.min[0] : cote === "est" ? p[0] > b.max[0] : true;
+};
+
+// ---------- Image par image ----------
 const meubles = donnees.decor.meubles.filter((m) => m.type !== "tapis").map(boiteMeuble);
 const blocs = blocsSousTitres(alignement.mots);
 let dirPrec: Vec3 | null = null;
@@ -89,10 +95,18 @@ for (let f = 0; f < r.duree; f++) {
   const cam = etatCamera(r.camera, f, fps);
   const dir = soustrait(cam.cible, cam.position);
 
+  // La visée s'arrête au sol : viser un point sous le sol (pour remonter le sujet dans l'image) est permis
+  const finVisee: Vec3 =
+    cam.cible[1] >= 0.05
+      ? cam.cible
+      : (() => {
+          const k = (cam.position[1] - 0.05) / (cam.position[1] - cam.cible[1]);
+          return [cam.position[0] + (cam.cible[0] - cam.position[0]) * k, 0.05, cam.position[2] + (cam.cible[2] - cam.position[2]) * k] as Vec3;
+        })();
   // Caméra jamais dans un mur, jamais derrière un mur plein
   for (const b of obs) {
     if (dansBoite(cam.position, b, 0.15)) signaler("Caméra dans un mur/meuble", `caméra dans ${b.id}`, f);
-    else if (b.nature === "mur" && b.plein && segmentTraverse(cam.position, cam.cible, b)) signaler("Caméra derrière un mur", `la visée traverse ${b.id}`, f);
+    else if (b.nature === "mur" && b.plein && derriere(b, cam.position) && segmentTraverse(cam.position, finVisee, b)) signaler("Caméra derrière un mur", `la caméra voit le dos de ${b.id}`, f);
   }
   // Vitesse de rotation
   if (dirPrec) {
@@ -113,9 +127,9 @@ for (let f = 0; f < r.duree; f++) {
         const h = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules * 0.6) * x.p.taille;
         point = [x.e.position[0], s.hauteur ?? h, x.e.position[2]];
       }
-      return point ? { nom: `${s.personnage ?? "sujet"}${s.hauteur ? ` (h=${s.hauteur} m)` : ""}`, p: project(point, cam) } : null;
+      return point ? { nom: `${s.personnage ?? "sujet"}${s.hauteur ? ` (h=${s.hauteur} m)` : ""}`, p: project(point, cam), point } : null;
     })
-    .filter((x): x is { nom: string; p: ReturnType<typeof project> } => x !== null);
+    .filter((x): x is { nom: string; p: ReturnType<typeof project>; point: Vec3 } => x !== null);
 
   // Encombrement à l'écran de chaque personnage déclaré comme sujet (des pieds au sommet de la tête)
   const silhouettes = [...new Set(r.sujets.filter((s) => s.personnage && f >= s.fDe && f < s.fA).map((s) => s.personnage!))]
@@ -167,7 +181,8 @@ for (let f = 0; f < r.duree; f++) {
   }
 
   // Sujets : visibles, jamais cachés par le HUD ou les sous-titres
-  for (const { nom, p } of sujetsEcran) {
+  for (const { nom, p, point } of sujetsEcran) {
+    for (const b of obs) if (b.nature === "mur" && b.plein && segmentTraverse(cam.position, point, b)) signaler("Sujet derrière un mur", `${nom} caché par ${b.id}`, f);
     if (!p.devant || p.x < 40 || p.x > LARGEUR - 40 || p.y < 40 || p.y > HAUTEUR - 40) {
       signaler("Sujet hors champ", `${nom} n'est pas (entièrement) à l'image`, f);
       continue;

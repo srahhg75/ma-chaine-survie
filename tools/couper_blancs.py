@@ -83,7 +83,14 @@ def main() -> None:
         editions.append(("couper", 0.0, mots[0]["debut"] - 0.05))
     for ma, mb in zip(mots, mots[1:]):
         if ma["source"] == "interpole" or mb["source"] == "interpole":
-            continue  # temps incertains : on ne touche à rien
+            # Temps incertains : on ne coupe rien. Seule exception : la pause avant une chute, insérée au point
+            # le plus calme juste avant le 1er mot de la chute (s'il est fiable et si l'endroit est silencieux).
+            if mb["source"] == "vosk" and mb["phrase"] != ma["phrase"] and phrases[mb["phrase"]]["chute"]:
+                p = point_calme(audio, max(0.0, mb["debut"] - 0.25), mb["debut"] - 0.01)
+                fen = audio[int((p - 0.01) * SR):int((p + 0.01) * SR)]
+                if len(fen) and np.sqrt(np.mean(fen ** 2)) < seuil * 3:
+                    editions.append(("inserer", p, 0.6 - max(0.0, mb["debut"] - p)))
+            continue
         ecart = mb["debut"] - ma["fin"]
         c = cible(ma, mb, phrases)
         if c is None or (ecart < PAUSE_MIN and c < 0.6) or abs(ecart - c) < 0.03:

@@ -1,0 +1,67 @@
+{
+ "episode": "testda",
+ "fps": 30,
+ "duree": 12,
+ "sons": [
+  {
+   "t": 2.49,
+   "id": "knock/desk",
+   "gain": -10
+  },
+  {
+   "t": 3,
+   "id": "impact/deep",
+   "gain": -12
+  },
+  {
+   "t": 3.45,
+   "id": "whoosh_big/thump_deep",
+   "gain": -6
+  },
+  {
+   "t": 5.55,
+   "id": "pro_sub_drop/low",
+   "gain": -2
+  },
+  {
+   "t": 8.04,
+   "id": "reverse_swell/dark",
+   "gain": -5
+  },
+  {
+   "t": 9.260000000000002,
+   "id": "pro_impact/deep",
+   "gain": -4
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 12,
+   "niveau": -1,
+   "fondu": 1
+  },
+  {
+   "type": "ville",
+   "de": 3.45,
+   "a": 12,
+   "niveau": 0,
+   "fondu": 1.5
+  },
+  {
+   "type": "coeur",
+   "de": 5.55,
+   "a": 12,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 84
+  }
+ ],
+ "pas": [
+  {
+   "t": 4.033333333333333,
+   "personnage": "heroine"
+  }
+ ]
+}

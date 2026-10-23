@@ -12,7 +12,7 @@ import { NomPose, poseMarche, POSES } from "./poses";
  * Banc d'essai du personnage : chaque pose est montrée 2 s sous 4 angles (face, trois-quarts, profil, dos).
  * Sert à valider une pose avant de l'utiliser dans un épisode (npx tsx tools/images.ts banc-essai …).
  */
-export const POSES_BANC: NomPose[] = ["debout", "marche", "accroupi", "mainTendue", "lampe", "froid", "inquiet", "assis"];
+export const POSES_BANC: NomPose[] = ["debout", "marche", "accroupi", "mainTendue", "boutonCote", "lampe", "froid", "inquiet", "assis"];
 export const IMAGES_PAR_POSE = 60;
 
 const ANGLES = [

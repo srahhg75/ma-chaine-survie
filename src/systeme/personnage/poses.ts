@@ -14,7 +14,7 @@ export type Pose = {
   sourcils: number; // -1 inquiet, 0 neutre, +1 décidé
 };
 
-export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "lampe" | "froid" | "inquiet" | "assis";
+export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "boutonCote" | "lampe" | "froid" | "inquiet" | "assis";
 
 const DEBOUT: Pose = {
   tronc: [2, 0, 0],
@@ -34,6 +34,8 @@ export const POSES: Record<Exclude<NomPose, "marche">, Pose> = {
   debout: DEBOUT,
   accroupi: { ...DEBOUT, tronc: [28, 0, 0], tete: [-12, 0], epauleG: [35, 12], coudeG: 50, epauleD: [55, 8], coudeD: 35, hancheG: [100, 12], genouG: 128, hancheD: [92, 12], genouD: 120 },
   mainTendue: { ...DEBOUT, tronc: [8, -6, 0], epauleD: [82, 4], coudeD: 8, epauleG: [5, 8], coudeG: 20, sourcils: 0.3 },
+  // bras droit tendu sur le côté (appuyer sur un bouton sans le regarder)
+  boutonCote: { ...DEBOUT, tronc: [2, 0, -4], tete: [2, -12], epauleD: [12, 74], coudeD: 10, epauleG: [2, 8], coudeG: 16, sourcils: -0.3 },
   lampe: { ...DEBOUT, tronc: [4, 0, 0], epauleD: [72, 2], coudeD: 18, epauleG: [10, 10], coudeG: 35, sourcils: 0.5 },
   froid: { ...DEBOUT, tronc: [10, 0, 0], tete: [10, 0], epauleG: [55, -18], coudeG: 115, epauleD: [55, -18], coudeD: 115, hancheG: [0, 1], hancheD: [0, 1], sourcils: -0.8 },
   inquiet: { ...DEBOUT, tete: [-6, 18], epauleG: [12, 14], coudeG: 40, epauleD: [12, 14], coudeD: 40, sourcils: -1 },

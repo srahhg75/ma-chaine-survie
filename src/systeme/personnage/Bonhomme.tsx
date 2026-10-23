@@ -10,6 +10,17 @@ import { CORPS, hauteurBassin, Pose } from "./poses";
  * Signes : bras/cuisses vers l'avant = rotation X négative ; genou plié = X positive ; coude plié = X négative.
  */
 export type Couleurs = { peau: string; parka: string; pantalon: string; bottes: string; bonnet: string; revers: string; echarpe: string; sac: string };
+export type Variante = "bonhomme" | "heroine";
+export const COULEURS_HEROINE: Couleurs = {
+  peau: "#f0c39c",
+  parka: "#2f6f73",
+  pantalon: "#3b3046",
+  bottes: "#3f2c22",
+  bonnet: "#6b3a22", // cheveux (carré châtain)
+  revers: "#d9a52b", // bandeau tricoté
+  echarpe: "#d9a52b",
+  sac: "#7a5236",
+};
 export const COULEURS_DEFAUT: Couleurs = {
   peau: "#e9b98f",
   parka: "#5f6e3c",
@@ -72,7 +83,32 @@ const Bras: React.FC<{ cote: 1 | -1; epaule: [number, number]; coude: number; c:
   </group>
 );
 
-const Tete: React.FC<{ pose: Pose; c: Couleurs }> = ({ pose, c }) => {
+// Carré à frange + bandeau tricoté (héroïne)
+const Carre: React.FC<{ c: Couleurs }> = ({ c }) => {
+  const R = CORPS.rayonTete;
+  const avant = Math.PI / 2; // +Z (visage) dans la paramétrisation de SphereGeometry
+  return (
+    <group>
+      {/* masse de cheveux : ouverte devant pour le visage, s'arrête au niveau de la mâchoire */}
+      <mesh position={[0, 0.0, -0.01]} scale={[1.09, 1.06, 1.08]} castShadow>
+        <sphereGeometry args={[R, 40, 24, avant + 0.95, Math.PI * 2 - 1.9, 0, Math.PI * 0.66]} />
+        <meshStandardMaterial color={c.bonnet} roughness={0.55} side={2} />
+      </mesh>
+      {/* frange */}
+      <mesh position={[0, 0.012, 0.004]} scale={[1.07, 1.05, 1.07]} castShadow>
+        <sphereGeometry args={[R, 40, 12, 0, Math.PI * 2, 0, Math.PI * 0.3]} />
+        <meshStandardMaterial color={c.bonnet} roughness={0.55} />
+      </mesh>
+      {/* bandeau tricoté */}
+      <mesh position={[0, R * 0.62, -0.02]} rotation={[Math.PI / 2 - 0.35, 0, 0]}>
+        <torusGeometry args={[R * 0.8, 0.032, 10, 32]} />
+        <Mat c={c.revers} r={1} />
+      </mesh>
+    </group>
+  );
+};
+
+const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante }> = ({ pose, c, variante }) => {
   const R = CORPS.rayonTete;
   const s = pose.sourcils;
   return (
@@ -100,8 +136,16 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs }> = ({ pose, c }) => {
             </mesh>
           </group>
         ))}
-        {/* pansement sur la joue (signe distinctif) */}
-        <group position={[0.15, -0.075, R * 0.83]} rotation={[0, 0.5, 0.35]}>
+        {/* taches de rousseur (héroïne) */}
+        {variante === "heroine" &&
+          [[-0.15, -0.07], [-0.12, -0.09], [-0.17, -0.1], [0.15, -0.07], [0.12, -0.09], [0.17, -0.1]].map(([x, y], i) => (
+            <mesh key={i} position={[x, y, Math.sqrt(R * R - x * x - y * y) - 0.002]}>
+              <sphereGeometry args={[0.007, 6, 6]} />
+              <Mat c="#b7714a" />
+            </mesh>
+          ))}
+        {/* pansement sur la joue (signe distinctif du bonhomme) */}
+        <group visible={variante === "bonhomme"} position={[0.15, -0.075, R * 0.83]} rotation={[0, 0.5, 0.35]}>
           <mesh>
             <boxGeometry args={[0.075, 0.026, 0.008]} />
             <Mat c="#e9d2a8" r={0.9} />
@@ -120,7 +164,9 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs }> = ({ pose, c }) => {
           <torusGeometry args={[0.035, 0.008, 6, 16, Math.PI]} />
           <Mat c="#5a2a24" />
         </mesh>
-        {/* chapka (signe distinctif) : calotte moutarde, bordure fourrée, oreillettes rabattues */}
+        {variante === "heroine" && <Carre c={c} />}
+        {/* chapka (signe distinctif du bonhomme) : calotte moutarde, bordure fourrée, oreillettes rabattues */}
+        <group visible={variante === "bonhomme"}>
         <mesh position={[0, 0.02, 0]} scale={[1.05, 1.0, 1.05]} castShadow>
           <sphereGeometry args={[R, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.36]} />
           <Mat c={c.bonnet} r={0.95} />
@@ -148,6 +194,7 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs }> = ({ pose, c }) => {
             </mesh>
           </group>
         ))}
+        </group>
       </group>
     </group>
   );
@@ -160,8 +207,9 @@ export const Bonhomme: React.FC<{
   lampe?: boolean;
   taille?: number;
   couleurs?: Partial<Couleurs>;
-}> = ({ pose, position, orientation, lampe = false, taille = 1, couleurs }) => {
-  const c = { ...COULEURS_DEFAUT, ...couleurs };
+  variante?: Variante;
+}> = ({ pose, position, orientation, lampe = false, taille = 1, couleurs, variante = "bonhomme" }) => {
+  const c = { ...(variante === "heroine" ? COULEURS_HEROINE : COULEURS_DEFAUT), ...couleurs };
   const yBassin = hauteurBassin(pose);
   return (
     <group position={position} rotation={[0, rad(orientation), 0]} scale={taille}>
@@ -208,7 +256,7 @@ export const Bonhomme: React.FC<{
             <Bras cote={-1} epaule={pose.epauleD} coude={pose.coudeD} c={c} lampe={lampe} />
           </group>
           <group position={[0, CORPS.bassinVersEpaules, 0]}>
-            <Tete pose={pose} c={c} />
+            <Tete pose={pose} c={c} variante={variante} />
           </group>
         </group>
       </group>

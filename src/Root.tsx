@@ -1,11 +1,11 @@
 import React from "react";
 import { Composition, staticFile } from "remotion";
 import { EPISODES } from "./episodes/registre";
+import { dureeSecondes, idComposition } from "./systeme/episode";
 import { PropsEpisode } from "./systeme/EpisodeStandard";
 import { FPS, HAUTEUR, LARGEUR } from "./systeme/format";
 import { Alignement, ALIGNEMENT_VIDE } from "./systeme/mots";
 import { BancEssai, IMAGES_PAR_POSE, POSES_BANC } from "./systeme/personnage/BancEssai";
-import { instant } from "./systeme/timeline";
 
 const existe = async (chemin: string) => {
   try {
@@ -15,13 +15,13 @@ const existe = async (chemin: string) => {
   }
 };
 
-// Une Composition par épisode (id = "ep" + NNN-nom), durée calculée depuis mots.json.
+// Une Composition par épisode (id = "ep" + NNN-nom, ou `composition`), durée calculée depuis mots.json.
 export const Racine: React.FC = () => (
   <>
     {EPISODES.map(({ donnees, Composant }) => (
       <Composition
         key={donnees.id}
-        id={`ep${donnees.id}`}
+        id={idComposition(donnees)}
         component={Composant}
         width={LARGEUR}
         height={HAUTEUR}
@@ -34,7 +34,7 @@ export const Racine: React.FC = () => (
           const alignement: Alignement = await r.json();
           const audio: PropsEpisode["audio"] = props.audio === "aucun" ? "aucun" : (await existe(`${donnees.id}/mix.wav`)) ? "mix" : "voix";
           return {
-            durationInFrames: Math.ceil((instant("fin", alignement) + (donnees.queue ?? 2)) * FPS),
+            durationInFrames: Math.ceil(dureeSecondes(donnees, alignement) * FPS),
             props: { ...props, alignement, audio },
           };
         }}

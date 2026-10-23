@@ -1,0 +1,5 @@
+# Test de direction artistique (12 s) — ne pas publier
+@p1 Ascenseur, 23h12. Elle appuie sur le *zéro*.
+@p2 Les portes s'ouvrent… mais ce n'est pas le hall.
+@p3 > C'est _son propre appartement_.
+@p4 Et quelqu'un est assis sur _son canapé_.

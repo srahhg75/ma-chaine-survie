@@ -39,7 +39,12 @@ export type DonneesEpisode = {
   queue?: number; // secondes après le dernier mot (carton de fin), défaut 2
   post?: OptionsPost;
   demonstration?: boolean; // épisode technique : durée libre (pas de contrôle 70-120 s)
+  composition?: string; // identifiant de la Composition Remotion (défaut : "ep" + id)
+  dureeFixe?: number; // durée imposée en secondes (sinon : dernier mot + queue)
 };
+
+export const idComposition = (d: DonneesEpisode) => d.composition ?? `ep${d.id}`;
+export const dureeSecondes = (d: DonneesEpisode, al: Alignement) => d.dureeFixe ?? instant("fin", al) + (d.queue ?? 2);
 
 export type EpisodeResolu = {
   donnees: DonneesEpisode;
@@ -54,7 +59,7 @@ export type EpisodeResolu = {
 };
 
 export const resoudreEpisode = (d: DonneesEpisode, al: Alignement, fps: number): EpisodeResolu => {
-  const fin = instant("fin", al) + (d.queue ?? 2);
+  const fin = dureeSecondes(d, al);
   const duree = Math.ceil(fin * fps);
   return {
     donnees: d,

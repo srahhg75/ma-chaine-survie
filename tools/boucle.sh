@@ -5,6 +5,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 EP="${1:?Episode manquant, ex. : bash tools/boucle.sh 000-demo}"
+COMP=$(npx tsx tools/composition.ts "$EP") || exit 1
 QC="qc/$EP"; mkdir -p "$QC"
 ECHEC=0
 etape() { printf "\n\033[1m== %s\033[0m\n" "$1"; }
@@ -26,7 +27,7 @@ etape "4. Mixage + contrôle audio"
 .venv/bin/python tools/qc_audio.py "$EP" > /dev/null; [ $? -eq 0 ] && head -3 "$QC/rapport_audio.md" | tail -1 || { ECHEC=1; cat "$QC/rapport_audio.md"; }
 
 etape "5. Brouillon en demi-résolution (sans occlusion ambiante)"
-npx remotion render src/index.ts "ep$EP" "$QC/brouillon.mp4" --scale=0.5 --props='{"brouillon":true}' --log=error || exit 1
+npx remotion render src/index.ts "$COMP" "$QC/brouillon.mp4" --scale=0.5 --props='{"brouillon":true}' --log=error || exit 1
 
 etape "6. Planches contact (1 image/s, zones interdites en rouge, ligne des sous-titres en jaune)"
 rm -f "$QC"/planche-*.jpg

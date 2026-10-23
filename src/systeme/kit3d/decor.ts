@@ -1,4 +1,5 @@
 import { Vec3 } from "../maths";
+import type { NomPBR } from "./pbr";
 
 // Description des décors EN DONNÉES : lue par le rendu (Decor.tsx) et par le contrôle qualité (tools/qc.ts).
 export type CoteMur = "nord" | "sud" | "est" | "ouest"; // nord = fond (z négatif), sud = devant (z positif)
@@ -7,7 +8,7 @@ export type Revetement = "papier" | "beton" | "carrelage" | "peint";
 
 export type Ouverture = {
   mur: CoteMur;
-  type: "fenetre" | "porte";
+  type: "fenetre" | "porte" | "passage"; // passage = baie sans porte (ex. portes coulissantes dessinées à part)
   centre: number; // position le long du mur depuis son milieu (m) : vers l'est pour nord/sud, vers le nord pour ouest/est
   largeur: number;
   hauteur: number;
@@ -28,6 +29,8 @@ export type DonneesPiece = {
   hauteurArasee?: number; // défaut 0,22
   ouvertures?: Ouverture[];
   plafonnier?: boolean; // ampoule (éteinte si panne)
+  // Vraies textures PBR (public/textures) à la place des textures procédurales ; motif = taille d'un motif en m
+  pbr?: { sol?: NomPBR; murs?: NomPBR; teinteSol?: string; teinteMurs?: string; motifSol?: number; motifMurs?: number; metalMurs?: number; gainMurs?: number; gainSol?: number };
 };
 
 export type TypeMeuble =
@@ -41,6 +44,7 @@ export type DonneesMeuble = {
   couleur?: string;
   echelle?: number;
   id?: string;
+  invisible?: boolean; // obstacle déclaré pour les contrôles, dessiné ailleurs (mobilier détaillé de l'épisode)
 };
 
 export type DonneesExterieur = {

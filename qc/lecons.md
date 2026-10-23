@@ -88,3 +88,21 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   le cadrage ne le pousse au bord, ou viser plus à droite.
 - **2026-10-23 — Vidéo finale de 70 Mo pour 11 s (49 Mb/s)** : le grain change à chaque image et ne se compresse pas.
   Règle : `tools/final.sh` réencode en x264 CRF 18 plafonné à 12 Mb/s ; vérifier le poids (≈ 1,5 Mo par seconde).
+- **2026-10-23 — Révélation éventée (TestDA) : le « double » visible dès le plan 1.** Deux causes : lumières sans
+  ombres qui traversent les murs (cabine -> salon) et caméra trop haute (37°) qui voit par-dessus le mur.
+  Règle : toute lumière sans ombres a une portée (`distance`) limitée à sa pièce ; ce qui doit être révélé reste
+  masqué par un mur (vérifier par calcul) ou dans le noir jusqu'à son allumage, calé sur le mot.
+- **2026-10-23 — Métal PBR noir et plat** (aucun environnement à refléter). Règle : `<Environnement />` discret
+  (0,07–0,25) dans toute scène avec du métal ou du vernis.
+- **2026-10-23 — Lampes qui « brûlent » (abat-jour et plateau blancs).** Règle : lampe d'intérieur 1 à 3 avec
+  `distance` 3–5 m, abat-jour émissif ≤ 0,3 ; regarder les plans éclairés en pleine résolution.
+- **2026-10-23 — Visage jamais visible quand le personnage agit sur un mur du fond (vue en coupe).** Règle : le faire
+  agir de profil ou de face (ex. bouton pressé bras sur le côté) ; il se retourne vers le fond au moment de la révélation.
+- **2026-10-23 — Rendu final interrompu : textures PBR non chargées en 30 s** (plusieurs onglets en parallèle).
+  Règle : délai de chargement porté à 180 s (`remotion.config.ts`, `tools/images.ts`) ; une image fixe qui passe ne
+  garantit pas le rendu complet : lancer le rendu final assez tôt.
+- **2026-10-23 — Images fixes SANS leurs textures PBR (critique faussée pendant 5 versions).** La 3D n'était pas
+  redessinée après le chargement des textures. Règle : `useMateriauPBR` force un redessin avant `continueRender` ;
+  toujours comparer une image fixe à la même image du rendu (au moins une fois par scène).
+- **2026-10-23 — Cabine en tôle presque noire au rendu réel** (métal 1 + environnement faible). Règle : murs métalliques
+  à `metal` 0,35–0,5 et teinte claire ; réserver `metal` 1 aux petites pièces (poignées, mains courantes).

@@ -1,0 +1,353 @@
+{
+ "fps": 30,
+ "duree": 8.742,
+ "phrases": [
+  {
+   "id": "p1",
+   "index": 0,
+   "chute": false,
+   "texte": "Ascenseur, 23h12. Elle appuie sur le zéro.",
+   "debut": 0.0,
+   "fin": 2.73,
+   "fDebut": 0,
+   "fFin": 82,
+   "premierMot": 0,
+   "dernierMot": 6
+  },
+  {
+   "id": "p2",
+   "index": 1,
+   "chute": false,
+   "texte": "Les portes s'ouvrent… mais ce n'est pas le hall.",
+   "debut": 3.0,
+   "fin": 5.55,
+   "fDebut": 90,
+   "fFin": 166,
+   "premierMot": 7,
+   "dernierMot": 15
+  },
+  {
+   "id": "p3",
+   "index": 2,
+   "chute": true,
+   "texte": "C'est son propre appartement.",
+   "debut": 5.55,
+   "fin": 6.75,
+   "fDebut": 166,
+   "fFin": 202,
+   "premierMot": 16,
+   "dernierMot": 19
+  },
+  {
+   "id": "p4",
+   "index": 3,
+   "chute": false,
+   "texte": "Et quelqu'un est assis sur son canapé.",
+   "debut": 6.99,
+   "fin": 8.46,
+   "fDebut": 210,
+   "fFin": 254,
+   "premierMot": 20,
+   "dernierMot": 26
+  }
+ ],
+ "mots": [
+  {
+   "mot": "Ascenseur,",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 0.0,
+   "fin": 0.45,
+   "conf": 0.68,
+   "source": "vosk",
+   "fDebut": 0,
+   "fFin": 14
+  },
+  {
+   "mot": "23h12.",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 0.54,
+   "fin": 1.506,
+   "conf": 0.94,
+   "source": "vosk",
+   "fDebut": 16,
+   "fFin": 45
+  },
+  {
+   "mot": "Elle",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 1.506,
+   "fin": 1.98,
+   "conf": 0.37,
+   "source": "vosk",
+   "fDebut": 45,
+   "fFin": 59
+  },
+  {
+   "mot": "appuie",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 1.98,
+   "fin": 2.16,
+   "conf": 0.42,
+   "source": "vosk",
+   "fDebut": 59,
+   "fFin": 65
+  },
+  {
+   "mot": "sur",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 2.16,
+   "fin": 2.34,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 65,
+   "fFin": 70
+  },
+  {
+   "mot": "le",
+   "phrase": 0,
+   "style": "normal",
+   "debut": 2.34,
+   "fin": 2.487,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 70,
+   "fFin": 75
+  },
+  {
+   "mot": "zéro.",
+   "phrase": 0,
+   "style": "ressource",
+   "debut": 2.49,
+   "fin": 2.73,
+   "conf": 0.58,
+   "source": "vosk",
+   "fDebut": 75,
+   "fFin": 82
+  },
+  {
+   "mot": "Les",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 3.0,
+   "fin": 3.18,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 90,
+   "fFin": 95
+  },
+  {
+   "mot": "portes",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 3.18,
+   "fin": 3.45,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 95,
+   "fFin": 104
+  },
+  {
+   "mot": "s'ouvrent…",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 3.45,
+   "fin": 3.78,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 104,
+   "fFin": 113
+  },
+  {
+   "mot": "mais",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.05,
+   "fin": 4.26,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 122,
+   "fFin": 128
+  },
+  {
+   "mot": "ce",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.26,
+   "fin": 4.38,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 128,
+   "fFin": 131
+  },
+  {
+   "mot": "n'est",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.38,
+   "fin": 4.5,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 131,
+   "fFin": 135
+  },
+  {
+   "mot": "pas",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.5,
+   "fin": 4.59,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 135,
+   "fFin": 138
+  },
+  {
+   "mot": "le",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.59,
+   "fin": 4.7,
+   "conf": 0.5,
+   "source": "vosk",
+   "fDebut": 138,
+   "fFin": 141
+  },
+  {
+   "mot": "hall.",
+   "phrase": 1,
+   "style": "normal",
+   "debut": 4.7,
+   "fin": 5.55,
+   "conf": 0.0,
+   "source": "interpole",
+   "fDebut": 141,
+   "fFin": 166
+  },
+  {
+   "mot": "C'est",
+   "phrase": 2,
+   "style": "normal",
+   "debut": 5.55,
+   "fin": 5.76,
+   "conf": 0.95,
+   "source": "vosk",
+   "fDebut": 166,
+   "fFin": 173
+  },
+  {
+   "mot": "son",
+   "phrase": 2,
+   "style": "danger",
+   "debut": 5.76,
+   "fin": 5.88,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 173,
+   "fFin": 176
+  },
+  {
+   "mot": "propre",
+   "phrase": 2,
+   "style": "danger",
+   "debut": 5.88,
+   "fin": 6.21,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 176,
+   "fFin": 186
+  },
+  {
+   "mot": "appartement.",
+   "phrase": 2,
+   "style": "danger",
+   "debut": 6.21,
+   "fin": 6.75,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 186,
+   "fFin": 202
+  },
+  {
+   "mot": "Et",
+   "phrase": 3,
+   "style": "normal",
+   "debut": 6.99,
+   "fin": 7.077,
+   "conf": 0.35,
+   "source": "vosk",
+   "fDebut": 210,
+   "fFin": 212
+  },
+  {
+   "mot": "quelqu'un",
+   "phrase": 3,
+   "style": "normal",
+   "debut": 7.077,
+   "fin": 7.411,
+   "conf": 0.99,
+   "source": "vosk",
+   "fDebut": 212,
+   "fFin": 222
+  },
+  {
+   "mot": "est",
+   "phrase": 3,
+   "style": "normal",
+   "debut": 7.411,
+   "fin": 7.497,
+   "conf": 0.75,
+   "source": "vosk",
+   "fDebut": 222,
+   "fFin": 225
+  },
+  {
+   "mot": "assis",
+   "phrase": 3,
+   "style": "normal",
+   "debut": 7.497,
+   "fin": 7.68,
+   "conf": 0.83,
+   "source": "vosk",
+   "fDebut": 225,
+   "fFin": 230
+  },
+  {
+   "mot": "sur",
+   "phrase": 3,
+   "style": "normal",
+   "debut": 7.69,
+   "fin": 7.89,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 231,
+   "fFin": 237
+  },
+  {
+   "mot": "son",
+   "phrase": 3,
+   "style": "danger",
+   "debut": 7.89,
+   "fin": 8.04,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 237,
+   "fFin": 241
+  },
+  {
+   "mot": "canapé.",
+   "phrase": 3,
+   "style": "danger",
+   "debut": 8.04,
+   "fin": 8.46,
+   "conf": 1.0,
+   "source": "vosk",
+   "fDebut": 241,
+   "fFin": 254
+  }
+ ]
+}

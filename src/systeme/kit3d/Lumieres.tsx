@@ -1,5 +1,7 @@
-import React, { useMemo } from "react";
-import { AdditiveBlending, DoubleSide, Object3D } from "three";
+import { useThree } from "@react-three/fiber";
+import React, { useEffect, useMemo } from "react";
+import { AdditiveBlending, DoubleSide, Object3D, PMREMGenerator } from "three";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { useCurrentFrame, useVideoConfig } from "remotion";
 import { bruitFractal } from "../maths";
 
@@ -118,4 +120,20 @@ export const LampeTorche: React.FC<{ allumee?: boolean; puissance?: number; ombr
       )}
     </group>
   );
+};
+
+// Environnement lumineux discret : donne des reflets aux métaux et aux vernis (un métal PBR sans
+// environnement paraît noir et plat). Intensité basse pour ne pas délaver l'ambiance de nuit.
+export const Environnement: React.FC<{ intensite?: number }> = ({ intensite = 0.25 }) => {
+  const { gl, scene } = useThree();
+  const env = useMemo(() => {
+    const pm = new PMREMGenerator(gl);
+    const t = pm.fromScene(new RoomEnvironment(), 0.04).texture;
+    pm.dispose();
+    return t;
+  }, [gl]);
+  scene.environment = env;
+  scene.environmentIntensity = intensite;
+  useEffect(() => () => env.dispose(), [env]);
+  return null;
 };

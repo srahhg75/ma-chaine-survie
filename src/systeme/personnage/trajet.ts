@@ -23,6 +23,7 @@ export type DonneesPersonnage = {
   poses?: ClePose[];
   lampe?: { de: Ancre; a?: Ancre }; // lampe torche allumée dans la main droite
   taille?: number; // défaut 1
+  variante?: "bonhomme" | "heroine"; // personnage de la chaîne ou héroïne
 };
 
 type Segment = { points: Vec3[]; longueur: number; fDepart: number; fArrivee: number; orientationFin?: number; orientationDebut: number };
@@ -33,6 +34,7 @@ export type PersonnageResolu = {
   segments: Segment[];
   poses: { f: number; pose: Exclude<NomPose, "marche">; transition: number }[];
   lampe?: [number, number];
+  variante: "bonhomme" | "heroine";
 };
 
 export type EtatPersonnage = { position: Vec3; orientation: number; pose: Pose; marche: boolean; lampe: boolean; vitesse: number };
@@ -60,6 +62,7 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
   return {
     id: p.id,
     taille: p.taille ?? 1,
+    variante: p.variante ?? "bonhomme",
     depart: p.depart,
     segments,
     poses: (p.poses ?? []).map((k) => ({ f: image(k.a, al, fps), pose: k.pose, transition: k.transition ?? 0.35 })),

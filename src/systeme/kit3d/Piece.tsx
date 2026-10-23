@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import { DoubleSide } from "three";
 import { Vec3 } from "../maths";
 import { CoteMur, DonneesPiece, EPAISSEUR_MUR, mursPiece, Ouverture } from "./decor";
+import { Material } from "three";
+import { useMateriauPBR } from "./pbr";
 import { repeter, texture, TypeTexture } from "./textures";
 
 // Pièce en coupe : murs du fond entiers, murs de devant arasés (dessus sombre façon « plan de coupe »).
@@ -19,8 +21,6 @@ const COULEURS_MUR: Record<DonneesPiece["murs"], string> = {
 };
 const COUPE = "#17171b";
 
-type Segment = { centre: Vec3; taille: Vec3 };
-
 // Découpe un mur autour de ses ouvertures (pleins à gauche/droite, allège sous la fenêtre, linteau au-dessus)
 const segmentsMur = (longueur: number, hauteur: number, ouvertures: Ouverture[]): { u0: number; u1: number; y0: number; y1: number }[] => {
   const res: { u0: number; u1: number; y0: number; y1: number }[] = [];
@@ -36,6 +36,41 @@ const segmentsMur = (longueur: number, hauteur: number, ouvertures: Ouverture[])
   }
   if (curseur < longueur / 2) res.push({ u0: curseur, u1: longueur / 2, y0: 0, y1: hauteur });
   return res.filter((s) => s.u1 - s.u0 > 0.001 && s.y1 - s.y0 > 0.001);
+};
+
+// Sol : texture PBR si demandée, sinon procédurale
+const Sol: React.FC<{ p: DonneesPiece }> = ({ p }) => {
+  const motif = p.pbr?.motifSol ?? 1.5;
+  const pbr = useMateriauPBR(p.pbr?.sol ?? "herringbone_parquet", { repetition: [p.largeur / motif, p.profondeur / motif], teinte: p.pbr?.teinteSol, gain: p.pbr?.gainSol, occlusion: 0.6 });
+  const proc = useMemo(
+    () => repeter(texture(p.sol, p.couleurSol ?? COULEURS_SOL[p.sol], `${p.id}sol`), p.largeur, p.profondeur, p.sol === "carrelage" ? 1.2 : 2),
+    [p],
+  );
+  return (
+    <mesh position={[p.centre[0], -0.01, p.centre[1]]} receiveShadow material={p.pbr?.sol ? pbr : undefined}>
+      <boxGeometry args={[p.largeur, 0.02, p.profondeur]} />
+      {!p.pbr?.sol && <meshStandardMaterial map={proc} roughness={p.sol === "carrelage" ? 0.35 : 0.8} />}
+    </mesh>
+  );
+};
+
+const SegmentMur: React.FC<{ p: DonneesPiece; centre: Vec3; taille: Vec3 }> = ({ p, centre, taille }) => {
+  const motif = p.pbr?.motifMurs ?? 1.5;
+  const pbr: Material = useMateriauPBR(p.pbr?.murs ?? "painted_plaster_wall", {
+    repetition: [taille[0] / motif, taille[1] / motif],
+    teinte: p.pbr?.teinteMurs,
+    metal: p.pbr?.metalMurs ?? 0,
+    gain: p.pbr?.gainMurs,
+    occlusion: 0.5,
+  });
+  const typeMur: TypeTexture = p.murs;
+  const proc = useMemo(() => repeter(texture(typeMur, p.couleurMurs ?? COULEURS_MUR[p.murs], `${p.id}mur`), taille[0], taille[1], 2), [p, typeMur, taille]);
+  return (
+    <mesh position={centre} castShadow receiveShadow material={p.pbr?.murs ? pbr : undefined}>
+      <boxGeometry args={taille} />
+      {!p.pbr?.murs && <meshStandardMaterial map={proc} roughness={0.9} />}
+    </mesh>
+  );
 };
 
 const Fenetre: React.FC<{ largeur: number; hauteur: number }> = ({ largeur, hauteur }) => {
@@ -85,20 +120,12 @@ const Porte: React.FC<{ largeur: number; hauteur: number }> = ({ largeur, hauteu
 export const Piece: React.FC<{ piece: DonneesPiece }> = ({ piece: p }) => {
   const h = p.hauteur ?? 2.6;
   const [cx, cz] = p.centre;
-  const texSol = useMemo(
-    () => repeter(texture(p.sol, p.couleurSol ?? COULEURS_SOL[p.sol], `${p.id}sol`), p.largeur, p.profondeur, p.sol === "carrelage" ? 1.2 : 2),
-    [p],
-  );
-  const typeMur: TypeTexture = p.murs;
   const murs = mursPiece(p);
 
   return (
     <group>
       {/* sol */}
-      <mesh position={[cx, -0.01, cz]} receiveShadow>
-        <boxGeometry args={[p.largeur, 0.02, p.profondeur]} />
-        <meshStandardMaterial map={texSol} roughness={p.sol === "carrelage" ? 0.35 : 0.8} />
-      </mesh>
+      <Sol p={p} />
       {/* tranche du sol (coupe) */}
       <mesh position={[cx, -0.13, cz]}>
         <boxGeometry args={[p.largeur + EPAISSEUR_MUR, 0.22, p.profondeur + EPAISSEUR_MUR]} />
@@ -117,19 +144,9 @@ export const Piece: React.FC<{ piece: DonneesPiece }> = ({ piece: p }) => {
         const rotY = selonX ? 0 : Math.PI / 2;
         return (
           <group key={cote} position={centreMur} rotation={[0, rotY, 0]}>
-            {segs.map((s, i) => {
-              const seg: Segment = {
-                centre: [(s.u0 + s.u1) / 2, (s.y0 + s.y1) / 2, 0],
-                taille: [s.u1 - s.u0, s.y1 - s.y0, EPAISSEUR_MUR],
-              };
-              const tex = repeter(texture(typeMur, p.couleurMurs ?? COULEURS_MUR[p.murs], `${p.id}mur`), seg.taille[0], seg.taille[1], 2);
-              return (
-                <mesh key={i} position={seg.centre} castShadow receiveShadow>
-                  <boxGeometry args={seg.taille} />
-                  <meshStandardMaterial map={tex} roughness={0.9} />
-                </mesh>
-              );
-            })}
+            {segs.map((s, i) => (
+              <SegmentMur key={i} p={p} centre={[(s.u0 + s.u1) / 2, (s.y0 + s.y1) / 2, 0]} taille={[s.u1 - s.u0, s.y1 - s.y0, EPAISSEUR_MUR]} />
+            ))}
             {/* dessus du mur : couleur de coupe */}
             <mesh position={[0, hauteur + 0.004, 0]}>
               <boxGeometry args={[longueur, 0.008, EPAISSEUR_MUR + 0.004]} />
@@ -150,7 +167,7 @@ export const Piece: React.FC<{ piece: DonneesPiece }> = ({ piece: p }) => {
                 ))}
             {ouvertures.map((o, i) => {
               const bas = o.type === "porte" ? 0 : o.bas ?? 0.9;
-              if (bas >= hauteur) return null;
+              if (bas >= hauteur || o.type === "passage") return null;
               return (
                 <group key={`o${i}`} position={[o.centre, bas + o.hauteur / 2, 0]}>
                   {o.type === "fenetre" ? <Fenetre largeur={o.largeur} hauteur={o.hauteur} /> : <Porte largeur={o.largeur} hauteur={Math.min(o.hauteur, hauteur)} />}

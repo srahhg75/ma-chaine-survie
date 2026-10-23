@@ -48,7 +48,7 @@ const VignetteGrain = {
     }`,
 };
 
-export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 0.92, vignette = 0.45, grain = 0.05, occlusion = true }) => {
+export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 0.92, vignette = 0.45, grain = 0.05, occlusion = true, exposition = 1 }) => {
   const { gl, scene, camera, size } = useThree();
   const frame = useCurrentFrame();
 
@@ -63,7 +63,7 @@ export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 
     c.addPass(new RenderPass(scene, camera));
     if (occlusion) {
       const ao = new GTAOPass(scene, camera, largeur, hauteur);
-      ao.updateGtaoMaterial({ radius: 0.35, distanceExponent: 1.5, thickness: 1, scale: 1, samples: 12 });
+      ao.updateGtaoMaterial({ radius: 0.4, distanceExponent: 1.6, thickness: 1, scale: 1.1, samples: 16 });
       ao.blendIntensity = 0.85;
       c.addPass(ao);
     }
@@ -78,6 +78,7 @@ export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 
 
   useEffect(() => () => composer.dispose(), [composer]);
 
+  gl.toneMappingExposure = exposition;
   passeGrain.uniforms.image.value = frame % 997;
   // Priorité 1 : on prend la main sur le rendu de R3F
   useFrame(() => composer.render(), 1);

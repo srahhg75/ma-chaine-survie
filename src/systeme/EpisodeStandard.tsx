@@ -27,7 +27,7 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
     <>
       {r.personnages.map((p) => {
         const e = etatPersonnage(p, frame, fps);
-        return <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} taille={p.taille} />;
+        return <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} taille={p.taille} variante={p.variante} />;
       })}
     </>
   );

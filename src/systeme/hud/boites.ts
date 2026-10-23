@@ -50,8 +50,9 @@ export const boiteHud = (e: ElementHudResolu, cam?: EtatCamera): Rect & { ancre?
         return { ...presDuPoint(p.x, p.y, HUD.fiche.l, HUD.fiche.h), ancre: { x: p.x, y: p.y } };
       }
       // Sans point 3D : sous la montre (gauche) ou sous le bandeau (droite, par défaut)
+      // à gauche, elle se place sous les moodles (qui occupent y = 324 à 408)
       const x = e.cote === "gauche" ? ZONE_SURE.gauche : ZONE_SURE.droite - HUD.fiche.l;
-      return { x, y: 336, l: HUD.fiche.l, h: HUD.fiche.h };
+      return { x, y: e.cote === "gauche" ? HUD.moodles.y + HUD.moodles.taille + HUD.marge : 336, l: HUD.fiche.l, h: HUD.fiche.h };
     }
     case "inventaire": {
       const l = e.objets.length * HUD.inventaire.case + 24;

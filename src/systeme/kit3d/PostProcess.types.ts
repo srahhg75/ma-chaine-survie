@@ -5,4 +5,6 @@ export type OptionsPost = {
   vignette?: number; // 0..1, défaut 0.45
   grain?: number; // 0..0.15, défaut 0.05
   occlusion?: boolean; // occlusion ambiante, défaut true
+  exposition?: number; // exposition du tone mapping, défaut 1
+  ombresDouces?: boolean; // ombres plus douces (rayon de flou), défaut true
 };

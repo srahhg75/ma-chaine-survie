@@ -1,0 +1,35 @@
+{
+ "lufs": -14.04,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "s'ouvrent…",
+   "t": 3.45,
+   "baisse_db": 1.3
+  },
+  {
+   "mot": "hall.",
+   "t": 4.7,
+   "baisse_db": 7.8
+  },
+  {
+   "mot": "C'est",
+   "t": 5.55,
+   "baisse_db": 8.4
+  },
+  {
+   "mot": "Et",
+   "t": 6.99,
+   "baisse_db": 1.8
+  }
+ ],
+ "sons": [
+  "knock/desk",
+  "impact/deep",
+  "whoosh_big/thump_deep",
+  "pro_sub_drop/low",
+  "reverse_swell/dark",
+  "pro_impact/deep"
+ ],
+ "pas": 1
+}

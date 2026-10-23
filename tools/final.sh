@@ -5,6 +5,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 EP="${1:?Episode manquant, ex. : bash tools/final.sh 000-demo}"
+COMP=$(npx tsx tools/composition.ts "$EP") || exit 1
 QC="qc/$EP"; OUT="videos/$EP"; mkdir -p "$QC" "$OUT"
 etape() { printf "\n\033[1m== %s\033[0m\n" "$1"; }
 
@@ -19,7 +20,7 @@ npx tsx tools/qc.ts "$EP" > /dev/null || { echo "Contrôle visuel en échec : vo
 .venv/bin/python tools/qc_audio.py "$EP" > /dev/null || { echo "Contrôle audio en échec : voir $QC/rapport_audio.md"; exit 1; }
 
 etape "2. Rendu pleine résolution"
-npx remotion render src/index.ts "ep$EP" "$OUT/rendu.mp4" --log=error || exit 1
+npx remotion render src/index.ts "$COMP" "$OUT/rendu.mp4" --log=error || exit 1
 
 etape "3. Encodage final (vidéo x264 ≤ 12 Mb/s + master audio mix.wav en AAC 320 kb/s)"
 # Vidéo réencodée en x264 CRF 18 plafonné à 12 Mb/s (le grain rend sinon le fichier énorme : ~46 Mb/s)
