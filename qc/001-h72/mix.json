@@ -3,14 +3,29 @@
  "true_peak_dbtp": -1.5,
  "corrections_mot_par_mot": [
   {
+   "mot": "l'air ?",
+   "t": 2.04,
+   "baisse_db": 1.4
+  },
+  {
+   "mot": "l'immeuble",
+   "t": 8.37,
+   "baisse_db": 2.3
+  },
+  {
    "mot": "s'arrête.",
    "t": 8.85,
-   "baisse_db": 5.1
+   "baisse_db": 8.8
+  },
+  {
+   "mot": "Un :",
+   "t": 16.56,
+   "baisse_db": 2.3
   },
   {
    "mot": "litres.",
    "t": 28.08,
-   "baisse_db": 7.0
+   "baisse_db": 7.8
   },
   {
    "mot": "la",
@@ -18,24 +33,39 @@
    "baisse_db": 3.0
   },
   {
+   "mot": "Trois :",
+   "t": 37.11,
+   "baisse_db": 1.2
+  },
+  {
+   "mot": "pas",
+   "t": 57.9,
+   "baisse_db": 3.2
+  },
+  {
    "mot": "potable.",
    "t": 58.08,
-   "baisse_db": 4.5
+   "baisse_db": 7.5
   },
   {
    "mot": "vide.",
    "t": 69.66,
-   "baisse_db": 9.5
+   "baisse_db": 13.5
+  },
+  {
+   "mot": "Le",
+   "t": 70.29,
+   "baisse_db": 2.7
   },
   {
    "mot": "seule",
    "t": 73.89,
-   "baisse_db": 3.2
+   "baisse_db": 6.8
   },
   {
    "mot": "clé.",
    "t": 74.13,
-   "baisse_db": 10.2
+   "baisse_db": 13.6
   }
  ],
  "sons": [
@@ -59,8 +89,13 @@
   "pro_sub_drop/low",
   "whoosh_fast/heavy",
   "cut_hit/sub",
+  "cut_hit/sub",
+  "cut_hit/punch",
   "pro_impact/deep",
   "impact/deep",
+  "whoosh_fast/heavy",
+  "cut_hit/punch",
+  "cut_hit/sub",
   "drip/drop",
   "drip/bubble",
   "drip/drop",

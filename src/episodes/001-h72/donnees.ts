@@ -253,8 +253,10 @@ export const donnees: DonneesEpisode = {
     // TACTIQUE 3 — le ballon (placard qui s'ouvre)
     { a: "t3:ballon", ...plan([3.85, 1.0, -1.3], { azimut: 12, elevation: 15, distance: 3.3, fov: 40, y: 660, x: 560 }), deplacement: 1.7 },
     // les 4 gestes, en un seul plan tenu (étiquettes numérotées)
-    { a: "t3b", ...plan([3.28, 0.8, -1.1], { azimut: 10, elevation: 14, distance: 4.6, fov: 46, y: 620, x: 520 }), deplacement: 0.5 },
-    { a: "t3f:cafe", ...plan([3.75, 0.2, -0.4], { azimut: 35, elevation: 32, distance: 1.9, fov: 36, y: 640 }), deplacement: 0.5 },
+    // plus large et décalé à droite : au geste « disjoncteur » (x = 2,62), Inès était coupée par le bord gauche
+    { a: "t3b", ...plan([3.28, 0.8, -1.1], { azimut: 10, elevation: 14, distance: 5.4, fov: 46, y: 620, x: 580 }), deplacement: 0.5 },
+    // gros plan de la carafe et de son filtre, filmé depuis l'est : Inès (au nord-ouest) n'est plus derrière l'objet
+    { a: "t3f:cafe", ...plan([3.62, 0.32, -0.12], { azimut: 55, elevation: 30, distance: 1.7, fov: 36, y: 560 }), deplacement: 0.8 },
     // ERREUR — les radiateurs du salon (fantôme)
     { a: "erreur:jamais", ...plan([-2.95, 0.45, -1.25], { azimut: -20, elevation: 20, distance: 3.3, fov: 40, y: 640, x: 470 }), deplacement: 1.3 },
     { a: "erreur2:circuit", ...plan([-3.4, 0.45, -1.45], { azimut: -15, elevation: 15, distance: 2.1, fov: 36, y: 640 }), deplacement: 0.8 },
@@ -300,7 +302,7 @@ export const donnees: DonneesEpisode = {
     { type: "etiquette", de: "t3b+0.1", a: "t3c", texte: "1 · Disjoncteur", point: P.tableau, style: "ressource" },
     { type: "etiquette", de: "t3c", a: "t3d+0.1", texte: "2 · Eau froide", point: P.vanne, style: "ressource" },
     { type: "etiquette", de: "t3d:robinet", a: "t3e+0.4", texte: "3 · Air", point: P.robinetLavabo, style: "ressource" },
-    { type: "etiquette", de: "t3e", a: "t3f-0.05", texte: "4 · Vidange", point: P.vidange, style: "ressource" },
+    { type: "etiquette", de: "t3e", a: "t3f:cafe-0.85", texte: "4 · Vidange", point: P.vidange, style: "ressource" }, // disparaît avant le départ vers la carafe
     { type: "etiquette", de: "erreur:jamais", a: "erreur2-0.25", texte: "Danger", point: P.purge, style: "danger" },
     { type: "fiche", de: "erreur3", a: "erreur4.fin", icone: "danger", titre: "Eau de radiateur", lignes: ["Produits anti-rouille", "Non potable", "Même bouillie"], cote: "gauche" },
     { type: "etiquette", de: "garde:de", a: "retour:rentre-0.62", texte: "Fermé à clé", point: P.verrou, style: "normal" },
@@ -328,6 +330,9 @@ export const donnees: DonneesEpisode = {
     { a: "chute:vide.fin", id: "pro_sub_drop/low", gain: -3 },
     { a: "vide", id: "whoosh_fast/heavy", gain: -11 },
     { a: "fin-0.19", id: "cut_hit/sub", gain: -10 },
+    // coupes mesurées « sans son » par earshot sur la vidéo finale (0:34,70 et 1:13,37)
+    { a: "t2e-0.01", id: "cut_hit/sub", gain: -11 },
+    { a: "vide.fin+0.08", id: "cut_hit/punch", gain: -12 },
     { a: "fin:cle", id: "pro_impact/deep", gain: -4 },
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
     // choix A/B : souffle à l'entrée des blocs, un impact quand chacun se pose (A à +0,53 s, B à +0,70 s du carton)

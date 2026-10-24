@@ -21,7 +21,7 @@ from scipy.ndimage import minimum_filter1d
 
 SR = 48000
 RACINE = Path(__file__).resolve().parent.parent
-EARSHOT = RACINE / "tools" / "earshot" / ".venv" / "bin" / "earshot"
+EARSHOT = RACINE / "tools" / "earshot" / ".venv" / ("Scripts/earshot.exe" if sys.platform == "win32" else "bin/earshot")
 CIBLE_LUFS = -14.0
 PLAFOND_TP = -1.5  # marge sous −1 dBTP pour l'encodage AAC
 VOIX_LUFS = -16.0  # niveau de la voix avant master

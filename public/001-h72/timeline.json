@@ -104,6 +104,16 @@
    "gain": -10
   },
   {
+   "t": 34.7,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 73.37,
+   "id": "cut_hit/punch",
+   "gain": -12
+  },
+  {
    "t": 74.13,
    "id": "pro_impact/deep",
    "gain": -4
@@ -112,6 +122,21 @@
    "t": 75.13000000000001,
    "id": "impact/deep",
    "gain": -8
+  },
+  {
+   "t": 75.33000000000001,
+   "id": "whoosh_fast/heavy",
+   "gain": -9
+  },
+  {
+   "t": 75.66000000000001,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 75.83000000000001,
+   "id": "cut_hit/sub",
+   "gain": -5
   },
   {
    "t": 1.11,

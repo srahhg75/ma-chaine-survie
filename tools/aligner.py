@@ -38,15 +38,16 @@ def reconnaitre(chemin: Path) -> tuple[list[dict], float]:
         tmp = Path(d) / "x.wav"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(chemin), "-ac", "1", "-ar", "16000",
                         "-sample_fmt", "s16", tmp], check=True)
-        wf = wave.open(str(tmp), "rb")
-        duree = wf.getnframes() / wf.getframerate()
-        rec = KaldiRecognizer(_modele, wf.getframerate())
-        rec.SetWords(True)
-        resultats = []
-        while data := wf.readframes(4000):
-            if rec.AcceptWaveform(data):
-                resultats.append(json.loads(rec.Result()))
-        resultats.append(json.loads(rec.FinalResult()))
+        # fichier fermé avant la suppression du dossier temporaire (sinon Windows refuse de l'effacer)
+        with wave.open(str(tmp), "rb") as wf:
+            duree = wf.getnframes() / wf.getframerate()
+            rec = KaldiRecognizer(_modele, wf.getframerate())
+            rec.SetWords(True)
+            resultats = []
+            while data := wf.readframes(4000):
+                if rec.AcceptWaveform(data):
+                    resultats.append(json.loads(rec.Result()))
+            resultats.append(json.loads(rec.FinalResult()))
     return [w for r in resultats for w in r.get("result", [])], duree
 
 

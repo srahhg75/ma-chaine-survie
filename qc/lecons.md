@@ -231,3 +231,10 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   froide d'ambiance faible (hémisphère ≤ 0,17, lune ≤ 0,27, environnement ≤ 0,09), exposition ≤ 0,9, vignette ≥ 0,6 ;
   aucun mur ni sol plus clair que #c0c0c0 ; comparer avant/après côte à côte sur 3 plans et vérifier que sujet,
   objets étiquetés et sol restent lisibles.
+- **2026-10-24 — Relecture « réalisateur » avant publication : 2 plans refaits.** (1) Gros plan du filtre à café :
+  la caméra visait à côté de la carafe et Inès était juste derrière l'objet (on voyait ses jambes, pas le filtre).
+  Règle : un gros plan d'objet vise l'objet lui-même, et la caméra se place du côté opposé au personnage (calculer la
+  direction personnage → objet) ; filtre/objet entier dans la bande y≈250-1000. (2) Plan des 4 gestes du ballon :
+  Inès coupée par le bord gauche pendant le 1er geste (le milieu du plan était bon). Règle : regarder chaque plan tenu
+  au DÉBUT, au milieu et à chaque étiquette, pas seulement au milieu ; relecture complète = une image par plan tenu
+  extraite de la vidéo rendue (avec HUD et sous-titres), en planches.
