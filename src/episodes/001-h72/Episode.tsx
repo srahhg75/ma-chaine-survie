@@ -40,10 +40,10 @@ const useTemps = (al: Alignement) => {
 const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
   <>
     <Environnement intensite={0.14} />
-    <hemisphereLight args={["#5b74b8", "#1a140f", lerp(0.55, 0.3, nuit)]} />
+    <hemisphereLight args={["#5b74b8", "#1a140f", lerp(0.26, 0.16, nuit)]} />
     <directionalLight
       position={[-6, 10, -9]}
-      intensity={lerp(0.85, 0.45, nuit)}
+      intensity={lerp(0.42, 0.26, nuit)}
       color="#9ab4ff"
       castShadow
       shadow-mapSize={[2048, 2048]}
@@ -55,7 +55,7 @@ const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
       shadow-bias={-0.0006}
     />
     {/* contre-jour froid côté caméra : détache les volumes */}
-    <directionalLight position={[7, 6, 8]} intensity={lerp(0.32, 0.16, nuit)} color="#a9bde8" />
+    <directionalLight position={[7, 6, 8]} intensity={lerp(0.14, 0.08, nuit)} color="#a9bde8" />
   </>
 );
 
@@ -719,7 +719,7 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
           <meshStandardMaterial color="#9fb7bf" transparent opacity={0.8} roughness={0.05} emissive="#4f8fd0" emissiveIntensity={0.2} />
         </mesh>
       )}
-      <Lanterne position={[2.15, 0.975, -1.47]} allumee={lanternes} portee={3.0} puissance={0.5} />
+      <Lanterne position={[2.15, 0.975, -1.47]} allumee={lanternes} portee={2.6} puissance={0.2} />
 
       {/* ---- salon ---- */}
       <CanapeTissu position={[-4.6, 0, 0.55]} rotation={90} couleur="#6d4a3e" />
@@ -733,7 +733,7 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
         <meshStandardMaterial color="#c49a3c" metalness={0.8} roughness={0.3} />
       </mesh>
       <BouteilleBrune niveau={niveauBrun} echelle={bouteille} />
-      <Lanterne position={[-2.45, 0, 0.9]} allumee={lanternes * 0.8} portee={3.6} />
+      <Lanterne position={[-2.45, 0, 0.9]} allumee={lanternes * 0.8} portee={3.2} puissance={0.6} />
 
       {/* ---- entrée ---- */}
       <PorteEntree ouverture={ouverture} verrou={verrou} cle={cle} />

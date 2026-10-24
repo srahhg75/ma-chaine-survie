@@ -40,7 +40,7 @@ export const donnees: DonneesEpisode = {
   id: "001-h72",
   titre: "H+72 — Partie 1 : Neuf litres",
   queue: 5.5,
-  post: { bloom: 0.32, seuilBloom: 0.92, vignette: 0.36, grain: 0.03, exposition: 1.35 },
+  post: { bloom: 0.36, seuilBloom: 0.88, vignette: 0.52, grain: 0.03, exposition: 1.2 }, // nuit sans courant : pénombre, sources chaudes
   decor: {
     pieces: [
       {
