@@ -323,3 +323,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-25 — DEMANDE : une voix lit le choix A/B du carton de fin.** Règle : chaque épisode se termine par le
   narrateur qui lit la question et les deux choix (lignes `@carton…` du script, voix du narrateur, sans sous-titres
   puisque le carton affiche le texte) ; `queue` allongée pour que la lecture finisse avant la fin de la vidéo.
+- **2026-10-25 — Voix du carton ajoutée : l'ancre « fin » a glissé après la lecture (vidéo de 107,8 s, carton
+  affiché trop tard).** Règle : « fin » = dernier mot du RÉCIT ; les lignes `@carton…` ne comptent pas
+  (`src/systeme/timeline.ts`) ; le carton de fin n'est pas soumis à la règle de rythme ; après tout ajout de voix,
+  relire la durée annoncée par `tools/timeline.ts` et supprimer les tranches déjà rendues (`videos/<ep>/tranches/`).

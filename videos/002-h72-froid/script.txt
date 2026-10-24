@@ -49,3 +49,8 @@
 @m_lampe [Morel] Le type avait une lampe torche.
 @m_cles [Morel] Et les clés du _6e_.
 @fin > Et ce soir, Inès est de _garde_.
+# Carton de fin, lu par le narrateur (voix « narrateur2.mp3 ») : pas de sous-titres, le carton affiche le texte
+@carton1 > [narrateur2] Ce soir, Inès…
+@carton2 [narrateur2] A : elle part à sa garde.
+@carton3 [narrateur2] B : elle reste et guette.
+@carton4 [narrateur2] Répondez en commentaire !

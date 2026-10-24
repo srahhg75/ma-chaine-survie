@@ -66,7 +66,7 @@ const pieces6: DonneesPiece[] = partie1.decor.pieces.map((p) =>
 export const donnees: DonneesEpisode = {
   id: "002-h72-froid",
   titre: "H+72 — Partie 2 : Le froid",
-  queue: 5.5,
+  queue: 9.5, // le narrateur lit le choix A/B sur le carton (@carton1-4)
   post: { bloom: 0.36, seuilBloom: 0.88, vignette: 0.62, grain: 0.03, exposition: 0.9 }, // nuit sans courant
   decor: {
     pieces: [
@@ -468,13 +468,13 @@ export const donnees: DonneesEpisode = {
     { a: "fin:garde", id: "tap/knuckle", gain: -10 },
   ],
   ambiances: [
-    { type: "drone", de: 0, a: "fin+5.5", niveau: -1 },
-    { type: "vent", de: 0, a: "fin+5.5", niveau: -3, fondu: 1.5 },
+    { type: "drone", de: 0, a: "fin+9.5", niveau: -1 },
+    { type: "vent", de: 0, a: "fin+9.5", niveau: -3, fondu: 1.5 },
     { type: "ville", de: "recap1", a: "recap2", niveau: 0, fondu: 0.6 },
     // vent fort quand la fenêtre de Morel est ouverte
     { type: "vent", de: "aere:grand", a: "sort.fin", niveau: -2, fondu: 0.6 },
     { type: "coeur", de: "co3", a: "co4.fin+0.5", niveau: -2, bpm: 72 },
-    { type: "coeur", de: "m_lampe", a: "fin+5.5", niveau: -1, bpm: 88 },
+    { type: "coeur", de: "m_lampe", a: "fin+9.5", niveau: -1, bpm: 88 },
     { type: "grincement", de: "t1a:porte", a: "t1a:fermee", niveau: -4, fondu: 0.1 },
     { type: "grincement", de: "m_folle-0.45", a: "m_folle-0.05", niveau: -5, fondu: 0.1 },
     { type: "eau", de: "tuyau", a: "tuyau.fin", niveau: -12, fondu: 0.3 },

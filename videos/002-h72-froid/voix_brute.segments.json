@@ -412,5 +412,41 @@
   "de": 69.758,
   "a": 72.021,
   "gain_db": 0.0
+ },
+ {
+  "phrase": 46,
+  "id": "carton1",
+  "voix": "narrateur2",
+  "fichier": "narrateur2.mp3",
+  "de": -0.02,
+  "a": 1.175,
+  "gain_db": 0.9
+ },
+ {
+  "phrase": 47,
+  "id": "carton2",
+  "voix": "narrateur2",
+  "fichier": "narrateur2.mp3",
+  "de": 1.51,
+  "a": 3.428,
+  "gain_db": 0.9
+ },
+ {
+  "phrase": 48,
+  "id": "carton3",
+  "voix": "narrateur2",
+  "fichier": "narrateur2.mp3",
+  "de": 4.087,
+  "a": 5.69,
+  "gain_db": 0.9
+ },
+ {
+  "phrase": 49,
+  "id": "carton4",
+  "voix": "narrateur2",
+  "fichier": "narrateur2.mp3",
+  "de": 5.74,
+  "a": 6.952,
+  "gain_db": 0.9
  }
 ]

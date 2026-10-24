@@ -70,8 +70,10 @@ r.personnages.forEach((p) => {
 const tries = [...evenements].filter((f) => f >= 0 && f <= r.duree).sort((a, b) => a - b);
 tries.push(r.duree);
 let prec = 0;
+// le carton de fin (animé, lu par le narrateur) n'est pas soumis à la règle de rythme
+const debutCarton = Math.min(...r.hud.filter((e) => e.type === "carton").map((e) => e.fDe), r.duree);
 for (const f of tries) {
-  if ((f - prec) / fps > RYTHME_MAX_S) signaler("Rythme", `aucun changement d'image pendant ${((f - prec) / fps).toFixed(1)} s (max ${RYTHME_MAX_S} s)`, prec);
+  if (prec < debutCarton && (f - prec) / fps > RYTHME_MAX_S) signaler("Rythme", `aucun changement d'image pendant ${((f - prec) / fps).toFixed(1)} s (max ${RYTHME_MAX_S} s)`, prec);
   prec = f;
 }
 const debutEnAction =

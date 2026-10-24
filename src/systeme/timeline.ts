@@ -1,4 +1,4 @@
-import { Alignement } from "./mots";
+import { Alignement, estCarton } from "./mots";
 
 /*
  * Ancres de timeline : tout (caméra, HUD, sons, personnages) est calé sur la voix via mots.json.
@@ -12,6 +12,7 @@ import { Alignement } from "./mots";
  *   "hook#3"               début du 4e mot de la phrase (index 0)
  *   "hook.fin+0.4"         décalage en secondes (+ ou -)
  *   "debut", "fin"         début (0 s) / fin de la voix ; "fin+1.5" = 1,5 s après le dernier mot
+ *                          (les lignes @carton…, lues par-dessus le carton de fin, ne comptent pas)
  *   2.5                    nombre = secondes absolues (à éviter : ne suit pas la voix)
  */
 export type Ancre = string | number;
@@ -36,7 +37,10 @@ export const instant = (ancre: Ancre, a: Alignement): number => {
   } else if (corps.endsWith(".debut")) corps = corps.slice(0, -6);
 
   if (corps === "debut") return decalage;
-  if (corps === "fin") return (a.mots.length ? a.mots[a.mots.length - 1].fin : a.duree) + decalage;
+  if (corps === "fin") {
+    const recit = a.mots.filter((m) => !estCarton(a.phrases[m.phrase]));
+    return (recit.length ? recit[recit.length - 1].fin : a.duree) + decalage;
+  }
 
   const [idPhrase, motCherche] = corps.split(/[:#]/);
   const phrase = a.phrases.find((p) => p.id === idPhrase);
