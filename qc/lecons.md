@@ -238,3 +238,9 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   Inès coupée par le bord gauche pendant le 1er geste (le milieu du plan était bon). Règle : regarder chaque plan tenu
   au DÉBUT, au milieu et à chaque étiquette, pas seulement au milieu ; relecture complète = une image par plan tenu
   extraite de la vidéo rendue (avec HUD et sous-titres), en planches.
+- **2026-10-24 — Outils Linux sur le PC Windows : la boucle qualité « OK » alors que les planches manquaient.**
+  Sous Windows : environnements Python dans `.venv/Scripts/*.exe` (pas `.venv/bin/`), ffmpeg sans fontconfig
+  (`drawtext` sans `fontfile` plante), WAV temporaire à fermer avant de supprimer son dossier, torch exige le
+  runtime Visual C++ (`winget install Microsoft.VCRedist.2015+.x64`). Règle : les scripts choisissent `bin/` ou
+  `Scripts/` selon ce qui existe, `drawtext` reçoit toujours une police (Montserrat figée en TTF), et une étape qui
+  ne produit pas son fichier compte comme une ERREUR au bilan (`tools/boucle.sh` : planches absentes = échec).
