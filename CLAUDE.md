@@ -51,6 +51,8 @@ analyse/                  analyses (chaînes de référence…) ; reference/ (vi
 Une ligne = une phrase de la timeline. `@id` en début de ligne = identifiant (sinon p1, p2…) ; `>` = phrase-chute
 (0,6 s de silence avant) ; `*mots*` = mot-clé ressource/chiffre (jaune) ; `_mot_` = danger (rouge) ; `# …` commentaire ;
 `[…]` indication non lue. Ex. : `@chute > Mais _jamais_ de barbecue à l'intérieur.`
+`[Prénom]` en tête de phrase = réplique dite par ce personnage (sa propre voix ; sinon narrateur).
+Ex. : `@m1 [Morel] C'est mon chauffage central !`
 
 ## Pipeline d'un épisode
 0. **Relire `qc/lecons.md`.** Choisir `NNN-nom`, créer `videos/`, `public/`, `src/episodes/` à ce nom.

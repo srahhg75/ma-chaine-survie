@@ -12,7 +12,7 @@ import { boiteHud, boiteSousTitre, chevauche, contient, Rect } from "../src/syst
 import { boiteMeuble, dansBoite, murTraverse, obstacles, segmentTraverse } from "../src/systeme/kit3d/decor";
 import { angleEntre, distance, soustrait, Vec3 } from "../src/systeme/maths";
 import { blocsSousTitres } from "../src/systeme/mots";
-import { CORPS, hauteurBassin } from "../src/systeme/personnage/poses";
+import { corpsDe, hautTete, hauteurBassin } from "../src/systeme/personnage/poses";
 import { etatPersonnage } from "../src/systeme/personnage/trajet";
 
 const id = process.argv[2];
@@ -87,7 +87,7 @@ const derriere = (b: (typeof obs)[number], p: Vec3) => {
 
 // ---------- Image par image ----------
 const meubles = donnees.decor.meubles.filter((m) => m.type !== "tapis").map(boiteMeuble);
-const blocs = blocsSousTitres(alignement.mots);
+const blocs = blocsSousTitres(alignement.mots, alignement.phrases);
 let dirPrec: Vec3 | null = null;
 const posPrec = new Map<string, Vec3>();
 
@@ -108,8 +108,9 @@ for (let f = 0; f < r.duree; f++) {
     if (dansBoite(cam.position, b, 0.15)) signaler("Caméra dans un mur/meuble", `caméra dans ${b.id}`, f);
     else if (b.nature === "mur" && b.plein && derriere(b, cam.position) && segmentTraverse(cam.position, finVisee, b)) signaler("Caméra derrière un mur", `la caméra voit le dos de ${b.id}`, f);
   }
-  // Vitesse de rotation
-  if (dirPrec) {
+  // Vitesse de rotation (une coupe nette n'est pas un mouvement)
+  const coupeIci = r.camera.some((c) => c.coupe && c.fArrivee === f);
+  if (dirPrec && !coupeIci) {
     const v = (angleEntre(dirPrec, dir) * 180) / Math.PI * fps;
     if (v > CAMERA_ROTATION_MAX_DEG_S) signaler("Caméra trop rapide", `rotation au-delà de ${CAMERA_ROTATION_MAX_DEG_S}°/s (pointe ${Math.round(v)}°/s)`, f);
   }
@@ -124,7 +125,7 @@ for (let f = 0; f < r.duree; f++) {
       if (s.personnage) {
         const x = etats.get(s.personnage);
         if (!x) return null;
-        const h = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules * 0.6) * x.p.taille;
+        const h = (hauteurBassin(x.e.pose, x.p.variante) + corpsDe(x.p.variante).bassinVersEpaules * 0.6) * x.p.taille;
         point = [x.e.position[0], s.hauteur ?? h, x.e.position[2]];
       }
       return point ? { nom: `${s.personnage ?? "sujet"}${s.hauteur ? ` (h=${s.hauteur} m)` : ""}`, p: project(point, cam), point } : null;
@@ -137,7 +138,7 @@ for (let f = 0; f < r.duree; f++) {
       const x = etats.get(id);
       if (!x) return null;
       const k = x.p.taille;
-      const sommet = (hauteurBassin(x.e.pose) + CORPS.bassinVersEpaules + CORPS.cou + 2 * CORPS.rayonTete + 0.06) * k;
+      const sommet = (hauteurBassin(x.e.pose, x.p.variante) + hautTete(x.p.variante) + 0.06) * k;
       const [px, , pz] = x.e.position;
       const coins = [-1, 1].flatMap((dx) => [-1, 1].flatMap((dz) => [0.02, sommet].map((y) => project([px + dx * 0.28 * k, y, pz + dz * 0.28 * k], cam))));
       const xs = coins.map((c) => c.x);

@@ -244,3 +244,48 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   runtime Visual C++ (`winget install Microsoft.VCRedist.2015+.x64`). Règle : les scripts choisissent `bin/` ou
   `Scripts/` selon ce qui existe, `drawtext` reçoit toujours une police (Montserrat figée en TTF), et une étape qui
   ne produit pas son fichier compte comme une ERREUR au bilan (`tools/boucle.sh` : planches absentes = échec).
+- **2026-10-24 — Script de la Partie 2 hors gabarit (274 mots, hook de 15 mots, répliques entre guillemets)** : le
+  « PROMPT 06 » cité par la demande n'était pas dans le dépôt, le script a été écrit sans ses contraintes chiffrées.
+  Règle : gabarit d'un script (PROMPT 06 du protocole) = **200 à 260 mots (70-90 s)**, hook de 2 phrases, récap de
+  3-4 phrases, 3 tactiques « Un : … », erreur ou fausse sécurité, twist, dernière phrase très courte ; **phrases de
+  2 à 8 mots**, chiffres précis, objets du quotidien, **aucune indication de mise en scène** dans le texte lu, et
+  jamais une réplique lue par le narrateur. Vérifier mots et longueurs avec `lire_script` de `tools/script_format.py`
+  avant de livrer. Si une demande cite un prompt introuvable, le demander au lieu de deviner.
+- **2026-10-24 — DEMANDE : des personnages qui se parlent (vannes, petites insultes) pour faire commenter.**
+  Règle : les répliques sont permises et recherchées, dites chacune par la **voix de son personnage** (un fichier
+  ElevenLabs par voix : `narrateur.mp3`, `<prenom>.mp3`), marquées `[Prénom]` en tête de ligne dans `script.txt`
+  (champ `voix` de `tools/script_format.py`, écrit dans `mots.json`) ; elles comptent dans les 200-260 mots et les
+  phrases de 2 à 8 mots. Insultes légères seulement (rien de grossier ni de discriminant) ; une blague sur un geste
+  dangereux est toujours contredite à l'image (fantôme) et par un personnage. Celui qui parle est visible, de face
+  ou de trois-quarts ; chaque personnage garde la même voix dans toute la série.
+- **2026-10-24 — DEMANDE : les chiffres s'affichent en chiffres, plus d'effets sur le texte (« réalisateur qui veut
+  percer sur TikTok »).** Règle : dans `script.txt`, chiffres en chiffres (« *200 litres* », « *11°C* », « Au 6e »,
+  « *20 €* », « 1 : … ») ; le texte collé dans ElevenLabs garde les nombres en lettres (lecture sûre), et
+  `forme_parlee` fait le lien (ordinaux « 6e », « € », « deux cents »). Sous-titres « rétention » : chaque mot entre
+  avec un impact, les chiffres et mots-clés grossissent et vibrent, les chutes s'affichent seules en très gros,
+  les répliques prennent la couleur et le nom du personnage. Toujours dans la bande des sous-titres (jamais sur le
+  sujet, zones sûres TikTok) et lisibles en un coup d'œil.
+- **2026-10-24 — DEMANDE (précisée 3 fois le même soir) : plus de réalisme, mais en formes simples ET en gardant la
+  silhouette de la partie 1 (petite taille, tête un peu grosse).** Règle : aucun modèle 3D téléchargé ; proportions
+  « figurine » de la partie 1 (≈ 1,4 m, tête ≈ 1/3 du corps) ; le réalisme vient des DÉTAILS et du MOUVEMENT :
+  vêtements en couches (col, poignets, ourlet, boutons, fermeture, lacets), mains à doigts et pouce, cheveux en volume
+  sculpté, visage complet (oreilles, nez, lèvres, dents quand la bouche s'ouvre, joues, rides selon l'âge),
+  accessoires (lunettes, bonnet), respiration et léger balancement au repos, marche avec bras et buste qui suivent,
+  bouche qui parle sur les répliques. Composant : `personnage/Humain.tsx` (variante « humain »), apparence dans
+  `personnage/apparence.ts`. Décors plus meublés (plinthes, prises, cadres, rideaux, livres, objets du quotidien).
+  Avant de changer un style en profondeur, montrer UNE image d'essai et attendre le retour.
+- **2026-10-24 — RETOUR : « supprime les paupières, on doit voir tout l'œil, yeux manga comme Inès en partie 1 ».**
+  Règle : les personnages « humain » gardent l'œil manga de la partie 1 (grand blanc, iris coloré à anneau sombre,
+  pupille, deux reflets, trait de cils épais et virgule au coin) ; pas de paupière couleur peau par-dessus ; le
+  clignement écrase l'œil (comme le Bonhomme). Ancres de mots : un nombre s'écrit en chiffres dans l'ancre
+  (« appel:112 », pas « appel:douze »).
+- **2026-10-24 — Tête « humain » à l'envers** (on voyait l'intérieur du crâne et le cou à travers le menton).
+  Règle : un profil de `LatheGeometry` se donne du BAS vers le HAUT (y croissant), sinon les faces regardent vers
+  l'intérieur ; vérifier toute nouvelle forme au tour sur le banc (`banc-humains`) en gros plan.
+- **2026-10-24 — Changement de lieu simulé par un déplacement de 0,05 s = « caméra trop rapide ».** Règle : une coupe
+  nette (autre plateau, flash-back) s'écrit `coupe: true` dans la clé de caméra ; le contrôle ne la compte pas comme
+  une rotation ; chaque coupe garde son son court (`cut_hit/…`).
+- **2026-10-24 — 77 erreurs de cadrage au 1er passage (têtes coupées, personnages hors champ).** Règle : pour les
+  personnages « humain », cadrer avec les aides `buste` (tête ≈ 1,12 m, distance ≥ 2,6 m), `enPied` (≥ 4 m) et
+  `aDeux` (≥ 4,3 m) de l'épisode 002 ; un dialogue se filme en plan à deux, les deux personnages de trois-quarts
+  vers la caméra, mur entre eux arasé ; une fiche 2D se pose du côté où personne ne se tient.

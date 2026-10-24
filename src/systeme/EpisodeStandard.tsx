@@ -10,6 +10,7 @@ import { EclairageBase } from "./kit3d/Lumieres";
 import { PostProcess } from "./kit3d/PostProcess";
 import { Alignement } from "./mots";
 import { Bonhomme } from "./personnage/Bonhomme";
+import { Humain } from "./personnage/Humain";
 import { etatPersonnage, opaciteFantome } from "./personnage/trajet";
 import { Fantome } from "./kit3d/Fantome";
 import { SousTitres } from "./SousTitres";
@@ -29,7 +30,12 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
     <>
       {r.personnages.map((p) => {
         const e = etatPersonnage(p, frame, fps);
-        const corps = <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} variante={p.variante} />;
+        const corps =
+          p.variante === "humain" ? (
+            <Humain key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} apparence={e.apparence} />
+          ) : (
+            <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} variante={p.variante} />
+          );
         return p.fantome ? (
           <Fantome key={p.id} opacite={opaciteFantome(p, frame, fps)}>
             {corps}
@@ -66,7 +72,7 @@ export const EpisodeStandard: React.FC<PropsEpisode & { donnees: DonneesEpisode;
         <PostProcess {...donnees.post} {...(brouillon ? { occlusion: false } : {})} />
       </ThreeCanvas>
       {!sansTexte && <Hud elements={r.hud} camera={r.camera} />}
-      {!sansTexte && <SousTitres mots={alignement.mots} />}
+      {!sansTexte && <SousTitres mots={alignement.mots} phrases={alignement.phrases} />}
       {audio !== "aucun" && <Audio src={staticFile(`${donnees.id}/${audio === "mix" ? "mix" : "voix"}.wav`)} />}
       {guide && <GuideZonesSures />}
     </AbsoluteFill>

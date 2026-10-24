@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/2b82579aecf4.wav: drip/drop seed 1: 0.334 s, onset 0.004 s, peak at 0.022 s, end 0.271 s, -1.0 dBFS, -12.3 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/2b82579aecf4.wav",
+ "meta": {
+  "id": "drip/drop",
+  "seed": 1,
+  "sr": 48000,
+  "onset_s": 0.0038,
+  "peak_s": 0.0225,
+  "end_s": 0.271,
+  "dur_s": 0.3341,
+  "peak_db": -1.0,
+  "lufs_m_max": -12.32,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "drip/drop: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -139.1,
+    "ring_z": 4.8,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 7.75,
+    "t40_ms": 200.0,
+    "crest_db": 5.4,
+    "res_db": 17.3,
+    "res_hz": 1849,
+    "peak_dbfs": -1.0,
+    "live_ms": 218.5
+   },
+   "glide": {
+    "tonal_share": 1.0,
+    "rise_st": 0.8,
+    "from_s": 0.011,
+    "to_s": 0.041
+   },
+   "layers": {
+    "attacks": [
+     0.033
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "drip",
+    "sound": "drip/drop"
+   }
+  }
+ }
+}

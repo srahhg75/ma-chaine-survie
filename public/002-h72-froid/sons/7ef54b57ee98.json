@@ -1,0 +1,58 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/7ef54b57ee98.wav: riser/dark seed 4401: 0.951 s, onset 0.135 s, peak at 0.697 s, end 0.943 s, -1.0 dBFS, -16.4 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/7ef54b57ee98.wav",
+ "meta": {
+  "id": "riser/dark",
+  "seed": 4401,
+  "sr": 48000,
+  "onset_s": 0.1345,
+  "peak_s": 0.6965,
+  "end_s": 0.943,
+  "dur_s": 0.9511,
+  "peak_db": -1.0,
+  "lufs_m_max": -16.4,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "riser/dark: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -122.9,
+    "ring_z": 3.9,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 6.0,
+    "t40_ms": 190.0,
+    "crest_db": 13.2,
+    "res_db": 5.6,
+    "res_hz": 4090,
+    "peak_dbfs": -1.0,
+    "live_ms": 715.0
+   },
+   "glide": {
+    "tonal_share": 0.56,
+    "rise_st": 1.0,
+    "from_s": 0.401,
+    "to_s": 0.411
+   },
+   "layers": {
+    "attacks": [
+     0.517,
+     0.698
+    ],
+    "count": 2,
+    "pre_swell_ms": 350.0
+   },
+   "context": {
+    "category": "riser",
+    "sound": "riser/dark"
+   }
+  }
+ }
+}

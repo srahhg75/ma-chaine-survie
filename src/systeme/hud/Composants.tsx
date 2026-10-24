@@ -64,7 +64,7 @@ export const Montre: React.FC<Props<"montre"> & { jour: number; heure: string; t
 
 // ---------- Moodles : indicateurs d'état (niveau 1 jaune -> 4 rouge) ----------
 const NIVEAUX = ["#e8c23a", "#e8902f", "#e0582c", "#d42b2b"];
-const LIBELLES: Record<NomMoodle, string> = { panique: "PANIQUE", froid: "FROID", faim: "FAIM", soif: "SOIF", fatigue: "FATIGUE", blessure: "BLESSURE" };
+const LIBELLES: Record<NomMoodle, string> = { panique: "PANIQUE", froid: "FROID", faim: "FAIM", soif: "SOIF", fatigue: "FATIGUE", blessure: "BLESSURE", tete: "MAL DE TÊTE", nausee: "NAUSÉE", sommeil: "SOMMEIL", odeur: "ODEUR" };
 export const Moodles: React.FC<Props<"moodles">> = ({ e, r, f }) => (
   <div style={boite(r, { display: "flex", gap: 12 })}>
     {e.moodles.map((m, i) => {

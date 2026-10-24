@@ -5,8 +5,8 @@ import { Ancre } from "../timeline";
 // HUD « jeu de survie » décrit EN DONNÉES dans chaque épisode (donnees.ts).
 export type NomIcone =
   | "bougie" | "eau" | "lampe" | "piles" | "conserve" | "couverture" | "radio" | "allumettes" | "trousse"
-  | "briquet" | "jerrican" | "thermometre" | "danger" | "maison" | "porte";
-export type NomMoodle = "panique" | "froid" | "faim" | "soif" | "fatigue" | "blessure";
+  | "briquet" | "jerrican" | "thermometre" | "danger" | "maison" | "porte" | "telephone" | "cle";
+export type NomMoodle = "panique" | "froid" | "faim" | "soif" | "fatigue" | "blessure" | "tete" | "nausee" | "sommeil" | "odeur";
 
 type Base = { de?: Ancre; a?: Ancre };
 

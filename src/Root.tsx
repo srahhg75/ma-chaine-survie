@@ -5,7 +5,7 @@ import { dureeSecondes, idComposition } from "./systeme/episode";
 import { PropsEpisode } from "./systeme/EpisodeStandard";
 import { FPS, HAUTEUR, LARGEUR } from "./systeme/format";
 import { Alignement, ALIGNEMENT_VIDE } from "./systeme/mots";
-import { BancEssai, BancVisages, IMAGES_PAR_POSE, POSES_BANC } from "./systeme/personnage/BancEssai";
+import { BancEssai, BancHumains, BancVisages, IMAGES_PAR_POSE, POSES_BANC } from "./systeme/personnage/BancEssai";
 
 const existe = async (chemin: string) => {
   try {
@@ -42,5 +42,6 @@ export const Racine: React.FC = () => (
     ))}
     <Composition id="banc-essai" component={BancEssai} width={LARGEUR} height={HAUTEUR} fps={FPS} durationInFrames={IMAGES_PAR_POSE * POSES_BANC.length} />
     <Composition id="banc-visages" component={BancVisages} width={LARGEUR} height={HAUTEUR} fps={FPS} durationInFrames={60} />
+    <Composition id="banc-humains" component={BancHumains} width={LARGEUR} height={HAUTEUR} fps={FPS} durationInFrames={60} />
   </>
 );

@@ -1,0 +1,62 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/55792d438a66.wav: impact/deep seed 0: 6.205 s, onset 0.000 s, peak at 0.084 s, end 4.620 s, -1.0 dBFS, -11.7 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/002-h72-froid/sons/55792d438a66.wav",
+ "meta": {
+  "id": "impact/deep",
+  "seed": 0,
+  "sr": 48000,
+  "onset_s": 0.0,
+  "peak_s": 0.0835,
+  "end_s": 4.62,
+  "dur_s": 6.2047,
+  "peak_db": -1.0,
+  "lufs_m_max": -11.67,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [
+    {
+     "code": "tail",
+     "msg": "the tail rises again by 10 dB (a second event, a roll or a double member)"
+    }
+   ],
+   "summary": "impact/deep: clean (the tail rises again by 10 dB (a second event, a roll or a double member))",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -97.2,
+    "ring_z": 3.9,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 10.5,
+    "attack_ms": 4.5,
+    "t40_ms": 3610.0,
+    "crest_db": 9.6,
+    "res_db": 2.7,
+    "res_hz": 1875,
+    "peak_dbfs": -1.0,
+    "live_ms": 2881.0
+   },
+   "glide": {
+    "tonal_share": 0.74,
+    "rise_st": 2.3,
+    "from_s": 1.746,
+    "to_s": 1.771
+   },
+   "layers": {
+    "attacks": [
+     0.107
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "impact",
+    "sound": "impact/deep"
+   }
+  }
+ }
+}

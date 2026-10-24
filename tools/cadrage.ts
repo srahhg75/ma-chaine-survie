@@ -3,7 +3,7 @@
 //   --milieux : affiche seulement l'instant (s) du milieu de chaque plan tenu (une image fixe par plan)
 import { chargerEpisode } from "./charger";
 import { etatCamera, project } from "../src/systeme/camera";
-import { CORPS, hauteurBassin } from "../src/systeme/personnage/poses";
+import { hautTete, hauteurBassin } from "../src/systeme/personnage/poses";
 import { etatPersonnage } from "../src/systeme/personnage/trajet";
 import { Vec3 } from "../src/systeme/maths";
 
@@ -24,7 +24,7 @@ r.camera.forEach((c, i) => {
     .map((p) => {
       const e = etatPersonnage(p, f, fps);
       const k = p.taille;
-      const sommet = (hauteurBassin(e.pose) + CORPS.bassinVersEpaules + CORPS.cou + 2 * CORPS.rayonTete + 0.06) * k;
+      const sommet = (hauteurBassin(e.pose, p.variante) + hautTete(p.variante) + 0.06) * k;
       return `${p.id} pieds ${fmt(project(e.position, cam))} tête ${fmt(project([e.position[0], sommet, e.position[2]], cam))}`;
     })
     .filter((s) => !s.startsWith("fantome"))

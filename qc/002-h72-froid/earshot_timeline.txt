@@ -1,0 +1,106 @@
+brouillon.mp4: 0:00.00-1:37.15 (97.2 s). Loudness -14.0 LUFS integrated, true peak -1.4 dBTP, LRA 5.1 LU; loudest 0:54.00-0:57.00 (-11.3 LUFS short-term). 44 stop-down(s)/gap(s): 0:01.95 0.4 s drop, 0:03.60 0.4 s drop, 0:06.00 0.3 s drop, 0:08.45 0.4 s drop, 0:10.10 0.5 s drop. Quiet tail 4.0 s (drop). No steady beat grid (pulse clarity 0.05 < 0.15). 5 section(s): 0:00.00-0:21.69 funk music, vocal chop | voice: voice-over narration; 0:21.69-1:03.70 also: speech synthesizer, narration, monologue (AST) | voice: voice-over narration; 1:03.70-1:18.06 also: artillery fire, gunshot, gunfire, machine gun (AST) | voice: voice-over narration; 1:18.06-1:22.59 funk music, vocal chop; 1:22.59-1:37.15 also: sigh, beatboxing (AST) | voice: voice-over narration. 558 events (5.7/s); 20 tagged (16 voice, 2 whoosh, 1 foley, 1 ui; tags are hints). Strongest accents over a running bed: 1:28.68 +43 dB, 0:31.23 +38 dB, 0:21.67 +37 dB. Sync to 37 cuts: 24% have an onset within 1 frame (chance 39%), 84% within 100 ms, median |offset| 45 ms; 5% land on a strong accent (>= 28 dB over the bed) within 1 frame (chance 8%); 1 met by a whoosh / riser peak; 1 only by a level peak (soft whoosh / swell?); 4 without a hit: 0:16.57, 0:16.73, 1:20.17, 1:29.67.
+
+SECTIONS
+  0:00.00-0:21.69  funk music, vocal chop | voice: voice-over narration  -14 LUFS
+  0:21.69-1:03.70  also: speech synthesizer, narration, monologue (AST) | voice: voice-over narration  -14 LUFS  [AST music 0.00, speech 0.80]
+  1:03.70-1:18.06  also: artillery fire, gunshot, gunfire, machine gun (AST) | voice: voice-over narration  -14 LUFS  [AST music 0.01, speech 0.36]
+  1:18.06-1:22.59  funk music, vocal chop  -11 LUFS
+  1:22.59-1:37.15  also: sigh, beatboxing (AST) | voice: voice-over narration  -18 LUFS  [AST music 0.01, speech 0.66]
+
+TRANSCRIPT   time  kind   what (CLAP tag / runner-up)                     peak  over bed  length  centroid  | sync
+== 0:00.00-0:21.69  funk music, vocal chop | voice: voice-over narration  (+131 untagged onsets, 6.0/s)
+ 0:01.95  GAP    drop 0.40 s (-39 LUFS)
+ 0:02.60  VOICE  spoken word / chat message pop                   -1.5 dBFS +16.8 dB   689 ms   209 Hz  | cut +69 ms near
+ 0:02.97  VOICE  spoken word / chat message pop                   -1.5 dBFS +30.6 dB   310 ms   495 Hz
+ 0:03.02  -      high onset                                       -1.6 dBFS  +3.2 dB   119 ms  4.8 kHz  | cut +15 ms OK
+ 0:03.60  GAP    drop 0.40 s (-40 LUFS)
+ 0:03.78  -      high onset                                      -28.4 dBFS  +0.0 dB    24 ms   161 Hz  | cut +43 ms near
+ 0:04.25  VOICE  short vocal sound / hi-hat                       -1.5 dBFS +19.1 dB   144 ms   610 Hz
+ 0:04.29  -      low onset                                        -1.5 dBFS +12.0 dB   105 ms   599 Hz  | cut -41 ms near
+ 0:06.00  GAP    drop 0.35 s (-42 LUFS)
+ 0:06.38  VOICE  spoken word / glockenspiel note                  -3.0 dBFS +32.5 dB   563 ms  4.6 kHz  | cut +42 ms near
+ 0:08.45  GAP    drop 0.40 s (-38 LUFS)
+ 0:10.10  GAP    drop 0.50 s (-40 LUFS)
+ 0:12.23  VOICE  short vocal sound / snare drum hit               -1.5 dBFS +29.7 dB   433 ms   310 Hz  | cut +98 ms near
+ 0:12.31  -      high onset                                       -1.5 dBFS +25.9 dB   222 ms   449 Hz  | cut -54 ms near
+ 0:12.70  GAP    drop 0.40 s (-41 LUFS)
+ 0:13.88  -      high onset                                       -1.5 dBFS +10.4 dB   142 ms   355 Hz  | cut -84 ms near
+ 0:14.30  GAP    drop 0.40 s (-36 LUFS)
+ 0:16.50  GAP    drop 0.60 s (-39 LUFS)
+ 0:16.57  CUT     no onset within 100 ms (strong sound at -171 ms)  <- NO HIT
+ 0:16.73  CUT     no onset or level peak within 250 ms  <- NO HIT
+ 0:21.20  GAP    drop 0.45 s (-43 LUFS)
+ 0:21.67  -      high onset                                       -1.5 dBFS +37.3 dB    88 ms   535 Hz  | strong accent (summary)
+== 0:21.69-1:03.70  also: speech synthesizer, narration, monologue (AST) | voice: voice-over narration  (+245 untagged onsets, 5.8/s)
+ 0:22.35  GAP    drop 0.30 s (-38 LUFS)
+ 0:22.88  -      high onset                                       -2.5 dBFS  +8.3 dB   200 ms  4.9 kHz  | cut -53 ms near
+ 0:23.02  FOLEY  bubble pop / mechanical keyboard key press       -2.5 dBFS +13.7 dB   188 ms   424 Hz
+ 0:24.80  GAP    drop 0.30 s (-40 LUFS)
+ 0:26.60  GAP    drop 0.35 s (-36 LUFS)
+ 0:28.40  GAP    drop 0.30 s (-39 LUFS)
+ 0:29.79  -      high onset                                       -1.5 dBFS  +3.6 dB   186 ms   377 Hz  | cut -6 ms OK
+ 0:30.70  GAP    drop 0.40 s (-41 LUFS)
+ 0:31.12  VOICE  speech (AST 0.67) / chat message pop             -1.5 dBFS +35.5 dB   343 ms   380 Hz  [AST Speech 0.67]  | cut +52 ms near
+ 0:31.23  -      full swell                                       -1.5 dBFS +37.6 dB   190 ms   277 Hz  | strong accent (summary)
+ 0:34.15  GAP    drop 0.40 s (-40 LUFS)
+ 0:35.95  GAP    drop 0.35 s (-38 LUFS)
+ 0:37.55  GAP    drop 0.40 s (-38 LUFS)
+ 0:37.64  -      low onset                                       -24.8 dBFS  +0.0 dB  2000 ms   210 Hz  | cut +36 ms near
+ 0:38.91  -      high onset                                       -9.4 dBFS  +0.0 dB    74 ms  2.3 kHz  | cut -25 ms OK
+ 0:39.15  GAP    drop 0.35 s (-43 LUFS)
+ 0:41.20  GAP    drop 0.35 s (-42 LUFS)
+ 0:41.56  VOICE  spoken word / chat message pop                   -1.5 dBFS +33.2 dB  2000 ms   282 Hz  | cut -4 ms OK
+ 0:41.62  UI     chat message pop / spoken word                   -1.5 dBFS +32.6 dB   548 ms  4.2 kHz
+ 0:42.20  GAP    drop 0.30 s (-37 LUFS)
+ 0:44.00  GAP    drop 0.40 s (-40 LUFS)
+ 0:45.00  GAP    drop 0.40 s (-40 LUFS)
+ 0:45.61  -      low onset                                        -1.5 dBFS  +8.6 dB    43 ms   672 Hz  | cut -54 ms near
+ 0:47.40  GAP    drop 0.40 s (-41 LUFS)
+ 0:48.16  -      high onset                                       -1.5 dBFS  +4.7 dB   168 ms   583 Hz  | cut -69 ms near
+ 0:48.40  GAP    drop 0.30 s (-41 LUFS)
+ 0:49.25  GAP    drop 0.45 s (-43 LUFS)
+ 0:52.20  GAP    drop 0.60 s (-35 LUFS)
+ 0:52.81  VOICE  spoken word / chat message pop                   -1.5 dBFS +26.9 dB   679 ms   309 Hz  | cut +47 ms near
+ 0:54.06  -      high onset                                      -10.8 dBFS +10.7 dB    19 ms   245 Hz  | cut -9 ms OK
+ 0:54.60  GAP    drop 0.35 s (-37 LUFS)
+ 0:55.40  GAP    drop 0.30 s (-41 LUFS)
+ 0:57.60  GAP    drop 0.30 s (-43 LUFS)
+ 0:57.91  VOICE  spoken word / chat message pop                   -4.7 dBFS +31.2 dB  2000 ms   395 Hz  | cut +42 ms near
+ 0:58.85  GAP    drop 0.40 s (-38 LUFS)
+ 0:59.90  -      high onset                                       -1.5 dBFS  +2.0 dB   451 ms  2.5 kHz  | cut +28 ms OK
+ 1:00.80  GAP    drop 0.40 s (-41 LUFS)
+ 1:02.44  WHOOSH whip pan whoosh transition / spoken word         -5.7 dBFS +30.3 dB   835 ms   273 Hz  | cut +40 ms near
+ 1:03.25  GAP    drop 0.35 s (-37 LUFS)
+== 1:03.70-1:18.06  also: artillery fire, gunshot, gunfire, machine gun (AST) | voice: voice-over narration  (+81 untagged onsets, 5.6/s)
+ 1:05.25  GAP    drop 0.30 s (-36 LUFS)
+ 1:10.82  VOICE  spoken word / fast air whoosh                    -3.1 dBFS +24.5 dB  1072 ms   279 Hz  | cut +83 ms near
+ 1:11.52  -      high onset                                       -2.2 dBFS  +0.0 dB   129 ms  4.8 kHz  | cut -13 ms OK
+ 1:12.00  GAP    drop 0.30 s (-39 LUFS)
+ 1:12.34  VOICE  spoken word / sub bass drop                      -1.5 dBFS +19.1 dB  2000 ms   161 Hz  | cut -26 ms OK
+ 1:12.44  VOICE  spoken word / glockenspiel note                  -1.5 dBFS +24.1 dB   583 ms  3.6 kHz
+ 1:13.65  GAP    drop 0.40 s (-37 LUFS)
+ 1:15.02  VOICE  short vocal sound / plucked string note          -1.5 dBFS +28.6 dB   495 ms   300 Hz  | cut +53 ms near
+ 1:16.03  VOICE  spoken word / glockenspiel note                  -3.2 dBFS +26.7 dB   633 ms   203 Hz  | cut -34 ms near
+ 1:16.55  GAP    drop 0.30 s (-40 LUFS)
+ 1:17.34  -      low onset                                        -7.2 dBFS +10.0 dB    38 ms   262 Hz  | cut -29 ms OK
+ 1:17.65  GAP    drop 0.40 s (-44 LUFS)
+== 1:18.06-1:22.59  funk music, vocal chop  (+21 untagged onsets, 4.6/s)
+ 1:18.85  GAP    drop 0.35 s (-41 LUFS)
+ 1:19.23  WHOOSH whip pan whoosh transition / glockenspiel note   -2.0 dBFS +24.8 dB   946 ms   248 Hz  | cut +63 ms near
+ 1:20.10  GAP    drop 0.45 s (-38 LUFS)
+ 1:20.17  CUT     no onset or level peak within 250 ms  <- NO HIT
+ 1:21.80  GAP    drop 0.75 s (-41 LUFS)
+== 1:22.59-1:37.15  also: sigh, beatboxing (AST) | voice: voice-over narration  (+41 untagged onsets, 2.8/s)
+ 1:24.10  GAP    drop 0.70 s (-41 LUFS)
+ 1:24.14  -      high onset                                      -28.2 dBFS  +0.0 dB    14 ms  3.2 kHz  | cut +45 ms near
+ 1:25.00  GAP    drop 0.70 s (-37 LUFS)
+ 1:26.94  VOICE  breath                                           -9.5 dBFS +23.7 dB   429 ms  1.6 kHz  | cut +72 ms near
+ 1:27.35  GAP    drop 0.50 s (-49 LUFS)
+ 1:28.68  -      full swell                                       -5.3 dBFS +43.2 dB   240 ms  5.4 kHz  | cut -220 ms swell; strong accent (summary)
+ 1:29.05  GAP    drop 0.80 s (-37 LUFS)
+ 1:29.67  CUT     no onset within 100 ms (strong sound at +198 ms)  <- NO HIT
+ 1:31.14  VOICE? short vocal sound / punchy impact hit            -3.1 dBFS  +6.1 dB    14 ms   146 Hz  | cut +43 ms near
+ 1:31.67  CUT     no onset; level peak +153 ms, rising 7 dB (a soft whoosh / swell, or just the bed?)  <- CHECK
+ 1:33.20  GAP    drop 3.95 s (-40 LUFS) = tail
+
+NOTES  times, levels, loudness and sync offsets are measurements. Event kinds / tags are CLAP guesses: '?' = the event is less than 12 dB over its bed, so its excerpt is mostly bed and the tag a weak hint (right kind about 1 in 4 on the tuning mixes, 1 in 2 for exposed events; often wrong on music and voice). Where AST ran, its speech overrides the kind with VOICE. Section genres marked ? are weak. 'over bed' = how far the event rises over the level just before it; 'silent' = that bed was below -60 (after a gap the rise means nothing). Full data: --json.

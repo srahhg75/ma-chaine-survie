@@ -7,6 +7,7 @@ Une ligne = une phrase de la timeline. Syntaxe :
   … une *bougie* …                    *mot* ou *plusieurs mots* = mot-clé ressource/chiffre (jaune)
   … le _monoxyde_ tue …               _mot_ = mot-clé danger (rouge)
   [indication de jeu]                 non lue, retirée
+  @m1 [Morel] Il est six heures !     [Nom] en tête de phrase = réplique dite par ce personnage (sinon narrateur)
 Le texte affiché (sous-titres) est exactement celui du script, sans les marqueurs.
 """
 import re
@@ -33,7 +34,7 @@ def nombre_en_lettres(n: int) -> str:
         return "quatrevingt" + (nombre_en_lettres(n - 80) if n > 80 else "s")
     if n < 1000:
         c, r = divmod(n, 100)
-        return ("cent" if c == 1 else UNITES[c] + "cent") + (nombre_en_lettres(r) if r else "")
+        return ("cent" if c == 1 else UNITES[c] + "cent" + ("" if r else "s")) + (nombre_en_lettres(r) if r else "")
     if n < 1_000_000:
         m, r = divmod(n, 1000)
         return ("mille" if m == 1 else nombre_en_lettres(m) + "mille") + (nombre_en_lettres(r) if r else "")
@@ -45,10 +46,19 @@ def sans_accents(s: str) -> str:
     return "".join(c for c in s if unicodedata.category(c) != "Mn").replace("œ", "oe").replace("æ", "ae")
 
 
+def ordinal(n: int) -> str:
+    """6 -> sixieme, 5 -> cinquieme, 9 -> neuvieme (pour « 6e », « 5e »)."""
+    b = nombre_en_lettres(n)
+    b = b[:-1] if b.endswith("e") else b
+    return {"cinq": "cinqu", "neuf": "neuv"}.get(b, b) + "ieme"
+
+
 def forme_parlee(mot: str) -> str:
     """Forme normalisée de ce qui est prononcé : minuscules, sans accents, lettres seules, chiffres en lettres."""
     m = sans_accents(mot)
-    m = m.replace("°c", " degres").replace("°", " degres").replace("%", " pourcent")
+    m = m.replace("°c", " degres").replace("°", " degres").replace("%", " pourcent").replace("€", " euros")
+    m = re.sub(r"^1(er|re)(?=[^a-z]*$)", "premier", m)
+    m = re.sub(r"^(\d+)(e|eme)(?=[^a-z]*$)", lambda x: " " + ordinal(int(x.group(1))) + " ", m)
     m = re.sub(r"\d+", lambda x: " " + nombre_en_lettres(int(x.group())) + " ", m)
     m = re.sub(r"^(km)$", "kilometres", m.strip())
     m = re.sub(r"^h$", "heures", m)
@@ -70,6 +80,7 @@ class Phrase:
     chute: bool
     texte: str
     mots: list[Mot] = field(default_factory=list)
+    voix: str = "narrateur"
 
 
 def lire_script(texte: str) -> list[Phrase]:
@@ -84,11 +95,15 @@ def lire_script(texte: str) -> list[Phrase]:
             ligne = ligne[m.end():]
         chute = ligne.startswith(">")
         ligne = ligne.lstrip("> ").strip()
+        voix = "narrateur"
+        if mv := re.match(r"^\[(\w+)\]\s*", ligne):
+            voix = mv.group(1)
+            ligne = ligne[mv.end():]
         ligne = re.sub(r"\[[^\]]*\]", " ", ligne)
         # Typographie française : la ponctuation haute reste collée au mot (espace insécable)
         ligne = re.sub(r"\s+([?!:;»…])", " \\1", ligne)
         ligne = re.sub(r"«\s+", "« ", ligne)
-        ph = Phrase(pid, len(phrases), chute, "")
+        ph = Phrase(pid, len(phrases), chute, "", voix=voix)
         style_ouvert = "normal"
         for jeton in ligne.split():
             style = style_ouvert

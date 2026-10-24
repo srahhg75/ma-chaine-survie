@@ -1,7 +1,7 @@
 import { EtatCamera, project } from "../camera";
 import { LARGEUR, Y_SOUS_TITRES, ZONE_SURE } from "../format";
 import { clamp } from "../maths";
-import { Bloc } from "../mots";
+import { Bloc, echelleMot, NARRATEUR } from "../mots";
 import { ElementHudResolu } from "./types";
 
 // Position de chaque élément du HUD en pixels (1080×1920). Source unique : rendu ET contrôle qualité.
@@ -72,13 +72,14 @@ export const boiteHud = (e: ElementHudResolu, cam?: EtatCamera): Rect & { ancre?
 };
 
 // Découpe d'un bloc de sous-titres en lignes (estimation de largeur Montserrat 900 majuscules)
+// Lignes d'un bloc, en tenant compte de la taille propre de chaque mot (chiffres géants, mots-clés, chute)
 export const lignesSousTitre = (bloc: Bloc): string[][] => {
   const max = HUD.sousTitres.largeurMax;
   const cw = HUD.sousTitres.taille * HUD.sousTitres.parCaractere;
   const lignes: string[][] = [[]];
   let largeur = 0;
   for (const m of bloc.mots) {
-    const l = (m.mot.length + 1) * cw;
+    const l = (m.mot.length + 1) * cw * echelleMot(m, bloc);
     if (largeur + l > max && lignes[lignes.length - 1].length) {
       lignes.push([]);
       largeur = 0;
@@ -89,13 +90,22 @@ export const lignesSousTitre = (bloc: Bloc): string[][] => {
   return lignes;
 };
 
+// Hauteur de la pastille du nom (« INÈS », « MOREL ») posée au-dessus d'une réplique
+export const NOM_SOUS_TITRE = { h: 54, ecart: 10, taille: 36 } as const;
+
 export const boiteSousTitre = (bloc: Bloc): Rect => {
   const lignes = lignesSousTitre(bloc);
   const cw = HUD.sousTitres.taille * HUD.sousTitres.parCaractere;
-  const l = Math.min(HUD.sousTitres.largeurMax, Math.max(...lignes.map((li) => li.join(" ").length)) * cw);
-  const h = lignes.length * HUD.sousTitres.interligne + 16;
+  let k = 0;
+  const mesures = lignes.map((li) => {
+    const ech = li.map(() => echelleMot(bloc.mots[k++], bloc));
+    return { l: li.reduce((s, t, i) => s + (t.length + 1) * cw * ech[i], 0), h: HUD.sousTitres.interligne * Math.max(...ech) };
+  });
+  const l = Math.min(HUD.sousTitres.largeurMax, Math.max(...mesures.map((m) => m.l)));
+  const h = mesures.reduce((s, m) => s + m.h, 0) + 16;
+  const nom = bloc.voix !== NARRATEUR ? NOM_SOUS_TITRE.h + NOM_SOUS_TITRE.ecart : 0;
   const centre = (ZONE_SURE.gauche + ZONE_SURE.droite) / 2;
-  return { x: centre - l / 2, y: Y_SOUS_TITRES - h / 2, l, h };
+  return { x: centre - l / 2, y: Y_SOUS_TITRES - h / 2 - nom, l, h: h + nom };
 };
 
 export const chevauche = (a: Rect, b: Rect, marge = 0) =>

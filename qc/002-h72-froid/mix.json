@@ -1,0 +1,143 @@
+{
+ "lufs": -14.0,
+ "true_peak_dbtp": -1.48,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "la",
+   "t": 3.0,
+   "baisse_db": 2.6
+  },
+  {
+   "mot": "seule",
+   "t": 3.09,
+   "baisse_db": 2.9
+  },
+  {
+   "mot": "on",
+   "t": 12.15,
+   "baisse_db": 2.9
+  },
+  {
+   "mot": "l'a",
+   "t": 12.3,
+   "baisse_db": 4.4
+  },
+  {
+   "mot": "vidé.",
+   "t": 12.42,
+   "baisse_db": 7.2
+  },
+  {
+   "mot": "Inès.",
+   "t": 37.167,
+   "baisse_db": 3.3
+  },
+  {
+   "mot": "Au",
+   "t": 41.58,
+   "baisse_db": 2.5
+  },
+  {
+   "mot": "pas.",
+   "t": 53.52,
+   "baisse_db": 18.1
+  },
+  {
+   "mot": "Ah.",
+   "t": 81.9,
+   "baisse_db": 4.8
+  },
+  {
+   "mot": "Le",
+   "t": 84.102,
+   "baisse_db": 11.1
+  },
+  {
+   "mot": "avait",
+   "t": 86.222,
+   "baisse_db": 3.0
+  },
+  {
+   "mot": "lampe",
+   "t": 86.627,
+   "baisse_db": 7.6
+  },
+  {
+   "mot": "torche.",
+   "t": 86.88,
+   "baisse_db": 4.6
+  },
+  {
+   "mot": "Et",
+   "t": 87.355,
+   "baisse_db": 13.8
+  },
+  {
+   "mot": "les",
+   "t": 87.603,
+   "baisse_db": 16.6
+  },
+  {
+   "mot": "clés",
+   "t": 87.974,
+   "baisse_db": 10.1
+  },
+  {
+   "mot": "garde.",
+   "t": 91.29,
+   "baisse_db": 1.1
+  }
+ ],
+ "sons": [
+  "whoosh_big/deep",
+  "pro_impact/deep",
+  "whoosh_big/swell",
+  "whoosh_big/deep",
+  "cut_hit/sub",
+  "pro_sub_drop/low",
+  "cut_hit/punch",
+  "pro_impact/short",
+  "pro_impact/short",
+  "pro_impact/deep",
+  "pro_impact/short",
+  "riser/dark",
+  "cut_hit/sub",
+  "reverse_swell/dark",
+  "pro_sub_drop/low",
+  "cut_hit/punch",
+  "whoosh_fast/heavy",
+  "reverse_swell/dark",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "pro_impact/deep",
+  "whoosh_big/thump_deep",
+  "impact/deep",
+  "whoosh_fast/heavy",
+  "cut_hit/punch",
+  "cut_hit/sub",
+  "toggle/latch",
+  "pro_tap/knock",
+  "pro_impact/short",
+  "toggle/latch",
+  "swish/soft",
+  "swish/soft",
+  "swish/soft",
+  "swish/soft",
+  "swish/soft",
+  "pro_tap/soft",
+  "knock/wood",
+  "knock/wood",
+  "knock/wood",
+  "toggle/latch",
+  "toggle/latch",
+  "click/thock",
+  "drip/drop",
+  "drip/drop",
+  "tap/table",
+  "pro_tap/soft",
+  "toggle/latch",
+  "tap/knuckle"
+ ],
+ "pas": 87
+}

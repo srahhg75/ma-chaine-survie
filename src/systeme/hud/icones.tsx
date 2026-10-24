@@ -104,6 +104,18 @@ const DESSINS: Record<NomIcone | NomMoodle, React.ReactNode> = {
       <circle cx="30" cy="25" r="2" fill="currentColor" />
     </>
   ),
+  telephone: (
+    <>
+      <rect x="15" y="5" width="18" height="38" rx="4" {...T} />
+      <path d="M21 37h6" {...T} />
+    </>
+  ),
+  cle: (
+    <>
+      <circle cx="15" cy="24" r="8" {...T} />
+      <path d="M23 24h19M36 24v7M42 24v5" {...T} />
+    </>
+  ),
   // Indicateurs d'état (« moodles »)
   panique: (
     <>
@@ -129,6 +141,20 @@ const DESSINS: Record<NomIcone | NomMoodle, React.ReactNode> = {
       <path d="M30 8a16 16 0 1 0 10 26A13 13 0 0 1 30 8z" {...T} />
     </>
   ),
+  tete: (
+    <>
+      <circle cx="24" cy="24" r="15" {...T} />
+      <path d="M14 10l6 8l-4 4l7 6M34 10l-5 7l5 4" {...T} />
+    </>
+  ),
+  nausee: (
+    <>
+      <circle cx="24" cy="24" r="16" {...T} />
+      <path d="M16 20h4M28 20h4M16 32c3-3 5 3 8 0s5 3 8 0" {...T} />
+    </>
+  ),
+  sommeil: <path d="M10 12h12L10 26h12M26 22h8l-8 10h8M34 8h6l-6 8h6" {...T} />,
+  odeur: <path d="M14 40c-4-6 4-10 0-16s4-10 0-16M24 40c-4-6 4-10 0-16s4-10 0-16M34 40c-4-6 4-10 0-16s4-10 0-16" {...T} />,
   blessure: (
     <>
       <rect x="8" y="17" width="32" height="14" rx="7" transform="rotate(-35 24 24)" {...T} />

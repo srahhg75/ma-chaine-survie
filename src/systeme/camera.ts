@@ -16,11 +16,13 @@ export type CleCamera = {
   cible: Vec3;
   fov?: number; // degrés (vertical), défaut 50
   deplacement?: number; // durée du déplacement qui mène à ce plan (s), défaut 1,4
+  coupe?: boolean; // coupe nette (changement de lieu) : pas de déplacement, l'image change d'un coup
   par?: Vec3; // point de passage pour contourner un mur ou un meuble (courbe)
   derive?: number; // amplitude (m) de la légère dérive « caméra vivante » sur le plan tenu, défaut 0,01
 };
 
-export type CleCameraResolue = Required<Omit<CleCamera, "a" | "par">> & {
+export type CleCameraResolue = Required<Omit<CleCamera, "a" | "par" | "coupe">> & {
+  coupe: boolean;
   par?: Vec3;
   fArrivee: number;
   fDepart: number; // début du déplacement qui y mène
@@ -38,13 +40,14 @@ export const resoudreCamera = (cles: CleCamera[], al: Alignement, fps: number): 
   const res: CleCameraResolue[] = [];
   cles.forEach((c, i) => {
     const fArrivee = i === 0 ? 0 : image(c.a, al, fps);
-    const deplacement = i === 0 ? 0 : c.deplacement ?? 1.4;
+    const deplacement = i === 0 || c.coupe ? 0 : c.deplacement ?? 1.4;
     const fPrec = i === 0 ? 0 : res[i - 1].fArrivee;
     res.push({
       position: c.position,
       cible: c.cible,
       fov: c.fov ?? 50,
       deplacement,
+      coupe: !!c.coupe,
       derive: c.derive ?? 0.01,
       par: c.par,
       fArrivee,

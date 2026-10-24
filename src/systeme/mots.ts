@@ -24,22 +24,33 @@ export type Phrase = {
   fFin: number;
   premierMot: number;
   dernierMot: number;
+  voix?: string; // "narrateur" (défaut) ou prénom du personnage qui dit la réplique
 };
 
 export type Alignement = { fps: number; duree: number; phrases: Phrase[]; mots: Mot[] };
 
 export const ALIGNEMENT_VIDE: Alignement = { fps: 30, duree: 0, phrases: [], mots: [] };
 
-// Bloc de sous-titres : 2 à 4 mots, jamais à cheval sur deux phrases.
-export type Bloc = { mots: Mot[]; fDebut: number; fFin: number };
+// Bloc de sous-titres : 2 à 4 mots (2 dans une phrase-chute), jamais à cheval sur deux phrases.
+// chute : affiché en très gros ; voix : personnage qui parle (couleur + nom) ; hook : les 2 premières phrases.
+export type Bloc = { mots: Mot[]; fDebut: number; fFin: number; chute: boolean; voix: string; hook: boolean };
+
+export const NARRATEUR = "narrateur";
+export const estChiffre = (m: Mot) => /\d/.test(m.mot);
+
+// Taille d'un mot relative au corps des sous-titres (rendu ET contrôle de place) : chiffres-ressources géants,
+// mots-clés plus gros, phrase-chute et hook agrandis.
+export const echelleMot = (m: Mot, bloc: Pick<Bloc, "chute" | "hook">) =>
+  (m.style === "ressource" && estChiffre(m) ? 1.5 : m.style !== "normal" ? 1.2 : 1) * (bloc.chute ? 1.3 : bloc.hook ? 1.1 : 1);
 
 const longueur = (mots: Mot[]) => mots.reduce((n, m) => n + m.mot.length + 1, 0);
 
-export const blocsSousTitres = (mots: Mot[], maxMots = 4, maxCaracteres = 22): Bloc[] => {
+export const blocsSousTitres = (mots: Mot[], phrases: Phrase[] = [], maxMots = 4, maxCaracteres = 22): Bloc[] => {
   const groupes: Mot[][] = [];
   let courant: Mot[] = [];
   mots.forEach((m, i) => {
     const suivant = mots[i + 1];
+    const max = phrases[m.phrase]?.chute ? 2 : maxMots;
     // Couper AVANT ce mot si le bloc deviendrait trop long
     if (courant.length >= 2 && longueur([...courant, m]) > maxCaracteres) {
       groupes.push(courant);
@@ -49,7 +60,7 @@ export const blocsSousTitres = (mots: Mot[], maxMots = 4, maxCaracteres = 22): B
     const finPhrase = !suivant || suivant.phrase !== m.phrase;
     const ponctuation = /[.!?…:;]\s*»?$/.test(m.mot) || (/,$/.test(m.mot) && courant.length >= 2);
     const pause = suivant ? suivant.debut - m.fin > 0.35 : true;
-    if (courant.length >= maxMots || finPhrase || ponctuation || pause) {
+    if (courant.length >= max || finPhrase || ponctuation || pause) {
       groupes.push(courant);
       courant = [];
     }
@@ -60,7 +71,8 @@ export const blocsSousTitres = (mots: Mot[], maxMots = 4, maxCaracteres = 22): B
   const fusion: Mot[][] = [];
   for (const g of groupes) {
     const prec = fusion[fusion.length - 1];
-    if (g.length === 1 && prec && prec.length < maxMots && prec[0].phrase === g[0].phrase && !/[.!?…]$/.test(prec[prec.length - 1].mot)) {
+    const max = phrases[g[0].phrase]?.chute ? 2 : maxMots;
+    if (g.length === 1 && prec && prec.length < max && prec[0].phrase === g[0].phrase && !/[.!?…]$/.test(prec[prec.length - 1].mot)) {
       prec.push(g[0]);
     } else fusion.push([...g]);
   }
@@ -69,6 +81,14 @@ export const blocsSousTitres = (mots: Mot[], maxMots = 4, maxCaracteres = 22): B
   return fusion.map((g, i) => {
     const suivant = fusion[i + 1];
     const finNaturelle = g[g.length - 1].fFin + 18;
-    return { mots: g, fDebut: g[0].fDebut, fFin: suivant ? Math.min(suivant[0].fDebut, finNaturelle) : finNaturelle };
+    const p = phrases[g[0].phrase];
+    return {
+      mots: g,
+      fDebut: g[0].fDebut,
+      fFin: suivant ? Math.min(suivant[0].fDebut, finNaturelle) : finNaturelle,
+      chute: !!p?.chute,
+      voix: p?.voix ?? NARRATEUR,
+      hook: g[0].phrase < 2,
+    };
   });
 };

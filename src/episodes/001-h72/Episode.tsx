@@ -22,7 +22,7 @@ import { donnees, ETAGE, P, SOUS_SOL } from "./donnees";
 const EAU = "#6fa8d8";
 
 // Temps courant + lecteur d'ancres
-const useTemps = (al: Alignement) => {
+export const useTemps = (al: Alignement) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = f / fps;
@@ -37,7 +37,7 @@ const useTemps = (al: Alignement) => {
 };
 
 // ---------- Lumière : aube d'hiver bleue, sans électricité ----------
-const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
+export const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
   <>
     {/* retour du 24/10 « pas assez sombre » : lumière froide d'ambiance −35 %, les sources chaudes restent */}
     <Environnement intensite={0.09} />
@@ -61,7 +61,7 @@ const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
 );
 
 // Lanterne de camping à piles (lumière douce, portée limitée à sa pièce)
-const Lanterne: React.FC<{ position: Vec3; allumee: number; portee?: number; puissance?: number }> = ({ position, allumee, portee = 3.2, puissance = 1 }) => (
+export const Lanterne: React.FC<{ position: Vec3; allumee: number; portee?: number; puissance?: number }> = ({ position, allumee, portee = 3.2, puissance = 1 }) => (
   <group position={position}>
     <Arrondi taille={[0.1, 0.03, 0.1]} position={[0, 0.015, 0]} rayon={0.01} couleur="#2a2e33" />
     <mesh position={[0, 0.09, 0]}>
@@ -74,7 +74,7 @@ const Lanterne: React.FC<{ position: Vec3; allumee: number; portee?: number; pui
 );
 
 // ---------- L'immeuble en coupe sous l'appartement (5 étages, rez-de-chaussée, sous-sol) ----------
-const Immeuble: React.FC<{ eau: number; pompe: number; loin: boolean }> = ({ eau, pompe, loin }) => {
+export const Immeuble: React.FC<{ eau: number; pompe: number; loin: boolean }> = ({ eau, pompe, loin }) => {
   const beton = useMateriauPBR("concrete_wall_006", { repetition: [6, 2], teinte: "#8d8a86" });
   const x0 = -5.2;
   const x1 = 5.8;
@@ -189,7 +189,7 @@ const Immeuble: React.FC<{ eau: number; pompe: number; loin: boolean }> = ({ eau
 };
 
 // ---------- Cuisine : bec du robinet + eau qui tousse ----------
-const RobinetCuisine: React.FC<{ t: number; fin: number }> = ({ t, fin }) => {
+export const RobinetCuisine: React.FC<{ t: number; fin: number }> = ({ t, fin }) => {
   const [x, y, z] = P.robinetCuisine;
   // filet d'eau : continu au début, puis par à-coups, puis plus rien (« crache de l'air »)
   const phase = t / Math.max(0.1, fin);
@@ -271,7 +271,7 @@ const Boite: React.FC<{ position: Vec3; couleur: string; etiquette?: string; ech
 );
 
 // ---------- Salle d'eau ----------
-const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number; abattant: number }> = ({ eauCuvette, tourbillon, t, abattant }) => (
+export const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number; abattant: number }> = ({ eauCuvette, tourbillon, t, abattant }) => (
   <group position={[P.wc[0], 0, P.wc[2]]}>
     {/* pied + cuvette */}
     <mesh position={[0, 0.17, 0.05]} castShadow>
@@ -305,7 +305,7 @@ const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number; abattant
   </group>
 );
 
-const Lavabo: React.FC<{ robinet: number }> = ({ robinet }) => (
+export const Lavabo: React.FC<{ robinet: number }> = ({ robinet }) => (
   <group position={[P.lavabo[0], 0, P.lavabo[2]]}>
     <mesh position={[0, 0.4, 0.02]} castShadow>
       <cylinderGeometry args={[0.07, 0.1, 0.8, 18]} />
@@ -336,7 +336,7 @@ const Lavabo: React.FC<{ robinet: number }> = ({ robinet }) => (
   </group>
 );
 
-const TableauElectrique: React.FC<{ coupe: number }> = ({ coupe }) => {
+export const TableauElectrique: React.FC<{ coupe: number }> = ({ coupe }) => {
   const [x, y, z] = P.tableau;
   return (
     <group position={[x, y, z + 0.02]}>
@@ -359,7 +359,7 @@ const TableauElectrique: React.FC<{ coupe: number }> = ({ coupe }) => {
 };
 
 // Placard + ballon + vanne d'arrivée + robinet de vidange + seau
-const PlacardBallon: React.FC<{ porte: number; vanne: number; vidange: number; jet: number; seau: number; t: number }> = ({ porte, vanne, vidange, jet, seau, t }) => {
+export const PlacardBallon: React.FC<{ porte: number; vanne: number; vidange: number; jet: number; seau: number; t: number }> = ({ porte, vanne, vidange, jet, seau, t }) => {
   const bois = useMateriauPBR("laminate_floor_02", { repetition: [0.8, 1.6], teinte: "#d9d2c4", gain: 1.1 });
   const [px, , pz] = P.placard;
   const l = 0.85;
@@ -459,7 +459,7 @@ const PlacardBallon: React.FC<{ porte: number; vanne: number; vidange: number; j
 };
 
 // Carafe + filtre à café (on filtre les dépôts)
-const Carafe: React.FC<{ niveau: number; goutte: number; t: number }> = ({ niveau, goutte, t }) => (
+export const Carafe: React.FC<{ niveau: number; goutte: number; t: number }> = ({ niveau, goutte, t }) => (
   <group position={P.carafe}>
     <mesh position={[0, 0.13, 0]}>
       <cylinderGeometry args={[0.075, 0.085, 0.26, 24, 1, true]} />
@@ -516,7 +516,7 @@ const Bassine: React.FC<{ position: Vec3; inclinaison: number; niveau: number; o
 );
 
 // ---------- Porte d'entrée (charnière à l'ouest, s'ouvre vers l'intérieur) + verrou ----------
-const PorteEntree: React.FC<{ ouverture: number; verrou: number; cle: number }> = ({ ouverture, verrou, cle }) => {
+export const PorteEntree: React.FC<{ ouverture: number; verrou: number; cle: number }> = ({ ouverture, verrou, cle }) => {
   const largeur = 0.9;
   const [x, , z] = P.porte;
   const [vx, vy] = P.verrou;

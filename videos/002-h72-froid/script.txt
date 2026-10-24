@@ -1,0 +1,51 @@
+# H+72 — Partie 2 « Le froid » (version dialoguée ; même texte que script.md, section 1, avec les marqueurs du pipeline)
+# Reprend à la dernière image de la Partie 1 : J4 · 06:00 · 11 °C, la clé dans la main d'Inès, porte fermée.
+# Voix : sans marqueur = narrateur ; [Inès] ou [Morel] en début de phrase = réplique dite par ce personnage
+# (indication non lue, retirée du texte affiché ; un fichier de voix par personnage).
+# Chiffres écrits en chiffres (affichés tels quels) ; la voix les a lus en lettres, l'alignement fait le lien.
+@hook Que feriez-vous si quelqu'un entrait chez vous ?
+@hook2 Alors que vous avez la _seule clé_ ?
+@recap1 Jour 4 sans électricité dans la ville.
+@recap2 Au 6e, Inès n'a plus d'eau courante.
+@recap3 Son ballon gardait *200 litres*.
+@recap4 Cette nuit, pendant sa garde, on l'a _vidé_.
+@serrure La serrure n'est pas forcée.
+@froid Et chez elle, il fait *11°C*.
+@i_genial [Inès] Génial. Ni eau, ni chauffage.
+@t1 1 : une seule pièce.
+@t1a La plus petite, porte fermée.
+@t2 2 : les courants d'air.
+@t2a Une serviette roulée sous la porte.
+@t2b Une couverture sur la fenêtre.
+@t2c Mais _jamais_ sur les grilles d'aération.
+@t2d Elles laissent respirer la pièce.
+@t3 3 : des couches.
+@t3a *3 couches* fines, et un bonnet.
+@i_sexy [Inès] Très sexy, Inès.
+@calme Elle ferme enfin les yeux.
+@odeur Une odeur de charbon monte du plancher.
+@morel Au 5e, monsieur Morel a allumé un _barbecue_.
+@salon Dans son salon.
+@co Le charbon dégage du _monoxyde de carbone_.
+@co2 Ni couleur, ni odeur.
+@co3 Mal de tête, nausées, envie de dormir.
+@co4 > Et on ne se _réveille pas_.
+@i_ouvrez [Inès] Morel ! Ouvrez !
+@m_folle [Morel] Il est 6 heures, espèce de folle !
+@i_tete [Inès] Vous avez mal à la tête ?
+@m_criez [Morel] Depuis que vous criez, oui.
+@i_barbecue [Inès] C'est votre barbecue. Il vous _empoisonne_.
+@m_chauffage [Morel] C'est mon chauffage central !
+@aere Elle ouvre les fenêtres en grand.
+@sort Elle le fait sortir sur le palier.
+@appel Et elle appelle le *112*.
+@rappel Vous vous souvenez du sol sec ?
+@tuyau Chez Morel, un tuyau. Encore mouillé.
+@bidons Et *10 bidons* pleins.
+@i_eau [Inès] Morel. D'où vient cette eau ?
+@m_achete [Morel] Achetée cette nuit. *20 €* le bidon.
+@i_rat [Inès] C'est mon eau, vieux rat !
+@m_bonne [Morel] Ah. Elle est très bonne.
+@m_lampe [Morel] Le type avait une lampe torche.
+@m_cles [Morel] Et les clés du _6e_.
+@fin > Et ce soir, Inès est de _garde_.
