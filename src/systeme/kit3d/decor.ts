@@ -1,7 +1,7 @@
 import { Vec3 } from "../maths";
 import type { NomPBR } from "./pbr";
 
-// Description des décors EN DONNÉES : lue par le rendu (Decor.tsx) et par le contrôle qualité (tools/qc.ts).
+// Description des décors EN DONNÉES : lue par le rendu (DecorScene.tsx) et par le contrôle qualité (tools/qc.ts).
 export type CoteMur = "nord" | "sud" | "est" | "ouest"; // nord = fond (z négatif), sud = devant (z positif)
 export type Sol = "parquet" | "carrelage" | "beton" | "moquette";
 export type Revetement = "papier" | "beton" | "carrelage" | "peint";
@@ -98,13 +98,17 @@ export const mursPiece = (p: DonneesPiece): (Boite & { cote: CoteMur })[] => {
   const P = p.profondeur / 2;
   const e = EPAISSEUR_MUR / 2;
   const hauteur = (c: CoteMur) => (devant.includes(c) ? ha : h);
+  const sans = p.sansMurs ?? [];
+  // Un bout de mur déborde de e pour fermer l'angle ; contre un mur partagé (dessiné par la voisine), il s'arrête
+  // à sa face (−e), sinon les deux murs se superposent sur 12 cm et clignotent
+  const bout = (c: CoteMur) => (sans.includes(c) ? -e : e);
   const boites: Record<CoteMur, [Vec3, Vec3]> = {
-    nord: [[cx - L - e, 0, cz - P - e], [cx + L + e, hauteur("nord"), cz - P + e]],
-    sud: [[cx - L - e, 0, cz + P - e], [cx + L + e, hauteur("sud"), cz + P + e]],
-    ouest: [[cx - L - e, 0, cz - P - e], [cx - L + e, hauteur("ouest"), cz + P + e]],
-    est: [[cx + L - e, 0, cz - P - e], [cx + L + e, hauteur("est"), cz + P + e]],
+    nord: [[cx - L - bout("ouest"), 0, cz - P - e], [cx + L + bout("est"), hauteur("nord"), cz - P + e]],
+    sud: [[cx - L - bout("ouest"), 0, cz + P - e], [cx + L + bout("est"), hauteur("sud"), cz + P + e]],
+    ouest: [[cx - L - e, 0, cz - P - bout("nord")], [cx - L + e, hauteur("ouest"), cz + P + bout("sud")]],
+    est: [[cx + L - e, 0, cz - P - bout("nord")], [cx + L + e, hauteur("est"), cz + P + bout("sud")]],
   };
-  return (Object.keys(boites) as CoteMur[]).filter((cote) => !(p.sansMurs ?? []).includes(cote)).map((cote) => ({
+  return (Object.keys(boites) as CoteMur[]).filter((cote) => !sans.includes(cote)).map((cote) => ({
     min: boites[cote][0],
     max: boites[cote][1],
     nature: "mur" as const,

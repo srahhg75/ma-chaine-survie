@@ -40,7 +40,7 @@ export const donnees: DonneesEpisode = {
   id: "001-h72",
   titre: "H+72 — Partie 1 : Neuf litres",
   queue: 5.5,
-  post: { bloom: 0.36, seuilBloom: 0.88, vignette: 0.52, grain: 0.03, exposition: 1.2 }, // nuit sans courant : pénombre, sources chaudes
+  post: { bloom: 0.36, seuilBloom: 0.88, vignette: 0.62, grain: 0.03, exposition: 0.9 }, // nuit sans courant : pénombre, sources chaudes
   decor: {
     pieces: [
       {
@@ -75,7 +75,7 @@ export const donnees: DonneesEpisode = {
         sol: "carrelage",
         murs: "carrelage",
         couleurSol: "#8f9aa0",
-        couleurMurs: "#dfe3e2",
+        couleurMurs: "#bfc5c5", // carrelage moins blanc : il renvoyait trop de lumière dans la pénombre
         devant: ["sud", "est", "ouest"],
         // passages vers la cuisine et vers l'entrée (on ne marche jamais à travers une cloison, même arasée)
         ouvertures: [{ mur: "ouest", type: "passage", centre: 0.25, largeur: 1.0, hauteur: 2.05 }, { mur: "est", type: "passage", centre: 0.2, largeur: 1.0, hauteur: 2.05 }],
@@ -330,6 +330,10 @@ export const donnees: DonneesEpisode = {
     { a: "fin-0.19", id: "cut_hit/sub", gain: -10 },
     { a: "fin:cle", id: "pro_impact/deep", gain: -4 },
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
+    // choix A/B : souffle à l'entrée des blocs, un impact quand chacun se pose (A à +0,53 s, B à +0,70 s du carton)
+    { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -9 },
+    { a: "fin+1.23", id: "cut_hit/punch", gain: -6 },
+    { a: "fin+1.4", id: "cut_hit/sub", gain: -5 },
     // ---- bruitages d'objets (foley) ----
     // hook : le robinet tousse et crache des gouttes
     { a: "hook:robinet", id: "drip/drop", gain: -9 },
