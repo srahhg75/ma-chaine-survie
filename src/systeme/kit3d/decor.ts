@@ -32,6 +32,7 @@ export type DonneesPiece = {
   hauteurArasee?: number; // défaut 0,22
   ouvertures?: Ouverture[];
   plafonnier?: boolean; // ampoule (éteinte si panne)
+  sansMurs?: CoteMur[]; // murs NON dessinés car partagés avec la pièce voisine (sinon deux murs superposés clignotent)
   // Vraies textures PBR (public/textures) à la place des textures procédurales ; motif = taille d'un motif en m
   pbr?: { sol?: NomPBR; murs?: NomPBR; teinteSol?: string; teinteMurs?: string; motifSol?: number; motifMurs?: number; metalMurs?: number; gainMurs?: number; gainSol?: number };
 };
@@ -103,7 +104,7 @@ export const mursPiece = (p: DonneesPiece): (Boite & { cote: CoteMur })[] => {
     ouest: [[cx - L - e, 0, cz - P - e], [cx - L + e, hauteur("ouest"), cz + P + e]],
     est: [[cx + L - e, 0, cz - P - e], [cx + L + e, hauteur("est"), cz + P + e]],
   };
-  return (Object.keys(boites) as CoteMur[]).map((cote) => ({
+  return (Object.keys(boites) as CoteMur[]).filter((cote) => !(p.sansMurs ?? []).includes(cote)).map((cote) => ({
     min: boites[cote][0],
     max: boites[cote][1],
     nature: "mur" as const,

@@ -206,3 +206,9 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   Règle : dès l'écriture de l'épisode, éclairage de nuit sans courant : pénombre bleutée, coins noirs, vraies sources
   chaudes (bougies, lampe torche, lanternes) qui découpent les formes ; mais Inès, ses gestes et les objets clés restent
   lisibles sur téléphone (leçon du 23/10 : jamais de sol ni de décor invisibles). Valider sur la planche d'un plan sur deux.
+- **2026-10-24 — RETOUR : à 0:35, les murs de la cuisine et de la salle de bain « se rentraient dedans »** (deux pièces
+  voisines dessinaient chacune leur mur au même endroit : deux murs superposés qui clignotent). Règle : un mur partagé
+  n'est dessiné qu'une fois : l'une des deux pièces le déclare dans `sansMurs` (`kit3d/decor.ts`) ; le passage reste
+  sur le mur de l'autre pièce.
+- **2026-10-24 — RETOUR : lanterne trop « flashy » posée sur les WC.** Règle : pas de source lumineuse visible posée
+  sur un objet qu'on filme de près ; pour éclairer une pièce, une lueur douce invisible (plafond) suffit.

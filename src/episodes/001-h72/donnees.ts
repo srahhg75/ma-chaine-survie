@@ -55,6 +55,7 @@ export const donnees: DonneesEpisode = {
       },
       {
         id: "cuisine",
+        sansMurs: ["ouest"], // mur partagé : dessiné une seule fois (par la pièce voisine)
         centre: [0, 0],
         largeur: 3.4,
         profondeur: 3.2,
@@ -67,6 +68,7 @@ export const donnees: DonneesEpisode = {
       },
       {
         id: "salle-eau",
+        sansMurs: ["ouest"], // mur partagé : dessiné une seule fois (par la pièce voisine)
         centre: [3.0, 0],
         largeur: 2.6,
         profondeur: 3.2,
@@ -80,6 +82,7 @@ export const donnees: DonneesEpisode = {
       },
       {
         id: "entree",
+        sansMurs: ["ouest"], // mur partagé : dessiné une seule fois (par la pièce voisine)
         centre: [5.0, 0],
         largeur: 1.4,
         profondeur: 3.2,
@@ -93,6 +96,7 @@ export const donnees: DonneesEpisode = {
       {
         // palier de l'immeuble derrière la porte d'entrée (sans lui, la porte ouvrait sur le vide)
         id: "palier",
+        sansMurs: ["sud"], // mur partagé : dessiné une seule fois (par la pièce voisine)
         centre: [5.0, -2.45],
         largeur: 2.4,
         profondeur: 1.5,

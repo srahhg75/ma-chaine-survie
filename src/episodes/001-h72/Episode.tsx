@@ -719,7 +719,8 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
           <meshStandardMaterial color="#9fb7bf" transparent opacity={0.8} roughness={0.05} emissive="#4f8fd0" emissiveIntensity={0.2} />
         </mesh>
       )}
-      <Lanterne position={[2.15, 0.975, -1.47]} allumee={lanternes} portee={2.6} puissance={0.2} />
+      {/* plus de lanterne visible sur les WC (trop flashy, retour du 24/10) : lueur douce invisible au plafond */}
+      {lanternes > 0 && <pointLight position={[3.0, 2.3, -0.6]} intensity={0.35} distance={3.0} color="#ffd9b0" />}
 
       {/* ---- salon ---- */}
       <CanapeTissu position={[-4.6, 0, 0.55]} rotation={90} couleur="#6d4a3e" />
