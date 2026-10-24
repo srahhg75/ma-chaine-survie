@@ -3,6 +3,7 @@
 Chaîne TikTok **en français**, sans visage : séries de **survie apocalyptiques en 3D**, format
 « **Que feriez-vous si…** ». La personne qui gère la chaîne ne code pas : Claude fait tout, explique simplement ce
 qu'il fait, et ne pose que les questions indispensables.
+**Claude répond TOUJOURS en français**, dans chaque message, et donne les heures à l'heure de Paris (le serveur est en UTC).
 
 ## ⚠️ Règle n°1 : les leçons
 - **Avant chaque épisode et avant chaque rendu : relire `qc/lecons.md` en entier.**

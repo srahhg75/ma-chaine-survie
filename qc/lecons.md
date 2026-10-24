@@ -197,3 +197,6 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — RETOUR : étagère + bougie collées à la porte d'entrée** (elles encombraient les gros plans du verrou
   et de la porte). Règle : les abords d'une porte qu'on filme restent dégagés (aucun meuble ni objet à moins de 0,6 m
   du chambranle) ; une lumière d'ambiance peut rester, sans objet visible.
+- **2026-10-24 — RETOUR : réponses parfois en anglais, et heures données en UTC** (« vers 15 h 30 » alors qu'il était
+  déjà 15 h 45 à Paris). Règle (inscrite dans CLAUDE.md) : toujours répondre en français ; toujours convertir les
+  heures en heure de Paris (`TZ=Europe/Paris date`).
