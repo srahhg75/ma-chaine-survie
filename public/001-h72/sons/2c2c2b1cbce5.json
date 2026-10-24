@@ -1,0 +1,57 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/2c2c2b1cbce5.wav: swish/soft seed 1007119508: 0.883 s, onset 0.021 s, peak at 0.110 s, end 0.653 s, -1.0 dBFS, -20.7 LUFS momentary max; checks: clean",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/2c2c2b1cbce5.wav",
+ "meta": {
+  "id": "swish/soft",
+  "seed": 1007119508,
+  "sr": 48000,
+  "onset_s": 0.0205,
+  "peak_s": 0.1095,
+  "end_s": 0.653,
+  "dur_s": 0.8826,
+  "peak_db": -1.0,
+  "lufs_m_max": -20.73,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "swish/soft: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -120.0,
+    "ring_z": 4.8,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 5.4,
+    "attack_ms": 7.5,
+    "t40_ms": 350.0,
+    "crest_db": 12.7,
+    "res_db": 5.1,
+    "res_hz": 2614,
+    "peak_dbfs": -1.0,
+    "live_ms": 319.75
+   },
+   "glide": {
+    "tonal_share": 0.22,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.102
+    ],
+    "count": 1,
+    "pre_swell_ms": 45.0
+   },
+   "context": {
+    "category": "swish",
+    "sound": "swish/soft"
+   }
+  }
+ }
+}

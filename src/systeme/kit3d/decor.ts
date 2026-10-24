@@ -12,8 +12,11 @@ export type Ouverture = {
   centre: number; // position le long du mur depuis son milieu (m) : vers l'est pour nord/sud, vers le nord pour ouest/est
   largeur: number;
   hauteur: number;
-  bas?: number; // hauteur de l'allège (fenêtre), défaut 0,9 ; 0 pour une porte
+  bas?: number; // hauteur de l'allège (fenêtre seulement), défaut 0,9 ; porte et passage partent du sol
 };
+
+// Hauteur du bas d'une ouverture : seule une fenêtre a une allège (une porte ou un passage part du sol)
+export const basOuverture = (o: Ouverture) => (o.type === "fenetre" ? o.bas ?? 0.9 : 0);
 
 export type DonneesPiece = {
   id: string;
@@ -147,4 +150,25 @@ export const segmentTraverse = (a: Vec3, b: Vec3, boite: Boite) => {
     if (t0 > t1) return false;
   }
   return true;
+};
+
+/*
+ * Un personnage (rayon ~0,12 m au sol) est-il DANS un mur, plein ou arasé, en dehors d'une porte/d'un passage ?
+ * Renvoie l'identifiant du mur traversé, ou null. Sert au contrôle « Personnage à travers un mur » (tools/qc.ts).
+ */
+export const murTraverse = (d: DonneesDecor, x: number, z: number, rayon = 0.12): string | null => {
+  for (const p of d.pieces) {
+    for (const m of mursPiece(p)) {
+      const dedans = x > m.min[0] - rayon && x < m.max[0] + rayon && z > m.min[2] - rayon && z < m.max[2] + rayon;
+      if (!dedans) continue;
+      const selonX = m.cote === "nord" || m.cote === "sud";
+      // position le long du mur depuis son milieu : vers l'est (nord/sud), vers le nord (ouest/est)
+      const u = selonX ? x - p.centre[0] : -(z - p.centre[1]);
+      const libre = (p.ouvertures ?? []).some(
+        (o) => o.mur === m.cote && basOuverture(o) === 0 && u > o.centre - o.largeur / 2 + rayon && u < o.centre + o.largeur / 2 - rayon,
+      );
+      if (!libre) return m.id;
+    }
+  }
+  return null;
 };

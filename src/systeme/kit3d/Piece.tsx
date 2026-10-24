@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { DoubleSide } from "three";
 import { Vec3 } from "../maths";
-import { CoteMur, DonneesPiece, EPAISSEUR_MUR, mursPiece, Ouverture } from "./decor";
+import { basOuverture, CoteMur, DonneesPiece, EPAISSEUR_MUR, mursPiece, Ouverture } from "./decor";
 import { Material } from "three";
 import { useMateriauPBR } from "./pbr";
 import { repeter, texture, TypeTexture } from "./textures";
@@ -28,7 +28,7 @@ const segmentsMur = (longueur: number, hauteur: number, ouvertures: Ouverture[])
   for (const o of [...ouvertures].sort((a, b) => a.centre - b.centre)) {
     const a = o.centre - o.largeur / 2;
     const b = o.centre + o.largeur / 2;
-    const bas = o.type === "porte" ? 0 : o.bas ?? 0.9;
+    const bas = basOuverture(o);
     if (a > curseur) res.push({ u0: curseur, u1: a, y0: 0, y1: hauteur });
     if (bas > 0) res.push({ u0: a, u1: b, y0: 0, y1: Math.min(bas, hauteur) });
     if (bas + o.hauteur < hauteur) res.push({ u0: a, u1: b, y0: bas + o.hauteur, y1: hauteur });
@@ -166,7 +166,7 @@ export const Piece: React.FC<{ piece: DonneesPiece }> = ({ piece: p }) => {
                   </mesh>
                 ))}
             {ouvertures.map((o, i) => {
-              const bas = o.type === "porte" ? 0 : o.bas ?? 0.9;
+              const bas = basOuverture(o);
               if (bas >= hauteur || o.type === "passage") return null;
               return (
                 <group key={`o${i}`} position={[o.centre, bas + o.hauteur / 2, 0]}>

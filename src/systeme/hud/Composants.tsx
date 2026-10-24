@@ -210,33 +210,78 @@ const Trait: React.FC<{ de: { x: number; y: number }; vers: { x: number; y: numb
   </svg>
 );
 
-// ---------- Carton de fin « PARTIE N » ----------
+// ---------- Carton de fin « PARTIE N » (+ choix A/B en grand pour faire commenter) ----------
 export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
   const entree = interpolate(f - e.fDe, [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  return (
-    <div style={boite(r, { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 22, fontFamily: POLICE_TEXTE, color: "white", textAlign: "center" })}>
-      <div style={{ background: JAUNE, color: "#141414", fontWeight: 900, fontSize: 40, padding: "8px 26px", borderRadius: 10, transform: `scale(${0.8 + 0.2 * entree})` }}>
-        PARTIE {e.partie}
-      </div>
-      <div style={{ fontWeight: 900, fontSize: 76, lineHeight: 1.02, textTransform: "uppercase", textShadow: "0 6px 24px rgba(0,0,0,0.8)" }}>{e.titre}</div>
-      {e.question && (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, marginTop: 4 }}>
-          <div style={{ fontWeight: 900, fontSize: 40, textShadow: "0 4px 16px rgba(0,0,0,0.8)" }}>{e.question}</div>
-          {e.choix && (
-            <div style={{ display: "flex", gap: 16 }}>
-              {e.choix.map((c, i) => (
-                <div key={i} style={{ fontWeight: 800, fontSize: 28, padding: "10px 18px", borderRadius: 12, background: PANNEAU, border: `2px solid ${JAUNE}` }}>
-                  <span style={{ color: JAUNE, marginRight: 8 }}>{i === 0 ? "A" : "B"}</span>
-                  {c}
-                </div>
-              ))}
-            </div>
-          )}
-          <div style={{ fontWeight: 600, fontSize: 24, opacity: 0.85 }}>Réponds en commentaire · réponse dans la partie {e.partie}</div>
+  if (!e.question) {
+    return (
+      <div style={boite(r, { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 22, fontFamily: POLICE_TEXTE, color: "white", textAlign: "center" })}>
+        <div style={{ background: JAUNE, color: "#141414", fontWeight: 900, fontSize: 40, padding: "8px 26px", borderRadius: 10, transform: `scale(${0.8 + 0.2 * entree})` }}>
+          PARTIE {e.partie}
         </div>
-      )}
-      <div style={{ fontWeight: 800, fontSize: 34, marginTop: 10, padding: "14px 26px", border: "2px solid rgba(255,255,255,0.6)", borderRadius: 999 }}>ABONNE-TOI POUR LA SUITE</div>
-      <div style={{ fontWeight: 600, fontSize: 22, opacity: 0.75 }}>Fiction · conseils vérifiés le {e.verifie}</div>
-    </div>
+        <div style={{ fontWeight: 900, fontSize: 76, lineHeight: 1.02, textTransform: "uppercase", textShadow: "0 6px 24px rgba(0,0,0,0.8)" }}>{e.titre}</div>
+        <div style={{ fontWeight: 800, fontSize: 34, marginTop: 10, padding: "14px 26px", border: "2px solid rgba(255,255,255,0.6)", borderRadius: 999 }}>ABONNE-TOI POUR LA SUITE</div>
+        <div style={{ fontWeight: 600, fontSize: 22, opacity: 0.75 }}>Fiction · conseils vérifiés le {e.verifie}</div>
+      </div>
+    );
+  }
+  // Version « choix » : fond assombri, grosse question, deux grands blocs A / B qui pulsent à tour de rôle
+  const couleurs = [JAUNE, ROUGE];
+  const pulse = (i: number) => {
+    const k = Math.max(0, f - e.fDe - 14 - i * 6);
+    const actif = Math.floor(k / 24) % 2 === i ? 1 : 0;
+    return 1 + 0.045 * actif * Math.sin(((k % 24) / 24) * Math.PI);
+  };
+  const glisse = (i: number) => interpolate(f - e.fDe, [6 + i * 5, 16 + i * 5], [120, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const apparait = (i: number) => interpolate(f - e.fDe, [6 + i * 5, 16 + i * 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return (
+    <>
+      <div style={{ position: "absolute", inset: 0, background: `rgba(5,6,8,${0.62 * entree})` }} />
+      <div style={boite(r, { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 30, fontFamily: POLICE_TEXTE, color: "white", textAlign: "center" })}>
+        <div style={{ background: JAUNE, color: "#141414", fontWeight: 900, fontSize: 38, padding: "8px 26px", borderRadius: 10, transform: `scale(${0.8 + 0.2 * entree})` }}>
+          PARTIE {e.partie} · {e.titre.toUpperCase()}
+        </div>
+        <div style={{ fontWeight: 900, fontSize: 88, lineHeight: 1.0, textTransform: "uppercase", textShadow: "0 8px 30px rgba(0,0,0,0.9)", opacity: entree }}>{e.question}</div>
+        {(e.choix ?? []).map((c, i) => (
+          <div
+            key={i}
+            style={{
+              width: 780,
+              minHeight: 200,
+              boxSizing: "border-box",
+              display: "flex",
+              alignItems: "center",
+              gap: 30,
+              padding: "20px 30px",
+              borderRadius: 28,
+              background: "rgba(14,16,20,0.92)",
+              border: `6px solid ${couleurs[i]}`,
+              boxShadow: `0 0 ${30 * (pulse(i) - 1) * 22}px ${couleurs[i]}, 0 14px 40px rgba(0,0,0,0.7)`,
+              transform: `translateX(${i === 0 ? -glisse(i) : glisse(i)}px) scale(${pulse(i)})`,
+              opacity: apparait(i),
+            }}
+          >
+            <div
+              style={{
+                width: 150,
+                height: 150,
+                flexShrink: 0,
+                borderRadius: 24,
+                background: couleurs[i],
+                color: "#141414",
+                fontWeight: 900,
+                fontSize: 120,
+                lineHeight: "150px",
+              }}
+            >
+              {i === 0 ? "A" : "B"}
+            </div>
+            <div style={{ fontWeight: 900, fontSize: 54, lineHeight: 1.05, textTransform: "uppercase", textAlign: "left" }}>{c}</div>
+          </div>
+        ))}
+        <div style={{ fontWeight: 900, fontSize: 46, color: JAUNE, textShadow: "0 4px 16px rgba(0,0,0,0.9)", opacity: apparait(2) }}>RÉPONDS A OU B EN COMMENTAIRE ↓</div>
+        <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>Réponse dans la partie {e.partie} · Fiction · conseils vérifiés le {e.verifie}</div>
+      </div>
+    </>
   );
 };

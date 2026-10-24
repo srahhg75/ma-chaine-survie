@@ -20,7 +20,8 @@ export type Son = {
   pitch?: string; // note ou Hz
 };
 
-export type TypeAmbiance = "vent" | "drone" | "coeur" | "ville";
+// vent/drone/coeur/ville = fonds ; eau/glouglou/grincement = bruitages d'objets synthétisés (tools/mix.py)
+export type TypeAmbiance = "vent" | "drone" | "coeur" | "ville" | "eau" | "glouglou" | "grincement";
 export type Ambiance = { type: TypeAmbiance; de: Ancre; a: Ancre; niveau?: number; fondu?: number; bpm?: number };
 
 // Ce qui ne doit jamais être caché par le HUD ni les sous-titres

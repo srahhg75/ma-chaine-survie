@@ -29,8 +29,8 @@ ECART_MIN_DB = 12.0  # fond au moins 12 dB sous la voix pendant chaque mot (règ
 
 # Niveaux de base (dBFS crête pour les bruitages, RMS pour les ambiances), ajustés par `gain` / `niveau`
 BASE_SFX_DB = -12.0
-BASE_PAS_DB = -30.0
-BASE_AMB_DB = {"vent": -36.0, "drone": -37.0, "coeur": -30.0, "ville": -38.0}
+BASE_PAS_DB = -24.0  # pas audibles (retour du 24/10 : « pas assez de bruitages »)
+BASE_AMB_DB = {"vent": -36.0, "drone": -37.0, "coeur": -30.0, "ville": -38.0, "eau": -27.0, "glouglou": -27.0, "grincement": -29.0}
 
 
 def db(x: float) -> float:
@@ -109,7 +109,76 @@ def amb_ville(n: int, g: str) -> np.ndarray:
     return normaliser_rms(grondement * lfo(n, 0.03, g, 0.4), 0)
 
 
-AMBIANCES = {"vent": amb_vent, "drone": amb_drone, "coeur": amb_coeur, "ville": amb_ville}
+# ---------------- Bruitages d'objets synthétisés (absents de la banque earshot) ----------------
+def _bulles_aigues(n: int, g: str) -> np.ndarray:
+    """Nuage dense de petites bulles aiguës (gouttes qui éclatent) + souffle d'eau."""
+    r = rng(g)
+    x = passe_bande(r.standard_normal(n), 900, 6000, 2) * 0.35 * lfo(n, 9.0, g + "f", 0.4)
+    t = 0.0
+    while t < n / SR:
+        d = int((0.008 + 0.018 * r.random()) * SR)
+        f0 = 700 + 2600 * r.random() ** 1.5
+        tt = np.arange(d) / SR
+        goutte = np.sin(2 * np.pi * (f0 * tt + f0 * 2.5 * tt * tt / (2 * d / SR))) * np.exp(-tt * 260)
+        i = int(t * SR)
+        j = min(n, i + d)
+        x[i:j] += goutte[: j - i] * (0.3 + r.random())
+        t += r.exponential(1 / 220)
+    return normaliser_rms(x, 0)
+
+
+def amb_glouglou(n: int, g: str) -> np.ndarray:
+    """Gargouillis (vidange, tuyau qui se vide) : bulles = petits glissandos montants amortis."""
+    r = rng(g)
+    x = passe_bas(r.standard_normal(n), 300) * 0.25
+    t = 0.0
+    while t < n / SR:
+        d = int((0.03 + 0.05 * r.random()) * SR)
+        f0 = 180 + 260 * r.random()
+        tt = np.arange(d) / SR
+        bulle = np.sin(2 * np.pi * (f0 * tt + (f0 * 1.8) * tt * tt / (2 * d / SR))) * np.exp(-tt * 45)
+        i = int(t * SR)
+        j = min(n, i + d)
+        x[i:j] += bulle[: j - i] * (0.5 + r.random())
+        t += 0.04 + 0.12 * r.random()
+    return normaliser_rms(x, 0)
+
+
+def amb_grincement(n: int, g: str) -> np.ndarray:
+    """Grincement de porte : frottement « colle-glisse » dont la cadence glisse (130 -> 260 Hz) et qui excite
+    les résonances du bois ; irrégulier (accroches) comme une vraie charnière."""
+    r = rng(g)
+    t = np.arange(n) / SR
+    glisse = 130 + 130 * (0.5 - 0.5 * np.cos(np.pi * np.clip(t / max(t[-1], 1e-3), 0, 1)))
+    taux = glisse * (1 + 0.08 * passe_bas(r.standard_normal(n), 30) / 0.05) * lfo(n, 4.0, g + "a", 0.15)
+    phase = np.cumsum(np.maximum(taux, 20)) / SR
+    impulsions = (np.diff(np.floor(phase), prepend=0) > 0).astype(float) * (0.6 + 0.4 * r.random(n))
+    x = np.zeros(n)
+    for f, a, bw in ((520, 1.0, 90), (1150, 0.7, 140), (2300, 0.35, 220), (3400, 0.2, 300)):
+        rr = np.exp(-np.pi * bw / SR)
+        x += a * signal.lfilter([1.0 - rr], [1, -2 * rr * np.cos(2 * np.pi * f / SR), rr * rr], impulsions)
+    x *= np.clip(lfo(n, 2.3, g + "e", 0.6), 0.2, None)
+    return normaliser_rms(passe_bande(x, 250, 5000), 0)
+
+
+def _turbulence(n: int, g: str) -> np.ndarray:
+    """Bruit d'eau turbulente : trois bandes modulées par des enveloppes aléatoires rapides."""
+    r = rng(g)
+    x = np.zeros(n)
+    for f1, f2, a in ((300, 900, 0.6), (900, 2200, 1.0), (2200, 5000, 0.7)):
+        env = np.abs(passe_bas(r.standard_normal(n), 35))
+        env /= env.std() + 1e-9
+        x += a * passe_bande(r.standard_normal(n), f1, f2, 2) * (0.4 + env)
+    return normaliser_rms(x, 0)
+
+
+def amb_eau(n: int, g: str) -> np.ndarray:
+    """Filet d'eau qui coule (robinet, seau qu'on vide) : turbulence + gargouillis + bulles aiguës.
+    Choisi à l'oreille d'earshot (`earshot rank` : meilleure des 5 variantes pour « water running from a tap »)."""
+    return normaliser_rms(_turbulence(n, g) + 0.5 * amb_glouglou(n, g + "g") + 0.4 * _bulles_aigues(n, g + "b"), 0)
+
+
+AMBIANCES = {"vent": amb_vent, "drone": amb_drone, "coeur": amb_coeur, "ville": amb_ville, "eau": amb_eau, "glouglou": amb_glouglou, "grincement": amb_grincement}
 
 
 def pas(n: int, temps: list[float], g: str) -> np.ndarray:

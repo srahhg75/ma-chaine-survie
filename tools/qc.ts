@@ -9,7 +9,7 @@ import {
   RYTHME_MAX_S, VITESSE_MAX_M_S, ZONE_SURE,
 } from "../src/systeme/format";
 import { boiteHud, boiteSousTitre, chevauche, contient, Rect } from "../src/systeme/hud/boites";
-import { boiteMeuble, dansBoite, obstacles, segmentTraverse } from "../src/systeme/kit3d/decor";
+import { boiteMeuble, dansBoite, murTraverse, obstacles, segmentTraverse } from "../src/systeme/kit3d/decor";
 import { angleEntre, distance, soustrait, Vec3 } from "../src/systeme/maths";
 import { blocsSousTitres } from "../src/systeme/mots";
 import { CORPS, hauteurBassin } from "../src/systeme/personnage/poses";
@@ -178,6 +178,9 @@ for (let f = 0; f < r.duree; f++) {
     if (avant && distance(avant, e.position) * fps > VITESSE_MAX_M_S * 1.05) signaler("Téléportation", `${p.id} se déplace à plus de ${VITESSE_MAX_M_S} m/s`, f);
     posPrec.set(p.id, e.position);
     for (const m of meubles) if (dansBoite([e.position[0], 0.3, e.position[2]], m, -0.05)) signaler("Personnage dans un meuble", `${p.id} traverse ${m.id}`, f, false);
+    // Murs pleins OU arasés : on ne passe que par une porte ou un passage (jamais par-dessus une cloison)
+    const mur = p.fantome ? null : murTraverse(donnees.decor, e.position[0], e.position[2]);
+    if (mur) signaler("Personnage à travers un mur", `${p.id} traverse ${mur} (pas de porte ni de passage à cet endroit)`, f);
   }
 
   // Sujets : visibles, jamais cachés par le HUD ou les sous-titres

@@ -27,7 +27,7 @@ export const P = {
   vanne: [3.68, 0.24, -1.12] as Vec3,
   vidange: [3.98, 0.3, -1.04] as Vec3,
   seau: [3.98, 0, -0.78] as Vec3,
-  carafe: [2.66, 0.9, -1.28] as Vec3, // posée sur le lavabo
+  carafe: [3.62, 0, -0.12] as Vec3, // par terre, à côté du seau (on filtre l'eau vidée dans le seau)
   radiateur: [-3.4, 0.12, -1.5] as Vec3,
   purge: [-2.98, 0.6, -1.45] as Vec3,
   porte: [5.0, 0, -1.6] as Vec3, // porte d'entrée (mur nord de l'entrée), charnière à l'ouest
@@ -39,7 +39,7 @@ const INES = "ines";
 export const donnees: DonneesEpisode = {
   id: "001-h72",
   titre: "H+72 — Partie 1 : Neuf litres",
-  queue: 4.0,
+  queue: 5.5,
   post: { bloom: 0.32, seuilBloom: 0.92, vignette: 0.36, grain: 0.03, exposition: 1.35 },
   decor: {
     pieces: [
@@ -51,7 +51,7 @@ export const donnees: DonneesEpisode = {
         sol: "parquet",
         murs: "peint",
         pbr: { sol: "herringbone_parquet", murs: "painted_plaster_wall", teinteMurs: "#d9c7ae", motifSol: 1.4, motifMurs: 1.6, gainSol: 1.3, gainMurs: 1.2 },
-        ouvertures: [{ mur: "nord", type: "fenetre", centre: 0, largeur: 1.4, hauteur: 1.25, bas: 0.95 }],
+        ouvertures: [{ mur: "nord", type: "fenetre", centre: 0, largeur: 1.4, hauteur: 1.25, bas: 0.95 }, { mur: "est", type: "passage", centre: 0, largeur: 1.0, hauteur: 2.05 }],
       },
       {
         id: "cuisine",
@@ -63,7 +63,7 @@ export const donnees: DonneesEpisode = {
         couleurSol: "#b7ada0",
         devant: ["sud", "est", "ouest"],
         pbr: { murs: "painted_plaster_wall", teinteMurs: "#e6dccb", motifMurs: 1.6, gainMurs: 1.25 },
-        ouvertures: [{ mur: "nord", type: "fenetre", centre: 0.55, largeur: 1.0, hauteur: 0.85, bas: 1.32 }],
+        ouvertures: [{ mur: "nord", type: "fenetre", centre: 0.55, largeur: 1.0, hauteur: 0.85, bas: 1.32 }, { mur: "ouest", type: "passage", centre: 0, largeur: 1.0, hauteur: 2.05 }, { mur: "est", type: "passage", centre: 0.25, largeur: 1.0, hauteur: 2.05 }],
       },
       {
         id: "salle-eau",
@@ -75,6 +75,8 @@ export const donnees: DonneesEpisode = {
         couleurSol: "#8f9aa0",
         couleurMurs: "#dfe3e2",
         devant: ["sud", "est", "ouest"],
+        // passages vers la cuisine et vers l'entrée (on ne marche jamais à travers une cloison, même arasée)
+        ouvertures: [{ mur: "ouest", type: "passage", centre: 0.25, largeur: 1.0, hauteur: 2.05 }, { mur: "est", type: "passage", centre: 0.2, largeur: 1.0, hauteur: 2.05 }],
       },
       {
         id: "entree",
@@ -86,7 +88,7 @@ export const donnees: DonneesEpisode = {
         devant: ["sud", "est", "ouest"],
         pbr: { sol: "herringbone_parquet", murs: "painted_plaster_wall", teinteMurs: "#cdbfa8", motifSol: 1.4, motifMurs: 1.6, gainSol: 1.2, gainMurs: 1.15 },
         // la porte d'entrée (battant, verrou) est dessinée dans Episode.tsx
-        ouvertures: [{ mur: "nord", type: "passage", centre: 0, largeur: 0.92, hauteur: 2.05 }],
+        ouvertures: [{ mur: "nord", type: "passage", centre: 0, largeur: 0.92, hauteur: 2.05 }, { mur: "ouest", type: "passage", centre: 0.2, largeur: 1.0, hauteur: 2.05 }],
       },
     ],
     meubles: [
@@ -101,6 +103,9 @@ export const donnees: DonneesEpisode = {
       { type: "chaise", position: P.wc, id: "wc", invisible: true },
       { type: "chaise", position: [P.lavabo[0], 0, -1.42], id: "lavabo", invisible: true },
       { type: "placard", position: P.placard, id: "placard", echelle: 0.85, invisible: true },
+      // seau et carafe (dessinés dans Episode.tsx) : obstacles pour les contrôles
+      { type: "jerrican", position: [P.seau[0], 0, P.seau[2]], id: "seau", echelle: 0.8, invisible: true },
+      { type: "bouteille", position: [P.carafe[0], 0, P.carafe[2]], id: "carafe", echelle: 1.6, invisible: true },
       // salon
       { type: "radiateur", position: P.radiateur, id: "radiateur" },
       { type: "etagere", position: [-4.55, 0, -1.42], id: "bibliotheque", invisible: true },
@@ -120,7 +125,7 @@ export const donnees: DonneesEpisode = {
         { a: "t1:manger", position: [-0.72, 0, -0.92], orientation: 205, vitesse: 1.0 },
         { a: "t1a:peches", position: [-0.3, 0, -0.12], orientation: 0, vitesse: 1.1 },
         // t2 : la salle d'eau
-        { a: "t2a", position: [1.82, 0, -0.38], orientation: 95, vitesse: 1.3 },
+        { a: "t2a", position: [1.97, 0, -0.38], orientation: 95, vitesse: 1.3 },
         { a: "t2c:lave", position: [2.62, 0, -0.78], orientation: 0, vitesse: 1.0 },
         { a: "t2d:sale", position: [2.62, 0, -1.04], orientation: -90, vitesse: 0.9 },
         // t3 : le ballon
@@ -137,8 +142,8 @@ export const donnees: DonneesEpisode = {
         { a: "garde:part", position: [4.95, 0, -1.2], orientation: 180, vitesse: 1.0 },
         { a: "garde:de", position: [4.95, 0, -2.3], orientation: 180, vitesse: 1.3 },
         // retour (J4, 6 h) : elle rentre avec sa lampe, va au placard
-        { a: "ouvre", position: [4.85, 0, -0.95], orientation: 200, vitesse: 1.1 },
-        { a: "ouvre:bas", position: [3.42, 0, -0.62], orientation: 165, vitesse: 1.5 },
+        { a: "ouvre", position: [4.6, 0, -0.5], orientation: 220, vitesse: 1.36 },
+        { a: "ouvre:bas", position: [3.42, 0, -0.62], orientation: 165, vitesse: 1.4, chemin: [[4.3, 0, -0.2]] },
         { a: "vide:quelqu'un", position: [3.45, 0, -0.6], orientation: 70, vitesse: 0.5 },
       ],
       poses: [
@@ -207,7 +212,7 @@ export const donnees: DonneesEpisode = {
     { a: "t3:ballon", ...plan([3.85, 1.0, -1.3], { azimut: 12, elevation: 15, distance: 3.3, fov: 40, y: 660, x: 560 }), deplacement: 1.7 },
     // les 4 gestes, en un seul plan tenu (étiquettes numérotées)
     { a: "t3b", ...plan([3.28, 0.8, -1.1], { azimut: 10, elevation: 14, distance: 4.6, fov: 46, y: 620, x: 520 }), deplacement: 0.5 },
-    { a: "t3f:cafe", ...plan([2.66, 1.1, -1.28], { azimut: -20, elevation: 25, distance: 1.5, fov: 36, y: 640 }), deplacement: 0.5 },
+    { a: "t3f:cafe", ...plan([3.75, 0.2, -0.4], { azimut: 35, elevation: 32, distance: 1.9, fov: 36, y: 640 }), deplacement: 0.5 },
     // ERREUR — les radiateurs du salon (fantôme)
     { a: "erreur:jamais", ...plan([-2.95, 0.45, -1.25], { azimut: -20, elevation: 20, distance: 3.3, fov: 40, y: 640, x: 470 }), deplacement: 1.3 },
     { a: "erreur2:circuit", ...plan([-3.4, 0.45, -1.45], { azimut: -15, elevation: 15, distance: 2.1, fov: 36, y: 640 }), deplacement: 0.8 },
@@ -231,6 +236,7 @@ export const donnees: DonneesEpisode = {
   hud: [
     {
       type: "montre",
+      a: "fin+0.7", // la montre laisse la place au carton de fin
       jour: 3,
       heure: "07:40",
       temperature: 13,
@@ -259,6 +265,7 @@ export const donnees: DonneesEpisode = {
     { type: "carton", de: "fin+0.7", partie: 2, titre: "Le froid", verifie: "23/10/2026", question: "Qui a vidé le ballon ?", choix: ["Un voisin", "Quelqu'un qui a sa clé"] },
   ],
   sons: [
+    // ---- transitions et moments forts (sombres) ----
     { a: "hook:air", id: "impact/deep", gain: -12 },
     { a: "hook2:neuf", id: "cut_hit/sub", gain: -10 },
     { a: "recap1:sans", id: "whoosh_big/swell", gain: -7 },
@@ -266,34 +273,78 @@ export const donnees: DonneesEpisode = {
     { a: "recap3:sixieme", id: "whoosh_big/deep", gain: -9 },
     { a: "promesse2:deux", id: "reverse_swell/dark", gain: -9 },
     { a: "t1", id: "pro_impact/short", gain: -10 },
-    { a: "t1c:chips", id: "whoosh_fast/heavy", gain: -10 },
+    { a: "t1:manger", id: "whoosh_fast/heavy", gain: -12 },
     { a: "t2", id: "pro_impact/short", gain: -10 },
     { a: "t2a:neuf", id: "whoosh_big/thump_deep", gain: -8 },
-    { a: "t2e:coup", id: "whoosh_big/gust", gain: -12 },
     { a: "t3", id: "pro_impact/short", gain: -10 },
-    { a: "t3b:coupe", id: "knock/desk", gain: -12 },
-    { a: "t3c:ferme", id: "knock/wood", gain: -14 },
+    { a: "erreur-0.07", id: "cut_hit/sub", gain: -10 },
     { a: "erreur:jamais", id: "pro_impact/deep", gain: -6 },
     { a: "erreur4:potable", id: "downlifter/sub_sink", gain: -9 },
-    { a: "garde:heures+0.2", id: "knock/desk", gain: -10 },
+    { a: "calme2-0.21", id: "cut_hit/punch", gain: -13 },
     { a: "retour", id: "whoosh_big/thump_deep", gain: -7 },
     { a: "rien:goutte", id: "riser/dark", gain: -14 },
-    { a: "chute:vide", id: "knock/wood", gain: -8, pitch: "C4" },
     { a: "chute:vide.fin", id: "pro_sub_drop/low", gain: -3 },
-    { a: "fin:cle", id: "pro_impact/deep", gain: -4 },
-    { a: "fin+0.7", id: "impact/deep", gain: -8 },
-    // transitions de caméra sans son repérées par earshot (timeline --video) sur la vidéo finale
-    { a: "t1:manger", id: "whoosh_fast/heavy", gain: -12 },
-    { a: "erreur-0.07", id: "cut_hit/sub", gain: -10 },
-    { a: "calme2-0.21", id: "cut_hit/punch", gain: -13 },
     { a: "vide", id: "whoosh_fast/heavy", gain: -11 },
     { a: "fin-0.19", id: "cut_hit/sub", gain: -10 },
+    { a: "fin:cle", id: "pro_impact/deep", gain: -4 },
+    { a: "fin+0.7", id: "impact/deep", gain: -8 },
+    // ---- bruitages d'objets (foley) ----
+    // hook : le robinet tousse et crache des gouttes
+    { a: "hook:robinet", id: "drip/drop", gain: -9 },
+    { a: "hook:crachait", id: "drip/bubble", gain: -9 },
+    { a: "hook:air", id: "drip/drop", gain: -11 },
+    // tactique 1 : les conserves posées sur la table, une par mot ; la boîte qu'on ouvre ; les fantômes balayés
+    { a: "t1:mouille", id: "tap/table", gain: -10 },
+    { a: "t1a:peches", id: "tap/table", gain: -6 },
+    { a: "t1a:ananas", id: "tap/table", gain: -6 },
+    { a: "t1a:haricots", id: "tap/table", gain: -6 },
+    { a: "t1b", id: "toggle/latch", gain: -8 },
+    { a: "t1b+0.3", id: "pro_tap/soft", gain: -9 },
+    { a: "t1c:chips", id: "swish/soft", gain: -9 },
+    { a: "t1c:saucisson", id: "swish/soft", gain: -9 },
+    { a: "t1d", id: "swish/soft", gain: -10 },
+    // tactique 2 : l'abattant qu'on relève
+    { a: "t2d:cuvette-0.05", id: "pro_tap/knock", gain: -8 },
+    // tactique 3 : disjoncteur, vanne, robinet, gouttes du filtre
+    { a: "t3b:coupe", id: "fit/snap/switch_flip", gain: -6 },
+    { a: "t3c:ferme", id: "pro_tap/knock", gain: -8 },
+    { a: "t3d:ouvre", id: "toggle/latch", gain: -9 },
+    { a: "t3e:vide", id: "pro_tap/knock", gain: -9 },
+    { a: "t3f:filtre", id: "drip/drop", gain: -9 },
+    { a: "t3f:cafe+0.35", id: "drip/drop", gain: -10 },
+    { a: "t3f:retient", id: "drip/drop", gain: -10 },
+    { a: "t3f:depots", id: "drip/drop", gain: -11 },
+    // la porte d'entrée : elle se ferme, le verrou claque ; au retour, la lampe s'allume
+    { a: "garde:heures+0.1", id: "pro_impact/short", gain: -9 },
+    { a: "garde:heures+0.3", id: "toggle/latch", gain: -6 },
+    { a: "retour:matin-0.2", id: "toggle/latch", gain: -9 },
+    { a: "retour:matin", id: "click/thock", gain: -9 },
+    // twist : le robinet de vidange qu'on tourne (rien ne sort), on tape sur le ballon (creux), la clé
+    { a: "ouvre:bas", id: "pro_tap/knock", gain: -7 },
+    { a: "chute:vide", id: "knock/wood", gain: -6, pitch: "C4" },
+    { a: "chute:vide+0.3", id: "knock/wood", gain: -8, pitch: "C4" },
+    { a: "fin:seule", id: "tap/knuckle", gain: -10 },
   ],
   ambiances: [
-    { type: "drone", de: 0, a: "fin+4", niveau: -1 },
-    { type: "vent", de: 0, a: "fin+4", niveau: -2, fondu: 1.5 },
+    { type: "drone", de: 0, a: "fin+5.5", niveau: -1 },
+    { type: "vent", de: 0, a: "fin+5.5", niveau: -2, fondu: 1.5 },
     { type: "ville", de: "recap1", a: "recap3", niveau: 0, fondu: 0.6 },
-    { type: "coeur", de: "rien", a: "fin+4", niveau: -1, bpm: 84 },
+    { type: "coeur", de: "rien", a: "fin+5.5", niveau: -1, bpm: 84 },
+    // eau (synthétisée dans tools/mix.py) : robinet qui tousse, chasse fantôme, toilette, bassine versée, vidange, purge
+    { type: "eau", de: 0, a: "hook:air.fin", niveau: -2, fondu: 0.3 },
+    { type: "glouglou", de: "hook:crachait", a: "hook2", niveau: -4, fondu: 0.2 },
+    { type: "glouglou", de: "t2a:chasse", a: "t2b:coup", niveau: 0, fondu: 0.2 },
+    { type: "eau", de: "t2a:chasse", a: "t2a.fin", niveau: -4, fondu: 0.2 },
+    { type: "eau", de: "t2c:lave", a: "t2c.fin", niveau: -8, fondu: 0.3 },
+    { type: "eau", de: "t2e", a: "t2e:vide", niveau: 1, fondu: 0.2 },
+    { type: "glouglou", de: "t2e:coup", a: "t2e.fin+0.4", niveau: -1, fondu: 0.3 },
+    { type: "eau", de: "t3e:vide+0.2", a: "t3f.fin", niveau: -3, fondu: 0.3 },
+    { type: "eau", de: "erreur3", a: "erreur3.fin", niveau: -5, fondu: 0.3 },
+    // portes qui grincent : placard du ballon, porte d'entrée (sortie et retour), placard rouvert
+    { type: "grincement", de: "t3", a: "t3:ballon", niveau: -3, fondu: 0.1 },
+    { type: "grincement", de: "garde-0.3", a: "garde:part", niveau: -3, fondu: 0.1 },
+    { type: "grincement", de: "retour:matin", a: "retour:matin+0.4", niveau: -2, fondu: 0.1 },
+    { type: "grincement", de: "ouvre:robinet", a: "ouvre:robinet+0.45", niveau: -4, fondu: 0.1 },
   ],
   sujets: [
     { de: 0, a: "hook2", point: P.robinetCuisine },
@@ -306,7 +357,7 @@ export const donnees: DonneesEpisode = {
     { de: "t2c:lave", a: "t2d", personnage: INES, hauteur: 0.75 },
     { de: "t3:ballon", a: "t3f", point: P.ballon },
     { de: "t3b", a: "t3f", personnage: INES, hauteur: 0.75 },
-    { de: "t3f:cafe", a: "erreur:jamais-1.3", point: [2.66, 1.1, -1.28] },
+    { de: "t3f:cafe", a: "erreur:jamais-1.3", point: [3.62, 0.25, -0.12] },
     { de: "erreur:jamais", a: "erreur2:circuit-0.8", point: [-2.95, 0.45, -1.25] },
     { de: "erreur2:circuit", a: "erreur3:pleine-0.6", point: [-3.4, 0.45, -1.45] },
     { de: "erreur3:pleine", a: "erreur4:bouillie-0.9", point: [-2.95, 0.18, -1.3] },

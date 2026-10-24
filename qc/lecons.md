@@ -22,8 +22,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 ### Son
 - La voix passe avant tout : bruitages et ambiances ≥ 10 dB sous la voix.
 - Master à −14 LUFS, true peak < −1 dB.
-- Sons uniquement sombres (souffles graves, impacts lourds, grincements) : jamais de carillon, ding,
-  shimmer ou « pop » mignon.
+- Sons sombres (souffles graves, impacts lourds, grincements) + bruitages réalistes d'objets (foley) : jamais de
+  carillon, ding, shimmer, « pop » mignon ni son d'interface.
 
 ### Mise en scène
 - Pas de téléportation : un personnage marche jusqu'à sa nouvelle place.
@@ -160,3 +160,23 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   finale : 71 % des coupes avec un son à 100 ms). Règle : lancer `earshot timeline <vidéo> --video <vidéo>` sur la
   vidéo finale ; chaque coupe « without a hit » reçoit un son court (`cut_hit/…`) calé sur l'instant MESURÉ
   (ancre « phrase±décalage ») ; refaire seulement le mixage et remplacer le son (`ffmpeg -c:v copy`), sans re-rendre.
+- **2026-10-24 — RETOUR : WC dont la cuvette n'est pas « soulevée » au moment de verser** (pas d'abattant, rien ne
+  s'ouvrait). Règle : un objet qu'on utilise doit faire son geste d'usage AVANT l'action (abattant relevé, couvercle
+  ôté, porte ouverte) ; chaque meuble « actif » d'un épisode a ses pièces mobiles (abattant, porte, robinet).
+- **2026-10-24 — RETOUR : un mur restait dans l'ouverture de la porte d'entrée** (bug du moteur : un « passage »
+  recevait une allège de 0,9 m comme une fenêtre). Règle : seule une fenêtre a une allège (`basOuverture` dans
+  `kit3d/decor.ts`) ; une porte ou un passage part du sol. Vérifier en image fixe chaque porte qu'un personnage franchit.
+- **2026-10-24 — RETOUR : Inès passait à travers les murs** (allège de la porte d'entrée + cloisons arasées entre les
+  pièces, sans passage). `tools/qc.ts` bloque désormais « Personnage à travers un mur » (murs pleins ET arasés, sauf
+  porte/passage) ; toute cloison entre deux pièces reçoit un `passage` et les trajets passent par lui (`chemin`).
+- **2026-10-24 — RETOUR : le filtre à café « sautait » du lavabo à un pot par terre** (objets d'une même action à
+  deux endroits). Règle : continuité des objets : les objets d'une même action restent groupés au même endroit d'un
+  plan à l'autre (seau + carafe + filtre ensemble), et un objet ne change jamais de place sans qu'on le voie déplacé.
+- **2026-10-24 — RETOUR : choix A/B de fin trop petit, pas assez marquant.** Règle : le carton de fin à choix occupe
+  tout l'écran (fond assombri, question ≥ 80 px, deux blocs A/B de 780 px de large avec lettre de 120 px qui pulsent),
+  visible au moins 4 s (`queue` ≥ 5) ; la montre disparaît quand il apparaît.
+- **2026-10-24 — RETOUR : pas assez de bruitages** (28 sons, aucun son d'objet). Règle : chaque geste visible a son son
+  (objet posé, interrupteur, robinet, porte, verrou, gouttes, eau qui coule) : viser ≥ 1 bruitage toutes les 2 s en
+  plus des transitions ; sons d'objets réalistes autorisés (`tools/sons_autorises.json`) et sons d'eau / grincement
+  synthétisés par `tools/mix.py` (types d'ambiance `eau`, `glouglou`, `grincement`), validés à l'oreille d'earshot
+  (`earshot match` / `earshot rank`) ; pas à −24 dB.

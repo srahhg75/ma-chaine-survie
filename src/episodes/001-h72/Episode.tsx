@@ -270,7 +270,7 @@ const Boite: React.FC<{ position: Vec3; couleur: string; etiquette?: string; ech
 );
 
 // ---------- Salle d'eau ----------
-const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number }> = ({ eauCuvette, tourbillon, t }) => (
+const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number; abattant: number }> = ({ eauCuvette, tourbillon, t, abattant }) => (
   <group position={[P.wc[0], 0, P.wc[2]]}>
     {/* pied + cuvette */}
     <mesh position={[0, 0.17, 0.05]} castShadow>
@@ -286,6 +286,13 @@ const WC: React.FC<{ eauCuvette: number; tourbillon: number; t: number }> = ({ e
       <torusGeometry args={[0.16, 0.025, 10, 32]} />
       <meshStandardMaterial color="#e9e6dd" roughness={0.35} />
     </mesh>
+    {/* abattant, charnière à l'arrière : fermé à plat, relevé contre le réservoir avant de verser */}
+    <group position={[0, 0.445, -0.14]} rotation={[-1.75 * abattant, 0, 0]}>
+      <mesh position={[0, 0, 0.22]} scale={[1, 1, 1.25]}>
+        <cylinderGeometry args={[0.18, 0.18, 0.025, 32]} />
+        <meshStandardMaterial color="#f4f3ee" roughness={0.3} />
+      </mesh>
+    </group>
     {/* eau de la cuvette (niveau qui baisse quand on « tire la chasse » au seau) */}
     <mesh position={[0, 0.3 + 0.06 * eauCuvette, 0.08]} rotation={[-Math.PI / 2, tourbillon * t * 6, 0]} scale={[1, 1.2, 1]}>
       <circleGeometry args={[0.1 + 0.03 * eauCuvette, 24]} />
@@ -617,8 +624,9 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
   const eauCuvette = 1 - 0.7 * vidangeCuvette + 0.7 * entre("t2e:vide", 0.8);
 
   // Tactique 3 : placard, disjoncteur, vanne, robinet d'eau chaude, vidange, seau, carafe
-  // ouverte à la tactique 3, refermée par Inès avant de partir (calme), rouverte au retour (ouvre)
-  const portePlacard = t < a("calme") - 0.6 ? entre("t3", "t3:ballon") : t < a("ouvre") - 0.5 ? 1 - entre("calme-0.6", 0.5) : entre("ouvre-0.5", "ouvre:robinet");
+  // ouverte à la tactique 3, refermée pendant l'erreur (hors champ, avant qu'Inès ne passe à côté), rouverte au retour
+  // une fois qu'Inès est passée (la porte ne balaie jamais l'endroit où elle se trouve)
+  const portePlacard = t < a("erreur4") ? entre("t3", "t3:ballon") : t < a("ouvre:robinet") ? 1 - entre("erreur4", 0.5) : entre("ouvre:robinet", 0.45);
   const coupe = entre("t3b:coupe", 0.25);
   const vanne = entre("t3c:ferme", 0.4);
   const robinetChaud = entre("t3d:ouvre", 0.4) * (1 - entre("t3f", 0.4));
@@ -683,7 +691,7 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       </Fantome>
 
       {/* ---- salle d'eau ---- */}
-      <WC eauCuvette={eauCuvette} tourbillon={vidangeCuvette} t={t} />
+      <WC eauCuvette={eauCuvette} tourbillon={vidangeCuvette} t={t} abattant={entre("t2d:cuvette-0.6", "t2d:cuvette")} />
       <Fantome opacite={fantomeChasse}>
         {/* la chasse tirée : 9 litres qui tourbillonnent et partent */}
         <group position={[P.wc[0], 0.33, P.wc[2] + 0.08]} rotation={[0, t * 8, 0]}>

@@ -1,0 +1,57 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/a82e38925943.wav: drip/bubble seed 1: 0.289 s, onset 0.000 s, peak at 0.015 s, end 0.241 s, -1.0 dBFS, -15.1 LUFS momentary max; checks: clean",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/a82e38925943.wav",
+ "meta": {
+  "id": "drip/bubble",
+  "seed": 1,
+  "sr": 48000,
+  "onset_s": 0.0,
+  "peak_s": 0.0145,
+  "end_s": 0.241,
+  "dur_s": 0.2894,
+  "peak_db": -1.0,
+  "lufs_m_max": -15.05,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "drip/bubble: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -125.0,
+    "ring_z": 4.0,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 6.25,
+    "t40_ms": 190.0,
+    "crest_db": 7.2,
+    "res_db": 9.7,
+    "res_hz": 449,
+    "peak_dbfs": -1.0,
+    "live_ms": 187.0
+   },
+   "glide": {
+    "tonal_share": 1.0,
+    "rise_st": 0.2,
+    "from_s": 0.051,
+    "to_s": 0.066
+   },
+   "layers": {
+    "attacks": [
+     0.022
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "drip",
+    "sound": "drip/bubble"
+   }
+  }
+ }
+}

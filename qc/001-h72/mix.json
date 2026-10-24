@@ -8,9 +8,19 @@
    "baisse_db": 5.1
   },
   {
+   "mot": "litres.",
+   "t": 28.08,
+   "baisse_db": 7.0
+  },
+  {
+   "mot": "la",
+   "t": 35.82,
+   "baisse_db": 3.0
+  },
+  {
    "mot": "potable.",
    "t": 58.08,
-   "baisse_db": 3.8
+   "baisse_db": 4.5
   },
   {
    "mot": "vide.",
@@ -20,7 +30,7 @@
   {
    "mot": "seule",
    "t": 73.89,
-   "baisse_db": 3.1
+   "baisse_db": 3.2
   },
   {
    "mot": "clé.",
@@ -39,24 +49,47 @@
   "whoosh_fast/heavy",
   "pro_impact/short",
   "whoosh_big/thump_deep",
-  "whoosh_big/gust",
   "pro_impact/short",
-  "knock/desk",
-  "knock/wood",
+  "cut_hit/sub",
   "pro_impact/deep",
   "downlifter/sub_sink",
-  "knock/desk",
+  "cut_hit/punch",
   "whoosh_big/thump_deep",
   "riser/dark",
-  "knock/wood",
   "pro_sub_drop/low",
-  "pro_impact/deep",
-  "impact/deep",
   "whoosh_fast/heavy",
   "cut_hit/sub",
-  "cut_hit/punch",
-  "whoosh_fast/heavy",
-  "cut_hit/sub"
+  "pro_impact/deep",
+  "impact/deep",
+  "drip/drop",
+  "drip/bubble",
+  "drip/drop",
+  "tap/table",
+  "tap/table",
+  "tap/table",
+  "tap/table",
+  "toggle/latch",
+  "pro_tap/soft",
+  "swish/soft",
+  "swish/soft",
+  "swish/soft",
+  "pro_tap/knock",
+  "fit/snap/switch_flip",
+  "pro_tap/knock",
+  "toggle/latch",
+  "pro_tap/knock",
+  "drip/drop",
+  "drip/drop",
+  "drip/drop",
+  "drip/drop",
+  "pro_impact/short",
+  "toggle/latch",
+  "toggle/latch",
+  "click/thock",
+  "pro_tap/knock",
+  "knock/wood",
+  "knock/wood",
+  "tap/knuckle"
  ],
- "pas": 50
+ "pas": 52
 }
