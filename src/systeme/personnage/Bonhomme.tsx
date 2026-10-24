@@ -112,7 +112,8 @@ const Carre: React.FC<{ c: Couleurs }> = ({ c }) => {
 // virgule au coin extérieur. `ouverture` écrase l'œil verticalement (clignement, regard fatigué, yeux écarquillés).
 const IRIS = { anneau: "#3a1a08", iris: "#8a4718", clair: "#d08a3a", pupille: "#120703", cils: "#24140e" };
 const OeilManga: React.FC<{ k: number; ouverture: number }> = ({ k, ouverture }) => (
-  <group scale={[1, Math.max(0.06, ouverture), 1]}>
+  // aplati en profondeur (0,72) : vu de trois-quarts, l'œil suit la courbe de la tête au lieu d'en dépasser
+  <group scale={[1, Math.max(0.06, ouverture), 0.72]}>
     <mesh scale={[1, 1.3, 0.5]}>
       <sphereGeometry args={[0.068, 28, 20]} />
       <meshStandardMaterial color="#fbf8f2" roughness={0.35} />
@@ -192,7 +193,7 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante; visage?: Vis
           <Mat c={c.peau} r={0.7} />
         </mesh>
         {[-1, 1].map((k) => (
-          <group key={k} position={[k * (manga ? 0.09 : 0.095), 0.0, R * (manga ? 0.885 : 0.9)]} rotation={[0, k * 0.28, 0]}>
+          <group key={k} position={[k * (manga ? 0.088 : 0.095), 0.0, R * (manga ? 0.872 : 0.9)]} rotation={[0, k * (manga ? 0.36 : 0.28), 0]}>
             {manga ? (
               <OeilManga k={k} ouverture={v.yeux} />
             ) : (

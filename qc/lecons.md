@@ -192,7 +192,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — RETOUR : yeux d'Inès « tout noirs », visage sans expression.** Règle : l'héroïne a des yeux manga
   (blanc, iris coloré à anneau sombre, pupille, deux reflets, cils, virgule au coin) ; chaque personnage principal a
   des `expressions` calées sur le texte (neutre, sourire, décidé, inquiet, peur, surpris, triste, fatigue, soulagé)
-  et cligne des yeux tout seul ; valider tout visage sur le banc `npx tsx tools/images.ts banc-visages 0.5 1.5`.
+  et cligne des yeux tout seul ; valider tout visage sur le banc `npx tsx tools/images.ts banc-visages 0.5 1.5`
+  (face ET trois-quarts : un œil ne doit jamais dépasser du contour de la tête) puis en gros plan pleine résolution.
 - **2026-10-24 — RETOUR : étagère + bougie collées à la porte d'entrée** (elles encombraient les gros plans du verrou
   et de la porte). Règle : les abords d'une porte qu'on filme restent dégagés (aucun meuble ni objet à moins de 0,6 m
   du chambranle) ; une lumière d'ambiance peut rester, sans objet visible.
