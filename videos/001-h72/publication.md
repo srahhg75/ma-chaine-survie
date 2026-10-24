@@ -1,6 +1,6 @@
 # Publication — H+72 · Partie 1 « Neuf litres »
 
-Fichier vidéo : `videos/001-h72/final.mp4` (1080×1920, 30 i/s, 78,4 s, master −14,0 LUFS, true peak −1,4 dB).
+Fichier vidéo : `videos/001-h72/final.mp4` (1080×1920, 30 i/s, 79,9 s, master −14,0 LUFS, true peak −1,35 dB).
 
 ## Légende (à coller telle quelle)
 

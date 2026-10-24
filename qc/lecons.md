@@ -141,7 +141,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — RÉCIDIVE `pkill -f` : ma propre commande tuée** (motif « final.sh » écrit dans la commande).
   Règle (rappel) : `pgrep -a` dans une commande, puis `kill <pid>` dans une AUTRE commande ; jamais `pkill -f`.
   Même piège pour une boucle d'attente `while pgrep -f "motif"` lancée par `bash -c '…motif…'` : elle se trouve
-  elle-même et attend sans fin. Attendre un PID précis (`while kill -0 <pid>`) ou enchaîner les commandes avec `;`.
+  elle-même et attend sans fin (vu deux fois, y compris dans un Monitor « until ! pgrep -f final.sh »). Attendre un
+  PID précis (`while kill -0 <pid>`), un fichier témoin (ligne « FIN » du journal) ou enchaîner avec `;`.
 - **2026-10-24 — Défaut vu sur la VIDÉO FINALE (gros plan « Leur jus hydrate ») : boîte « ouverte » qui restait
   fermée (le corps plein cachait le sirop) et bougie au premier plan qui mangeait l'image.** Ni le contrôle auto ni
   la planche toutes les 2 s ne l'avaient montré (plan de 1 s). Règle : une image fixe pour CHAQUE plan tenu
