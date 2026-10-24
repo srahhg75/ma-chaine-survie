@@ -1,7 +1,7 @@
 import React from "react";
 import { Vec3 } from "../maths";
 import { LampeTorche } from "../kit3d/Lumieres";
-import { CORPS, hauteurBassin, Pose } from "./poses";
+import { CORPS, hauteurBassin, Pose, Visage, visageDePose } from "./poses";
 
 /*
  * « Le bonhomme » : personnage original de la chaîne. Grosse tête, petit corps trapu, grands yeux noirs
@@ -108,9 +108,82 @@ const Carre: React.FC<{ c: Couleurs }> = ({ c }) => {
   );
 };
 
-const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante }> = ({ pose, c, variante }) => {
+// Œil « manga » de l'héroïne : blanc, grand iris coloré à anneau sombre, pupille, deux reflets, cils et petite
+// virgule au coin extérieur. `ouverture` écrase l'œil verticalement (clignement, regard fatigué, yeux écarquillés).
+const IRIS = { anneau: "#3a1a08", iris: "#8a4718", clair: "#d08a3a", pupille: "#120703", cils: "#24140e" };
+const OeilManga: React.FC<{ k: number; ouverture: number }> = ({ k, ouverture }) => (
+  <group scale={[1, Math.max(0.06, ouverture), 1]}>
+    <mesh scale={[1, 1.3, 0.5]}>
+      <sphereGeometry args={[0.068, 28, 20]} />
+      <meshStandardMaterial color="#fbf8f2" roughness={0.35} />
+    </mesh>
+    {/* iris : anneau sombre, couleur, dégradé plus clair vers le bas */}
+    <mesh position={[-k * 0.004, -0.006, 0.022]} scale={[0.86, 1.12, 0.4]}>
+      <sphereGeometry args={[0.052, 24, 18]} />
+      <meshStandardMaterial color={IRIS.anneau} roughness={0.3} />
+    </mesh>
+    <mesh position={[-k * 0.004, -0.008, 0.03]} scale={[0.8, 1.05, 0.36]}>
+      <sphereGeometry args={[0.047, 24, 18]} />
+      <meshStandardMaterial color={IRIS.iris} roughness={0.25} emissive={IRIS.iris} emissiveIntensity={0.25} />
+    </mesh>
+    <mesh position={[-k * 0.004, -0.024, 0.038]} scale={[0.75, 0.55, 0.3]}>
+      <sphereGeometry args={[0.04, 20, 14]} />
+      <meshStandardMaterial color={IRIS.clair} roughness={0.25} emissive={IRIS.clair} emissiveIntensity={0.35} />
+    </mesh>
+    <mesh position={[-k * 0.004, -0.004, 0.044]} scale={[0.75, 1.05, 0.3]}>
+      <sphereGeometry args={[0.022, 16, 12]} />
+      <meshStandardMaterial color={IRIS.pupille} roughness={0.2} />
+    </mesh>
+    {/* reflets */}
+    <mesh position={[0.017, 0.03, 0.05]}>
+      <sphereGeometry args={[0.017, 12, 10]} />
+      <meshBasicMaterial color="#ffffff" toneMapped={false} />
+    </mesh>
+    <mesh position={[-0.016, -0.034, 0.05]}>
+      <sphereGeometry args={[0.008, 10, 8]} />
+      <meshBasicMaterial color="#ffffff" toneMapped={false} />
+    </mesh>
+    {/* trait de paupière supérieure + cils, virgule au coin extérieur */}
+    <mesh position={[0, 0.002, 0.012]} scale={[1.06, 1.32, 1]}>
+      <torusGeometry args={[0.068, 0.0085, 8, 28, Math.PI]} />
+      <meshStandardMaterial color={IRIS.cils} roughness={0.6} />
+    </mesh>
+    <mesh position={[k * 0.074, 0.05, 0.016]} rotation={[0, 0, k * 0.55]}>
+      <boxGeometry args={[0.036, 0.011, 0.01]} />
+      <meshStandardMaterial color={IRIS.cils} roughness={0.6} />
+    </mesh>
+  </group>
+);
+
+// Bouche selon l'expression : arc (sourire ∪ / moue ∩) ou bouche ouverte (surprise, peur)
+const Bouche: React.FC<{ v: Visage; R: number }> = ({ v, R }) => {
+  if (v.bouche > 0.08)
+    return (
+      <group position={[0, -0.135, R * 0.9]}>
+        <mesh scale={[1 + 0.25 * Math.max(0, v.sourire), 0.35 + 0.95 * v.bouche, 0.35]}>
+          <sphereGeometry args={[0.03, 16, 12]} />
+          <meshStandardMaterial color="#4a1a18" roughness={0.6} />
+        </mesh>
+        <mesh position={[0, -0.012 * v.bouche, 0.004]} scale={[0.75, 0.3 * v.bouche + 0.05, 0.3]}>
+          <sphereGeometry args={[0.026, 12, 10]} />
+          <meshStandardMaterial color="#c4605a" roughness={0.6} />
+        </mesh>
+      </group>
+    );
+  const m = v.sourire;
+  return (
+    <mesh position={[0, -0.13 + (m < 0 ? -0.012 : 0), R * 0.9]} rotation={[0, 0, m >= 0 ? Math.PI : 0]} scale={[1 + 0.25 * Math.abs(m), 0.12 + 0.55 * Math.abs(m), 1]}>
+      <torusGeometry args={[0.035, 0.008, 6, 16, Math.PI]} />
+      <Mat c="#5a2a24" />
+    </mesh>
+  );
+};
+
+const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante; visage?: Visage }> = ({ pose, c, variante, visage }) => {
   const R = CORPS.rayonTete;
-  const s = pose.sourcils;
+  const v = visage ?? visageDePose(pose);
+  const s = v.sourcils;
+  const manga = variante === "heroine";
   return (
     <group rotation={[rad(pose.tete[0]), rad(pose.tete[1]), 0]}>
       <group position={[0, R + CORPS.cou, 0]}>
@@ -118,20 +191,26 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante }> = ({ pose,
           <sphereGeometry args={[R, 32, 24]} />
           <Mat c={c.peau} r={0.7} />
         </mesh>
-        {/* grands yeux noirs brillants */}
         {[-1, 1].map((k) => (
-          <group key={k} position={[k * 0.095, 0.0, R * 0.9]} rotation={[0, k * 0.28, 0]}>
-            <mesh scale={[1, 1.28, 0.55]}>
-              <sphereGeometry args={[0.068, 24, 18]} />
-              <meshPhysicalMaterial color="#050506" roughness={0.12} clearcoat={1} clearcoatRoughness={0.05} />
-            </mesh>
-            <mesh position={[0.022, 0.03, 0.03]}>
-              <sphereGeometry args={[0.016, 10, 10]} />
-              <meshBasicMaterial color="#ffffff" toneMapped={false} />
-            </mesh>
-            {/* sourcil : inquiet (s<0) = bout intérieur relevé, décidé (s>0) = bout intérieur baissé */}
-            <mesh position={[0, 0.098, 0.035]} rotation={[0, 0, k * rad(18 * s)]}>
-              <boxGeometry args={[0.09, 0.018, 0.02]} />
+          <group key={k} position={[k * (manga ? 0.09 : 0.095), 0.0, R * (manga ? 0.885 : 0.9)]} rotation={[0, k * 0.28, 0]}>
+            {manga ? (
+              <OeilManga k={k} ouverture={v.yeux} />
+            ) : (
+              <group scale={[1, Math.max(0.06, v.yeux), 1]}>
+                {/* grands yeux noirs brillants (bonhomme) */}
+                <mesh scale={[1, 1.28, 0.55]}>
+                  <sphereGeometry args={[0.068, 24, 18]} />
+                  <meshPhysicalMaterial color="#050506" roughness={0.12} clearcoat={1} clearcoatRoughness={0.05} />
+                </mesh>
+                <mesh position={[0.022, 0.03, 0.03]}>
+                  <sphereGeometry args={[0.016, 10, 10]} />
+                  <meshBasicMaterial color="#ffffff" toneMapped={false} />
+                </mesh>
+              </group>
+            )}
+            {/* sourcil : inquiet (s<0) = bout intérieur relevé, décidé (s>0) = bout intérieur baissé ; il monte quand on écarquille */}
+            <mesh position={[0, 0.102 + 0.03 * Math.max(0, v.yeux - 1) - 0.008 * Math.max(0, s), 0.035]} rotation={[0, 0, k * rad(18 * s)]}>
+              <boxGeometry args={[0.09, manga ? 0.014 : 0.018, 0.02]} />
               <Mat c="#3a2a1e" />
             </mesh>
           </group>
@@ -160,10 +239,7 @@ const Tete: React.FC<{ pose: Pose; c: Couleurs; variante: Variante }> = ({ pose,
           <sphereGeometry args={[0.028, 12, 12]} />
           <Mat c="#d99c74" r={0.7} />
         </mesh>
-        <mesh position={[0, -0.13, R * 0.9]} rotation={[0, 0, Math.PI]} scale={[1, s < 0 ? 0.6 : 0.35, 1]}>
-          <torusGeometry args={[0.035, 0.008, 6, 16, Math.PI]} />
-          <Mat c="#5a2a24" />
-        </mesh>
+        <Bouche v={v} R={R} />
         {variante === "heroine" && <Carre c={c} />}
         {/* chapka (signe distinctif du bonhomme) : calotte moutarde, bordure fourrée, oreillettes rabattues */}
         <group visible={variante === "bonhomme"}>
@@ -209,7 +285,8 @@ export const Bonhomme: React.FC<{
   taille?: number;
   couleurs?: Partial<Couleurs>;
   variante?: Variante;
-}> = ({ pose, position, orientation, lampe = false, puissanceLampe = 1, taille = 1, couleurs, variante = "bonhomme" }) => {
+  visage?: Visage; // expression du visage (sinon déduite des sourcils de la pose)
+}> = ({ pose, position, orientation, lampe = false, puissanceLampe = 1, taille = 1, couleurs, variante = "bonhomme", visage }) => {
   const c = { ...(variante === "heroine" ? COULEURS_HEROINE : COULEURS_DEFAUT), ...couleurs };
   const yBassin = hauteurBassin(pose);
   return (
@@ -257,7 +334,7 @@ export const Bonhomme: React.FC<{
             <Bras cote={-1} epaule={pose.epauleD} coude={pose.coudeD} c={c} lampe={lampe} puissanceLampe={puissanceLampe} />
           </group>
           <group position={[0, CORPS.bassinVersEpaules, 0]}>
-            <Tete pose={pose} c={c} variante={variante} />
+            <Tete pose={pose} c={c} variante={variante} visage={visage} />
           </group>
         </group>
       </group>

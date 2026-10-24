@@ -737,8 +737,9 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
 
       {/* ---- entrée ---- */}
       <PorteEntree ouverture={ouverture} verrou={verrou} cle={cle} />
-      <Arrondi taille={[0.5, 0.04, 0.25]} position={[5.38, 0.9, -1.4]} rayon={0.01} couleur="#6b4c33" />
-      <Bougie position={[5.5, 0.92, -1.4]} allumee={!nuit} graine="bougieEntree" puissance={0.8} />
+      {/* (plus d'étagère ni de bougie près de la porte : retour du 24/10) ; lumière douce de l'entrée, sans objet visible,
+          venue de la lanterne de la salle d'eau voisine */}
+      {!nuit && <pointLight position={[4.4, 1.6, -0.2]} intensity={0.9} distance={3.2} color="#ffd6a0" />}
       {/* palier : veilleuse de secours (à piles) au-dessus de l'escalier, lumière limitée au palier */}
       <mesh position={[5.9, 2.1, -3.15]}>
         <boxGeometry args={[0.3, 0.1, 0.05]} />

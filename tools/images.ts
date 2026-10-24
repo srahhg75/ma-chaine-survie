@@ -21,7 +21,7 @@ if (!id || !instants.length) throw new Error('Usage : npx tsx tools/images.ts <Ã
 
 const fichierDonnees = path.resolve("src/episodes", id, "donnees.ts");
 const compositionId =
-  id === "banc-essai" ? "banc-essai" : existsSync(fichierDonnees) ? idComposition(((await import(pathToFileURL(fichierDonnees).href)) as { donnees: DonneesEpisode }).donnees) : `ep${id}`;
+  id.startsWith("banc-") ? id : existsSync(fichierDonnees) ? idComposition(((await import(pathToFileURL(fichierDonnees).href)) as { donnees: DonneesEpisode }).donnees) : `ep${id}`;
 const mots = path.resolve("public", id, "mots.json");
 const alignement: Alignement | null = existsSync(mots) ? JSON.parse(readFileSync(mots, "utf-8")) : null;
 const enSecondes = (a: string) => (/^-?\d+(\.\d+)?$/.test(a) ? parseFloat(a) : alignement ? instant(a, alignement) : NaN);

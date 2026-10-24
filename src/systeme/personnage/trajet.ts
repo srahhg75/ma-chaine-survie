@@ -1,7 +1,8 @@
 import { Alignement } from "../mots";
 import { clamp, distance, lerp, tresDoux, Vec3 } from "../maths";
 import { Ancre, image } from "../timeline";
-import { FOULEE, melanger, NomPose, Pose, poseMarche, POSES } from "./poses";
+import { EXPRESSIONS, FOULEE, melanger, melangerVisage, NomExpression, NomPose, Pose, poseMarche, POSES, Visage, visageDePose } from "./poses";
+import { bruit } from "../maths";
 
 /*
  * Déplacements et poses d'un personnage, en données. Pas de téléportation : pour changer de place,
@@ -15,12 +16,14 @@ export type CleTrajet = {
   vitesse?: number; // m/s, défaut 1,0
 };
 export type ClePose = { a: Ancre; pose: Exclude<NomPose, "marche">; transition?: number };
+export type CleExpression = { a: Ancre; expression: NomExpression; transition?: number };
 
 export type DonneesPersonnage = {
   id: string;
   depart: { position: Vec3; orientation: number };
   trajet?: CleTrajet[];
   poses?: ClePose[];
+  expressions?: CleExpression[]; // visage calé sur les mots (sinon : déduit des sourcils de la pose)
   lampe?: { de: Ancre; a?: Ancre; puissance?: number }; // lampe torche allumée dans la main droite (puissance 1 par défaut)
   taille?: number; // défaut 1
   variante?: "bonhomme" | "heroine"; // personnage de la chaîne ou héroïne
@@ -34,13 +37,14 @@ export type PersonnageResolu = {
   depart: { position: Vec3; orientation: number };
   segments: Segment[];
   poses: { f: number; pose: Exclude<NomPose, "marche">; transition: number }[];
+  expressions: { f: number; expression: NomExpression; transition: number }[];
   lampe?: [number, number];
   puissanceLampe: number;
   variante: "bonhomme" | "heroine";
   fantome?: [number, number];
 };
 
-export type EtatPersonnage = { position: Vec3; orientation: number; pose: Pose; marche: boolean; lampe: boolean; vitesse: number };
+export type EtatPersonnage = { position: Vec3; orientation: number; pose: Pose; marche: boolean; lampe: boolean; vitesse: number; visage: Visage };
 
 const cap = (a: Vec3, b: Vec3) => (Math.atan2(b[0] - a[0], b[2] - a[2]) * 180) / Math.PI;
 const angleVers = (de: number, vers: number, t: number) => {
@@ -69,6 +73,7 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
     depart: p.depart,
     segments,
     poses: (p.poses ?? []).map((k) => ({ f: image(k.a, al, fps), pose: k.pose, transition: k.transition ?? 0.35 })),
+    expressions: (p.expressions ?? []).map((k) => ({ f: image(k.a, al, fps), expression: k.expression, transition: k.transition ?? 0.3 })),
     lampe: p.lampe ? [image(p.lampe.de, al, fps), p.lampe.a !== undefined ? image(p.lampe.a, al, fps) : Infinity] : undefined,
     puissanceLampe: p.lampe?.puissance ?? 1,
     fantome: p.fantome ? [image(p.fantome.de, al, fps), image(p.fantome.a, al, fps)] : undefined,
@@ -110,6 +115,24 @@ const poseStatique = (r: PersonnageResolu, frame: number, fps: number): Pose => 
   return melanger(prec, POSES[k.pose], tresDoux((frame - k.f) / Math.max(1, k.transition * fps)));
 };
 
+// Visage courant : expressions de l'épisode (fondu entre deux clés) + clignements automatiques (toutes les 2,5 à 4,5 s)
+const visageCourant = (r: PersonnageResolu, pose: Pose, frame: number, fps: number): Visage => {
+  const actives = r.expressions.filter((k) => k.f <= frame);
+  let v: Visage;
+  if (!r.expressions.length) v = visageDePose(pose);
+  else if (!actives.length) v = EXPRESSIONS.neutre;
+  else {
+    const k = actives[actives.length - 1];
+    const prec = actives.length > 1 ? EXPRESSIONS[actives[actives.length - 2].expression] : EXPRESSIONS.neutre;
+    v = melangerVisage(prec, EXPRESSIONS[k.expression], tresDoux((frame - k.f) / Math.max(1, k.transition * fps)));
+  }
+  const t = frame / fps;
+  const periode = 3.5 + 1.0 * bruit(`${r.id}cligne`, Math.floor(t / 3.5));
+  const phase = (t + 0.7 * (r.id.length % 5)) % periode;
+  const fermeture = phase < 0.07 ? phase / 0.07 : phase < 0.16 ? 1 - (phase - 0.07) / 0.09 : 0;
+  return { ...v, yeux: v.yeux * (1 - 0.94 * clamp(fermeture)) };
+};
+
 export const etatPersonnage = (r: PersonnageResolu, frame: number, fps: number): EtatPersonnage => {
   const lampe = !!r.lampe && frame >= r.lampe[0] && frame < r.lampe[1];
   let pos = r.depart.position;
@@ -131,7 +154,8 @@ export const etatPersonnage = (r: PersonnageResolu, frame: number, fps: number):
       const marche = poseMarche((d / FOULEE / r.taille) % 1);
       const lampePose = lampe ? { epauleD: POSES.lampe.epauleD, coudeD: POSES.lampe.coudeD } : {};
       const vit = (avancement(Math.min(1, t + 1 / (duree * fps)), duree) - u) * s.longueur * fps;
-      return { position: p, orientation: o, pose: { ...melanger(base, marche, clamp(fondu)), ...lampePose }, marche: true, lampe, vitesse: vit };
+      const poseM = { ...melanger(base, marche, clamp(fondu)), ...lampePose };
+      return { position: p, orientation: o, pose: poseM, marche: true, lampe, vitesse: vit, visage: visageCourant(r, poseM, frame, fps) };
     }
     distanceCumulee += s.longueur;
     pos = s.points[s.points.length - 1];
@@ -140,7 +164,8 @@ export const etatPersonnage = (r: PersonnageResolu, frame: number, fps: number):
     orient = angleVers(dirFin, fin, tresDoux((frame - s.fArrivee) / (0.4 * fps)));
   }
   const pose = poseStatique(r, frame, fps);
-  return { position: pos, orientation: orient, pose: lampe ? { ...pose, epauleD: POSES.lampe.epauleD, coudeD: POSES.lampe.coudeD } : pose, marche: false, lampe, vitesse: 0 };
+  const poseF = lampe ? { ...pose, epauleD: POSES.lampe.epauleD, coudeD: POSES.lampe.coudeD } : pose;
+  return { position: pos, orientation: orient, pose: poseF, marche: false, lampe, vitesse: 0, visage: visageCourant(r, poseF, frame, fps) };
 };
 
 // Instants où un pied touche le sol (pour les bruits de pas du mixage)

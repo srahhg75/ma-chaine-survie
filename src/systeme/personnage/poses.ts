@@ -100,3 +100,28 @@ export const hauteurBassin = (p: Pose) => {
     -(CORPS.cuisse * Math.cos(rad(h[0])) + CORPS.tibia * Math.cos(rad(h[0] - g))) * Math.cos(rad(h[1]));
   return -Math.min(cheville(p.hancheG, p.genouG), cheville(p.hancheD, p.genouD)) + CORPS.semelle;
 };
+
+// ---------- Expressions du visage (indépendantes de la pose du corps) ----------
+// sourcils : -1 inquiet … +1 décidé ; sourire : -1 bouche triste … +1 grand sourire ; bouche : 0 fermée … 1 grande ouverte ;
+// yeux : 0 fermés … 1 normaux … 1,3 écarquillés
+export type Visage = { sourcils: number; sourire: number; bouche: number; yeux: number };
+export type NomExpression = "neutre" | "sourire" | "decide" | "inquiet" | "peur" | "surpris" | "triste" | "fatigue" | "soulage";
+export const EXPRESSIONS: Record<NomExpression, Visage> = {
+  neutre: { sourcils: 0, sourire: 0.15, bouche: 0, yeux: 1 },
+  sourire: { sourcils: 0.15, sourire: 0.95, bouche: 0, yeux: 0.82 },
+  decide: { sourcils: 0.85, sourire: 0.25, bouche: 0, yeux: 0.88 },
+  inquiet: { sourcils: -0.9, sourire: -0.5, bouche: 0, yeux: 1.08 },
+  peur: { sourcils: -1, sourire: -0.6, bouche: 0.75, yeux: 1.28 },
+  surpris: { sourcils: -0.35, sourire: 0, bouche: 0.6, yeux: 1.25 },
+  triste: { sourcils: -1, sourire: -0.85, bouche: 0, yeux: 0.72 },
+  fatigue: { sourcils: -0.25, sourire: -0.1, bouche: 0, yeux: 0.5 },
+  soulage: { sourcils: -0.3, sourire: 0.65, bouche: 0, yeux: 0.7 },
+};
+// Visage par défaut quand l'épisode ne donne pas d'expression : déduit des sourcils de la pose
+export const visageDePose = (p: Pose): Visage => ({ sourcils: p.sourcils, sourire: p.sourcils < -0.2 ? -0.4 : 0.15, bouche: 0, yeux: 1 });
+export const melangerVisage = (a: Visage, b: Visage, t: number): Visage => ({
+  sourcils: mix(a.sourcils, b.sourcils, t),
+  sourire: mix(a.sourire, b.sourire, t),
+  bouche: mix(a.bouche, b.bouche, t),
+  yeux: mix(a.yeux, b.yeux, t),
+});
