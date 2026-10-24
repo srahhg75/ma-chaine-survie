@@ -122,7 +122,7 @@ export const donnees: DonneesEpisode = {
         // t2 : la salle d'eau
         { a: "t2a", position: [1.82, 0, -0.38], orientation: 95, vitesse: 1.3 },
         { a: "t2c:lave", position: [2.62, 0, -0.78], orientation: 0, vitesse: 1.0 },
-        { a: "t2d:sale", position: [2.17, 0, -0.74], orientation: 180, vitesse: 0.9 },
+        { a: "t2d:sale", position: [2.62, 0, -1.04], orientation: -90, vitesse: 0.9 },
         // t3 : le ballon
         { a: "t3:ballon", position: [3.42, 0, -0.55], orientation: 170, vitesse: 1.1 },
         // les 4 gestes : elle se place à côté de chaque élément (jamais devant ce que montre l'étiquette)
@@ -197,12 +197,12 @@ export const donnees: DonneesEpisode = {
     // TACTIQUE 1 — l'étagère des conserves
     { a: "t1:mouille", ...plan([-0.95, 0.9, -1.1], { azimut: 24, elevation: 16, distance: 3.6, fov: 40, y: 660 }), deplacement: 1.0 },
     { a: "t1a:sirop", ...plan([-0.3, 0.95, -0.12], { azimut: 14, elevation: 22, distance: 3.9, fov: 40, y: 650 }), deplacement: 0.9 },
-    { a: "t1b:jus", ...plan([-0.12, 0.84, 0.33], { azimut: 22, elevation: 34, distance: 1.35, fov: 34, y: 640 }), deplacement: 0.7 },
+    { a: "t1b:jus", ...plan([-0.12, 0.84, 0.33], { azimut: -28, elevation: 38, distance: 1.25, fov: 34, y: 640 }), deplacement: 0.7 },
     { a: "t1c:chips", ...plan([-0.3, 0.85, 0.15], { azimut: 14, elevation: 26, distance: 3.6, fov: 38, y: 640 }), deplacement: 0.7 },
     // TACTIQUE 2 — les toilettes
     { a: "t2:toilettes", ...plan([2.15, 0.8, -0.85], { azimut: 0, elevation: 22, distance: 4.0, fov: 42, y: 660, x: 560 }), deplacement: 1.3 },
     { a: "t2c:lave", ...plan([2.62, 0.72, -0.62], { azimut: 10, elevation: 20, distance: 3.7, fov: 40, y: 660 }), deplacement: 0.9 },
-    { a: "t2d:cuvette", ...plan([2.17, 0.72, -1.0], { azimut: -60, elevation: 22, distance: 2.9, fov: 40, y: 640 }), deplacement: 1.3 },
+    { a: "t2d:cuvette", ...plan([2.35, 0.7, -1.1], { azimut: -12, elevation: 26, distance: 4.0, fov: 40, y: 660 }), deplacement: 1.0 },
     // TACTIQUE 3 — le ballon (placard qui s'ouvre)
     { a: "t3:ballon", ...plan([3.85, 1.0, -1.3], { azimut: 12, elevation: 15, distance: 3.3, fov: 40, y: 660, x: 560 }), deplacement: 1.7 },
     // les 4 gestes, en un seul plan tenu (étiquettes numérotées)

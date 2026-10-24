@@ -13,7 +13,7 @@ npm ci
 echo "== Environnement Python principal (.venv)"
 [ -d .venv ] || "$PY" -m venv .venv
 .venv/bin/python -m pip install -q --upgrade pip
-.venv/bin/python -m pip install -q numpy scipy soundfile pyloudnorm vosk
+.venv/bin/python -m pip install -q numpy scipy soundfile pyloudnorm vosk fonttools brotli
 
 echo "== Modèle Vosk français"
 if [ ! -d tools/models/vosk-model-small-fr-0.22 ]; then

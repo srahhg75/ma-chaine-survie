@@ -1,6 +1,6 @@
 # Publication — H+72 · Partie 1 « Neuf litres »
 
-Fichier vidéo : `videos/001-h72/final.mp4` (1080×1920, 30 i/s, ≈ 78 s, master −14 LUFS).
+Fichier vidéo : `videos/001-h72/final.mp4` (1080×1920, 30 i/s, 78,4 s, master −14,0 LUFS, true peak −1,4 dB).
 
 ## Légende (à coller telle quelle)
 
@@ -35,10 +35,11 @@ Alors : A (un voisin) ou B (quelqu'un qui a sa clé) ? Réponse dans la partie 2
 
 ## Image de couverture conseillée
 
-- **Image :** à **13,5 s** — Inès de face, les 6 bouteilles d'eau sur la table, la bougie allumée
-  (fichier prêt : `videos/001-h72/couverture.jpg`).
-- **Texte de couverture** (à ajouter dans TikTok, police « Classique », en haut, 2 lignes) :
-  **« IL LUI RESTE 9 LITRES »** / **« H+72 · PARTIE 1 »**.
+- **Fichier prêt : `videos/001-h72/couverture.jpg`** — Inès de face à 14 s, les 6 bouteilles, la bougie,
+  avec le titre **« IL LUI RESTE / 9 LITRES / H+72 · PARTIE 1 »** déjà incrusté (placé sous son visage, dans la zone
+  visible de la grille du profil).
+- Dans TikTok : « Modifier la couverture » → **« Importer »** (TikTok Studio sur ordinateur, ou appli si l'option est
+  proposée). Sinon, choisir l'image à **14 s** et écrire le même texte avec l'outil texte de TikTok.
 - Pourquoi : un visage + un chiffre précis + l'objet du danger (l'eau) se lisent en vignette sur la grille du profil.
 
 ## Réglages de publication

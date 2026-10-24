@@ -1,5 +1,6 @@
 // Aide au cadrage : pour chaque plan tenu, position à l'écran (pixels 1080×1920) des personnages (pieds, tête)
-// et des points nommés. Usage : npx tsx tools/cadrage.ts 001-h72 [point=x,y,z …]
+// et des points nommés. Usage : npx tsx tools/cadrage.ts 001-h72
+//   --milieux : affiche seulement l'instant (s) du milieu de chaque plan tenu (une image fixe par plan)
 import { chargerEpisode } from "./charger";
 import { etatCamera, project } from "../src/systeme/camera";
 import { CORPS, hauteurBassin } from "../src/systeme/personnage/poses";
@@ -12,9 +13,11 @@ const fps = r.fps;
 const mod = await import(`../src/episodes/${id}/donnees.ts`);
 const points: Record<string, Vec3> = mod.P ?? {};
 const fmt = (p: { x: number; y: number; devant: boolean }) => (p.devant ? `${Math.round(p.x)},${Math.round(p.y)}` : "derrière");
+const milieux = process.argv.includes("--milieux");
 r.camera.forEach((c, i) => {
   const fin = i + 1 < r.camera.length ? r.camera[i + 1].fDepart : r.duree;
   const f = Math.round((c.fArrivee + fin) / 2);
+  if (milieux) return console.log((Math.min(f, r.duree - 1) / fps).toFixed(2));
   const cam = etatCamera(r.camera, f, fps);
   const phrase = alignement.phrases.find((p) => p.fDebut <= f && p.fFin >= f - 15)?.id ?? "-";
   const persos = r.personnages

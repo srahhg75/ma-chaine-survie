@@ -236,8 +236,13 @@ const Boite: React.FC<{ position: Vec3; couleur: string; etiquette?: string; ech
   liquide = "#f0a840",
 }) => (
   <group position={position} scale={echelle}>
+    {/* corps ouvert en haut (le couvercle ferme la boîte ; ouvert, on voit le sirop) */}
     <mesh position={[0, 0.055, 0]} castShadow>
-      <cylinderGeometry args={[0.04, 0.04, 0.11, 20]} />
+      <cylinderGeometry args={[0.04, 0.04, 0.11, 20, 1, true]} />
+      <meshStandardMaterial color="#b8bcc0" metalness={0.8} roughness={0.3} side={DoubleSide} />
+    </mesh>
+    <mesh position={[0, 0.002, 0]}>
+      <cylinderGeometry args={[0.04, 0.04, 0.004, 20]} />
       <meshStandardMaterial color="#b8bcc0" metalness={0.8} roughness={0.3} />
     </mesh>
     <mesh position={[0, 0.055, 0]}>
@@ -699,6 +704,13 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       </group>
       <Carafe niveau={carafe} goutte={goutte} t={t} />
       <Bassine position={bassinePos} orientation={bassineOrient} inclinaison={verse * (1 - depose)} niveau={niveauBassine} />
+      {/* filet d'eau de la bassine vers la cuvette */}
+      {verse > 0.35 && niveauBassine > 0.05 && depose === 0 && (
+        <mesh position={[(bassinePos[0] + P.wc[0]) / 2 - 0.02, (bassinePos[1] + 0.36) / 2, P.wc[2] + 0.1]} rotation={[0, 0, -0.5]}>
+          <cylinderGeometry args={[0.018 * niveauBassine + 0.006, 0.026 * niveauBassine + 0.008, bassinePos[1] - 0.3, 10]} />
+          <meshStandardMaterial color="#9fb7bf" transparent opacity={0.8} roughness={0.05} emissive="#4f8fd0" emissiveIntensity={0.2} />
+        </mesh>
+      )}
       <Lanterne position={[2.15, 0.975, -1.47]} allumee={lanternes} portee={3.0} puissance={0.5} />
 
       {/* ---- salon ---- */}

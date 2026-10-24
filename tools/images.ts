@@ -1,5 +1,5 @@
 // Images fixes rapides d'instants précis (un seul « bundle » pour toutes les images).
-// Usage : npx tsx tools/images.ts 000-demo 1.5 "chute:jamais" "regle.fin-0.2" [--guide] [--demi]
+// Usage : npx tsx tools/images.ts 000-demo 1.5 "chute:jamais" "regle.fin-0.2" [--guide] [--demi] [--sans-texte]
 //         npx tsx tools/images.ts banc-essai 0.5 2.5 4.5          (banc d'essai du personnage)
 // Sortie : qc/<id>/images/<instant>.png
 import { bundle } from "@remotion/bundler";
@@ -27,7 +27,8 @@ const alignement: Alignement | null = existsSync(mots) ? JSON.parse(readFileSync
 const enSecondes = (a: string) => (/^-?\d+(\.\d+)?$/.test(a) ? parseFloat(a) : alignement ? instant(a, alignement) : NaN);
 
 const serveUrl = await bundle({ entryPoint: path.resolve("src/index.ts") });
-const inputProps = { guide, brouillon: args.includes("--brouillon") };
+const sansTexte = args.includes("--sans-texte");
+const inputProps = { guide, brouillon: args.includes("--brouillon"), sansTexte };
 const composition = await selectComposition({ serveUrl, id: compositionId, inputProps });
 const dossier = path.resolve("qc", id, "images");
 mkdirSync(dossier, { recursive: true });
@@ -35,7 +36,7 @@ for (const a of instants) {
   const sec = enSecondes(a);
   if (Number.isNaN(sec)) throw new Error(`Instant illisible : ${a}`);
   const frame = Math.min(composition.durationInFrames - 1, Math.max(0, Math.round(sec * FPS)));
-  const sortie = path.join(dossier, `${a.replace(/[^\w.+-]/g, "_")}${guide ? "_guide" : ""}.png`);
+  const sortie = path.join(dossier, `${a.replace(/[^\w.+-]/g, "_")}${guide ? "_guide" : ""}${sansTexte ? "_sans-texte" : ""}.png`);
   await renderStill({ composition, serveUrl, output: sortie, frame, inputProps, scale: echelle, timeoutInMilliseconds: 180000, chromiumOptions: { gl: process.platform === "linux" && !existsSync("/dev/dri") ? "swangle" : "angle" } });
   console.log(`${a} (${sec.toFixed(2)} s, image ${frame}) -> ${path.relative(process.cwd(), sortie)}`);
 }

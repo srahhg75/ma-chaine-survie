@@ -19,6 +19,7 @@ export type PropsEpisode = {
   audio: "mix" | "voix" | "aucun"; // mix.wav (mixage final) si présent, sinon la voix seule
   guide: boolean; // calque des zones sûres (contrôle uniquement)
   brouillon?: boolean; // brouillon de la boucle qualité : sans occlusion ambiante (3× plus rapide)
+  sansTexte?: boolean; // image de couverture : ni HUD ni sous-titres
 };
 
 const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r }) => {
@@ -48,6 +49,7 @@ export const EpisodeStandard: React.FC<PropsEpisode & { donnees: DonneesEpisode;
   audio,
   guide,
   brouillon,
+  sansTexte,
   scene,
   eclairage,
 }) => {
@@ -63,8 +65,8 @@ export const EpisodeStandard: React.FC<PropsEpisode & { donnees: DonneesEpisode;
         {scene}
         <PostProcess {...donnees.post} {...(brouillon ? { occlusion: false } : {})} />
       </ThreeCanvas>
-      <Hud elements={r.hud} camera={r.camera} />
-      <SousTitres mots={alignement.mots} />
+      {!sansTexte && <Hud elements={r.hud} camera={r.camera} />}
+      {!sansTexte && <SousTitres mots={alignement.mots} />}
       {audio !== "aucun" && <Audio src={staticFile(`${donnees.id}/${audio === "mix" ? "mix" : "voix"}.wav`)} />}
       {guide && <GuideZonesSures />}
     </AbsoluteFill>
