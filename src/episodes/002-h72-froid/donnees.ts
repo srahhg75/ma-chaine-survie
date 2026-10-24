@@ -411,6 +411,12 @@ export const donnees: DonneesEpisode = {
     { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -9 },
     { a: "fin+1.23", id: "cut_hit/punch", gain: -6 },
     { a: "fin+1.4", id: "cut_hit/sub", gain: -5 },
+    // mouvements mesurés « sans son » par earshot sur la vidéo finale (0:16,57 · 1:17,93 · 1:20,17 · 1:28,90 · 1:29,67)
+    { a: "i_genial+0.05", id: "whoosh_fast/heavy", gain: -14 },
+    { a: "m_achete+0.26", id: "whoosh_fast/heavy", gain: -14 },
+    { a: "i_rat-0.29", id: "cut_hit/sub", gain: -13 },
+    { a: "fin-0.92", id: "whoosh_fast/heavy", gain: -13 },
+    { a: "fin-0.15", id: "cut_hit/sub", gain: -12 },
     // ---- bruitages d'objets ----
     { a: "hook:quelqu'un", id: "toggle/latch", gain: -9 },
     { a: "serrure:forcee", id: "pro_tap/knock", gain: -10 },

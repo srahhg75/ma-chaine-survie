@@ -289,3 +289,6 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   personnages « humain », cadrer avec les aides `buste` (tête ≈ 1,12 m, distance ≥ 2,6 m), `enPied` (≥ 4 m) et
   `aDeux` (≥ 4,3 m) de l'épisode 002 ; un dialogue se filme en plan à deux, les deux personnages de trois-quarts
   vers la caméra, mur entre eux arasé ; une fiche 2D se pose du côté où personne ne se tient.
+- **2026-10-24 — Rendu final arrêté net sur le PC Windows : `tools/final.sh` appelait `.venv/bin/python`.** Règle (rappel
+  de la leçon « outils Linux sur Windows ») : tout script shell du dépôt choisit `PY` (bin/ ou Scripts/) en tête ;
+  après un changement de machine, chercher `grep -n "venv/bin" tools/*.sh` avant de lancer un rendu.

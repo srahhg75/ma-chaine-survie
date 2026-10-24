@@ -5,6 +5,8 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 EP="${1:?Episode manquant, ex. : bash tools/final.sh 000-demo}"
+# Python : bin/ sous Linux et Mac, Scripts/*.exe sous Windows
+PY=.venv/bin/python; [ -x .venv/Scripts/python.exe ] && PY=.venv/Scripts/python.exe
 COMP=$(npx tsx tools/composition.ts "$EP") || exit 1
 QC="qc/$EP"; OUT="videos/$EP"; mkdir -p "$QC" "$OUT"
 etape() { printf "\n\033[1m== %s\033[0m\n" "$1"; }
@@ -16,8 +18,8 @@ etape "1. Contrôles bloquants"
 npx tsc --noEmit || exit 1
 npx tsx tools/timeline.ts "$EP" || exit 1
 npx tsx tools/qc.ts "$EP" > /dev/null || { echo "Contrôle visuel en échec : voir $QC/rapport_qc.md"; exit 1; }
-.venv/bin/python tools/mix.py "$EP" || exit 1
-.venv/bin/python tools/qc_audio.py "$EP" > /dev/null || { echo "Contrôle audio en échec : voir $QC/rapport_audio.md"; exit 1; }
+"$PY" tools/mix.py "$EP" || exit 1
+"$PY" tools/qc_audio.py "$EP" > /dev/null || { echo "Contrôle audio en échec : voir $QC/rapport_audio.md"; exit 1; }
 
 etape "2. Rendu pleine résolution"
 # par tranches, avec reprise (un rendu complet dure des heures sans carte graphique)
@@ -30,14 +32,15 @@ ffmpeg -v error -y -i "$OUT/rendu.mp4" -i "public/$EP/mix.wav" -map 0:v -map 1:a
 rm -f "$OUT/rendu.mp4"
 
 etape "4. Vérifications du fichier final"
-INFO=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 "$OUT/final.mp4")
-DUREE=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT/final.mp4")
+# (sous Windows, ffprobe termine la ligne par une virgule et un retour chariot : on nettoie avant de comparer)
+INFO=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 "$OUT/final.mp4" | tr -d '\r' | sed 's/,$//')
+DUREE=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$OUT/final.mp4" | tr -d '\r')
 echo "Image : $INFO ; durée : ${DUREE} s"
 [ "$INFO" = "1080,1920,30/1" ] || { echo "ERREUR : format attendu 1080x1920 à 30 i/s"; exit 1; }
 if ! grep -q "demonstration: true" "src/episodes/$EP/donnees.ts"; then
   awk -v d="$DUREE" 'BEGIN { exit !(d >= 70 && d <= 120) }' || { echo "ERREUR : durée hors 70-120 s"; exit 1; }
 fi
-.venv/bin/python tools/verifier_master.py "$OUT/final.mp4" || exit 1
+"$PY" tools/verifier_master.py "$OUT/final.mp4" || exit 1
 
 etape "5. Copie dans « Vidéos TikTok » sur le bureau"
 BUREAU=""

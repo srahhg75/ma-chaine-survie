@@ -139,6 +139,31 @@
    "gain": -5
   },
   {
+   "t": 16.61,
+   "id": "whoosh_fast/heavy",
+   "gain": -14
+  },
+  {
+   "t": 77.93,
+   "id": "whoosh_fast/heavy",
+   "gain": -14
+  },
+  {
+   "t": 80.16999999999999,
+   "id": "cut_hit/sub",
+   "gain": -13
+  },
+  {
+   "t": 90.7,
+   "id": "whoosh_fast/heavy",
+   "gain": -13
+  },
+  {
+   "t": 91.47,
+   "id": "cut_hit/sub",
+   "gain": -12
+  },
+  {
    "t": 0.96,
    "id": "toggle/latch",
    "gain": -9
@@ -275,8 +300,8 @@
    "type": "vent",
    "de": 66.75,
    "a": 68.91,
-   "niveau": 2,
-   "fondu": 0.4
+   "niveau": -2,
+   "fondu": 0.6
   },
   {
    "type": "coeur",

@@ -85,7 +85,7 @@
   {
    "mot": "garde.",
    "t": 91.29,
-   "baisse_db": 1.1
+   "baisse_db": 1.8
   }
  ],
  "sons": [
@@ -115,6 +115,11 @@
   "impact/deep",
   "whoosh_fast/heavy",
   "cut_hit/punch",
+  "cut_hit/sub",
+  "whoosh_fast/heavy",
+  "whoosh_fast/heavy",
+  "cut_hit/sub",
+  "whoosh_fast/heavy",
   "cut_hit/sub",
   "toggle/latch",
   "pro_tap/knock",
