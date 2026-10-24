@@ -1,7 +1,7 @@
 import { Vec3 } from "../maths";
 import type { NomPBR } from "./pbr";
 
-// Description des décors EN DONNÉES : lue par le rendu (Decor.tsx) et par le contrôle qualité (tools/qc.ts).
+// Description des décors EN DONNÉES : lue par le rendu (DecorScene.tsx) et par le contrôle qualité (tools/qc.ts).
 export type CoteMur = "nord" | "sud" | "est" | "ouest"; // nord = fond (z négatif), sud = devant (z positif)
 export type Sol = "parquet" | "carrelage" | "beton" | "moquette";
 export type Revetement = "papier" | "beton" | "carrelage" | "peint";

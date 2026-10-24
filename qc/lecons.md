@@ -52,7 +52,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-23 — Le dossier `analyse/` était entièrement exclu de Git** (le rapport aurait été perdu).
   Règle : après chaque nouveau livrable, vérifier avec `git status` qu'il est bien suivi ; `reference/` reste exclu.
 - **2026-10-23 — Neige qui tombait DANS la pièce** (démo : le volume de neige englobait l'appartement).
-  Règle : la neige est placée automatiquement derrière le mur du fond par `kit3d/Decor.tsx` ; ne jamais lui donner
+  Règle : la neige est placée automatiquement derrière le mur du fond par `kit3d/DecorScene.tsx` ; ne jamais lui donner
   un volume qui recoupe une pièce.
 - **2026-10-23 — Étiquette « Porte fermée » pointant hors de l'image** (porte du mauvais côté + hors cadre).
   Règle : les ouvertures se mesurent le long du mur (vers l'est pour nord/sud, vers le nord pour ouest/est) ;
@@ -212,3 +212,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   sur le mur de l'autre pièce.
 - **2026-10-24 — RETOUR : lanterne trop « flashy » posée sur les WC.** Règle : pas de source lumineuse visible posée
   sur un objet qu'on filme de près ; pour éclairer une pièce, une lueur douce invisible (plafond) suffit.
+- **2026-10-24 — Rendu impossible sur le PC Windows (erreur React #130)** : `kit3d/decor.ts` et `kit3d/Decor.tsx`
+  ne différaient que par la casse ; Windows ne distingue pas les majuscules, `./kit3d/Decor` retombait sur `decor.ts`.
+  Règle : jamais deux fichiers d'un même dossier dont les noms (sans extension) ne diffèrent que par la casse ;
+  le composant s'appelle désormais `kit3d/DecorScene.tsx`. `npm run typecheck` le signale (TS1149) sous Windows.

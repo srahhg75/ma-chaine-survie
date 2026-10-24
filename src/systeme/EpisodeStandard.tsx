@@ -5,7 +5,7 @@ import { CameraRig } from "./CameraRig";
 import { DonneesEpisode, resoudreEpisode } from "./episode";
 import { GuideZonesSures } from "./GuideZonesSures";
 import { Hud } from "./hud/Hud";
-import { Decor } from "./kit3d/Decor";
+import { Decor } from "./kit3d/DecorScene";
 import { EclairageBase } from "./kit3d/Lumieres";
 import { PostProcess } from "./kit3d/PostProcess";
 import { Alignement } from "./mots";
