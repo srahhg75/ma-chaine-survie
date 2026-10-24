@@ -1,0 +1,57 @@
+{
+ "summary": "wrote /home/user/ma-chaine-survie/public/001-h72/sons/9cdbf911330e.wav: whoosh_big/thump seed 4201: 1.030 s, onset 0.046 s, peak at 0.138 s, end 0.880 s, -1.0 dBFS, -14.3 LUFS momentary max; checks: clean",
+ "file": "/home/user/ma-chaine-survie/public/001-h72/sons/9cdbf911330e.wav",
+ "meta": {
+  "id": "whoosh_big/thump",
+  "seed": 4201,
+  "sr": 48000,
+  "onset_s": 0.0462,
+  "peak_s": 0.1375,
+  "end_s": 0.88,
+  "dur_s": 1.03,
+  "peak_db": -1.0,
+  "lufs_m_max": -14.32,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "whoosh_big/thump: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -66.8,
+    "ring_z": 2.9,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 3.5,
+    "attack_ms": 1.0,
+    "t40_ms": 660.0,
+    "crest_db": 9.6,
+    "res_db": 4.1,
+    "res_hz": 4150,
+    "peak_dbfs": -1.0,
+    "live_ms": 614.0
+   },
+   "glide": {
+    "tonal_share": 0.84,
+    "rise_st": 2.3,
+    "from_s": 0.501,
+    "to_s": 0.546
+   },
+   "layers": {
+    "attacks": [
+     0.142
+    ],
+    "count": 1,
+    "pre_swell_ms": 85.0
+   },
+   "context": {
+    "category": "whoosh_big",
+    "sound": "whoosh_big/thump"
+   }
+  }
+ }
+}

@@ -282,6 +282,12 @@ export const donnees: DonneesEpisode = {
     { a: "chute:vide.fin", id: "pro_sub_drop/low", gain: -3 },
     { a: "fin:cle", id: "pro_impact/deep", gain: -4 },
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
+    // transitions de caméra sans son repérées par earshot (timeline --video) sur la vidéo finale
+    { a: "t1:manger", id: "whoosh_fast/heavy", gain: -12 },
+    { a: "erreur-0.07", id: "cut_hit/sub", gain: -10 },
+    { a: "calme2-0.21", id: "cut_hit/punch", gain: -13 },
+    { a: "vide", id: "whoosh_fast/heavy", gain: -11 },
+    { a: "fin-0.19", id: "cut_hit/sub", gain: -10 },
   ],
   ambiances: [
     { type: "drone", de: 0, a: "fin+4", niveau: -1 },

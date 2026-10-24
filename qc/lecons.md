@@ -156,3 +156,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — Titre de couverture en lettres creuses** (Montserrat est une police « variable » : ffmpeg prenait la
   graisse la plus fine) et texte posé sur le visage. Règle : `bash tools/couverture.sh` (graisse 900 figée, image sans
   HUD ni sous-titres, texte dans la bande y≈1150-1570, jamais sur le visage) ; regarder la couverture avant de livrer.
+- **2026-10-24 — 5 transitions de caméra sans aucun son** (repérées par `earshot timeline --video` sur la vidéo
+  finale : 71 % des coupes avec un son à 100 ms). Règle : lancer `earshot timeline <vidéo> --video <vidéo>` sur la
+  vidéo finale ; chaque coupe « without a hit » reçoit un son court (`cut_hit/…`) calé sur l'instant MESURÉ
+  (ancre « phrase±décalage ») ; refaire seulement le mixage et remplacer le son (`ffmpeg -c:v copy`), sans re-rendre.
