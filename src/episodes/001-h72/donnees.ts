@@ -90,6 +90,19 @@ export const donnees: DonneesEpisode = {
         // la porte d'entrée (battant, verrou) est dessinée dans Episode.tsx
         ouvertures: [{ mur: "nord", type: "passage", centre: 0, largeur: 0.92, hauteur: 2.05 }, { mur: "ouest", type: "passage", centre: 0.2, largeur: 1.0, hauteur: 2.05 }],
       },
+      {
+        // palier de l'immeuble derrière la porte d'entrée (sans lui, la porte ouvrait sur le vide)
+        id: "palier",
+        centre: [5.0, -2.45],
+        largeur: 2.4,
+        profondeur: 1.5,
+        sol: "beton",
+        murs: "beton",
+        couleurSol: "#5a5650",
+        couleurMurs: "#6a645b",
+        devant: ["sud", "est"],
+        ouvertures: [{ mur: "sud", type: "passage", centre: 0, largeur: 0.92, hauteur: 2.05 }],
+      },
     ],
     meubles: [
       // cuisine

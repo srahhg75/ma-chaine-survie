@@ -739,6 +739,12 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       <PorteEntree ouverture={ouverture} verrou={verrou} cle={cle} />
       <Arrondi taille={[0.5, 0.04, 0.25]} position={[5.38, 0.9, -1.4]} rayon={0.01} couleur="#6b4c33" />
       <Bougie position={[5.5, 0.92, -1.4]} allumee={!nuit} graine="bougieEntree" puissance={0.8} />
+      {/* palier : veilleuse de secours (à piles) au-dessus de l'escalier, lumière limitée au palier */}
+      <mesh position={[5.9, 2.1, -3.15]}>
+        <boxGeometry args={[0.3, 0.1, 0.05]} />
+        <meshStandardMaterial color="#d8ffe0" emissive="#5dff8a" emissiveIntensity={0.6} />
+      </mesh>
+      <pointLight position={[5.6, 1.9, -2.7]} intensity={0.9} distance={2.6} color="#9fd8b0" />
       {/* patère et manteau */}
       <Arrondi taille={[0.04, 0.04, 0.1]} position={[4.4, 1.65, -1.48]} rayon={0.01} couleur="#2a2a2a" />
       <Arrondi taille={[0.34, 0.85, 0.14]} position={[4.4, 1.2, -1.42]} rayon={0.06} couleur={t < a("garde") ? "#2f6f73" : "#5a5a5a"} />

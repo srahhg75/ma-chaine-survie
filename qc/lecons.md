@@ -180,3 +180,6 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   plus des transitions ; sons d'objets réalistes autorisés (`tools/sons_autorises.json`) et sons d'eau / grincement
   synthétisés par `tools/mix.py` (types d'ambiance `eau`, `glouglou`, `grincement`), validés à l'oreille d'earshot
   (`earshot match` / `earshot rank`) ; pas à −24 dB.
+- **2026-10-24 — Porte d'entrée qui ouvrait sur le vide** (le ciel, au 6e étage) une fois le mur de l'allège retiré.
+  Règle : toute porte franchissable donne sur un espace construit (palier, couloir, pièce voisine) avec un sol, des
+  murs et une petite lumière ; le vérifier en image fixe quand la porte est ouverte, depuis la caméra du plan.
