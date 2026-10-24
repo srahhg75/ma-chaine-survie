@@ -200,3 +200,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — RETOUR : réponses parfois en anglais, et heures données en UTC** (« vers 15 h 30 » alors qu'il était
   déjà 15 h 45 à Paris). Règle (inscrite dans CLAUDE.md) : toujours répondre en français ; toujours convertir les
   heures en heure de Paris (`TZ=Europe/Paris date`).
+- **2026-10-24 — RETOUR (pour les prochains épisodes) : ambiance pas assez sombre pour une panne d'électricité.**
+  Règle : dès l'écriture de l'épisode, éclairage de nuit sans courant : pénombre bleutée, coins noirs, vraies sources
+  chaudes (bougies, lampe torche, lanternes) qui découpent les formes ; mais Inès, ses gestes et les objets clés restent
+  lisibles sur téléphone (leçon du 23/10 : jamais de sol ni de décor invisibles). Valider sur la planche d'un plan sur deux.
