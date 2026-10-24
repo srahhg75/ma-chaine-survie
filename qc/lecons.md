@@ -184,3 +184,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — Porte d'entrée qui ouvrait sur le vide** (le ciel, au 6e étage) une fois le mur de l'allège retiré.
   Règle : toute porte franchissable donne sur un espace construit (palier, couloir, pièce voisine) avec un sol, des
   murs et une petite lumière ; le vérifier en image fixe quand la porte est ouverte, depuis la caméra du plan.
+- **2026-10-24 — Vidéo envoyée dans le chat impossible à enregistrer sur iPhone** (pas d'option de partage, 111 Mo).
+  Règle : livrer aussi une copie légère (`ffmpeg -crf 20 -maxrate 4M`, ≈ 40 Mo, son copié tel quel) poussée sur la
+  branche (`git add -f videos/NNN-nom/<nom>.mp4`, < 50 Mo) et donner le lien direct
+  `https://github.com/<compte>/<dépôt>/raw/<branche>/videos/NNN-nom/<nom>.mp4` à ouvrir dans Safari.
