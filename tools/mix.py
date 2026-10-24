@@ -28,7 +28,7 @@ VOIX_LUFS = -16.0  # niveau de la voix avant master
 ECART_MIN_DB = 12.0  # fond au moins 12 dB sous la voix pendant chaque mot (règle : ≥ 10 dB)
 
 # Niveaux de base (dBFS crête pour les bruitages, RMS pour les ambiances), ajustés par `gain` / `niveau`
-BASE_SFX_DB = -12.0
+BASE_SFX_DB = -8.0  # +4 dB (retour du 24/10 : bruitages trop faibles) ; la voix reste protégée mot par mot
 BASE_PAS_DB = -24.0  # pas audibles (retour du 24/10 : « pas assez de bruitages »)
 BASE_AMB_DB = {"vent": -36.0, "drone": -37.0, "coeur": -30.0, "ville": -38.0, "eau": -27.0, "glouglou": -27.0, "grincement": -29.0}
 

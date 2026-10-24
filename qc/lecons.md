@@ -216,3 +216,18 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   ne différaient que par la casse ; Windows ne distingue pas les majuscules, `./kit3d/Decor` retombait sur `decor.ts`.
   Règle : jamais deux fichiers d'un même dossier dont les noms (sans extension) ne diffèrent que par la casse ;
   le composant s'appelle désormais `kit3d/DecorScene.tsx`. `npm run typecheck` le signale (TS1149) sous Windows.
+- **2026-10-24 — RETOUR : « toujours un bug de mur » : zébrures qui clignotent aux jonctions des murs du fond**
+  (salle d'eau / entrée, cuisine / salle d'eau). Chaque mur déborde de 6 cm à ses bouts pour fermer les angles ; deux
+  pièces voisines superposaient donc leurs murs du fond sur 12 cm, même après `sansMurs`. Règle : `mursPiece`
+  (`kit3d/decor.ts`) arrête désormais un mur contre la face d'un mur partagé (`sansMurs`) ; pour vérifier une jonction,
+  comparer deux images fixes avant/après en gros plan (la superposition se voit en zébrures fines, pas toujours en
+  planche réduite).
+- **2026-10-24 — RETOUR : bruitages trop faibles, et aucun son sur le choix A/B de fin.** Règle : `BASE_SFX_DB` de
+  `tools/mix.py` passe de −12 à −8 dB (la protection mot par mot de la voix, 12 dB, ne bouge pas) ; le carton à choix a
+  toujours ses sons : souffle à l'entrée des blocs (`fin+0.9`) puis un impact quand A se pose (+0,53 s du carton) et
+  un autre quand B se pose (+0,70 s).
+- **2026-10-24 — RETOUR : « toujours pas assez sombre » (après un premier assombrissement).** Le carrelage presque
+  blanc (#dfe3e2) renvoyait la lumière froide et la salle d'eau restait claire. Règle : nuit sans courant = lumière
+  froide d'ambiance faible (hémisphère ≤ 0,17, lune ≤ 0,27, environnement ≤ 0,09), exposition ≤ 0,9, vignette ≥ 0,6 ;
+  aucun mur ni sol plus clair que #c0c0c0 ; comparer avant/après côte à côte sur 3 plans et vérifier que sujet,
+  objets étiquetés et sol restent lisibles.

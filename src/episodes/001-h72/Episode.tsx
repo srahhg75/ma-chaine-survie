@@ -39,11 +39,12 @@ const useTemps = (al: Alignement) => {
 // ---------- Lumière : aube d'hiver bleue, sans électricité ----------
 const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
   <>
-    <Environnement intensite={0.14} />
-    <hemisphereLight args={["#5b74b8", "#1a140f", lerp(0.26, 0.16, nuit)]} />
+    {/* retour du 24/10 « pas assez sombre » : lumière froide d'ambiance −35 %, les sources chaudes restent */}
+    <Environnement intensite={0.09} />
+    <hemisphereLight args={["#5b74b8", "#1a140f", lerp(0.17, 0.1, nuit)]} />
     <directionalLight
       position={[-6, 10, -9]}
-      intensity={lerp(0.42, 0.26, nuit)}
+      intensity={lerp(0.27, 0.17, nuit)}
       color="#9ab4ff"
       castShadow
       shadow-mapSize={[2048, 2048]}
@@ -55,7 +56,7 @@ const Lumiere: React.FC<{ nuit: number }> = ({ nuit }) => (
       shadow-bias={-0.0006}
     />
     {/* contre-jour froid côté caméra : détache les volumes */}
-    <directionalLight position={[7, 6, 8]} intensity={lerp(0.14, 0.08, nuit)} color="#a9bde8" />
+    <directionalLight position={[7, 6, 8]} intensity={lerp(0.1, 0.06, nuit)} color="#a9bde8" />
   </>
 );
 

@@ -134,11 +134,14 @@ export const Piece: React.FC<{ piece: DonneesPiece }> = ({ piece: p }) => {
       {murs.map((m) => {
         const cote = m.cote as CoteMur;
         const selonX = cote === "nord" || cote === "sud";
-        const longueur = selonX ? p.largeur + EPAISSEUR_MUR : p.profondeur + EPAISSEUR_MUR;
+        // longueur réelle de la boîte (raccourcie contre un mur partagé, cf. mursPiece)
+        const longueur = selonX ? m.max[0] - m.min[0] : m.max[2] - m.min[2];
         const hauteur = m.max[1];
-        const ouvertures = (p.ouvertures ?? []).filter((o) => o.mur === cote);
-        const segs = segmentsMur(longueur, hauteur, ouvertures);
         const centreMur: Vec3 = [(m.min[0] + m.max[0]) / 2, 0, (m.min[2] + m.max[2]) / 2];
+        // les ouvertures se mesurent depuis le milieu de la pièce : on les ramène au milieu du mur
+        const decalage = selonX ? centreMur[0] - cx : -(centreMur[2] - cz);
+        const ouvertures = (p.ouvertures ?? []).filter((o) => o.mur === cote).map((o) => ({ ...o, centre: o.centre - decalage }));
+        const segs = segmentsMur(longueur, hauteur, ouvertures);
         // Repère local du mur : x le long du mur (vers l'est pour nord/sud, vers le nord pour ouest/est),
         // z vers l'intérieur pour nord/ouest, vers l'extérieur pour sud/est
         const rotY = selonX ? 0 : Math.PI / 2;
