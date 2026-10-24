@@ -6,8 +6,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 EP="${1:?episode}"; T="${2:?instant}"; L1="${3:?ligne 1}"; L2="${4:?ligne 2 (grosse, jaune)}"; L3="${5:-}"
 POLICE="qc/$EP/Montserrat-900.ttf"
+PY=.venv/bin/python; [ -x .venv/Scripts/python.exe ] && PY=.venv/Scripts/python.exe  # Windows
 # La police est « variable » : il faut figer la graisse 900, sinon le texte sort en creux
-.venv/bin/python -c "
+"$PY" -c "
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 f = TTFont('public/polices/Montserrat-900-latin.woff2')
