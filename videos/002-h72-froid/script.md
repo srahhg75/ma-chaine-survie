@@ -331,3 +331,17 @@ bassine, seau, carafe et filtre groupés dans la salle d'eau).
 (6 répliques en 11 s : plans à deux tenus, pas un plan par réplique) ; le gros plan du tuyau (caméra du côté opposé
 à Inès) ; la lampe torche tout en haut de l'escalier visible sur téléphone, dans la bande y≈250-1000, hors colonne
 de droite.
+
+---
+
+## 7. Voix du choix A/B (ajout du 25/10/2026)
+
+À générer avec **la voix et les réglages du narrateur** (Multilingual v2, comme le texte 1), puis déposer sous
+`videos/002-h72-froid/narrateur2.mp3` :
+
+```
+Ce soir, Inès…
+A : elle part à sa garde.
+B : elle reste et guette.
+Répondez en commentaire !
+```

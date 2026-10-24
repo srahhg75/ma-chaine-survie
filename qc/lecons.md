@@ -292,3 +292,34 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-24 — Rendu final arrêté net sur le PC Windows : `tools/final.sh` appelait `.venv/bin/python`.** Règle (rappel
   de la leçon « outils Linux sur Windows ») : tout script shell du dépôt choisit `PY` (bin/ ou Scripts/) en tête ;
   après un changement de machine, chercher `grep -n "venv/bin" tools/*.sh` avant de lancer un rendu.
+- **2026-10-25 — RETOUR (0:01) : Inès passait à travers la porte OUVERTE du placard et frôlait le muret noir (mur
+  arasé) du passage.** La porte, dessinée dans `Episode.tsx`, était invisible pour les contrôles. Règle : tout battant
+  ouvert (porte, placard, fenêtre) dessiné à part est déclaré dans `decor.meubles` (invisible, avec sa rotation) tant
+  qu'il est ouvert ; un trajet passe par le MILIEU d'un passage, perpendiculairement au mur ; `tools/qc.ts` bloque
+  désormais « Personnage dans un meuble … en marchant ».
+- **2026-10-25 — RETOUR (0:21) : son corps traversait le muret de la chambre.** Le contrôle des murs supposait un corps
+  de 12 cm de rayon ; un personnage « humain » (épaules, bras, sac, lampe tendue) en fait ~22. Règle : rayon de
+  collision 0,22 m pour les « humain » dans `tools/qc.ts` ; passages d'au moins 0,9 m ; la lampe s'éteint avant de
+  franchir un passage étroit.
+- **2026-10-25 — RETOUR : la bouche bougeait trop vite.** Elle s'ouvrait 8 fois par seconde. Règle : bouche réglée sur
+  `SYLLABE_S` = 0,2 s (≈ 5 syllabes par seconde, rythme du français) dans `personnage/trajet.ts`, amplitude 0,18-0,5 ;
+  vérifier une réplique en lecture réelle (brouillon), pas seulement sur image fixe.
+- **2026-10-25 — RETOUR (0:34) : « 3 couches fines » : on ne voyait rien, donc on ne comprenait pas.** Règle : chaque
+  conseil se MONTRE à l'image au moment où il est dit, de façon visible sur téléphone : changement net (couleur,
+  volume) mot par mot (t-shirt → polaire → parka → bonnet, via `tenues`), plus une fiche qui numérote les étapes ;
+  avant/après lisible (elle frissonne en t-shirt, puis soulagée).
+- **2026-10-25 — RETOUR (0:42) : Morel « dans » le fauteuil (corps enfoncé dedans).** Les meubles étaient à hauteur
+  d'adulte réel (assise 0,43 m), les personnages assis ont les hanches à 0,26 m. Règle : mobilier à l'échelle des
+  personnages (assise et matelas à ≈ 0,22-0,24 m) ; un personnage assis se place sur l'avant du coussin, dossier
+  derrière lui ; seul le dossier est déclaré comme obstacle ; vérifier chaque personnage assis en image fixe de profil.
+- **2026-10-25 — RETOUR (1:27) : la rampe de l'escalier était à l'envers** (elle descendait quand les marches
+  montaient). Règle : un élément incliné (rampe, toit, échelle) se calcule à partir des points de départ et
+  d'arrivée de ce qu'il suit (angle = atan(dénivelé / longueur), signe vérifié : marches vers −z ⇒ rotation x
+  positive) ; le regarder en image fixe de profil avant de valider.
+- **2026-10-25 — RETOUR (1:27) : l'escalier finissait contre un mur gris : « on ne peut même pas monter au 6e ».**
+  Règle : un décor doit rester logique hors du sujet du plan : un escalier mène quelque part (ouverture dans le mur,
+  cage d'escalier qui continue jusqu'à l'étage suivant), une porte donne sur une pièce, une fenêtre sur dehors ; un
+  personnage qui « arrive d'en haut » descend vraiment depuis l'étage.
+- **2026-10-25 — DEMANDE : une voix lit le choix A/B du carton de fin.** Règle : chaque épisode se termine par le
+  narrateur qui lit la question et les deux choix (lignes `@carton…` du script, voix du narrateur, sans sous-titres
+  puisque le carton affiche le texte) ; `queue` allongée pour que la lecture finisse avant la fin de la vidéo.

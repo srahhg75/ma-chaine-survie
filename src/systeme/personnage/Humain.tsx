@@ -162,7 +162,7 @@ const Bras: React.FC<{ a: Apparence; cote: 1 | -1; epaule: [number, number]; cou
       </mesh>
       <Segment long={C.brasHaut} r0={0.05 + ep} r1={0.043 + ep} c={manche} />
       <group position={[0, -C.brasHaut, 0]} rotation={[-rad(coude), 0, 0]}>
-        <Segment long={C.avantBras} r0={0.043 + ep} r1={0.034 + ep} c={manche} />
+        <Segment long={C.avantBras} r0={0.043 + ep} r1={0.034 + ep} c={a.haut === "tshirt" ? <Peau c={a.peau} /> : manche} />
         {/* poignet côtelé */}
         <mesh position={[0, -C.avantBras + 0.012, 0]}>
           <cylinderGeometry args={[0.036 + ep, 0.036 + ep, 0.03, 14]} />

@@ -27,7 +27,7 @@ export const P = {
   grilleSol: [7.0, 0.01, 0.65] as Vec3, // grille du sol (l'odeur du 5e monte par là)
   porteChambre: [5.7, 0, -0.6] as Vec3, // passage entrée -> chambre (mur est de l'entrée)
   // 5e : Morel
-  escalierHaut: o(-3.0, 1.6, -1.25),
+  escalierHaut: o(-3.0, 2.88, -2.95), // palier du 6e, en haut de la cage d'escalier
   escalierBas: o(-3.0, 0, 0.4),
   porte5: o(-1.3, 0, -0.4), // porte palier -> entrée de Morel (mur est du palier), charnière au nord
   judas: o(-1.3, 1.25, -0.4),
@@ -38,7 +38,7 @@ export const P = {
   fauteuil: o(1.05, 0, 0.35),
   fenetre5: o(2.5, 1.5, -1.6),
   grille5: o(1.0, 2.15, -1.53),
-  lampeHaut: o(-3.0, 2.35, -1.5),
+  lampeHaut: o(-3.0, 3.85, -3.0), // lampe torche tenue sur le palier du 6e
 };
 
 // Cadrages types pour les personnages « humain » (≈ 1,4 m, tête au centre ≈ 1,15 m) ; p = position des pieds
@@ -94,7 +94,25 @@ export const donnees: DonneesEpisode = {
         couleurSol: "#5a5650",
         couleurMurs: "#6e675d",
         devant: ["sud", "est"], // mur vers l'entrée arasé : on voit Inès (palier) et Morel (entrée) ensemble
-        ouvertures: [{ mur: "est", type: "passage", centre: 0.4, largeur: 0.92, hauteur: 2.05 }],
+        ouvertures: [
+          { mur: "est", type: "passage", centre: 0.4, largeur: 0.92, hauteur: 2.05 },
+          // l'escalier passe dans la cage (mur nord) : ouverture sur toute la hauteur
+          { mur: "nord", type: "passage", centre: -0.6, largeur: 1.05, hauteur: 2.6 },
+        ],
+      },
+      {
+        // cage d'escalier derrière le palier : les marches continuent jusqu'au 6e
+        id: "cage5",
+        sansMurs: ["sud"], // mur partagé avec le palier (dessiné par lui)
+        centre: [OX - 3.0, -2.5],
+        largeur: 1.2,
+        profondeur: 1.8,
+        hauteur: 3.4,
+        sol: "beton",
+        murs: "beton",
+        couleurSol: "#4e4a45",
+        couleurMurs: "#5f5950",
+        devant: ["est"],
       },
       {
         id: "entree5",
@@ -124,12 +142,13 @@ export const donnees: DonneesEpisode = {
     ],
     meubles: [
       ...partie1.decor.meubles,
+      // porte OUVERTE du placard du ballon (battant de 0,85 m vers le sud-est) : obstacle pour les contrôles
+      { type: "etagere", position: [4.41, 0, -0.62], rotation: -71, echelle: 0.95, id: "porte-placard", invisible: true },
       // chambre d'Inès (lit, chevet dessinés dans Episode.tsx : obstacles pour les contrôles)
-      { type: "lit", position: P.lit, id: "lit", echelle: 0.8, invisible: true },
+      { type: "lit", position: [7.55, 0, -0.65], id: "lit", echelle: 0.75, invisible: true },
       { type: "chaise", position: P.chevet, id: "chevet", echelle: 0.9, invisible: true },
       // 5e : escalier, fauteuil, barbecue, bidons (dessinés dans Episode.tsx)
-      { type: "carton", position: o(-3.0, 0, -0.6), id: "escalier", echelle: 1.8, invisible: true },
-      { type: "chaise", position: P.fauteuil, id: "fauteuil", echelle: 1.3, invisible: true },
+      { type: "chaise", position: o(0.8, 0, 0.35), id: "fauteuil-dossier", echelle: 0.8, invisible: true }, // seul le dossier fait obstacle
       { type: "radio", position: o(2.2, 0, 0.0), id: "barbecue", echelle: 2.0, invisible: true },
       ...[0.35, 0.7, 1.05, 1.4, 1.75].flatMap((x, i) => [
         { type: "jerrican" as const, position: o(x, 0, -1.38), id: `bidon${i}`, invisible: true },
@@ -149,11 +168,11 @@ export const donnees: DonneesEpisode = {
       depart: { position: [3.45, 0, -0.6], orientation: 70 }, // dernière image de la partie 1
       trajet: [
         // hook : elle se tourne vers la porte d'entrée, la clé à la main
-        { a: "hook2", position: [4.55, 0, -0.55], orientation: 20, vitesse: 0.9 },
+        { a: "hook2", position: [4.85, 0, -0.45], orientation: 20, vitesse: 1.0, chemin: [[3.75, 0, 0.05], [4.6, 0, 0.02]] },
         // « 11°C » : elle souffle dans ses mains, face à nous
-        { a: "froid", position: [4.6, 0, -0.2], orientation: 15, vitesse: 0.6 },
+        { a: "froid", position: [5.0, 0, -0.1], orientation: 15, vitesse: 0.6 },
         // une seule pièce : elle gagne la chambre et en ferme la porte
-        { a: "t1a:fermee", position: [6.3, 0, -0.35], orientation: 250, vitesse: 1.2, chemin: [[5.35, 0, -0.6], [6.0, 0, -0.6]] },
+        { a: "t1a:fermee", position: [6.3, 0, -0.35], orientation: 250, vitesse: 1.2, chemin: [[5.3, 0, -0.6], [6.15, 0, -0.6]] },
         // serviette sous la porte (accroupie à côté du passage)
         { a: "t2a:serviette", position: [6.15, 0, -0.65], orientation: 270, vitesse: 0.8 },
         // couverture sur la fenêtre
@@ -173,11 +192,15 @@ export const donnees: DonneesEpisode = {
         { a: "t2a.fin", pose: "debout", transition: 0.3 },
         { a: "t2b:couverture-0.2", pose: "mainTendue", transition: 0.3 },
         { a: "t2b.fin", pose: "debout", transition: 0.3 },
-        { a: "t3a:couches", pose: "mainTendue", transition: 0.25 },
-        { a: "t3a:bonnet+0.3", pose: "debout", transition: 0.3 },
+        { a: "t3", pose: "froid", transition: 0.3 },
+        { a: "t3a:3", pose: "bras", transition: 0.2 },
+        { a: "t3a:fines", pose: "debout", transition: 0.25 },
         { a: "calme:ferme", pose: "assis", transition: 0.4 },
       ],
       tenues: [
+        { a: "t3", apparence: { haut: "tshirt", couleurHaut: "#e8e4dc", echarpe: null, sac: null } },
+        { a: "t3a:3", apparence: { haut: "polaire", couleurHaut: "#9a3040" } },
+        { a: "t3a:fines", apparence: { haut: "parka", couleurHaut: "#2f6f73", echarpe: "#d9a52b" } },
         { a: "t3a:bonnet", apparence: { bonnet: "#c9a227", couleurPompon: "#f3ede2" } },
       ],
       expressions: [
@@ -187,13 +210,15 @@ export const donnees: DonneesEpisode = {
         { a: "froid", expression: "triste" },
         { a: "i_genial", expression: "fatigue" },
         { a: "t1", expression: "decide" },
+        { a: "t3", expression: "triste" },
+        { a: "t3a:fines", expression: "soulage" },
         { a: "t3a:bonnet", expression: "sourire" },
         { a: "i_sexy", expression: "sourire" },
         { a: "calme", expression: "fatigue" },
         { a: "calme:yeux", expression: "dort", transition: 0.5 },
         { a: "odeur:charbon", expression: "inquiet", transition: 0.2 },
       ],
-      lampe: { de: 0, a: "t1a:fermee", puissance: 0.07 },
+      lampe: { de: 0, a: "t1", puissance: 0.07 },
     },
     {
       // Fantôme du mauvais réflexe : Inès qui colle du ruban sur la grille d'aération
@@ -212,11 +237,11 @@ export const donnees: DonneesEpisode = {
       apparence: { ...APPARENCE_INES, bonnet: "#c9a227" },
       depart: { position: P.escalierHaut, orientation: 180 },
       trajet: [
-        { a: "i_ouvrez", position: PORTE_INES, orientation: 70, vitesse: 1.25, chemin: [P.escalierBas, o(-2.6, 0, 0.3)] },
+        { a: "i_ouvrez", position: PORTE_INES, orientation: 70, vitesse: 1.3, chemin: [P.escalierBas, o(-2.6, 0, 0.3)] },
         // elle file ouvrir la fenêtre du salon (en contournant les bidons), pendant la réplique de Morel
         { a: "aere:fenetres", position: o(2.5, 0, -1.05), orientation: 180, vitesse: 1.8, chemin: [o(-1.3, 0, -0.4), o(-0.4, 0, -0.08), o(0.6, 0, -0.08), o(2.0, 0, -0.65)] },
         // elle ressort sur le palier pour appeler
-        { a: "appel:appelle", position: PALIER_INES, orientation: 30, vitesse: 2.0, chemin: [o(2.0, 0, -0.6), o(0.6, 0, -0.08), o(-0.4, 0, -0.08), o(-1.3, 0, -0.4)] },
+        { a: "appel:appelle", position: PALIER_INES, orientation: 30, vitesse: 2.0, chemin: [o(2.0, 0, -0.6), o(0.6, 0, -0.08), o(-0.4, 0, -0.08), o(-1.0, 0, -0.4), o(-1.85, 0, -0.4)] },
         { a: "i_eau", position: PALIER_INES, orientation: 290, vitesse: 0.6 },
         { a: "fin", position: PALIER_INES, orientation: 15, vitesse: 0.6 },
       ],
@@ -252,14 +277,14 @@ export const donnees: DonneesEpisode = {
       voix: "Morel",
       variante: "humain",
       apparence: APPARENCE_MOREL,
-      depart: { position: P.fauteuil, orientation: 80 },
+      depart: { position: o(1.12, 0, 0.37), orientation: 80 },
       trajet: [
         // il va ouvrir, de mauvaise humeur
-        { a: "m_folle", position: PORTE_MOREL, orientation: 290, vitesse: 1.0, chemin: [o(0.3, 0, -0.1)] },
+        { a: "m_folle", position: PORTE_MOREL, orientation: 290, vitesse: 1.0, chemin: [o(1.3, 0, -0.25), o(0.3, 0, -0.2)] },
         // il s'écarte (sud) pour laisser passer Inès
         { a: "m_chauffage", position: o(-0.8, 0, 0.15), orientation: 300, vitesse: 0.6 },
         // sorti sur le palier
-        { a: "sort:palier", position: PALIER_MOREL, orientation: 70, vitesse: 1.1, chemin: [o(-1.3, 0, -0.35), o(-2.4, 0, 0.4)] },
+        { a: "sort:palier", position: PALIER_MOREL, orientation: 70, vitesse: 1.2, chemin: [o(-1.0, 0, -0.4), o(-1.85, 0, -0.4), o(-2.4, 0, 0.4)] },
       ],
       poses: [
         { a: 0, pose: "assis" },
@@ -288,7 +313,7 @@ export const donnees: DonneesEpisode = {
       id: "fantome-morel",
       variante: "humain",
       apparence: APPARENCE_MOREL,
-      depart: { position: o(1.07, 0, 0.37), orientation: 80 }, // superposé au vrai Morel : ce qui va lui arriver
+      depart: { position: o(1.14, 0, 0.38), orientation: 80 }, // superposé au vrai Morel : ce qui va lui arriver
       poses: [{ a: 0, pose: "assis" }, { a: "co3:dormir", pose: "affale", transition: 0.8 }],
       expressions: [{ a: 0, expression: "fatigue" }, { a: "co3:dormir", expression: "dort", transition: 0.6 }],
       fantome: { de: "co3", a: "co4.fin+0.3" },
@@ -297,7 +322,7 @@ export const donnees: DonneesEpisode = {
   camera: [
     // HOOK — exactement le dernier cadre de la partie 1 (gros plan du verrou), puis recul sur Inès et la porte
     { a: 0, ...plan(P.verrou, { azimut: 8, elevation: 5, distance: 0.95, fov: 32, y: 640, x: 500 }) },
-    { a: "hook:chez", ...enPied([4.15, 0, -0.75], 22, { distance: 4.2, x: 480 }), deplacement: 1.2 },
+    { a: "hook:chez", ...enPied([4.3, 0, -0.2], 22, { distance: 4.4, x: 480 }), deplacement: 1.2 },
     // la clé : Inès et la serrure ensemble
     { a: "hook2", ...plan([4.9, 0.95, -0.95], { azimut: 20, elevation: 8, distance: 4.0, fov: 40, y: 600, x: 520 }), deplacement: 0.8 },
     // RÉCAP — la ville noire, l'immeuble en coupe, le ballon, le robinet du bas
@@ -307,8 +332,8 @@ export const donnees: DonneesEpisode = {
     { a: "recap4:nuit", ...plan([3.85, 0.15, -1.1], { azimut: 15, elevation: 40, distance: 1.9, fov: 36, y: 640 }), deplacement: 0.9 },
     { a: "recap4.fin", ...plan(P.verrou, { azimut: 22, elevation: 6, distance: 1.3, fov: 34, y: 640, x: 520 }), deplacement: 0.8 },
     // « 11°C » + réplique : Inès de face
-    { a: "froid:fait", ...buste([4.6, 0, -0.2], 14), deplacement: 0.9 },
-    { a: "i_genial:chauffage", ...buste([4.6, 0, -0.2], 4, { distance: 2.4, y: 600 }), deplacement: 1.2 },
+    { a: "froid:fait", ...buste([5.0, 0, -0.1], 14), deplacement: 0.9 },
+    { a: "i_genial:chauffage", ...buste([5.0, 0, -0.1], 4, { distance: 2.4, y: 600 }), deplacement: 1.2 },
     // TACTIQUE 1 — l'appartement en coupe : la chambre s'allume, le reste s'éteint ; Inès y entre
     { a: "t1:seule", ...plan([5.6, 0.8, -0.3], { azimut: 18, elevation: 30, distance: 7.2, fov: 44, y: 650 }), deplacement: 1.0 },
     { a: "t1a:plus", ...enPied([6.2, 0, -0.45], 18, { distance: 4.4 }), deplacement: 0.9 },
@@ -319,15 +344,15 @@ export const donnees: DonneesEpisode = {
     // fantôme : le ruban sur la grille (fantôme de profil, à côté de la grille)
     { a: "t2c:jamais", ...plan([6.22, 0.4, -1.35], { azimut: 0, elevation: 30, distance: 2.9, fov: 40, y: 680, x: 540 }), deplacement: 1.1 },
     // TACTIQUE 3 — les couches, le bonnet, la réplique
-    { a: "t3:couches", ...enPied([6.6, 0, 0.4], 10, { distance: 4.0 }), deplacement: 1.0 },
+    { a: "t3:couches", ...enPied([6.6, 0, 0.4], 10, { distance: 4.0, x: 620 }), deplacement: 1.0 },
     { a: "i_sexy", ...buste([6.6, 0, 0.4], 12), deplacement: 0.7 },
     // elle s'endort, puis l'odeur
-    { a: "calme:yeux", ...buste([7.55, -0.3, 0.17], 12, { distance: 2.9, elevation: 12 }), deplacement: 0.9 },
+    { a: "calme:yeux", ...buste([7.55, -0.3, 0.17], 12, { distance: 3.2, elevation: 12 }), deplacement: 0.9 },
     { a: "odeur:monte", ...plan([7.3, 0.6, 0.35], { azimut: 10, elevation: 22, distance: 3.4, fov: 40, y: 620 }), deplacement: 0.8 },
     // 5e — coupe nette sur le salon de Morel (barbecue)
     { a: "morel", ...plan(o(1.6, 0.6, 0.15), { azimut: 38, elevation: 20, distance: 4.4, fov: 42, y: 650, x: 520 }), coupe: true },
     { a: "salon.fin", ...plan(o(1.6, 0.8, -0.6), { azimut: 15, elevation: 24, distance: 5.0, fov: 44, y: 640 }), deplacement: 0.8 },
-    { a: "co3:tete", ...buste(o(1.07, -0.35, 0.37), 20, { distance: 3.0, elevation: 12 }), deplacement: 0.9 },
+    { a: "co3:tete", ...buste(o(1.14, -0.4, 0.38), 25, { distance: 3.0, elevation: 12 }), deplacement: 0.9 },
     // la porte : Inès frappe, Morel ouvre (plan à deux, palier | entrée en coupe, de face)
     { a: "i_ouvrez", ...aDeux(PORTE_INES, PORTE_MOREL, 0, { x: 480 }), coupe: true },
     { a: "i_tete", ...aDeux(PORTE_INES, PORTE_MOREL, -10, { distance: 4.4, x: 520 }), deplacement: 0.6 },
@@ -339,7 +364,7 @@ export const donnees: DonneesEpisode = {
     { a: "sort:palier", ...aDeux(o(-2.6, 0, 0.6), PALIER_MOREL, 10, { distance: 5.2 }), deplacement: 1.2 },
     { a: "appel:112", ...buste(PALIER_INES, 20), deplacement: 0.7 },
     // « Vous vous souvenez du sol sec ? » : flash partie 1, le sol du placard
-    { a: "rappel", ...plan([3.85, 0.02, -1.2], { azimut: 12, elevation: 45, distance: 1.7, fov: 36, y: 660 }), coupe: true },
+    { a: "rappel", ...plan([3.85, 0.02, -1.2], { azimut: -20, elevation: 45, distance: 1.7, fov: 36, y: 660 }), coupe: true },
     // le tuyau, puis les 10 bidons (un seul plan tenu)
     { a: "tuyau", ...plan(o(0.8, 0.2, -0.95), { azimut: -30, elevation: 45, distance: 3.6, fov: 42, y: 520, x: 540 }), coupe: true },
     // la dispute sur le palier (plan à deux)
@@ -349,7 +374,7 @@ export const donnees: DonneesEpisode = {
     { a: "m_bonne", ...aDeux(PALIER_INES, PALIER_MOREL, 10, { distance: 4.3, x: 480 }), deplacement: 0.5 },
     { a: "m_lampe:type", ...aDeux(PALIER_INES, PALIER_MOREL, 0, { distance: 5.0, x: 520 }), deplacement: 0.7 },
     // la lampe torche en haut de l'escalier
-    { a: "m_cles:cles", ...plan(o(-3.0, 1.7, -1.2), { azimut: 12, elevation: 24, distance: 3.6, fov: 42, y: 600 }), deplacement: 1.0 },
+    { a: "m_cles:cles", ...plan(o(-3.0, 2.3, -2.2), { azimut: 10, elevation: 8, distance: 4.4, fov: 44, y: 560 }), deplacement: 1.0 },
     // « Et ce soir, Inès est de garde. »
     { a: "fin:soir", ...buste(PALIER_INES, 10), deplacement: 0.8 },
     { a: "fin+3.0", ...buste(PALIER_INES, 8, { distance: 2.4 }), deplacement: 2.0 },
@@ -372,6 +397,7 @@ export const donnees: DonneesEpisode = {
     { type: "tactique", de: "t2", a: "t2d.fin", numero: 2, total: 3, titre: "Les courants d'air" },
     { type: "etiquette", de: "t2c:jamais", a: "t2d", texte: "Grille d'aération", point: P.grilleChambre, style: "danger" },
     { type: "tactique", de: "t3", a: "i_sexy", numero: 3, total: 3, titre: "Des couches" },
+    { type: "fiche", de: "t3a", a: "i_sexy.fin", icone: "couverture", titre: "3 couches fines", lignes: ["1 · T-shirt", "2 · Polaire", "3 · Parka + bonnet"], cote: "gauche" },
     { type: "moodles", de: "odeur:charbon", a: "odeur.fin+0.2", moodles: [{ nom: "odeur", niveau: 2 }] },
     { type: "fiche", de: "morel:monsieur", a: "salon.fin", icone: "maison", titre: "M. Morel", lignes: ["5e étage", "Seul, 70 ans"], cote: "droite" },
     { type: "etiquette", de: "co", a: "co2", texte: "Monoxyde (CO)", point: P.braises, style: "danger" },

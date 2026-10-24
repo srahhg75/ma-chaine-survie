@@ -24,17 +24,17 @@ const Lit: React.FC = () => {
   return (
     <group position={[x, 0, z]}>
       {/* cadre en bois, tête de lit contre le mur nord */}
-      <Arrondi taille={[1.2, 0.22, 1.64]} position={[0, 0.2, 0]} rayon={0.03} couleur="#6b4a32" rugosite={0.7} />
+      <Arrondi taille={[1.2, 0.12, 1.64]} position={[0, 0.1, 0]} rayon={0.03} couleur="#6b4a32" rugosite={0.7} />
       {[-1, 1].flatMap((i) => [-1, 1].map((j) => <Arrondi key={`${i}${j}`} taille={[0.06, 0.12, 0.06]} position={[i * 0.55, 0.06, j * 0.76]} rayon={0.01} couleur="#5a3d28" />))}
-      <Arrondi taille={[1.22, 0.75, 0.07]} position={[0, 0.42, -0.8]} rayon={0.03} couleur="#6b4a32" rugosite={0.7} />
+      <Arrondi taille={[1.22, 0.65, 0.07]} position={[0, 0.33, -0.8]} rayon={0.03} couleur="#6b4a32" rugosite={0.7} />
       {/* matelas, drap, couette pliée, oreiller */}
-      <Arrondi taille={[1.12, 0.16, 1.56]} position={[0, 0.38, 0.02]} rayon={0.06} couleur="#e9e4da" rugosite={0.95} />
-      <Arrondi taille={[1.16, 0.1, 1.05]} position={[0, 0.48, 0.25]} rayon={0.05} couleur="#5d6f9a" rugosite={1} />
-      <Arrondi taille={[1.16, 0.06, 0.28]} position={[0, 0.54, -0.18]} rayon={0.03} couleur="#e9e4da" rugosite={1} />
-      <Arrondi taille={[0.5, 0.12, 0.3]} position={[-0.25, 0.53, -0.58]} rayon={0.06} couleur="#f1ece3" rugosite={1} />
-      <Arrondi taille={[0.5, 0.12, 0.3]} position={[0.27, 0.53, -0.58]} rayon={0.06} couleur="#e6dccb" rugosite={1} />
-      {/* plaid tricoté au pied du lit */}
-      <Arrondi taille={[1.18, 0.05, 0.32]} position={[0, 0.55, 0.62]} rayon={0.025} couleur="#a8592f" rugosite={1} />
+      <Arrondi taille={[1.12, 0.1, 1.56]} position={[0, 0.2, 0.02]} rayon={0.04} couleur="#e9e4da" rugosite={0.95} />
+      <Arrondi taille={[1.16, 0.06, 1.05]} position={[0, 0.26, 0.25]} rayon={0.03} couleur="#5d6f9a" rugosite={1} />
+      <Arrondi taille={[1.16, 0.05, 0.28]} position={[0, 0.3, -0.18]} rayon={0.025} couleur="#e9e4da" rugosite={1} />
+      <Arrondi taille={[0.5, 0.1, 0.3]} position={[-0.25, 0.3, -0.58]} rayon={0.05} couleur="#f1ece3" rugosite={1} />
+      <Arrondi taille={[0.5, 0.1, 0.3]} position={[0.27, 0.3, -0.58]} rayon={0.05} couleur="#e6dccb" rugosite={1} />
+      {/* plaid tricoté au pied du lit (côté tête : Inès s'assied au pied) */}
+      <Arrondi taille={[1.18, 0.04, 0.3]} position={[0, 0.3, -0.35]} rayon={0.02} couleur="#a8592f" rugosite={1} />
     </group>
   );
 };
@@ -116,8 +116,9 @@ const Fumee: React.FC<{ base: Vec3; t: number; force: number; hauteur?: number; 
 };
 
 // ---------- 5e : escalier, porte de Morel, tuyau, bidons, fauteuil, barbecue, fenêtre ----------
+// 18 marches de 16 cm (jusqu'au 6e, 2,88 m), giron 19 cm, du palier (z = 0,4) vers la cage d'escalier (nord)
 const Escalier: React.FC = () => {
-  const marches = 10;
+  const marches = 18;
   return (
     <group>
       {Array.from({ length: marches }, (_, i) => {
@@ -125,12 +126,12 @@ const Escalier: React.FC = () => {
         const z = 0.4 - 0.19 * (i + 0.5);
         return <Arrondi key={i} taille={[0.95, y, 0.2]} position={[OX - 3.0, y / 2, z]} rayon={0.01} couleur={i % 2 ? "#6f6a62" : "#77726a"} rugosite={0.9} />;
       })}
-      {/* rampe (main courante en bois sur barreaux) */}
-      <mesh position={[OX - 2.5, 1.55, -0.55]} rotation={[-Math.atan2(1.6, 1.9), 0, 0]}>
-        <boxGeometry args={[0.05, 0.05, 2.5]} />
+      {/* rampe (main courante en bois sur barreaux) : elle suit la pente des marches, 0,9 m au-dessus */}
+      <mesh position={[OX - 2.5, 1.44 + 0.9, 0.4 - 1.71]} rotation={[Math.atan2(2.88, 3.42), 0, 0]}>
+        <boxGeometry args={[0.05, 0.05, Math.hypot(2.88, 3.42)]} />
         <meshStandardMaterial color="#5a3b26" roughness={0.6} />
       </mesh>
-      {Array.from({ length: 6 }, (_, i) => {
+      {Array.from({ length: 10 }, (_, i) => {
         const z = 0.3 - i * 0.36;
         const y0 = Math.max(0, (0.4 - z) / 0.19) * 0.16;
         return (
@@ -205,13 +206,13 @@ const Fauteuil: React.FC = () => {
   const [x, , z] = P.fauteuil;
   return (
     <group position={[x, 0, z]} rotation={[0, Math.PI / 2 - 0.15, 0]}>
-      <Arrondi taille={[0.78, 0.36, 0.75]} position={[0, 0.25, 0]} rayon={0.08} couleur="#5a6b3e" rugosite={1} />
-      <Arrondi taille={[0.78, 0.6, 0.18]} position={[0, 0.6, -0.3]} rayon={0.08} couleur="#5a6b3e" rugosite={1} />
+      <Arrondi taille={[0.78, 0.18, 0.75]} position={[0, 0.13, 0]} rayon={0.07} couleur="#5a6b3e" rugosite={1} />
+      <Arrondi taille={[0.78, 0.62, 0.18]} position={[0, 0.4, -0.3]} rayon={0.08} couleur="#5a6b3e" rugosite={1} />
       {[-1, 1].map((k) => (
-        <Arrondi key={k} taille={[0.16, 0.36, 0.72]} position={[k * 0.33, 0.5, 0]} rayon={0.07} couleur="#4f5e36" rugosite={1} />
+        <Arrondi key={k} taille={[0.16, 0.3, 0.72]} position={[k * 0.33, 0.3, 0]} rayon={0.07} couleur="#4f5e36" rugosite={1} />
       ))}
-      {/* coussin brodé et plaid */}
-      <Arrondi taille={[0.34, 0.26, 0.1]} position={[0.1, 0.55, -0.18]} rayon={0.05} couleur="#c9a96e" rugosite={1} />
+      {/* coussin brodé */}
+      <Arrondi taille={[0.3, 0.24, 0.1]} position={[0.12, 0.38, -0.18]} rayon={0.05} couleur="#c9a96e" rugosite={1} />
       {[-1, 1].flatMap((i) => [-1, 1].map((j) => <Arrondi key={`${i}${j}`} taille={[0.05, 0.08, 0.05]} position={[i * 0.32, 0.04, j * 0.3]} rayon={0.01} couleur="#3a2a1a" />))}
     </group>
   );

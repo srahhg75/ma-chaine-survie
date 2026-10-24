@@ -178,9 +178,14 @@ for (let f = 0; f < r.duree; f++) {
     const avant = posPrec.get(p.id);
     if (avant && distance(avant, e.position) * fps > VITESSE_MAX_M_S * 1.05) signaler("Téléportation", `${p.id} se déplace à plus de ${VITESSE_MAX_M_S} m/s`, f);
     posPrec.set(p.id, e.position);
-    for (const m of meubles) if (dansBoite([e.position[0], 0.3, e.position[2]], m, -0.05)) signaler("Personnage dans un meuble", `${p.id} traverse ${m.id}`, f, false);
-    // Murs pleins OU arasés : on ne passe que par une porte ou un passage (jamais par-dessus une cloison)
-    const mur = p.fantome ? null : murTraverse(donnees.decor, e.position[0], e.position[2]);
+    // Dans un meuble : bloquant s'il MARCHE (il passe à travers) ; simple avertissement à l'arrêt (assis, couché)
+    for (const m of meubles)
+      if (dansBoite([e.position[0], e.position[1] + 0.3, e.position[2]], m, -0.05))
+        signaler("Personnage dans un meuble", `${p.id} traverse ${m.id}${e.marche ? " en marchant" : ""}`, f, e.marche && !p.fantome);
+    // Murs pleins OU arasés : on ne passe que par une porte ou un passage (jamais par-dessus une cloison).
+    // Rayon du corps : 0,22 m pour un personnage « humain » (épaules, bras, sac, lampe), 0,12 m sinon.
+    const rayon = p.variante === "humain" ? 0.22 : 0.12;
+    const mur = p.fantome ? null : murTraverse(donnees.decor, e.position[0], e.position[2], rayon);
     if (mur) signaler("Personnage à travers un mur", `${p.id} traverse ${mur} (pas de porte ni de passage à cet endroit)`, f);
   }
 

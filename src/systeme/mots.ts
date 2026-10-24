@@ -45,7 +45,11 @@ export const echelleMot = (m: Mot, bloc: Pick<Bloc, "chute" | "hook">) =>
 
 const longueur = (mots: Mot[]) => mots.reduce((n, m) => n + m.mot.length + 1, 0);
 
-export const blocsSousTitres = (mots: Mot[], phrases: Phrase[] = [], maxMots = 4, maxCaracteres = 22): Bloc[] => {
+// Phrases lues par-dessus le carton de fin (@carton…) : le carton affiche déjà le texte, pas de sous-titres
+export const estCarton = (p?: Phrase) => !!p && p.id.startsWith("carton");
+
+export const blocsSousTitres = (tous: Mot[], phrases: Phrase[] = [], maxMots = 4, maxCaracteres = 22): Bloc[] => {
+  const mots = tous.filter((m) => !estCarton(phrases[m.phrase]));
   const groupes: Mot[][] = [];
   let courant: Mot[] = [];
   mots.forEach((m, i) => {

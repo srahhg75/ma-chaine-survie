@@ -94,6 +94,9 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
   };
 };
 
+// Durée d'une syllabe pour la bouche qui parle (français : ≈ 5 syllabes par seconde)
+export const SYLLABE_S = 0.2;
+
 const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 // Mots dits par cette voix (phrases `[Prénom]` du script), en images
 const motsDits = (voix: string, al: Alignement): [number, number][] => {
@@ -168,11 +171,11 @@ const visageCourant = (r: PersonnageResolu, pose: Pose, frame: number, fps: numb
     v = melangerVisage(prec, EXPRESSIONS[k.expression], tresDoux((frame - k.f) / Math.max(1, k.transition * fps)));
   }
   const t = frame / fps;
-  // Parole : la bouche s'ouvre et se ferme au rythme des syllabes (≈ 0,12 s) pendant chaque mot de ses répliques
+  // Parole : la bouche s'ouvre et se ferme au rythme des syllabes (≈ 0,2 s, soit 5 par seconde) pendant chaque mot
   const mot = r.parole.find(([a, b]) => frame >= a && frame < b);
   if (mot) {
     const u = (frame - mot[0]) / fps;
-    const ouverture = 0.22 + 0.38 * Math.abs(Math.sin((Math.PI * u) / 0.12 + bruit(`${r.id}syl`, mot[0]) * 2));
+    const ouverture = 0.18 + 0.32 * Math.abs(Math.sin((Math.PI * u) / SYLLABE_S + bruit(`${r.id}syl`, mot[0]) * 0.5));
     v = { ...v, bouche: Math.max(v.bouche, ouverture) };
   }
   const periode = 3.5 + 1.0 * bruit(`${r.id}cligne`, Math.floor(t / 3.5));
