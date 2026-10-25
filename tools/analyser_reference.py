@@ -9,6 +9,7 @@ Usage : .venv/bin/python tools/analyser_reference.py reference/<chaine>/<fichier
 """
 import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -63,9 +64,14 @@ def plans(video: Path) -> list[tuple[float, float]]:
                                                          r.stderr)]
 
 
+# ffmpeg sans fontconfig (Windows) : drawtext exige une police explicite
+POLICE = next((p for p in ["C:/Windows/Fonts/arial.ttf", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"] if Path(p).exists()), None)
+
+
 def planches(video: Path, base: Path) -> None:
+    police = "fontfile='" + POLICE.replace(":", "\\:") + "':" if POLICE else ""
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", video, "-vf",
-                    "fps=1,scale=216:384,drawtext=text='%{eif\\:t\\:d}s':x=6:y=6:fontsize=26:fontcolor=yellow:"
+                    "fps=1,scale=216:384,drawtext=" + police + "text='%{eif\\:t\\:d}s':x=6:y=6:fontsize=26:fontcolor=yellow:"
                     "box=1:boxcolor=black@0.7,tile=5x4", "-q:v", "4", f"{base}.planche-%02d.jpg"], check=True)
 
 
@@ -73,7 +79,8 @@ def main() -> None:
     video = Path(sys.argv[1])
     base = video.with_suffix("")
     d = duree(video)
-    segs = ocr(video)
+    # Sans Tesseract (PC Windows), pas d'OCR : les sous-titres se lisent alors à l'œil sur les planches
+    segs = ocr(video) if shutil.which("tesseract") else []
     base.with_suffix(".ocr.tsv").write_text("debut\tfin\ttexte\n" + "".join(f"{a:.2f}\t{b:.2f}\t{t}\n" for a, b, t in segs),
                                             encoding="utf-8")
     mots, _ = reconnaitre(video)

@@ -1,7 +1,7 @@
 # H+72 — Partie 2 : « Le froid » (version dialoguée)
 
 *Série « H+72 » (l'immeuble), épisode 2. Écrit le 24/10/2026 selon le PROMPT 09 puis le PROMPT 06 du protocole
-(`Protocole-Survie-Videos-Apocalypse-3D.pdf`), après relecture de `CLAUDE.md`, `qc/lecons.md`, `analyse/analyse.md`,
+(`Protocole-Survie-Videos-Apocalypse-3D.pdf`), après relecture de `CLAUDE.md`, `qc/lecons.md`, `analyse/analyse-anglemort.md`,
 `analyse/idees-series.md` et du texte de la Partie 1 (`videos/001-h72/`). Version dialoguée à la demande de la
 personne qui gère la chaîne : les personnages se parlent (vannes, petites insultes) pour faire réagir en commentaire.*
 

@@ -327,3 +327,10 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   affiché trop tard).** Règle : « fin » = dernier mot du RÉCIT ; les lignes `@carton…` ne comptent pas
   (`src/systeme/timeline.ts`) ; le carton de fin n'est pas soumis à la règle de rythme ; après tout ajout de voix,
   relire la durée annoncée par `tools/timeline.ts` et supprimer les tranches déjà rendues (`videos/<ep>/tranches/`).
+- **2026-10-25 — Analyse de @chroniques_flippantes sur le PC Windows : liste yt-dlp en échec (« Failed to parse JSON »),
+  `tools/analyser_reference.py` en panne (pas de Tesseract, `drawtext` sans police).** Règle : installer `yt-dlp` et
+  `curl_cffi` dans `.venv`, lister et télécharger avec `--impersonate chrome` (relancer 2-3 fois si la liste est
+  vide) ; garder la page d'intégration `https://www.tiktok.com/embed/@<compte>` comme secours ; l'outil d'analyse saute
+  l'OCR sans Tesseract (lire les sous-titres à l'œil sur les planches) et donne une police à `drawtext`. Vérifier la
+  durée de la piste SON et de l'IMAGE séparément (`ffprobe -select_streams a:0 / v:0`) : une piste son plus longue
+  révèle une musique recyclée.

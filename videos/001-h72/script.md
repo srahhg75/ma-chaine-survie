@@ -1,6 +1,6 @@
 # H+72 — Partie 1 : « Neuf litres »
 
-*Série « H+72 » (l'immeuble), épisode 1. Écrit le 23/10/2026 après relecture de `qc/lecons.md` et `analyse/analyse.md`.
+*Série « H+72 » (l'immeuble), épisode 1. Écrit le 23/10/2026 après relecture de `qc/lecons.md` et `analyse/analyse-anglemort.md`.
 Dossier nommé `001-h72` (convention `NNN-nom` : le « + » est évité dans les noms de dossiers et les adresses de fichiers).*
 
 **Durée visée : 75 à 85 s** (≈ 215 mots). Héroïne : **Inès**, 34 ans, infirmière de nuit au 6e, méthodique.

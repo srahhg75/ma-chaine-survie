@@ -1,6 +1,6 @@
 # 5 idées de séries — Studio Survie
 
-*Proposées le 23/10/2026, d'après `analyse/analyse.md`. Ce sont des pistes : chaque fait de survie sera revérifié
+*Proposées le 23/10/2026, d'après `analyse/analyse-anglemort.md`. Ce sont des pistes : chaque fait de survie sera revérifié
 à l'écriture du script (règle « faits vérifiés »).*
 
 Recette commune à toutes les séries (tirée de l'analyse) :
