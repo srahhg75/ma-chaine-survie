@@ -13,7 +13,7 @@ import { boiteMeuble, dansBoite, murTraverse, obstacles, segmentTraverse } from 
 import { angleEntre, distance, soustrait, Vec3 } from "../src/systeme/maths";
 import { blocsSousTitres } from "../src/systeme/mots";
 import { corpsDe, hautTete, hauteurBassin } from "../src/systeme/personnage/poses";
-import { etatPersonnage } from "../src/systeme/personnage/trajet";
+import { etatPersonnage, present } from "../src/systeme/personnage/trajet";
 
 const id = process.argv[2];
 const { donnees, alignement, resolu: r } = await chargerEpisode(id);
@@ -119,7 +119,8 @@ for (let f = 0; f < r.duree; f++) {
   dirPrec = dir;
 
   // Personnages et sujets projetés à l'écran (servent aux contrôles HUD et sujets)
-  const etats = new Map(r.personnages.map((p) => [p.id, { p, e: etatPersonnage(p, f, fps) }]));
+  // Seuls les personnages présents à cette image ; un personnage invisible (on ne voit que sa lampe) n'est pas contrôlé
+  const etats = new Map(r.personnages.filter((p) => present(p, f) && !p.invisible).map((p) => [p.id, { p, e: etatPersonnage(p, f, fps) }]));
   const sujetsEcran = r.sujets
     .filter((s) => f >= s.fDe && f < s.fA)
     .map((s) => {
@@ -128,7 +129,8 @@ for (let f = 0; f < r.duree; f++) {
         const x = etats.get(s.personnage);
         if (!x) return null;
         const h = (hauteurBassin(x.e.pose, x.p.variante) + corpsDe(x.p.variante).bassinVersEpaules * 0.6) * x.p.taille;
-        point = [x.e.position[0], s.hauteur ?? h, x.e.position[2]];
+        // hauteur comptée depuis le sol où il se tient (étage, marche d'escalier)
+        point = [x.e.position[0], x.e.position[1] + (s.hauteur ?? h), x.e.position[2]];
       }
       return point ? { nom: `${s.personnage ?? "sujet"}${s.hauteur ? ` (h=${s.hauteur} m)` : ""}`, p: project(point, cam), point } : null;
     })
@@ -141,8 +143,8 @@ for (let f = 0; f < r.duree; f++) {
       if (!x) return null;
       const k = x.p.taille;
       const sommet = (hauteurBassin(x.e.pose, x.p.variante) + hautTete(x.p.variante) + 0.06) * k;
-      const [px, , pz] = x.e.position;
-      const coins = [-1, 1].flatMap((dx) => [-1, 1].flatMap((dz) => [0.02, sommet].map((y) => project([px + dx * 0.28 * k, y, pz + dz * 0.28 * k], cam))));
+      const [px, py, pz] = x.e.position;
+      const coins = [-1, 1].flatMap((dx) => [-1, 1].flatMap((dz) => [0.02, sommet].map((y) => project([px + dx * 0.28 * k, py + y, pz + dz * 0.28 * k], cam))));
       const xs = coins.map((c) => c.x);
       const ys = coins.map((c) => c.y);
       return { id, b: { x: Math.min(...xs), y: Math.min(...ys), l: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) } as Rect };

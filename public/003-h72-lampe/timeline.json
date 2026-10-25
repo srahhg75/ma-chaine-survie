@@ -1,0 +1,850 @@
+{
+ "episode": "003-h72-lampe",
+ "fps": 30,
+ "duree": 86.73333333333333,
+ "sons": [
+  {
+   "t": 1.08,
+   "id": "whoosh_big/deep",
+   "gain": -9
+  },
+  {
+   "t": 3.03,
+   "id": "pro_impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 4.41,
+   "id": "whoosh_big/swell",
+   "gain": -9
+  },
+  {
+   "t": 6.84,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 8.88,
+   "id": "whoosh_fast/heavy",
+   "gain": -11
+  },
+  {
+   "t": 10.92,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 12.18,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 14.79,
+   "id": "pro_sub_drop/low",
+   "gain": -5
+  },
+  {
+   "t": 15.41,
+   "id": "whoosh_big/reverse",
+   "gain": -6
+  },
+  {
+   "t": 15.66,
+   "id": "cut_hit/punch",
+   "gain": -5
+  },
+  {
+   "t": 16.44,
+   "id": "downlifter/tape",
+   "gain": -9
+  },
+  {
+   "t": 18.27,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 20.97,
+   "id": "whoosh_fast/heavy",
+   "gain": -13
+  },
+  {
+   "t": 32.91,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 35.58,
+   "id": "riser/tension",
+   "gain": -12
+  },
+  {
+   "t": 39.27,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 41.01,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 45,
+   "id": "whoosh_fast/heavy",
+   "gain": -13
+  },
+  {
+   "t": 48.51,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 56.19,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 63.93,
+   "id": "downlifter/air_fall",
+   "gain": -9
+  },
+  {
+   "t": 66,
+   "id": "whoosh_big/deep",
+   "gain": -12
+  },
+  {
+   "t": 67.89,
+   "id": "reverse_swell/dark",
+   "gain": -8
+  },
+  {
+   "t": 69.96,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 71.73,
+   "id": "whoosh_big/gust",
+   "gain": -11
+  },
+  {
+   "t": 75.54,
+   "id": "pro_sub_drop/low",
+   "gain": -4
+  },
+  {
+   "t": 77.31,
+   "id": "whoosh_big/thump_deep",
+   "gain": -8
+  },
+  {
+   "t": 78.01,
+   "id": "impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 78.21000000000001,
+   "id": "whoosh_fast/heavy",
+   "gain": -9
+  },
+  {
+   "t": 78.54,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 78.71000000000001,
+   "id": "cut_hit/sub",
+   "gain": -5
+  },
+  {
+   "t": 0,
+   "id": "toggle/latch",
+   "gain": -11
+  },
+  {
+   "t": 10.92,
+   "id": "toggle/latch",
+   "gain": -8
+  },
+  {
+   "t": 16.59,
+   "id": "swish/soft",
+   "gain": -10
+  },
+  {
+   "t": 20.669999999999998,
+   "id": "toggle/latch",
+   "gain": -11
+  },
+  {
+   "t": 23.04,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 28.53,
+   "id": "swish/soft",
+   "gain": -9
+  },
+  {
+   "t": 29.49,
+   "id": "tap/table",
+   "gain": -10
+  },
+  {
+   "t": 32.91,
+   "id": "click/thock",
+   "gain": -8
+  },
+  {
+   "t": 33.6,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 33.9,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 41.4,
+   "id": "toggle/latch",
+   "gain": -9
+  },
+  {
+   "t": 41.97,
+   "id": "tap/knuckle",
+   "gain": -10
+  },
+  {
+   "t": 51.96,
+   "id": "pro_tap/soft",
+   "gain": -12
+  },
+  {
+   "t": 54.84,
+   "id": "knock/wood",
+   "gain": -4
+  },
+  {
+   "t": 55.06,
+   "id": "knock/wood",
+   "gain": -4
+  },
+  {
+   "t": 55.47,
+   "id": "knock/wood",
+   "gain": -2
+  },
+  {
+   "t": 56.73,
+   "id": "click/thock",
+   "gain": -10
+  },
+  {
+   "t": 63.93,
+   "id": "click/thock",
+   "gain": -7
+  },
+  {
+   "t": 73.59,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 74.25,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 74.55,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 75.18,
+   "id": "click/thock",
+   "gain": -9
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 86.71000000000001,
+   "niveau": -1,
+   "fondu": 1
+  },
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 86.71000000000001,
+   "niveau": -4,
+   "fondu": 1.5
+  },
+  {
+   "type": "ville",
+   "de": 4.11,
+   "a": 6.84,
+   "niveau": 0,
+   "fondu": 0.6
+  },
+  {
+   "type": "coeur",
+   "de": 35.4,
+   "a": 66,
+   "niveau": -2,
+   "fondu": 1,
+   "bpm": 96
+  },
+  {
+   "type": "coeur",
+   "de": 69.54,
+   "a": 86.71000000000001,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 104
+  },
+  {
+   "type": "grincement",
+   "de": 13.86,
+   "a": 14.79,
+   "niveau": -6,
+   "fondu": 0.1
+  },
+  {
+   "type": "grincement",
+   "de": 71.73,
+   "a": 72.79,
+   "niveau": -3,
+   "fondu": 0.1
+  },
+  {
+   "type": "vent",
+   "de": 72.39,
+   "a": 86.71000000000001,
+   "niveau": -2,
+   "fondu": 0.8
+  }
+ ],
+ "pas": [
+  {
+   "t": 16.5,
+   "personnage": "ines6"
+  },
+  {
+   "t": 11.466666666666667,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 11.7,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 11.933333333333334,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 12.133333333333333,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 12.366666666666667,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 12.566666666666666,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 12.8,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 13.033333333333333,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 13.233333333333333,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 13.466666666666667,
+   "personnage": "fantome-part"
+  },
+  {
+   "t": 17.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 18.133333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 18.4,
+   "personnage": "ines"
+  },
+  {
+   "t": 18.633333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 18.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 19.133333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 19.4,
+   "personnage": "ines"
+  },
+  {
+   "t": 19.633333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 19.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 20.133333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 20.4,
+   "personnage": "ines"
+  },
+  {
+   "t": 20.633333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 34.7,
+   "personnage": "ines"
+  },
+  {
+   "t": 35.166666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 35.63333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 36.1,
+   "personnage": "ines"
+  },
+  {
+   "t": 36.56666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.03333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.5,
+   "personnage": "ines"
+  },
+  {
+   "t": 37.96666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 38.43333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 38.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 39.36666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 39.86666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 40.333333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 40.8,
+   "personnage": "ines"
+  },
+  {
+   "t": 41.266666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 41.733333333333334,
+   "personnage": "ines"
+  },
+  {
+   "t": 42.2,
+   "personnage": "ines"
+  },
+  {
+   "t": 42.666666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 43.13333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 43.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 44.43333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 44.766666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 45.1,
+   "personnage": "ines"
+  },
+  {
+   "t": 45.46666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 45.8,
+   "personnage": "ines"
+  },
+  {
+   "t": 46.13333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 46.46666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 46.833333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 47.166666666666664,
+   "personnage": "ines"
+  },
+  {
+   "t": 47.5,
+   "personnage": "ines"
+  },
+  {
+   "t": 47.833333333333336,
+   "personnage": "ines"
+  },
+  {
+   "t": 48.2,
+   "personnage": "ines"
+  },
+  {
+   "t": 48.53333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 48.86666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 49.2,
+   "personnage": "ines"
+  },
+  {
+   "t": 49.53333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 49.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 50.233333333333334,
+   "personnage": "ines"
+  },
+  {
+   "t": 50.56666666666667,
+   "personnage": "ines"
+  },
+  {
+   "t": 50.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 51.266666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 51.6,
+   "personnage": "ines"
+  },
+  {
+   "t": 51.93333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 52.266666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 35.46666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 35.833333333333336,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 36.2,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 36.56666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 36.93333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 37.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 37.63333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 38,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 38.36666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 38.733333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 39.1,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 39.46666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 39.833333333333336,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 40.166666666666664,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 40.53333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 40.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 41.266666666666666,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 41.63333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 42,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 42.333333333333336,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 42.7,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 43.06666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 43.43333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 49.233333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 49.6,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 49.93333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 50.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 50.666666666666664,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 51.03333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 51.4,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 51.733333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 52.1,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 52.46666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 52.833333333333336,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 53.166666666666664,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 53.53333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 53.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 54.266666666666666,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 54.63333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 54.96666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 55.333333333333336,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 55.7,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 56.13333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 64.73333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 64.93333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 65.13333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 65.33333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 65.53333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 65.73333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 65.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 66.1,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 66.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 66.5,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 66.7,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 66.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 67.1,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 67.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 67.5,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 67.7,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 67.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 68.1,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 68.3,
+   "personnage": "inconnu"
+  }
+ ]
+}

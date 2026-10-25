@@ -343,3 +343,23 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   bas du ballon (le robinet d'eau chaude ouvert ne sert qu'à faire entrer l'air). Règle : chaque objet technique
   montré (ballon, tableau électrique, vanne…) est dessiné conforme au vrai, vérifié sur une photo ou un schéma de
   référence avant le rendu ; noter la source dans le tableau des faits du script.
+- **2026-10-25 — Voix de la Partie 3 déposées dans le dossier de la PARTIE 1** (`videos/001-h72/`). Règle : avant de
+  fabriquer, chercher les MP3 récents dans tout `videos/` (`ls -t videos/*/*.mp3 | head`), vérifier leur date et leur
+  contenu (transcription Vosk de `tools/assembler_voix.py`), puis les ranger dans le bon dossier.
+- **2026-10-25 — `tools/qc.ts` ignorait l'étage des personnages** : le point « sujet » et la silhouette étaient
+  calculés au niveau du sol (y = 0), faux pour un personnage au 6e ou dans l'escalier. Règle : toute hauteur de
+  personnage se compte depuis `position[1]` (étage, marche) ; corrigé dans `tools/qc.ts` et `tools/cadrage.ts`.
+- **2026-10-25 — Un même personnage sur deux moments séparés par une coupe (Inès qui guette à 18 h, puis descend à
+  23 h) obligeait à le faire courir.** Règle : deux personnages avec `presence: { de, a }` (jamais dessinés ni
+  contrôlés hors de leur présence), raccordés par une coupe nette (`coupe: true`) ; un personnage dont on ne voit
+  que la lampe se déclare `invisible: true` (sa position guide la lampe, ses pas restent dans le mixage).
+- **2026-10-25 — Décor sur plusieurs étages (cage d'escalier) : le sol extérieur gris et le ciel se voyaient sous le
+  4e et à côté de la cage.** Règle : un décor en coupe est entouré de la masse sombre de l'immeuble (côtés, dessous,
+  une ligne claire par plancher) ; vérifier les bords de chaque plan large en image fixe.
+- **2026-10-25 — Barre noire en travers des visages (dialogue Inès / Morel)** : la frise décorative du mur était une
+  seule longue boîte qui traversait la porte ouverte à hauteur de tête. Règle : tout décor posé sur un mur (frise,
+  plinthe, câble) s'interrompt aux ouvertures ; dans un dialogue près d'une porte, les deux personnages sont de
+  trois-quarts vers la caméra (pas de profil strict), vérifié en image fixe pleine résolution.
+- **2026-10-25 — Une ancre avec un trait d'union (« toit:au-dessus ») fait planter le rendu** (« Ancre illisible »)
+  alors que `tools/qc.ts` passe. Règle : pas de mot composé dans une ancre de `Episode.tsx` (prendre la phrase ou un
+  autre mot) ; rendre au moins une image fixe après chaque changement de `Episode.tsx`.

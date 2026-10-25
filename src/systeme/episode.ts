@@ -42,6 +42,9 @@ export type DonneesEpisode = {
   demonstration?: boolean; // épisode technique : durée libre (pas de contrôle 70-120 s)
   composition?: string; // identifiant de la Composition Remotion (défaut : "ep" + id)
   dureeFixe?: number; // durée imposée en secondes (sinon : dernier mot + queue)
+  // Signal « STOP » (retour en arrière après la mauvaise branche d'un choix A/B) : image en noir et blanc qui
+  // tremble comme une bande rembobinée, mot STOP en grand ; dessiné par EpisodeStandard
+  retours?: { de: Ancre; a: Ancre }[];
 };
 
 export const idComposition = (d: DonneesEpisode) => d.composition ?? `ep${d.id}`;

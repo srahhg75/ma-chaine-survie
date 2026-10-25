@@ -1,0 +1,407 @@
+[
+ {
+  "phrase": 0,
+  "id": "hook",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": -0.02,
+  "a": 2.184,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 1,
+  "id": "hook2",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 2.382,
+  "a": 4.426,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 2,
+  "id": "recap1",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 4.935,
+  "a": 7.77,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 3,
+  "id": "recap2",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 8.223,
+  "a": 10.088,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 4,
+  "id": "recap3",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 10.345,
+  "a": 12.367,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 5,
+  "id": "recap4",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 12.69,
+  "a": 14.543,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 6,
+  "id": "a1",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 14.93,
+  "a": 16.54,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 7,
+  "id": "a2",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 16.934,
+  "a": 19.188,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 8,
+  "id": "stop",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 19.188,
+  "a": 22.072,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 9,
+  "id": "morel",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 22.072,
+  "a": 25.348,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 10,
+  "id": "i_eau",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": -0.02,
+  "a": 1.711,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 11,
+  "id": "m_bidon",
+  "voix": "Morel",
+  "fichier": "morel.mp3",
+  "de": 0.07,
+  "a": 2.087,
+  "gain_db": -5.3
+ },
+ {
+  "phrase": 12,
+  "id": "i_genereux",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": 2.255,
+  "a": 3.979,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 13,
+  "id": "m_remontee",
+  "voix": "Morel",
+  "fichier": "morel.mp3",
+  "de": 2.5,
+  "a": 5.055,
+  "gain_db": -5.3
+ },
+ {
+  "phrase": 14,
+  "id": "i_rat",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": 4.063,
+  "a": 5.275,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 15,
+  "id": "m_plaisir",
+  "voix": "Morel",
+  "fichier": "morel.mp3",
+  "de": 5.33,
+  "a": 6.77,
+  "gain_db": -5.3
+ },
+ {
+  "phrase": 16,
+  "id": "lampe",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 25.581,
+  "a": 28.081,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 17,
+  "id": "eclats",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 28.454,
+  "a": 30.631,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 18,
+  "id": "monte",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 30.644,
+  "a": 33.352,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 19,
+  "id": "derriere",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 33.589,
+  "a": 35.222,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 20,
+  "id": "t1",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 35.222,
+  "a": 37.089,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 21,
+  "id": "t1a",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 37.273,
+  "a": 39.228,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 22,
+  "id": "t1b",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 39.319,
+  "a": 40.851,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 23,
+  "id": "t1c",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 40.851,
+  "a": 42.533,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 24,
+  "id": "i_continue",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": 6.38,
+  "a": 8.815,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 25,
+  "id": "t2",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 42.534,
+  "a": 45.059,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 26,
+  "id": "t2a",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 45.566,
+  "a": 48.081,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 27,
+  "id": "t2b",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 48.242,
+  "a": 50.319,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 28,
+  "id": "t2c",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 50.319,
+  "a": 52.119,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 29,
+  "id": "t3",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 52.363,
+  "a": 54.167,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 30,
+  "id": "t3a",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 54.167,
+  "a": 56.145,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 31,
+  "id": "i_17",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": 9.644,
+  "a": 12.789,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 32,
+  "id": "calme",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 56.15,
+  "a": 58.14,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 33,
+  "id": "pas",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 58.14,
+  "a": 59.453,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 34,
+  "id": "i_ouf",
+  "voix": "Inès",
+  "fichier": "ines.mp3",
+  "de": 13.79,
+  "a": 15.675,
+  "gain_db": -2.6
+ },
+ {
+  "phrase": 35,
+  "id": "rappel",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 59.453,
+  "a": 61.218,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 36,
+  "id": "signal",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 61.218,
+  "a": 62.754,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 37,
+  "id": "toit",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 63.275,
+  "a": 65.813,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 38,
+  "id": "reponse",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 65.813,
+  "a": 68.44,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 39,
+  "id": "deux",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 68.442,
+  "a": 69.373,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 40,
+  "id": "fin",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 69.726,
+  "a": 71.022,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 41,
+  "id": "carton1",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 71.447,
+  "a": 73.254,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 42,
+  "id": "carton2",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 73.474,
+  "a": 76.389,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 43,
+  "id": "carton3",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 76.718,
+  "a": 79.363,
+  "gain_db": 0.0
+ },
+ {
+  "phrase": 44,
+  "id": "carton4",
+  "voix": "narrateur",
+  "fichier": "narrateur.mp3",
+  "de": 79.363,
+  "a": 80.797,
+  "gain_db": 0.0
+ }
+]

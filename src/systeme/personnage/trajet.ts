@@ -32,6 +32,8 @@ export type DonneesPersonnage = {
   tenues?: { a: Ancre; apparence: Partial<Apparence> }[]; // changements d'apparence (couches, bonnet…)
   voix?: string; // nom de sa voix dans le script (`[Inès]`) : la bouche bouge sur ses répliques (défaut : id)
   fantome?: { de: Ancre; a: Ancre }; // « fantôme » rouge du mauvais réflexe, visible seulement de `de` à `a`
+  presence?: { de?: Ancre; a?: Ancre }; // le personnage n'existe que de `de` à `a` (même héros sur deux plans séparés par une coupe)
+  invisible?: boolean; // jamais dessiné (ex. l'inconnu dont on ne voit que la lampe) : sa position sert au décor et ses pas au mixage
 };
 
 type Segment = { points: Vec3[]; longueur: number; fDepart: number; fArrivee: number; orientationFin?: number; orientationDebut: number };
@@ -48,8 +50,13 @@ export type PersonnageResolu = {
   apparence?: Partial<Apparence>;
   tenues: { f: number; apparence: Partial<Apparence> }[];
   fantome?: [number, number];
+  presence: [number, number];
+  invisible: boolean;
   parole: [number, number][]; // images où il dit un mot (bouche qui bouge)
 };
+
+// Le personnage existe-t-il à cette image ? (hors de sa présence : ni dessiné, ni contrôlé)
+export const present = (r: PersonnageResolu, frame: number) => frame >= r.presence[0] && frame < r.presence[1];
 
 export type EtatPersonnage = { position: Vec3; orientation: number; pose: Pose; marche: boolean; lampe: boolean; vitesse: number; visage: Visage; apparence?: Partial<Apparence> };
 
@@ -91,6 +98,8 @@ export const resoudrePersonnage = (p: DonneesPersonnage, al: Alignement, fps: nu
     lampe: p.lampe ? [image(p.lampe.de, al, fps), p.lampe.a !== undefined ? image(p.lampe.a, al, fps) : Infinity] : undefined,
     puissanceLampe: p.lampe?.puissance ?? 1,
     fantome: p.fantome ? [image(p.fantome.de, al, fps), image(p.fantome.a, al, fps)] : undefined,
+    presence: [p.presence?.de !== undefined ? image(p.presence.de, al, fps) : -Infinity, p.presence?.a !== undefined ? image(p.presence.a, al, fps) : Infinity],
+    invisible: !!p.invisible,
   };
 };
 

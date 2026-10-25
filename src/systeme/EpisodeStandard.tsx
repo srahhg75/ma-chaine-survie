@@ -11,7 +11,9 @@ import { PostProcess } from "./kit3d/PostProcess";
 import { Alignement } from "./mots";
 import { Bonhomme } from "./personnage/Bonhomme";
 import { Humain } from "./personnage/Humain";
-import { etatPersonnage, opaciteFantome } from "./personnage/trajet";
+import { etatPersonnage, opaciteFantome, present } from "./personnage/trajet";
+import { instant } from "./timeline";
+import { Retour } from "./Retour";
 import { Fantome } from "./kit3d/Fantome";
 import { SousTitres } from "./SousTitres";
 
@@ -29,6 +31,7 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
   return (
     <>
       {r.personnages.map((p) => {
+        if (p.invisible || !present(p, frame)) return null;
         const e = etatPersonnage(p, frame, fps);
         const corps =
           p.variante === "humain" ? (
@@ -61,16 +64,19 @@ export const EpisodeStandard: React.FC<PropsEpisode & { donnees: DonneesEpisode;
 }) => {
   const { fps, width, height } = useVideoConfig();
   const r = useMemo(() => resoudreEpisode(donnees, alignement, fps), [donnees, alignement, fps]);
+  const retours = useMemo(() => (donnees.retours ?? []).map((x) => [instant(x.de, alignement), instant(x.a, alignement)] as [number, number]), [donnees, alignement]);
   return (
     <AbsoluteFill style={{ backgroundColor: "#050608" }}>
-      <ThreeCanvas width={width} height={height} shadows gl={{ antialias: false, preserveDrawingBuffer: true }}>
-        <CameraRig cles={r.camera} />
-        {eclairage ?? <EclairageBase />}
-        <Decor decor={donnees.decor} />
-        <Personnages r={r} />
-        {scene}
-        <PostProcess {...donnees.post} {...(brouillon ? { occlusion: false } : {})} />
-      </ThreeCanvas>
+      <Retour retours={retours}>
+        <ThreeCanvas width={width} height={height} shadows gl={{ antialias: false, preserveDrawingBuffer: true }}>
+          <CameraRig cles={r.camera} />
+          {eclairage ?? <EclairageBase />}
+          <Decor decor={donnees.decor} />
+          <Personnages r={r} />
+          {scene}
+          <PostProcess {...donnees.post} {...(brouillon ? { occlusion: false } : {})} />
+        </ThreeCanvas>
+      </Retour>
       {!sansTexte && <Hud elements={r.hud} camera={r.camera} />}
       {!sansTexte && <SousTitres mots={alignement.mots} phrases={alignement.phrases} />}
       {audio !== "aucun" && <Audio src={staticFile(`${donnees.id}/${audio === "mix" ? "mix" : "voix"}.wav`)} />}

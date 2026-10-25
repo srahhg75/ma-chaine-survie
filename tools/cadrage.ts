@@ -4,7 +4,7 @@
 import { chargerEpisode } from "./charger";
 import { etatCamera, project } from "../src/systeme/camera";
 import { hautTete, hauteurBassin } from "../src/systeme/personnage/poses";
-import { etatPersonnage } from "../src/systeme/personnage/trajet";
+import { etatPersonnage, present } from "../src/systeme/personnage/trajet";
 import { Vec3 } from "../src/systeme/maths";
 
 const id = process.argv[2];
@@ -21,10 +21,11 @@ r.camera.forEach((c, i) => {
   const cam = etatCamera(r.camera, f, fps);
   const phrase = alignement.phrases.find((p) => p.fDebut <= f && p.fFin >= f - 15)?.id ?? "-";
   const persos = r.personnages
+    .filter((p) => present(p, f))
     .map((p) => {
       const e = etatPersonnage(p, f, fps);
       const k = p.taille;
-      const sommet = (hauteurBassin(e.pose, p.variante) + hautTete(p.variante) + 0.06) * k;
+      const sommet = e.position[1] + (hauteurBassin(e.pose, p.variante) + hautTete(p.variante) + 0.06) * k;
       return `${p.id} pieds ${fmt(project(e.position, cam))} tête ${fmt(project([e.position[0], sommet, e.position[2]], cam))}`;
     })
     .filter((s) => !s.startsWith("fantome"))
