@@ -9,16 +9,17 @@ import { bruit, clamp, Vec3 } from "../../systeme/maths";
 import { Alignement } from "../../systeme/mots";
 import { etatPersonnage, present, resoudrePersonnage } from "../../systeme/personnage/trajet";
 import { Lumiere, useTemps } from "../001-h72/Episode";
-import { donnees, H, NIV, P, ZA, ZF } from "./donnees";
+import { DEMI, donnees, H, NIV, P, ZA, ZF } from "./donnees";
 
 /*
- * Éléments 3D de H+72 partie 3 : la cage d'escalier en coupe, du 4e à la porte du toit.
- * Murs à deux tons (soubassement vert-de-gris, haut cassé), volées de 18 marches, rampes, paliers, portes
- * (Inès au 6e, Morel au 5e, les voisins du 7e, le toit), fenêtres d'escalier sur la ville noire, veilleuses de
- * secours à piles. La lampe de l'inconnu (faisceau froid) suit la position de son personnage invisible.
+ * Éléments 3D de H+72 partie 3 : la cage d'escalier en coupe, du 4e à la porte du toit, comme un vrai escalier
+ * d'immeuble : paliers d'étage empilés à gauche (portes de Morel au 5e, d'Inès au 6e, des voisins au 7e, du toit),
+ * paliers intermédiaires à droite (fenêtres sur la ville noire), deux demi-volées de 9 marches par étage.
+ * Murs à deux tons (soubassement vert-de-gris, haut cassé), rampes, veilleuses de secours à piles.
+ * La lampe de l'inconnu (faisceau froid) suit la position de son personnage invisible.
  */
 const X0 = -1.8; // mur ouest (intérieur)
-const X1 = 5.4; // mur est (intérieur)
+const X1 = 3.6; // mur est (intérieur)
 const ZB = -1.6; // mur du fond (face intérieure −1,54)
 const ZD = 1.0; // bord de la coupe (devant)
 const HAUT = NIV.toit + 2.7; // plafond de la cage
@@ -107,15 +108,16 @@ const MurTroue: React.FC<{ axe: "x" | "z"; plan: number; u0: number; u1: number;
   );
 };
 
-// Volée droite de 18 marches (16 × 20 cm) de `bas` à `bas + H`, montant vers l'est (fond) ou l'ouest (devant)
+// Demi-volée de 9 marches (16 × 20 cm) de `bas` à `bas + DEMI` : au fond, elle monte vers l'est (de x 0 à 1,8) ;
+// devant, elle monte vers l'ouest (de x 1,8 à 0)
 const Volee: React.FC<{ bas: number; versEst: boolean }> = ({ bas, versEst }) => {
   const z = versEst ? ZF : ZA;
-  const angle = Math.atan2(H, 3.6);
+  const angle = Math.atan2(DEMI, 1.8);
   const zRampe = z + 0.47;
   return (
     <group>
-      {Array.from({ length: 18 }, (_, i) => {
-        const x = versEst ? (i + 0.5) * 0.2 : 3.6 - (i + 0.5) * 0.2;
+      {Array.from({ length: 9 }, (_, i) => {
+        const x = versEst ? (i + 0.5) * 0.2 : 1.8 - (i + 0.5) * 0.2;
         const haut = bas + (i + 1) * 0.16;
         return (
           <group key={i}>
@@ -132,19 +134,19 @@ const Volee: React.FC<{ bas: number; versEst: boolean }> = ({ bas, versEst }) =>
         );
       })}
       {/* paillasse (dessous de la volée) */}
-      <mesh position={[1.8, bas + H / 2 - 0.26, z]} rotation={[0, 0, versEst ? angle : -angle]} castShadow receiveShadow>
-        <boxGeometry args={[Math.hypot(3.6, H), 0.16, 0.9]} />
+      <mesh position={[0.9, bas + DEMI / 2 - 0.26, z]} rotation={[0, 0, versEst ? angle : -angle]} castShadow receiveShadow>
+        <boxGeometry args={[Math.hypot(1.8, DEMI), 0.16, 0.9]} />
         <meshStandardMaterial color={C_DALLE} roughness={0.95} />
       </mesh>
       {/* rampe : main courante en bois sur barreaux, côté vide (sud) */}
-      <mesh position={[1.8, bas + H / 2 + 0.92, zRampe]} rotation={[0, 0, versEst ? angle : -angle]}>
-        <boxGeometry args={[Math.hypot(3.6, H), 0.05, 0.06]} />
+      <mesh position={[0.9, bas + DEMI / 2 + 0.92, zRampe]} rotation={[0, 0, versEst ? angle : -angle]}>
+        <boxGeometry args={[Math.hypot(1.8, DEMI), 0.05, 0.06]} />
         <meshStandardMaterial color="#5a3b26" roughness={0.55} />
       </mesh>
-      {Array.from({ length: 11 }, (_, i) => {
-        const u = (i + 0.5) / 11;
-        const x = versEst ? 3.6 * u : 3.6 * (1 - u);
-        const y0 = bas + H * u;
+      {Array.from({ length: 6 }, (_, i) => {
+        const u = (i + 0.5) / 6;
+        const x = versEst ? 1.8 * u : 1.8 * (1 - u);
+        const y0 = bas + DEMI * u;
         return (
           <mesh key={i} position={[x, y0 + 0.45, zRampe]}>
             <boxGeometry args={[0.022, 0.9, 0.022]} />
@@ -209,8 +211,10 @@ const Porte: React.FC<{ charniere: Vec3; sens: "x+" | "x-" | "z-"; ouverture: nu
 };
 
 // Cadre (chambranle) d'une ouverture
-const Chambranle: React.FC<{ centre: Vec3; axe: "x" | "z"; largeur?: number; hauteur?: number }> = ({ centre, axe, largeur = 0.9, hauteur = 2.05 }) => {
-  const [cx, cy, cz] = centre;
+const Chambranle: React.FC<{ centre: Vec3; axe: "x" | "z"; largeur?: number; hauteur?: number; ouest?: boolean }> = ({ centre, axe, largeur = 0.9, hauteur = 2.05, ouest = false }) => {
+  const [cx0, cy, cz] = centre;
+  // sur un mur ouest, le chambranle est posé côté cage (vers l'est)
+  const cx = ouest ? cx0 + 0.14 : cx0;
   const pieces: [Vec3, [number, number, number]][] =
     axe === "z"
       ? [
@@ -336,7 +340,7 @@ const Faisceau: React.FC<{ origine: Vec3; vise: Vec3; force: number; longueur?: 
 };
 
 // Point visé par la lampe de l'inconnu : vers le haut de la cage (là où est Inès), avec un léger balayage
-const visee = (o: Vec3, cibleY: number, t: number, balayage = 0.5): Vec3 => [1.6 + balayage * Math.sin(t * 1.3), cibleY, -0.3 + 0.3 * Math.sin(t * 0.9)];
+const visee = (o: Vec3, cibleY: number, t: number, balayage = 0.5): Vec3 => [0.6 + balayage * Math.sin(t * 1.3), cibleY, -0.3 + 0.3 * Math.sin(t * 0.9)];
 
 const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
   const { t, fps, f, a, entre } = useTemps(al);
@@ -373,10 +377,10 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
   // ---- fantômes : la lampe qui entre chez Inès (branche A), la lampe qui se pose sur sa porte (tactique 1) ----
   const opA = clamp(Math.min((t - a("a2:revient") + 0.2) / 0.25, (a("a2.fin") + 0.1 - t) / 0.25));
   const uA = entre("a2:revient", "a2:vide");
-  const fA: Vec3 = [2.6 - 3.1 * uA, NIV.e5 + 1.6 + (H - 0.2) * uA, ZA - 1.0 * uA];
+  const fA: Vec3 = [1.6 - 2.2 * uA, NIV.e5 + DEMI + 0.9 + 0.7 * uA, ZA - 1.0 * uA];
   const op1 = clamp(Math.min((t - a("t1a") + 0.1) / 0.25, (a("t1b.fin") + 0.2 - t) / 0.25));
   const u1 = entre("t1a", "t1a:porte");
-  const f1: Vec3 = [2.2 - 1.6 * u1, NIV.e5 + 2.3 + 1.0 * u1, ZA];
+  const f1: Vec3 = [1.4 - 1.0 * u1, NIV.e5 + DEMI + 1.2 + 0.6 * u1, ZA];
 
   // ---- objets ----
   const porteMorel = t >= a("recap3") - 0.5 && t < a("lampe") ? 1 : 0;
@@ -401,43 +405,41 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
         trous={[
           { u0: -1.35, u1: -0.45, y0: NIV.e6, y1: NIV.e6 + 2.05 }, // porte d'Inès
           { u0: -1.35, u1: -0.45, y0: NIV.toit, y1: NIV.toit + 2.05 }, // porte du toit
-          ...[NIV.e4, NIV.e5, NIV.e6, NIV.e7].map((y) => ({ u0: 1.4, u1: 2.2, y0: y + 1.6, y1: y + 2.7 })), // fenêtres
+          ...[NIV.e4, NIV.e5, NIV.e6, NIV.e7].map((y) => ({ u0: 2.3, u1: 3.1, y0: y + DEMI + 0.6, y1: y + DEMI + 1.7 })), // fenêtres
         ]}
       />
-      <MurTroue axe="x" plan={X0 - EP / 2} u0={ZB} u1={ZD} trous={[]} />
       <MurTroue
         axe="x"
-        plan={X1 + EP / 2}
+        plan={X0 - EP / 2}
         u0={ZB}
         u1={ZD}
         trous={[
-          { u0: -1.05, u1: -0.15, y0: NIV.e5, y1: NIV.e5 + 2.05 }, // porte de Morel
-          // mur arasé (coupe) entre le palier du 5e et l'entrée de Morel : on les voit ensemble pendant le dialogue
+          // porte de Morel (5e) et mur arasé (coupe) entre le palier et son entrée : on les voit ensemble au dialogue
+          { u0: -1.05, u1: -0.15, y0: NIV.e5, y1: NIV.e5 + 2.05 },
           { u0: -0.15, u1: ZD + 0.01, y0: NIV.e5 + 0.22, y1: NIV.e5 + 2.6 },
           { u0: -0.95, u1: -0.05, y0: NIV.e7, y1: NIV.e7 + 2.05 }, // voisins du 7e
         ]}
       />
+      <MurTroue axe="x" plan={X1 + EP / 2} u0={ZB} u1={ZD} trous={[]} />
       {/* plafond */}
       <mesh position={[(X0 + X1) / 2, HAUT + 0.1, (ZB + ZD) / 2]}>
         <boxGeometry args={[X1 - X0 + 0.3, 0.2, ZD - ZB]} />
         <meshStandardMaterial color="#3a3833" roughness={1} />
       </mesh>
-      {/* paliers : 4e (toute la largeur, la volée du 3e passe dessous), 6e et toit à gauche, 5e et 7e à droite */}
+      {/* paliers d'étage empilés à gauche ; paliers intermédiaires à droite (mi-étage) ; deux demi-volées par étage */}
       <Dalle x0={X0} x1={X1} y={NIV.e4} />
-      <Dalle x0={X0} x1={0} y={NIV.e6} />
-      <Dalle x0={X0} x1={0} y={NIV.toit} />
-      <Dalle x0={3.6} x1={X1} y={NIV.e5} />
-      <Dalle x0={3.6} x1={X1} y={NIV.e7} />
-      <Volee bas={NIV.e4} versEst />
-      <Volee bas={NIV.e5} versEst={false} />
-      <Volee bas={NIV.e6} versEst />
-      <Volee bas={NIV.e7} versEst={false} />
-      {[NIV.e4, NIV.e5, NIV.e6, NIV.e7].map((y) => (
-        <FenetreEscalier key={y} x={1.8} y0={y + 1.6} />
+      {[NIV.e5, NIV.e6, NIV.e7, NIV.toit].map((y) => (
+        <Dalle key={y} x0={X0} x1={0} y={y} />
       ))}
-      {/* lueur de lune par les fenêtres */}
       {[NIV.e4, NIV.e5, NIV.e6, NIV.e7].map((y) => (
-        <pointLight key={y} position={[1.8, y + 2.1, -1.2]} intensity={0.35} distance={3.2} color="#9fb4e8" decay={2} />
+        <group key={y}>
+          <Dalle x0={1.8} x1={X1} y={y + DEMI} />
+          <Volee bas={y} versEst />
+          <Volee bas={y + DEMI} versEst={false} />
+          <FenetreEscalier x={2.7} y0={y + DEMI + 0.6} />
+          {/* lueur de lune par la fenêtre */}
+          <pointLight position={[2.7, y + DEMI + 1.2, -1.2]} intensity={0.35} distance={3.0} color="#9fb4e8" decay={2} />
+        </group>
       ))}
 
       {/* ---- 4e : porte palière fermée, paillasson, veilleuse ---- */}
@@ -447,40 +449,40 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       <Veilleuse position={[-0.9, NIV.e4 + 2.35, ZB + 0.1]} puissance={0.8} />
       <Minuterie position={[-0.2, NIV.e4 + 1.2, ZB + 0.08]} mur="z" />
 
-      {/* ---- 5e : porte de Morel (mur est), son entrée et ses bidons ---- */}
-      <Chambranle centre={[X1 + 0.02, NIV.e5, -0.6]} axe="x" />
-      <Porte charniere={[X1 + 0.03, NIV.e5, -1.05]} sens="z-" ouverture={porteMorel} angle={1.35} couleur="#3f5b4a" />
+      {/* ---- 5e : porte de Morel (mur ouest, juste sous Inès), son entrée et ses bidons ---- */}
+      <Chambranle centre={[X0 - 0.02, NIV.e5, -0.6]} axe="x" ouest />
+      <Porte charniere={[X0 - 0.03, NIV.e5, -1.05]} sens="z-" ouverture={porteMorel} angle={-1.35} couleur="#3f5b4a" />
       <EntreeMorel bidonsVisibles />
-      <Veilleuse position={[4.5, NIV.e5 + 2.35, ZB + 0.1]} />
-      <Minuterie position={[3.75, NIV.e5 + 1.2, ZB + 0.08]} mur="z" />
+      <Veilleuse position={[-0.9, NIV.e5 + 2.35, ZB + 0.1]} />
+      <Minuterie position={[-0.2, NIV.e5 + 1.2, ZB + 0.08]} mur="z" />
       {bidonSol > 0 && !porte && !posePorte && (
-        <Bidon position={[5.05 - 0.1 * bidonSol + (5.45 - 5.05) * (1 - bidonSol), NIV.e5, -1.15]} rotation={0.2} />
+        <Bidon position={[-1.6 + 0.1 * bidonSol - 0.35 * (1 - bidonSol), NIV.e5, -1.15]} rotation={0.2} />
       )}
       {porte && inesLa && <Bidon position={mainG} rotation={-oI + Math.PI / 2} />}
-      {posePorte && <Bidon position={[4.85, NIV.e7, -1.0]} rotation={0.3} />}
+      {posePorte && <Bidon position={[-0.75, NIV.e7, -1.15]} rotation={0.3} />}
 
       {/* ---- 6e : la porte d'Inès (mur du fond) ---- */}
       <Chambranle centre={[-0.9, NIV.e6, ZB + 0.02]} axe="z" />
       <Porte charniere={[-1.35, NIV.e6, ZB + 0.06]} sens="x+" ouverture={0} angle={0} couleur="#5a3a2a" />
       <Arrondi taille={[0.1, 0.07, 0.01]} position={[-0.9, NIV.e6 + 1.6, ZB + 0.1]} rayon={0.004} couleur="#c8b27a" metal={0.8} rugosite={0.3} />
       <Paillasson position={[-0.9, NIV.e6, -1.2]} />
-      <Veilleuse position={[-1.5, NIV.e6 + 2.35, ZB + 0.1]} puissance={0.9} />
-      <Minuterie position={[-0.2, NIV.e6 + 1.2, ZB + 0.08]} mur="z" />
-      <Plante position={[-0.2, NIV.e6, -1.35]} graine="palier6" />
+      <Veilleuse position={[-0.2, NIV.e6 + 2.35, ZB + 0.1]} puissance={0.9} />
+      <Minuterie position={[-0.15, NIV.e6 + 1.2, ZB + 0.08]} mur="z" />
+      <Plante position={[-1.6, NIV.e6, 0.75]} graine="palier6" />
 
-      {/* ---- 7e : les voisins (porte du mur est), bougies derrière, poussette ---- */}
-      <Chambranle centre={[X1 + 0.02, NIV.e7, -0.5]} axe="x" />
-      <Porte charniere={[X1 + 0.03, NIV.e7, -0.95]} sens="z-" ouverture={0} angle={0} couleur="#6a4a2a" />
+      {/* ---- 7e : les voisins (porte du mur ouest), bougies derrière, poussette ---- */}
+      <Chambranle centre={[X0 - 0.02, NIV.e7, -0.5]} axe="x" ouest />
+      <Porte charniere={[X0 - 0.03, NIV.e7, -0.95]} sens="z-" ouverture={0} angle={0} couleur="#6a4a2a" />
       {/* lueur des bougies sous la porte */}
-      <mesh position={[X1 + 0.01, NIV.e7 + 0.012, -0.5]}>
+      <mesh position={[X0 - 0.01, NIV.e7 + 0.012, -0.5]}>
         <boxGeometry args={[0.04, 0.018, 0.8]} />
         <meshBasicMaterial color="#ffb050" toneMapped={false} transparent opacity={0.9 * bougies7} />
       </mesh>
-      <pointLight position={[X1 - 0.15, NIV.e7 + 0.12, -0.5]} intensity={0.55 * bougies7} distance={1.8} color="#ffa040" decay={2} />
-      <Poussette position={[4.0, NIV.e7, -1.25]} />
-      <Paillasson position={[X1 - 0.3, NIV.e7, -0.5]} rotation={Math.PI / 2} />
-      <Veilleuse position={[4.5, NIV.e7 + 2.35, ZB + 0.1]} />
-      <Minuterie position={[3.75, NIV.e7 + 1.2, ZB + 0.08]} mur="z" />
+      <pointLight position={[X0 + 0.15, NIV.e7 + 0.12, -0.5]} intensity={0.55 * bougies7} distance={1.8} color="#ffa040" decay={2} />
+      <Poussette position={[-0.4, NIV.e7, -1.25]} />
+      <Paillasson position={[X0 + 0.3, NIV.e7, -0.5]} rotation={Math.PI / 2} />
+      <Veilleuse position={[-0.9, NIV.e7 + 2.35, ZB + 0.1]} />
+      <Minuterie position={[-0.2, NIV.e7 + 1.2, ZB + 0.08]} mur="z" />
 
       {/* ---- toit : porte du fond, terrasse, parapet ---- */}
       <Chambranle centre={[-0.9, NIV.toit, ZB + 0.02]} axe="z" />
@@ -488,7 +490,7 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       <Arrondi taille={[0.42, 0.12, 0.01]} position={[-0.9, NIV.toit + 2.25, ZB + 0.1]} rayon={0.004} couleur="#b23a2a" rugosite={0.6} />
       <Dalle x0={-3.0} x1={1.6} y={NIV.toit} z0={-5.0} z1={ZB - EP} />
       <Arrondi taille={[4.6, 0.6, 0.15]} position={[-0.7, NIV.toit + 0.3, -5.0]} rayon={0.02} couleur="#5b5750" />
-      <Veilleuse position={[-1.5, NIV.toit + 2.35, ZB + 0.1]} puissance={0.7} />
+      <Veilleuse position={[-0.2, NIV.toit + 2.35, ZB + 0.1]} puissance={0.7} />
       {/* neige qui entre quand la porte s'ouvre : lumière froide de dehors */}
       {porteToit > 0.05 && <pointLight position={[-0.9, NIV.toit + 1.2, ZB - 0.4]} intensity={0.8 * porteToit} distance={3.0} color="#a9c4ff" decay={2} />}
 
@@ -507,9 +509,9 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       {/* lampe de l'inconnu */}
       <Faisceau origine={origineInc} vise={cibleInc} force={lampeInconnu ? 1 : 0} ombre />
       {/* flash-back des 2 éclats (même lampe, même endroit qu'à « 2 éclats ») */}
-      <Faisceau origine={P.lampe4} vise={[1.6, NIV.e6, -0.3]} force={flash ? 1 : 0} />
+      <Faisceau origine={P.lampe4} vise={[0.6, NIV.e6, -0.3]} force={flash ? 1 : 0} />
       {/* la lampe qui répond, derrière la porte du toit */}
-      <Faisceau origine={P.lampeToit} vise={[3.0, NIV.e7 + 0.8, -0.4]} force={lampeToit ? (t >= a("deux:deux") - 0.1 ? 0.8 : 1) : 0} longueur={3.6} />
+      <Faisceau origine={P.lampeToit} vise={[-0.3, NIV.e7 + 0.8, -0.2]} force={lampeToit ? (t >= a("deux:deux") - 0.1 ? 0.8 : 1) : 0} longueur={3.6} />
 
       {/* fantômes rouges */}
       <Fantome opacite={opA}>
@@ -540,12 +542,12 @@ const Masse: React.FC<{ x0: number; x1: number; y0: number; y1: number }> = ({ x
 
 const Immeuble: React.FC = () => (
   <group>
-    {/* ouest (appartements des étages, derrière la porte d'Inès) */}
-    <Masse x0={-7} x1={X0 - EP} y0={-6} y1={HAUT + 0.2} />
-    {/* est : sous et au-dessus de l'entrée de Morel, et au-delà */}
-    <Masse x0={X1 + EP} x1={7.22} y0={-6} y1={NIV.e5 - 0.22} />
-    <Masse x0={X1 + EP} x1={7.22} y0={NIV.e5 + 2.8} y1={HAUT + 0.2} />
-    <Masse x0={7.22} x1={11} y0={-6} y1={HAUT + 0.2} />
+    {/* ouest : les appartements, sous et au-dessus de l'entrée de Morel (5e), et au-delà */}
+    <Masse x0={-3.52} x1={X0 - EP} y0={-6} y1={NIV.e5 - 0.22} />
+    <Masse x0={-3.52} x1={X0 - EP} y0={NIV.e5 + 2.8} y1={HAUT + 0.2} />
+    <Masse x0={-9} x1={-3.52} y0={-6} y1={HAUT + 0.2} />
+    {/* est */}
+    <Masse x0={X1 + EP} x1={9} y0={-6} y1={HAUT + 0.2} />
     {/* devant et sous la coupe : le vide de la nuit (cache le sol extérieur dans les plongées) */}
     <mesh position={[2, 0.03, ZD + 30.02]} rotation={[-Math.PI / 2, 0, 0]}>
       <planeGeometry args={[90, 60]} />
@@ -556,11 +558,11 @@ const Immeuble: React.FC = () => (
   </group>
 );
 
-// Entrée de Morel (5e), derrière la porte du mur est : on la voit en coupe quand la porte est ouverte
+// Entrée de Morel (5e), derrière la porte du mur ouest : on la voit en coupe (devant ouvert)
 const EntreeMorel: React.FC<{ bidonsVisibles: boolean }> = ({ bidonsVisibles }) => {
   const y = NIV.e5;
-  const x0 = X1 + EP;
-  const x1 = 7.1;
+  const x0 = -3.4;
+  const x1 = X0 - EP;
   return (
     <group>
       <Dalle x0={x0} x1={x1} y={y} z0={ZB} z1={0.6} />
@@ -568,7 +570,7 @@ const EntreeMorel: React.FC<{ bidonsVisibles: boolean }> = ({ bidonsVisibles }) 
         <boxGeometry args={[x1 - x0, 2.6, EP]} />
         <meshStandardMaterial color="#8a7a5e" roughness={0.9} />
       </mesh>
-      <mesh position={[x1 + EP / 2, y + 1.3, (ZB + 0.6) / 2]}>
+      <mesh position={[x0 - EP / 2, y + 1.3, (ZB + 0.6) / 2]}>
         <boxGeometry args={[EP, 2.6, 0.6 - ZB]} />
         <meshStandardMaterial color="#8a7a5e" roughness={0.9} />
       </mesh>
@@ -578,14 +580,14 @@ const EntreeMorel: React.FC<{ bidonsVisibles: boolean }> = ({ bidonsVisibles }) 
       </mesh>
       {/* bidons alignés contre le mur du fond (l'eau d'Inès) */}
       {bidonsVisibles &&
-        [6.05, 6.4, 6.75].flatMap((x, i) => [
+        [-2.45, -2.8, -3.15].flatMap((x, i) => [
           <Bidon key={`a${i}`} position={[x, y, -1.38]} rotation={(bruit("bm", i) - 0.5) * 0.3} />,
           <Bidon key={`b${i}`} position={[x, y, -1.18]} rotation={(bruit("bm", i + 5) - 0.5) * 0.3} />,
         ])}
       {/* patère et manteau, bougie sur un tabouret */}
-      <Arrondi taille={[0.34, 0.85, 0.14]} position={[6.95, y + 1.25, -0.4]} rayon={0.06} couleur="#4f4a40" />
-      <Arrondi taille={[0.3, 0.45, 0.3]} position={[6.8, y + 0.225, 0.25]} rayon={0.03} couleur="#6b4a32" />
-      <Bougie position={[6.8, y + 0.46, 0.25]} allumee graine="morel3" puissance={0.9} />
+      <Arrondi taille={[0.34, 0.85, 0.14]} position={[-3.3, y + 1.25, -0.4]} rayon={0.06} couleur="#4f4a40" />
+      <Arrondi taille={[0.3, 0.45, 0.3]} position={[-3.15, y + 0.225, 0.25]} rayon={0.03} couleur="#6b4a32" />
+      <Bougie position={[-3.15, y + 0.46, 0.25]} allumee graine="morel3" puissance={0.9} />
     </group>
   );
 };

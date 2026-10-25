@@ -363,3 +363,13 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-25 — Une ancre avec un trait d'union (« toit:au-dessus ») fait planter le rendu** (« Ancre illisible »)
   alors que `tools/qc.ts` passe. Règle : pas de mot composé dans une ancre de `Episode.tsx` (prendre la phrase ou un
   autre mot) ; rendre au moins une image fixe après chaque changement de `Episode.tsx`.
+- **2026-10-25 — Écran entièrement rouge 0,4 s (vu sur la tranche rendue)** : le fantôme apparaissait pendant que la
+  caméra était encore en gros plan juste devant lui. Règle : un fantôme n'apparaît qu'une fois la caméra arrivée sur
+  le plan qui le montre (`fantome.de` ≥ arrivée de ce plan) ; jamais de personnage ni de fantôme à moins de 1 m de
+  la caméra pendant un déplacement. Relire chaque tranche du rendu final dès qu'elle sort (planche 1 image/s) : une
+  tranche fautive se refait seule (10 min) au lieu de toute la vidéo.
+- **2026-10-25 — RETOUR : « on dirait qu'elle descend 2 étages pour aller au 5e ».** L'escalier en coupe alternait
+  les paliers d'étage à gauche et à droite (une volée droite par étage) : le palier vu juste sous celui d'Inès était
+  le 4e. Règle : un escalier d'immeuble a DEUX demi-volées par étage et un palier intermédiaire (avec la fenêtre) ;
+  tous les paliers d'étage sont empilés du même côté, les portes d'un étage juste au-dessus de celles de l'étage
+  inférieur. En coupe, les paliers empilés se cachent l'un l'autre vu d'en haut : filmer les étages de face.

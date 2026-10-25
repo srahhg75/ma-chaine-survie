@@ -19,7 +19,8 @@ for ((k = 0; k < N; k++)); do
   [ -s "$F" ] && { echo "tranche $k déjà rendue"; continue; }
   A=$((k * PAR)); B=$(( (k + 1) * PAR - 1 )); [ $B -ge $TOTAL ] && B=$((TOTAL - 1))
   echo "$(date +%H:%M:%S) tranche $k : images $A-$B"
-  npx remotion render src/index.ts "$COMP" "$F.tmp.mp4" --frames=$A-$B --muted --log=error || { echo "ÉCHEC tranche $k"; exit 1; }
+  # CONCURRENCE=n : onglets en parallèle (PC sans carte graphique et 8 Go : 3 au plus, sinon la mémoire sature)
+  npx remotion render src/index.ts "$COMP" "$F.tmp.mp4" --frames=$A-$B --muted --log=error ${CONCURRENCE:+--concurrency=$CONCURRENCE} || { echo "ÉCHEC tranche $k"; exit 1; }
   mv "$F.tmp.mp4" "$F"
 done
 ls "$T"/[0-9][0-9].mp4 | sed "s|^$T/|file '|; s|$|'|" > "$T/liste.txt"

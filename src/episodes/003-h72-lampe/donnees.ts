@@ -6,47 +6,57 @@ import { APPARENCE_INES, APPARENCE_MOREL } from "../../systeme/personnage/appare
 /*
  * H+72 — Partie 3 « La lampe qui suit ». Script : videos/003-h72-lampe/script.txt (découpage : script.md).
  * Un seul plateau : la CAGE D'ESCALIER de l'immeuble en coupe, du 4e jusqu'à la porte du toit (dessinée dans
- * Episode.tsx, sans `pieces` : le décor en données ne connaît qu'un seul étage). Vue de face (caméra au sud) :
- *  - paliers à GAUCHE (x −1,8 → 0) au 4e, au 6e (porte d'Inès, mur du fond) et au toit (porte du toit) ;
- *  - paliers à DROITE (x 3,6 → 5,4) au 5e (porte de Morel, mur est) et au 7e (porte des voisins, mur est) ;
- *  - entre les deux, une volée droite de 18 marches par étage, alternativement au fond (z −1) et devant (z 0,1).
+ * Episode.tsx, sans `pieces` : le décor en données ne connaît qu'un seul étage). Vue de face (caméra au sud),
+ * comme un vrai escalier d'immeuble (retour du 25/10 : « elle descend 2 étages pour aller au 5e ») :
+ *  - TOUS les paliers d'étage à GAUCHE (x −1,8 → 0), empilés : 4e, 5e (porte de Morel, mur ouest), 6e (porte
+ *    d'Inès, mur du fond), 7e (voisins, mur ouest), toit (porte du fond) ;
+ *  - à DROITE (x 1,8 → 3,6), un palier intermédiaire à mi-étage avec la fenêtre de l'escalier ;
+ *  - deux demi-volées de 9 marches par étage : montée au fond (z −1) vers le palier intermédiaire, puis devant
+ *    (z 0,1) vers l'étage suivant.
  * Inès : « ines6 » jusqu'à 23 h (elle guette devant sa porte), puis « ines » après la coupe (même tenue, même voix).
  * L'inconnu n'est jamais montré : un personnage invisible dont on ne dessine que la lampe (et dont on entend les pas).
  */
 export const H = 2.88; // hauteur d'un étage
 export const NIV = { e4: 0, e5: H, e6: 2 * H, e7: 3 * H, toit: 4 * H };
-export const ZF = -1.0; // volée du fond
-export const ZA = 0.1; // volée de devant
+export const DEMI = H / 2; // palier intermédiaire
+export const ZF = -1.0; // demi-volée du fond (étage -> palier intermédiaire)
+export const ZA = 0.1; // demi-volée de devant (palier intermédiaire -> étage suivant)
 
-// Point d'une volée (u = 0 en bas, 1 en haut). Volées montant vers l'est (fond) ou vers l'ouest (devant).
-export const volee = (bas: number, versEst: boolean, u: number): Vec3 => {
-  const x = versEst ? 3.6 * u : 3.6 * (1 - u);
-  return [x, bas + H * u, versEst ? ZF : ZA];
-};
+// Chemin pour monter d'un étage (de `y` à `y + H`), du pied de la volée du fond au haut de la volée de devant
+export const montee = (y: number): Vec3[] => [
+  [0, y, ZF],
+  [1.8, y + DEMI, ZF],
+  [2.3, y + DEMI, ZF + 0.25],
+  [2.3, y + DEMI, ZA - 0.25],
+  [1.8, y + DEMI, ZA],
+  [0, y + H, ZA],
+];
+// Et pour descendre d'un étage (de `y` à `y − H`)
+export const descente = (y: number): Vec3[] => [...montee(y - H)].reverse();
 
 export const P = {
   porteInes: [-0.9, NIV.e6, -1.6] as Vec3, // mur du fond du palier du 6e (gauche)
   verrouInes: [-0.55, NIV.e6 + 1.02, -1.53] as Vec3,
-  porteMorel: [5.4, NIV.e5, -0.6] as Vec3, // mur est du palier du 5e (droite)
-  porte7: [5.4, NIV.e7, -0.5] as Vec3, // voisins du 7e (mur est), bougies derrière
-  seuil7: [5.3, NIV.e7 + 0.05, -0.5] as Vec3,
+  porteMorel: [-1.8, NIV.e5, -0.6] as Vec3, // mur ouest du palier du 5e, juste sous Inès
+  porte7: [-1.8, NIV.e7, -0.5] as Vec3, // voisins du 7e (mur ouest), bougies derrière
+  seuil7: [-1.7, NIV.e7 + 0.05, -0.5] as Vec3,
   porteToit: [-0.9, NIV.toit, -1.6] as Vec3,
   lampeToit: [-0.9, NIV.toit + 1.45, -2.05] as Vec3,
-  fenetre6: [1.8, NIV.e6 + 1.95, -1.6] as Vec3, // fenêtre de l'escalier (mi-étage), la ville derrière
+  fenetre6: [2.7, NIV.e6 + DEMI + 1.15, -1.6] as Vec3, // fenêtre du palier intermédiaire (6e½), la ville derrière
   lampe4: [-0.5, NIV.e4 + 1.0, -0.2] as Vec3, // la lampe de l'inconnu, au 4e
   lampe6: [-0.35, NIV.e6 + 1.0, -0.1] as Vec3, // la lampe de l'inconnu, arrivé au 6e
-  bidonsMorel: [6.3, NIV.e5 + 0.25, -1.35] as Vec3,
+  bidonsMorel: [-2.8, NIV.e5 + 0.25, -1.35] as Vec3,
 };
 
 // Places
 const PORTE6 = [-1.5, NIV.e6, -0.95] as Vec3; // Inès à côté de sa porte (6e), côté charnière : la serrure reste visible
 const GUET6 = [-1.5, NIV.e6, -1.2] as Vec3; // accroupie contre sa porte, face à l'escalier
-const PALIER5 = [4.85, NIV.e5, -0.5] as Vec3; // Inès devant la porte de Morel
-const MOREL = [5.62, NIV.e5, -0.6] as Vec3; // Morel dans son entrée, porte entrouverte
-const PALIER7 = [4.8, NIV.e7, -0.5] as Vec3; // Inès devant la porte des voisins (7e)
+const PALIER5 = [-1.05, NIV.e5, -0.5] as Vec3; // Inès devant la porte de Morel (mur ouest)
+const MOREL = [-2.05, NIV.e5, -0.6] as Vec3; // Morel dans son entrée, porte ouverte
+const PALIER7 = [-1.1, NIV.e7, -0.5] as Vec3; // Inès devant la porte des voisins (7e, mur ouest)
 const INC4 = [-0.6, NIV.e4, -0.3] as Vec3; // l'inconnu au 4e
-const INC5 = [4.3, NIV.e5, 0.15] as Vec3; // l'inconnu au 5e (palier de Morel, côté escalier)
-const INC6 = [-0.45, NIV.e6, -0.05] as Vec3; // l'inconnu au 6e
+const INC5 = [-0.35, NIV.e5, 0.15] as Vec3; // l'inconnu au 5e (devant la porte de Morel)
+const INC6 = [-0.4, NIV.e6, 0.0] as Vec3; // l'inconnu au 6e
 
 // Cadrages types (personnages « humain » ≈ 1,4 m) ; p = position des pieds (y = étage)
 type Opt = { azimut?: number; elevation?: number; distance?: number; fov?: number; x?: number; y?: number };
@@ -104,8 +114,8 @@ export const donnees: DonneesEpisode = {
       variante: "humain",
       apparence: { ...APPARENCE_INES, bonnet: "#c9a227", sac: "#3a3a3a" },
       depart: { position: PORTE6, orientation: 10 },
-      trajet: [{ a: "a1.fin+0.3", position: volee(NIV.e5, false, 0.75), vitesse: 1.2, chemin: [[0.1, NIV.e6, ZA]] }],
-      fantome: { de: "a1", a: "a2:revient" },
+      trajet: [{ a: "a1.fin+0.3", position: descente(NIV.e6)[1], vitesse: 1.2, chemin: [[0.1, NIV.e6, ZA]] }],
+      fantome: { de: "a1:garde", a: "a2:revient" }, // visible une fois la caméra reculée (sinon il passe devant l'objectif)
     },
     {
       // Inès après 23 h : elle descend chez Morel, remonte avec le bidon, passe devant sa porte, file au 7e
@@ -114,16 +124,17 @@ export const donnees: DonneesEpisode = {
       variante: "humain",
       apparence: { ...APPARENCE_INES, bonnet: "#c9a227" },
       presence: { de: "morel" },
-      depart: { position: volee(NIV.e5, false, 0.5), orientation: 100 },
+      // à la coupe de 23 h, elle est au palier intermédiaire (5e½) et finit de descendre chez Morel
+      depart: { position: [1.8, NIV.e5 + DEMI, ZF], orientation: 270 },
       trajet: [
-        { a: "i_eau", position: PALIER5, orientation: 60, vitesse: 1.1, chemin: [volee(NIV.e5, false, 0)] },
+        { a: "i_eau", position: PALIER5, orientation: 295, vitesse: 1.3, chemin: [[0, NIV.e5, ZF], [-0.5, NIV.e5, -0.7]] },
         // elle remonte avec ses 20 kg : lentement, sans s'arrêter, jusqu'au 6e…
-        { a: "t1c", position: volee(NIV.e5, false, 1), vitesse: 0.62, chemin: [[3.95, NIV.e5, ZA]] },
+        { a: "t1c", position: montee(NIV.e5)[5], vitesse: 0.62, chemin: [[-0.4, NIV.e5, -0.85], ...montee(NIV.e5).slice(0, 5)] },
         // …passe devant sa porte sans ralentir et continue jusqu'au 7e
-        { a: "t2b:palier", position: PALIER7, orientation: 90, vitesse: 0.85, chemin: [[-0.4, NIV.e6, -0.45], volee(NIV.e6, true, 0), volee(NIV.e6, true, 1), [4.1, NIV.e7, -0.75]] },
+        { a: "t2c-0.3", position: PALIER7, orientation: 280, vitesse: 0.9, chemin: [[-0.45, NIV.e6, -0.45], ...montee(NIV.e6), [-0.5, NIV.e7, -0.3]] },
         // au téléphone, puis face à nous jusqu'à la fin (entre les deux lampes)
-        { a: "t3a", position: PALIER7, orientation: 30, vitesse: 1.0 },
-        { a: "signal", position: PALIER7, orientation: 15, vitesse: 1.0 },
+        { a: "t3a", position: PALIER7, orientation: 330, vitesse: 1.0 },
+        { a: "signal", position: PALIER7, orientation: 345, vitesse: 1.0 },
       ],
       poses: [
         { a: 0, pose: "debout" },
@@ -171,7 +182,7 @@ export const donnees: DonneesEpisode = {
       variante: "humain",
       apparence: APPARENCE_MOREL,
       presence: { de: "recap3", a: "lampe" },
-      depart: { position: MOREL, orientation: 300 },
+      depart: { position: MOREL, orientation: 65 },
       poses: [
         { a: 0, pose: "debout" },
         { a: "m_bidon", pose: "bras", transition: 0.25 },
@@ -191,62 +202,61 @@ export const donnees: DonneesEpisode = {
       invisible: true,
       depart: { position: INC4, orientation: 40 },
       trajet: [
-        { a: "t1b.fin", position: INC5, vitesse: 0.8, chemin: [[0, NIV.e4, ZF], [3.6, NIV.e5, ZF], [4.2, NIV.e5, -0.5]] },
-        { a: "t3", position: INC6, vitesse: 0.8, chemin: [volee(NIV.e5, false, 0), volee(NIV.e5, false, 1)] },
-        // la lampe s'éteint ; les pas redescendent
-        { a: "rappel+0.6", position: [4.2, NIV.e5, -0.3], vitesse: 1.4, chemin: [volee(NIV.e5, false, 1), volee(NIV.e5, false, 0)] },
+        { a: "t1b.fin", position: INC5, vitesse: 0.8, chemin: montee(NIV.e4) },
+        { a: "t3", position: INC6, vitesse: 0.8, chemin: montee(NIV.e5) },
+        // la lampe s'éteint ; les pas redescendent (jusqu'au palier intermédiaire 5e½)
+        { a: "rappel+0.6", position: [2.4, NIV.e5 + DEMI, -0.4], vitesse: 1.4, chemin: descente(NIV.e6).slice(0, 2) },
       ],
     },
   ],
   camera: [
-    // HOOK — raccord : Inès devant sa porte au 6e, clé en main ; puis plongée dans la cage vers la lampe du 4e
+    // HOOK — raccord : Inès à côté de sa porte au 6e, clé en main ; puis la lampe, deux étages plus bas (4e)
     { a: 0, ...buste(PORTE6, 8, { distance: 2.5 }) },
-    { a: "hook:lampe", ...plan(P.lampe4, { azimut: 12, elevation: 50, distance: 7.6, fov: 44, y: 760, x: 500 }), deplacement: 1.0 },
-    { a: "hook2:jamais", ...plan(P.lampe4, { azimut: 8, elevation: 46, distance: 6.6, fov: 44, y: 760, x: 520 }), deplacement: 0.9 },
-    // RÉCAP — la fenêtre de l'escalier (ville noire), la porte d'Inès, la porte de Morel, la serrure
-    // (Inès devant sa porte et la fenêtre de l'escalier : la ville noire derrière)
-    { a: "recap1:4", ...plan([0.15, NIV.e6 + 1.3, -0.8], { azimut: 4, elevation: 6, distance: 11.4, fov: 42, y: 600, x: 540 }), deplacement: 1.0 },
-    { a: "recap3:revend", ...plan([5.96, NIV.e5 + 0.9, -0.8], { azimut: 4, elevation: 10, distance: 5.4, fov: 40, y: 620, x: 520 }), deplacement: 0.9 },
+    { a: "hook:lampe", ...plan(P.lampe4, { azimut: 12, elevation: 14, distance: 5.6, fov: 42, y: 720, x: 500 }), deplacement: 1.0 },
+    { a: "hook2:jamais", ...plan(P.lampe4, { azimut: 8, elevation: 12, distance: 4.6, fov: 42, y: 720, x: 520 }), deplacement: 0.9 },
+    // RÉCAP — Inès devant sa porte et la fenêtre de l'escalier (ville noire), la porte de Morel, la serrure
+    { a: "recap1:4", ...plan([0.6, NIV.e6 + 1.4, -0.8], { azimut: 4, elevation: 6, distance: 12, fov: 42, y: 600, x: 540 }), deplacement: 1.0 },
+    { a: "recap3:revend", ...plan([-2.4, NIV.e5 + 0.9, -0.8], { azimut: -4, elevation: 10, distance: 5.4, fov: 40, y: 620, x: 540 }), deplacement: 0.9 },
     { a: "recap4", ...plan(P.verrouInes, { azimut: 14, elevation: 6, distance: 1.4, fov: 34, y: 620, x: 520 }), deplacement: 0.8 },
     // A (fantôme) : elle part ; il revient et vide tout
-    { a: "a1.fin", ...plan([-0.5, NIV.e6 + 0.5, -0.6], { azimut: 10, elevation: 20, distance: 6.0, fov: 44, y: 660 }), deplacement: 0.8 },
+    { a: "a1:part", ...plan([-0.2, NIV.e6 + 0.3, -0.4], { azimut: 10, elevation: 18, distance: 6.5, fov: 44, y: 660 }), deplacement: 0.6 },
     // STOP → B : elle reste, accroupie contre sa porte
     { a: "stop:elle", ...plan([GUET6[0], NIV.e6 + 0.75, GUET6[2]], { azimut: 10, elevation: 8, distance: 3.4, fov: 38, y: 680, x: 500 }), coupe: true },
-    // 23 h : elle descend chez Morel
-    { a: "morel", ...plan([2.6, NIV.e5 + 1.3, 0.0], { azimut: 6, elevation: 10, distance: 5.0, fov: 42, y: 640 }), coupe: true },
-    { a: "i_eau", ...aDeux(PALIER5, MOREL, 0, { x: 470 }), deplacement: 1.0 },
-    { a: "i_genereux", ...aDeux(PALIER5, MOREL, -12, { distance: 4.3, x: 540 }), deplacement: 0.6 },
-    { a: "m_remontee", ...aDeux(PALIER5, MOREL, 12, { distance: 4.3, x: 440 }), deplacement: 0.6 },
-    { a: "i_rat", ...aDeux(PALIER5, MOREL, -4, { distance: 4.8, x: 470, elevation: 14, y: 900 }), deplacement: 0.6 },
+    // 23 h : elle finit de descendre chez Morel, un étage sous chez elle
+    { a: "morel", ...plan([0.3, NIV.e5 + 1.0, -0.5], { azimut: 6, elevation: 10, distance: 6.5, fov: 42, y: 640, x: 520 }), coupe: true },
+    { a: "i_eau", ...aDeux(PALIER5, MOREL, 0, { x: 520 }), deplacement: 1.0 },
+    { a: "i_genereux", ...aDeux(PALIER5, MOREL, 12, { distance: 4.3, x: 540 }), deplacement: 0.6 },
+    { a: "m_remontee", ...aDeux(PALIER5, MOREL, -12, { distance: 4.3, x: 500 }), deplacement: 0.6 },
+    { a: "i_rat", ...aDeux(PALIER5, MOREL, 4, { distance: 4.8, x: 520, elevation: 14, y: 900 }), deplacement: 0.6 },
     // la lampe : plan d'ensemble de la cage (4e et 5e)
-    { a: "lampe", ...plan([2.2, NIV.e4 + 2.6, -0.4], { azimut: 0, elevation: 8, distance: 17, fov: 44, y: 700, x: 480 }), deplacement: 1.2 },
-    { a: "monte.fin", ...plan([2.0, NIV.e4 + 2.2, -0.4], { azimut: 0, elevation: 6, distance: 15.0, fov: 44, y: 640, x: 480 }), deplacement: 1.1 },
-    { a: "derriere.fin", ...plan([2.0, NIV.e4 + 3.0, -0.4], { azimut: 4, elevation: 8, distance: 12.5, fov: 44, y: 620, x: 480 }), deplacement: 1.0 },
+    { a: "lampe", ...plan([0.6, NIV.e4 + 2.0, -0.4], { azimut: 0, elevation: 8, distance: 13, fov: 44, y: 717, x: 520 }), deplacement: 1.2 },
+    { a: "monte.fin", ...plan([0.8, NIV.e5 + 0.6, -0.4], { azimut: 0, elevation: 6, distance: 12, fov: 44, y: 680, x: 520 }), deplacement: 1.1 },
+    { a: "derriere.fin", ...plan([0.9, NIV.e5 + 1.6, -0.4], { azimut: 4, elevation: 8, distance: 12, fov: 44, y: 640, x: 520 }), deplacement: 1.0 },
     // TACTIQUE 1 — sa porte ; le fantôme s'y arrête, la lampe se pose dessus ; elle passe devant
-    { a: "t1:rentrez", ...plan([-0.3, NIV.e6 + 0.9, -0.7], { azimut: 12, elevation: 14, distance: 5.2, fov: 42, y: 620 }), deplacement: 1.0 },
-    { a: "t1a:main", ...plan([-0.6, NIV.e6 + 0.9, -1.0], { azimut: 16, elevation: 12, distance: 4.4, fov: 40, y: 620, x: 520 }), deplacement: 0.6 },
-    { a: "t1c", ...plan([-0.2, NIV.e6 + 1.0, -0.5], { azimut: 8, elevation: 10, distance: 6.2, fov: 42, y: 640 }), deplacement: 0.8 },
-    // « Continue. Ne te retourne pas. » : elle monte la volée du fond, de trois-quarts
-    { a: "i_continue", ...plan([0.7, NIV.e6 + 1.5, ZF], { azimut: 28, elevation: 6, distance: 4.4, fov: 40, y: 640, x: 520 }), deplacement: 0.8 },
+    { a: "t1:rentrez", ...plan([-0.6, NIV.e6 + 0.9, -0.8], { azimut: 12, elevation: 14, distance: 5.2, fov: 42, y: 620 }), deplacement: 1.0 },
+    { a: "t1a:main", ...plan([-0.7, NIV.e6 + 0.9, -1.0], { azimut: 16, elevation: 12, distance: 4.4, fov: 40, y: 620, x: 520 }), deplacement: 0.6 },
+    { a: "t1c", ...plan([-0.3, NIV.e6 + 1.0, -0.5], { azimut: 8, elevation: 10, distance: 6.0, fov: 42, y: 640 }), deplacement: 0.8 },
+    // « Continue. Ne te retourne pas. » : elle monte la demi-volée du fond, de trois-quarts
+    { a: "i_continue", ...plan([1.0, NIV.e6 + 1.6, ZF], { azimut: 50, elevation: 22, distance: 3.3, fov: 42, y: 640, x: 480 }), deplacement: 0.8 },
     // TACTIQUE 2 — le 7e : bougies, voix, elle frappe
-    { a: "t2:allez", ...plan([4.6, NIV.e7 + 0.9, -0.5], { azimut: -22, elevation: 12, distance: 5.0, fov: 42, y: 640 }), deplacement: 1.0 },
-    { a: "t2a:bougies", ...plan(P.seuil7, { azimut: -48, elevation: 16, distance: 2.6, fov: 38, y: 680 }), deplacement: 0.9 },
-    { a: "t2b:palier", ...enPied(PALIER7, -18, { distance: 4.8, x: 460 }), deplacement: 0.9 },
-    { a: "t2c:frappe", ...enPied(PALIER7, -6, { distance: 4.0, x: 440 }), deplacement: 0.6 },
+    { a: "t2:allez", ...plan([-1.2, NIV.e7 + 0.9, -0.5], { azimut: 22, elevation: 12, distance: 5.0, fov: 42, y: 640 }), deplacement: 1.0 },
+    { a: "t2a:bougies", ...plan(P.seuil7, { azimut: 48, elevation: 16, distance: 2.6, fov: 38, y: 680 }), deplacement: 0.9 },
+    { a: "t2b:palier", ...enPied(PALIER7, 18, { distance: 4.8, x: 560 }), deplacement: 0.9 },
+    { a: "t2c:frappe", ...enPied(PALIER7, 6, { distance: 4.0, x: 560 }), deplacement: 0.6 },
     // TACTIQUE 3 — le 17
-    { a: "t3:appelez", ...buste(PALIER7, -16, { x: 620, y: 760, distance: 3.0 }), deplacement: 0.8 },
-    { a: "i_17", ...buste(PALIER7, -10, { distance: 2.6, x: 620, y: 760 }), deplacement: 0.8 },
+    { a: "t3:appelez", ...buste(PALIER7, 16, { x: 620, y: 760, distance: 3.0 }), deplacement: 0.8 },
+    { a: "i_17", ...buste(PALIER7, 10, { distance: 2.6, x: 620, y: 760 }), deplacement: 0.8 },
     // FAUSSE SÉCURITÉ — en bas, la lampe s'éteint, les pas redescendent
-    { a: "calme:lampe", ...plan(P.lampe6, { azimut: 14, elevation: 40, distance: 5.4, fov: 42, y: 700 }), deplacement: 1.0 },
-    { a: "i_ouf", ...buste(PALIER7, -12, { x: 440 }), deplacement: 1.0 },
-    // TWIST — rappel des 2 éclats (même cadre qu'à 34 s), la porte du toit, la réponse
+    { a: "calme:lampe", ...plan(P.lampe6, { azimut: 14, elevation: 12, distance: 5.4, fov: 42, y: 680 }), deplacement: 1.0 },
+    { a: "i_ouf", ...buste(PALIER7, 12, { x: 520 }), deplacement: 1.0 },
+    // TWIST — rappel des 2 éclats (le 4e), la porte du toit, la réponse
     { a: "rappel", ...plan(P.lampe4, { azimut: 10, elevation: 12, distance: 4.4, fov: 40, y: 660 }), coupe: true },
-    { a: "signal", ...buste(PALIER7, -12, { distance: 2.4, x: 440 }), coupe: true },
+    { a: "signal", ...buste(PALIER7, 12, { distance: 2.4, x: 520 }), coupe: true },
     { a: "toit:porte", ...plan([-0.9, NIV.toit + 1.1, -1.6], { azimut: 14, elevation: 4, distance: 4.4, fov: 40, y: 620 }), deplacement: 1.4 },
     { a: "reponse", ...plan([-0.9, NIV.toit + 1.25, -1.7], { azimut: 10, elevation: 3, distance: 3.6, fov: 40, y: 620 }), deplacement: 0.6 },
-    // « Ils sont deux. » : toute la cage, Inès entre les deux lampes ; puis son visage
-    { a: "deux:deux", ...plan([1.9, 8.45, -0.4], { azimut: 0, elevation: 4, distance: 20, fov: 46, y: 860, x: 540 }), deplacement: 0.85 },
-    { a: "fin+0.6", ...buste(PALIER7, -8, { distance: 2.4, x: 440 }), deplacement: 0.9 },
+    // « Ils sont deux. » : toute la cage, Inès au 7e entre les deux lampes ; puis son visage
+    { a: "deux:deux", ...plan([0.9, 9.2, -0.4], { azimut: 0, elevation: 4, distance: 16, fov: 46, y: 820, x: 540 }), deplacement: 0.85 },
+    { a: "fin+0.6", ...buste(PALIER7, 8, { distance: 2.4, x: 520 }), deplacement: 0.9 },
   ],
   hud: [
     {
@@ -259,7 +269,7 @@ export const donnees: DonneesEpisode = {
     },
     { type: "fiche", de: "recap2", a: "recap3:revend", icone: "eau", titre: "Ballon d'Inès", lignes: ["0 litre", "Vidé pendant sa garde"], cote: "droite" },
     { type: "fiche", de: "recap3:revend", a: "recap4", icone: "jerrican", titre: "Marché noir", lignes: ["20 € le bidon", "Son eau à elle"], cote: "gauche" },
-    { type: "etiquette", de: "recap4+0.05", a: "a1.fin-0.85", texte: "Il a la clé", point: P.verrouInes, style: "danger" },
+    { type: "etiquette", de: "recap4", a: "a1:part-0.62", texte: "Il a la clé", point: P.verrouInes, style: "danger" },
     { type: "inventaire", de: "a1", a: "a2:vide", objets: [{ icone: "eau", quantite: 9, unite: "L" }, { icone: "conserve", quantite: 6 }] },
     { type: "inventaire", de: "a2:vide", a: "stop:elle", objets: [{ icone: "eau", quantite: 0, unite: "L" }, { icone: "conserve", quantite: 0 }], surligne: 0 },
     { type: "fiche", de: "i_rat", a: "lampe", icone: "jerrican", titre: "1 bidon", lignes: ["20 litres", "= 20 kilos"], cote: "droite" },
@@ -348,12 +358,12 @@ export const donnees: DonneesEpisode = {
     { de: 0, a: "hook:lampe-1.0", personnage: INES6, hauteur: 1.1 },
     { de: "hook:lampe", a: "recap1:4-1.0", point: P.lampe4 },
     { de: "recap1:4", a: "recap3:revend-0.9", personnage: INES6, hauteur: 1.0 },
-    { de: "recap4", a: "a1.fin-0.8", point: P.verrouInes },
+    { de: "recap4", a: "a1:part-0.6", point: P.verrouInes },
     { de: "stop:elle", a: "morel", personnage: INES6, hauteur: 0.75 },
     { de: "i_eau", a: "lampe-1.2", personnage: INES, hauteur: 1.1 },
     { de: "i_eau", a: "lampe-1.2", personnage: "morel", hauteur: 1.1 },
     { de: "lampe", a: "monte.fin-1.1", point: P.lampe4 },
-    { de: "t2b:palier", a: "calme:lampe-1.0", personnage: INES, hauteur: 1.1 },
+    { de: "t2c-0.3", a: "calme:lampe-1.0", personnage: INES, hauteur: 1.1 },
     { de: "calme:lampe", a: "i_ouf-1.0", point: P.lampe6 },
     { de: "i_ouf", a: "rappel", personnage: INES, hauteur: 1.1 },
     { de: "signal", a: "toit:porte-1.4", personnage: INES, hauteur: 1.1 },
