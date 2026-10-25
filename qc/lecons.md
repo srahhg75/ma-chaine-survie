@@ -244,3 +244,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   runtime Visual C++ (`winget install Microsoft.VCRedist.2015+.x64`). Règle : les scripts choisissent `bin/` ou
   `Scripts/` selon ce qui existe, `drawtext` reçoit toujours une police (Montserrat figée en TTF), et une étape qui
   ne produit pas son fichier compte comme une ERREUR au bilan (`tools/boucle.sh` : planches absentes = échec).
+- **2026-10-25 — RETOUR D'UN ABONNÉ (partie 1) : robinet de vidange du ballon dessiné sur le tuyau d'eau CHAUDE.**
+  En vrai, la vidange d'un chauffe-eau électrique se fait par le groupe de sécurité, sur l'arrivée d'eau FROIDE en
+  bas du ballon (le robinet d'eau chaude ouvert ne sert qu'à faire entrer l'air). Règle : chaque objet technique
+  montré (ballon, tableau électrique, vanne…) est dessiné conforme au vrai, vérifié sur une photo ou un schéma de
+  référence avant le rendu ; noter la source dans le tableau des faits du script.
