@@ -1,0 +1,50 @@
+# H+72 — Partie 3 « La lampe qui suit » (même texte que script.md, section 1, avec les marqueurs du pipeline)
+# Reprend à la dernière image de la Partie 2 : J4 · 18:00, Inès sur le palier du 6e, sa clé dans la main.
+# Voix : sans marqueur = narrateur ; [Inès] ou [Morel] en début de phrase = réplique dite par ce personnage.
+# Chiffres écrits en chiffres (affichés tels quels) ; la voix les lit en lettres, l'alignement fait le lien.
+@hook Que feriez-vous si une lampe vous suivait ?
+@hook2 Dans le noir, sans jamais s'approcher ?
+@recap1 Jour 4 sans électricité dans la ville.
+@recap2 Quelqu'un a vidé l'eau d'Inès.
+@recap3 Il la revend *20 €* le bidon.
+@recap4 Et il a les _clés du 6e_.
+@a1 Si elle part à sa garde…
+@a2 Il revient. Et il vide _tout_.
+@stop Stop. Elle reste, et elle guette.
+@morel 23 heures. Elle descend chez Morel.
+@i_eau [Inès] Je viens chercher mon eau.
+@m_bidon [Morel] Un bidon. Pas deux.
+@i_genereux [Inès] Vous êtes trop généreux.
+@m_remontee [Morel] Je sais. Bonne remontée.
+@i_rat [Inès] Vieux rat.
+@m_plaisir [Morel] Toujours un plaisir.
+@lampe Un étage plus bas, une lampe s'allume.
+@eclats *2 éclats*. Puis plus rien.
+@monte Elle monte. La lampe monte aussi.
+@derriere Toujours un étage derrière.
+@t1 1 : ne rentrez _pas_ chez vous.
+@t1a Clés en main devant sa porte…
+@t1b Il saurait où elle dort.
+@t1c Elle passe devant sans ralentir.
+@i_continue [Inès] Continue. Ne te retourne pas.
+@t2 2 : allez vers les gens.
+@t2a Au 7e, des bougies. Des voix.
+@t2b Un palier occupé et éclairé.
+@t2c Elle frappe. Fort.
+@t3 3 : appelez le *17*.
+@t3a L'adresse, l'étage, ce qui se passe.
+@i_17 [Inès] Quelqu'un me suit. 7e étage.
+@calme En bas, la lampe s'éteint.
+@pas Les pas redescendent.
+@i_ouf [Inès] Il abandonne. Enfin.
+@rappel Vous vous souvenez des *2 éclats* ?
+@signal C'était un _signal_.
+@toit Au-dessus, la porte du toit grince.
+@reponse Une lampe répond. *2 éclats*.
+@deux Ils sont _deux_.
+@fin > Et elle est entre eux.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Entre deux lampes, Inès…
+@carton2 A : elle crie pour réveiller l'immeuble.
+@carton3 B : elle éteint sa lampe et se tait.
+@carton4 Répondez en commentaire !

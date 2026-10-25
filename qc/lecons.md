@@ -334,3 +334,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   l'OCR sans Tesseract (lire les sous-titres à l'œil sur les planches) et donne une police à `drawtext`. Vérifier la
   durée de la piste SON et de l'IMAGE séparément (`ffprobe -select_streams a:0 / v:0`) : une piste son plus longue
   révèle une musique recyclée.
+- **2026-10-25 — RETOUR : « pas besoin de 4 voix, c'est le même narrateur qui lit le carton de fin ».** Règle : le carton
+  A/B est lu par le narrateur **dans le même fichier** `narrateur.mp3`, à la suite du récit (lignes `@carton…` sans
+  marqueur de voix dans `script.txt`) ; un épisode demande donc **une voix par personnage**, jamais de
+  `narrateur2.mp3` (sauf ajout après coup, comme en Partie 2).
