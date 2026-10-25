@@ -338,3 +338,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   A/B est lu par le narrateur **dans le même fichier** `narrateur.mp3`, à la suite du récit (lignes `@carton…` sans
   marqueur de voix dans `script.txt`) ; un épisode demande donc **une voix par personnage**, jamais de
   `narrateur2.mp3` (sauf ajout après coup, comme en Partie 2).
+- **2026-10-25 — RETOUR D'UN ABONNÉ (partie 1) : robinet de vidange du ballon dessiné sur le tuyau d'eau CHAUDE.**
+  En vrai, la vidange d'un chauffe-eau électrique se fait par le groupe de sécurité, sur l'arrivée d'eau FROIDE en
+  bas du ballon (le robinet d'eau chaude ouvert ne sert qu'à faire entrer l'air). Règle : chaque objet technique
+  montré (ballon, tableau électrique, vanne…) est dessiné conforme au vrai, vérifié sur une photo ou un schéma de
+  référence avant le rendu ; noter la source dans le tableau des faits du script.
