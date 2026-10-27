@@ -24,7 +24,8 @@ const chiffreAnime = (texte: string, t: number) => {
   return `${v}${m[2]}`;
 };
 
-// Sous-titres « rétention » : Montserrat 900 en majuscules, 2 à 4 mots par bloc, centrés à 60 % de la hauteur.
+// Sous-titres « rétention » : Montserrat 900 en majuscules, 2 à 4 mots par bloc, centrés à 69 % de la hauteur
+// (plus bas et plus petits, comme @chroniques_flippantes : demande du 27/10).
 // Un mot n'apparaît QUE quand il est prononcé (analyse : ne jamais dévoiler la suite) et arrive avec un impact :
 // - chiffre-ressource : géant, jaune lumineux, qui défile de 0 à sa valeur ;
 // - danger : rouge, plus gros, qui tremble à son arrivée ; ressource : jaune lumineux ;
@@ -60,9 +61,9 @@ export const SousTitres: React.FC<{ mots: Mot[]; phrases?: Phrase[] }> = ({ mots
           fontSize: HUD.sousTitres.taille,
           textTransform: "uppercase",
           letterSpacing: -0.5,
-          WebkitTextStroke: "12px rgba(0,0,0,0.92)",
+          WebkitTextStroke: "8px rgba(0,0,0,0.92)",
           paintOrder: "stroke fill",
-          textShadow: "0 8px 0 rgba(0,0,0,0.55), 0 12px 30px rgba(0,0,0,0.75)",
+          textShadow: "0 5px 0 rgba(0,0,0,0.55), 0 8px 22px rgba(0,0,0,0.75)",
         }}
       >
         {lignes.map((ligne, i) => {
@@ -107,7 +108,7 @@ const MotAnime: React.FC<{ m: Mot; texte: string; bloc: Bloc; frame: number; bas
         display: "inline-block",
         fontSize: `${echelleMot(m, bloc)}em`,
         transform: `translate(${dx}px, ${monte}px) rotate(${rot}deg) scale(${arrivee * (enCours ? 1.06 : 1)})`,
-        textShadow: `0 8px 0 rgba(0,0,0,0.55), 0 12px 30px rgba(0,0,0,0.75)${lueur}`,
+        textShadow: `0 5px 0 rgba(0,0,0,0.55), 0 8px 22px rgba(0,0,0,0.75)${lueur}`,
       }}
     >
       {chiffre && dit ? chiffreAnime(texte, t) : texte}

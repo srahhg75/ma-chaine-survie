@@ -1,0 +1,843 @@
+{
+ "episode": "004-h72-conseil",
+ "fps": 30,
+ "duree": 92.83333333333333,
+ "sons": [
+  {
+   "t": 2.61,
+   "id": "whoosh_big/deep",
+   "gain": -9
+  },
+  {
+   "t": 3.06,
+   "id": "click/thock",
+   "gain": -7
+  },
+  {
+   "t": 4.187,
+   "id": "click/thock",
+   "gain": -7
+  },
+  {
+   "t": 4.95,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 7.56,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 9.99,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 12.03,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 13.23,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 14.1,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 17.49,
+   "id": "pro_sub_drop/low",
+   "gain": -5
+  },
+  {
+   "t": 18.33,
+   "id": "click/thock",
+   "gain": -4
+  },
+  {
+   "t": 18.33,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 21.220000000000002,
+   "id": "click/thock",
+   "gain": -4
+  },
+  {
+   "t": 22.05,
+   "id": "pro_impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 24.3,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 25.2,
+   "id": "knock/wood",
+   "gain": -3
+  },
+  {
+   "t": 25.419999999999998,
+   "id": "knock/wood",
+   "gain": -3
+  },
+  {
+   "t": 25.64,
+   "id": "knock/wood",
+   "gain": -2
+  },
+  {
+   "t": 27.3,
+   "id": "whoosh_big/swell",
+   "gain": -10
+  },
+  {
+   "t": 28.08,
+   "id": "toggle/latch",
+   "gain": -8
+  },
+  {
+   "t": 28.43,
+   "id": "toggle/latch",
+   "gain": -9
+  },
+  {
+   "t": 28.89,
+   "id": "click/thock",
+   "gain": -9
+  },
+  {
+   "t": 29.52,
+   "id": "downlifter/air_fall",
+   "gain": -9
+  },
+  {
+   "t": 30.15,
+   "id": "knock/wood",
+   "gain": -6,
+   "pitch": "C4"
+  },
+  {
+   "t": 31.02,
+   "id": "whoosh_big/deep",
+   "gain": -11
+  },
+  {
+   "t": 33.27,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 37.47,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 39.63,
+   "id": "whoosh_big/swell",
+   "gain": -12
+  },
+  {
+   "t": 41.4,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 41.4,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 43.77,
+   "id": "swish/soft",
+   "gain": -11
+  },
+  {
+   "t": 44.82,
+   "id": "swish/soft",
+   "gain": -11
+  },
+  {
+   "t": 45.48,
+   "id": "tap/table",
+   "gain": -12
+  },
+  {
+   "t": 51.6,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 51.6,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 53.13,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 54.06,
+   "id": "tap/table",
+   "gain": -10
+  },
+  {
+   "t": 57.12,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 58.47,
+   "id": "whoosh_fast/heavy",
+   "gain": -13
+  },
+  {
+   "t": 60.03,
+   "id": "click/thock",
+   "gain": -11
+  },
+  {
+   "t": 63.27,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 66.9,
+   "id": "tap/table",
+   "gain": -11
+  },
+  {
+   "t": 68.16,
+   "id": "whoosh_big/swell",
+   "gain": -11
+  },
+  {
+   "t": 70.53,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 72.18,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 72.54,
+   "id": "toggle/latch",
+   "gain": -7
+  },
+  {
+   "t": 73.2,
+   "id": "swish/soft",
+   "gain": -9
+  },
+  {
+   "t": 73.95,
+   "id": "pro_sub_drop/low",
+   "gain": -6
+  },
+  {
+   "t": 75.89,
+   "id": "toggle/latch",
+   "gain": -8
+  },
+  {
+   "t": 75.96,
+   "id": "reverse_swell/dark",
+   "gain": -8
+  },
+  {
+   "t": 79.05,
+   "id": "pro_impact/deep",
+   "gain": -7
+  },
+  {
+   "t": 79.65,
+   "id": "swipe/cloth",
+   "gain": -9
+  },
+  {
+   "t": 80.67,
+   "id": "cut_hit/sub",
+   "gain": -7
+  },
+  {
+   "t": 81,
+   "id": "pro_impact/short",
+   "gain": -7
+  },
+  {
+   "t": 81.89,
+   "id": "whoosh_big/thump_deep",
+   "gain": -8
+  },
+  {
+   "t": 82.69,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 83.19,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 84.13000000000001,
+   "id": "impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 84.33000000000001,
+   "id": "whoosh_fast/heavy",
+   "gain": -9
+  },
+  {
+   "t": 84.66000000000001,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 84.83000000000001,
+   "id": "cut_hit/sub",
+   "gain": -5
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 92.83000000000001,
+   "niveau": -1,
+   "fondu": 1
+  },
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 37.47,
+   "niveau": -4,
+   "fondu": 1.5
+  },
+  {
+   "type": "coeur",
+   "de": 0,
+   "a": 21.3,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 104
+  },
+  {
+   "type": "ville",
+   "de": 4.95,
+   "a": 7.56,
+   "niveau": 0,
+   "fondu": 0.6
+  },
+  {
+   "type": "grincement",
+   "de": 28.08,
+   "a": 28.88,
+   "niveau": -5,
+   "fondu": 0.1
+  },
+  {
+   "type": "vent",
+   "de": 70.53,
+   "a": 92.83000000000001,
+   "niveau": -5,
+   "fondu": 1
+  },
+  {
+   "type": "grincement",
+   "de": 72.54,
+   "a": 73.24000000000001,
+   "niveau": -5,
+   "fondu": 0.1
+  },
+  {
+   "type": "coeur",
+   "de": 73.95,
+   "a": 92.83000000000001,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 98
+  }
+ ],
+ "pas": [
+  {
+   "t": 24.066666666666666,
+   "personnage": "ines"
+  },
+  {
+   "t": 32.63333333333333,
+   "personnage": "ines"
+  },
+  {
+   "t": 32.9,
+   "personnage": "ines"
+  },
+  {
+   "t": 19.666666666666668,
+   "personnage": "morel"
+  },
+  {
+   "t": 19.9,
+   "personnage": "morel"
+  },
+  {
+   "t": 20.166666666666668,
+   "personnage": "morel"
+  },
+  {
+   "t": 20.433333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 20.666666666666668,
+   "personnage": "morel"
+  },
+  {
+   "t": 20.933333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 21.2,
+   "personnage": "morel"
+  },
+  {
+   "t": 21.433333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 21.7,
+   "personnage": "morel"
+  },
+  {
+   "t": 21.966666666666665,
+   "personnage": "morel"
+  },
+  {
+   "t": 22.2,
+   "personnage": "morel"
+  },
+  {
+   "t": 22.466666666666665,
+   "personnage": "morel"
+  },
+  {
+   "t": 22.733333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 22.966666666666665,
+   "personnage": "morel"
+  },
+  {
+   "t": 23.233333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 23.5,
+   "personnage": "morel"
+  },
+  {
+   "t": 23.733333333333334,
+   "personnage": "morel"
+  },
+  {
+   "t": 24,
+   "personnage": "morel"
+  },
+  {
+   "t": 24.266666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 24.5,
+   "personnage": "morel"
+  },
+  {
+   "t": 24.766666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 25.033333333333335,
+   "personnage": "morel"
+  },
+  {
+   "t": 25.266666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 25.533333333333335,
+   "personnage": "morel"
+  },
+  {
+   "t": 25.8,
+   "personnage": "morel"
+  },
+  {
+   "t": 26.033333333333335,
+   "personnage": "morel"
+  },
+  {
+   "t": 26.3,
+   "personnage": "morel"
+  },
+  {
+   "t": 26.566666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 26.8,
+   "personnage": "morel"
+  },
+  {
+   "t": 27.066666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 27.333333333333332,
+   "personnage": "morel"
+  },
+  {
+   "t": 27.566666666666666,
+   "personnage": "morel"
+  },
+  {
+   "t": 27.833333333333332,
+   "personnage": "morel"
+  },
+  {
+   "t": 28.1,
+   "personnage": "morel"
+  },
+  {
+   "t": 28.333333333333332,
+   "personnage": "morel"
+  },
+  {
+   "t": 28.6,
+   "personnage": "morel"
+  },
+  {
+   "t": 28.833333333333332,
+   "personnage": "morel"
+  },
+  {
+   "t": 29.1,
+   "personnage": "morel"
+  },
+  {
+   "t": 29.366666666666667,
+   "personnage": "morel"
+  },
+  {
+   "t": 29.6,
+   "personnage": "morel"
+  },
+  {
+   "t": 29.866666666666667,
+   "personnage": "morel"
+  },
+  {
+   "t": 30.133333333333333,
+   "personnage": "morel"
+  },
+  {
+   "t": 30.366666666666667,
+   "personnage": "morel"
+  },
+  {
+   "t": 30.633333333333333,
+   "personnage": "morel"
+  },
+  {
+   "t": 30.9,
+   "personnage": "morel"
+  },
+  {
+   "t": 31.133333333333333,
+   "personnage": "morel"
+  },
+  {
+   "t": 31.4,
+   "personnage": "morel"
+  },
+  {
+   "t": 31.666666666666668,
+   "personnage": "morel"
+  },
+  {
+   "t": 31.9,
+   "personnage": "morel"
+  },
+  {
+   "t": 32.166666666666664,
+   "personnage": "morel"
+  },
+  {
+   "t": 32.43333333333333,
+   "personnage": "morel"
+  },
+  {
+   "t": 32.666666666666664,
+   "personnage": "morel"
+  },
+  {
+   "t": 25.4,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 26.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 26.5,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 26.633333333333333,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 26.766666666666666,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 26.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.033333333333335,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.2,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.333333333333332,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.466666666666665,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.6,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.766666666666666,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 27.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.033333333333335,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.166666666666668,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.333333333333332,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.466666666666665,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.6,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.733333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 28.9,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.033333333333335,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.166666666666668,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.466666666666665,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.6,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.733333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 29.866666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.033333333333335,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.166666666666668,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.433333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.6,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.733333333333334,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 30.866666666666667,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 31,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 31.166666666666668,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 31.3,
+   "personnage": "inconnu"
+  },
+  {
+   "t": 69.96666666666667,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 70.2,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 70.43333333333334,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 70.66666666666667,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 70.93333333333334,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 71.16666666666667,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 71.4,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 71.63333333333334,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 71.9,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 72.13333333333334,
+   "personnage": "ines-descend"
+  },
+  {
+   "t": 72.2,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 72.46666666666667,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 72.73333333333333,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 73,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76.23333333333333,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76.4,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76.56666666666666,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76.73333333333333,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 76.9,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 77.06666666666666,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 77.23333333333333,
+   "personnage": "ines-entree"
+  },
+  {
+   "t": 77.43333333333334,
+   "personnage": "ines-entree"
+  }
+ ],
+ "rembobinages": [
+  {
+   "de": 18.33,
+   "a": 21.3,
+   "depuis": 14.1,
+   "gain": 0
+  }
+ ]
+}

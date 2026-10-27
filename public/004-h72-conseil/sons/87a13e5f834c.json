@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/87a13e5f834c.wav: cut_hit/sub seed 4101: 0.286 s, onset 0.000 s, peak at 0.021 s, end 0.263 s, -1.0 dBFS, -14.9 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/87a13e5f834c.wav",
+ "meta": {
+  "id": "cut_hit/sub",
+  "seed": 4101,
+  "sr": 48000,
+  "onset_s": 0.0,
+  "peak_s": 0.0205,
+  "end_s": 0.263,
+  "dur_s": 0.2858,
+  "peak_db": -1.0,
+  "lufs_m_max": -14.86,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "cut_hit/sub: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -91.2,
+    "ring_z": 3.2,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 15.25,
+    "t40_ms": 240.0,
+    "crest_db": 8.2,
+    "res_db": 3.3,
+    "res_hz": 1234,
+    "peak_dbfs": -1.0,
+    "live_ms": 231.25
+   },
+   "glide": {
+    "tonal_share": 0.67,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.018
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "cut_hit",
+    "sound": "cut_hit/sub"
+   }
+  }
+ }
+}

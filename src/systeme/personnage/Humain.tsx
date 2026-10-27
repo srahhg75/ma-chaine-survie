@@ -124,31 +124,43 @@ const Torse: React.FC<{ a: Apparence }> = ({ a }) => {
   );
 };
 
-const Main: React.FC<{ a: Apparence; cote: 1 | -1 }> = ({ a, cote }) => (
-  <group>
-    {/* paume */}
-    <mesh position={[0, -0.045, 0]} scale={[1, 1, 0.42]} castShadow>
-      <capsuleGeometry args={[0.03, 0.035, 6, 12]} />
-      <Peau c={a.peau} />
-    </mesh>
-    {/* 4 doigts légèrement repliés */}
-    {[-0.021, -0.007, 0.007, 0.021].map((x, i) => (
-      <group key={i} position={[x, -0.085, 0.004]} rotation={[-0.35, 0, 0]}>
-        <mesh position={[0, -0.022, 0]} castShadow>
-          <capsuleGeometry args={[0.0075, 0.034 - Math.abs(i - 1.5) * 0.005, 4, 8]} />
-          <Peau c={a.peau} />
+const Main: React.FC<{ a: Apparence; cote: 1 | -1 }> = ({ a, cote }) => {
+  // gant : tissu un peu plus épais à la place de la peau
+  const g = a.gants ? 1.18 : 1;
+  const matiere = a.gants ? <Tissu c={a.gants} r={0.8} /> : <Peau c={a.peau} />;
+  return (
+    <group>
+      {/* paume */}
+      <mesh position={[0, -0.045, 0]} scale={[g, 1, 0.42 * g]} castShadow>
+        <capsuleGeometry args={[0.03, 0.035, 6, 12]} />
+        {matiere}
+      </mesh>
+      {/* revers du gant sur le poignet */}
+      {a.gants && (
+        <mesh position={[0, -0.002, 0]}>
+          <cylinderGeometry args={[0.034, 0.03, 0.03, 14]} />
+          <Tissu c={teinte(a.gants, -0.2)} r={1} />
+        </mesh>
+      )}
+      {/* 4 doigts légèrement repliés */}
+      {[-0.021, -0.007, 0.007, 0.021].map((x, i) => (
+        <group key={i} position={[x, -0.085, 0.004]} rotation={[-0.35, 0, 0]}>
+          <mesh position={[0, -0.022, 0]} castShadow>
+            <capsuleGeometry args={[0.0075 * g, 0.034 - Math.abs(i - 1.5) * 0.005, 4, 8]} />
+            {matiere}
+          </mesh>
+        </group>
+      ))}
+      {/* pouce, vers l'avant */}
+      <group position={[cote * 0.024, -0.04, 0.016]} rotation={[-0.6, 0, cote * 0.5]}>
+        <mesh position={[0, -0.02, 0]}>
+          <capsuleGeometry args={[0.009 * g, 0.03, 4, 8]} />
+          {matiere}
         </mesh>
       </group>
-    ))}
-    {/* pouce, vers l'avant */}
-    <group position={[cote * 0.024, -0.04, 0.016]} rotation={[-0.6, 0, cote * 0.5]}>
-      <mesh position={[0, -0.02, 0]}>
-        <capsuleGeometry args={[0.009, 0.03, 4, 8]} />
-        <Peau c={a.peau} />
-      </mesh>
     </group>
-  </group>
-);
+  );
+};
 
 const Bras: React.FC<{ a: Apparence; cote: 1 | -1; epaule: [number, number]; coude: number; lampe?: boolean; puissanceLampe?: number }> = ({ a, cote, epaule, coude, lampe, puissanceLampe = 1 }) => {
   const manche = <Tissu c={a.couleurHaut} />;

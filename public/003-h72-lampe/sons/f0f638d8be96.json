@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/f0f638d8be96.wav: downlifter/tape seed 661058652: 1.630 s, onset 0.004 s, peak at 0.103 s, end 1.368 s, -1.0 dBFS, -8.3 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/f0f638d8be96.wav",
+ "meta": {
+  "id": "downlifter/tape",
+  "seed": 661058652,
+  "sr": 48000,
+  "onset_s": 0.0045,
+  "peak_s": 0.1035,
+  "end_s": 1.368,
+  "dur_s": 1.6303,
+  "peak_db": -1.0,
+  "lufs_m_max": -8.31,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "downlifter/tape: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -139.9,
+    "ring_z": 3.7,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 1.7,
+    "attack_ms": 48.25,
+    "t40_ms": 1150.0,
+    "crest_db": 6.6,
+    "res_db": 5.7,
+    "res_hz": 2105,
+    "peak_dbfs": -1.0,
+    "live_ms": 1167.0
+   },
+   "glide": {
+    "tonal_share": 0.58,
+    "rise_st": 4.4,
+    "from_s": 0.891,
+    "to_s": 0.921
+   },
+   "layers": {
+    "attacks": [
+     0.092
+    ],
+    "count": 1,
+    "pre_swell_ms": 10.0
+   },
+   "context": {
+    "category": "downlifter",
+    "sound": "downlifter/tape"
+   }
+  }
+ }
+}

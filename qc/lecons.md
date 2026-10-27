@@ -17,7 +17,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 
 ### Zones sûres TikTok
 - Rien d'important au-dessus de y=180, sous y≈1500, ni dans la colonne de droite.
-- Sous-titres à 60 % de la hauteur.
+- Sous-titres à 69 % de la hauteur, 68 px (depuis le 27/10 ; avant : 60 %, 84 px).
 
 ### Son
 - La voix passe avant tout : bruitages et ambiances ≥ 10 dB sous la voix.
@@ -373,3 +373,59 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   le 4e. Règle : un escalier d'immeuble a DEUX demi-volées par étage et un palier intermédiaire (avec la fenêtre) ;
   tous les paliers d'étage sont empilés du même côté, les portes d'un étage juste au-dessus de celles de l'étage
   inférieur. En coupe, les paliers empilés se cachent l'un l'autre vu d'en haut : filmer les étages de face.
+- **2026-10-26 — DEMANDE : après le STOP, le narrateur dit aussi « On rembobine », avec un VRAI bruitage du temps qui
+  remonte** (en Partie 3 : un simple `downlifter/tape`, on ne sentait pas le retour en arrière). Règle : chaque STOP
+  s'écrit « Stop. On rembobine. » puis la phrase suivante marquée `>>` (1,5 s de silence dans la voix, géré par
+  `tools/couper_blancs.py`) ; le retour se déclare avec `depuis` (début de la mauvaise branche) :
+  `retours: [{ de: "stop", a: "<phrase après>", depuis: "<1re phrase de la branche>" }]` → `tools/mix.py` rejoue
+  l'audio réel de la branche à l'envers en accélérant (moteur, scintillement, souffle) ; « clac » `click/thock` (+
+  `cut_hit/punch`) sur « Stop » et `click/thock` à l'arrêt ; l'image de la branche recule en même temps. Le son
+  d'un nouvel essai se valide avec `earshot match <wav> "cassette rewind sound effect"` (« strong » attendu).
+- **2026-10-26 — Personnages vus de DOS sur 5 plans (Partie 4)** : orientation calculée « vers la table » sans penser à
+  la caméra. Règle : orientation 0 = face à +Z (la caméra par défaut) ; un personnage est vu de face ou de
+  trois-quarts seulement si son orientation est entre 270° et 90° (cosinus positif) ; vérifier chaque personnage qui
+  parle sur une image fixe AVANT la boucle.
+- **2026-10-26 — Le héros cachait son propre fantôme** (branche B : Inès debout devant son fantôme accroupi). Règle :
+  pendant une branche montrée en fantôme, le vrai personnage est absent (`presence` découpée en deux personnages) ;
+  le STOP (image qui recule) part de l'image où il était encore là.
+- **2026-10-26 — Gros plans du carnet tout blancs : la caméra passait à travers les flammes des bougies.** Règle :
+  avant un gros plan d'objet, aucune bougie ni lampe sur le segment caméra → objet ni à moins de 0,35 m de l'objet ;
+  bougies dans les coins de la table, pas entre l'objet et la caméra.
+- **2026-10-26 — Flash final calé sur « fin » = la FIN de la voix (1,5 s trop tard).** Règle : l'ancre « fin » seule
+  désigne toujours la fin du dernier mot ; pour la phrase `@fin`, écrire « fin:<mot> » (ex. « fin:il-0.6 »).
+- **2026-10-26 — Stylo à insuline à hauteur de bouche (on aurait dit une cigarette).** Règle : un objet tenu en main
+  se place par rapport à la main réelle de la pose (≈ 0,8 m de haut et 0,45 m devant pour `mainTendue`), et se
+  vérifie en image fixe ; dans le doute, l'objet est posé sur la table, bien visible.
+- **2026-10-27 — RETOUR : « c'est trop proche, dézoome, filme comme les comptes de référence ».** Mesure : en Partie 4,
+  personnage médian à 55 % de la hauteur de l'image et 45 % de gros plans, contre ≈ 22-38 % et 14-20 % chez
+  @chroniques_flippantes (`analyse/cadrages.md`). Règle : filmer avec `cadrage.large / pied / deux / moyen / gros`
+  (`src/systeme/camera.ts`), caméra à hauteur d'œil, décor visible ; médiane ≤ 35 % et gros plans ≤ 15 %
+  (bloqué par `tools/qc.ts`) ; gros plan de visage seulement pour un moment fort ; les gros plans d'objets se
+  déclarent en `sujets` (point) ; une pièce filmée de l'intérieur laisse ≥ 3 m de recul à la caméra.
+- **2026-10-27 — RETOUR : sous-titres « trop au milieu », trop gros ; ouvertures toutes en « Que feriez-vous si… ».**
+  Mesure sur @chroniques_flippantes : mot centré à y ≈ 1 325 (69 %), majuscules ≈ 55 px de haut, contour fin.
+  Règle : sous-titres à 69 % de la hauteur, 68 px, contour 8 px (`format.ts`, `hud/boites.ts`) ; l'inventaire et le
+  compte à rebours passent au-dessus (y ≈ 1 060-1 220) ; sujet cadré entre y = 250 et 1 150. Accroche : alterner
+  d'un épisode à l'autre (« Que feriez-vous si… », « Si… », « Alors, t'as choisi… ? », « Imagine… », chiffre choc),
+  jamais la même ouverture deux épisodes de suite (règle dans CLAUDE.md, étape 1 du pipeline).
+- **2026-10-27 — RETOUR : « le bruitage de On rembobine est trop long »** (≈ 2,8 s : toute la phrase « Stop. On
+  rembobine. » + 1,5 s de pause). Règle : pause `>>` à **0,6 s** (`PAUSE_LONGUE`, `tools/script_format.py`) et
+  retour déclaré à partir du mot « rembobine » : `retours: [{ de: "stop:rembobine", a: "<phrase après>", depuis: … }]`
+  → ≈ 1,1 s de son. Ne pas rallonger sans demande.
+- **2026-10-27 — DEMANDE : arrêter la série H+72 à la Partie 5.** Règle : le dernier épisode d'une série résout les
+  fils ouverts (coupables, objet planté qui sert une dernière fois), répond à la toute première image de la série,
+  et finit SANS cliffhanger ni choix A/B : carton « FIN · <série> » lu par le narrateur, avec une question ouverte
+  pour les commentaires. Quand la demande dit « finale », demander si c'est la fin de la série avant d'écrire un
+  cliffhanger.
+- **2026-10-27 — Partie 5, 1re planche : Inès énorme au premier plan (0:21)** : après une coupe, la caméra était posée
+  là où elle se tenait, et elle marchait vers la porte en passant devant l'objectif. Règle : dans une pièce étroite
+  (entrée), le personnage démarre ENTRE la caméra et sa destination à plus de 1,5 m de l'objectif, jamais à côté de
+  la caméra ; vérifier la position de départ par rapport à la caméra du plan, pas seulement l'arrivée.
+- **2026-10-27 — Lampes de policiers et de Morel qui aveuglent l'image (cônes plein écran, visage brûlé).** Règle :
+  un faisceau porté par un figurant face caméra : force ≤ 0,35, longueur ≤ 1,6 m, visé vers le bas du sujet ; un
+  personnage qui parle n'a pas de lampe allumée vers un autre visage.
+- **2026-10-27 — Objets illisibles : enveloppe brune sur meuble brun, robinet caché derrière Inès, gros plan de pompe
+  sans repère.** Règle : un objet clé contraste avec son support (clair sur sombre) ; la caméra le place du côté
+  opposé au personnage (rappel du 24/10) ; un appareil se filme assez large pour voir son voyant ou son mouvement.
+- **2026-10-27 — Dernier épisode : carton « FIN » ajouté au moteur** (`fin: true` dans le carton, `hud/Composants.tsx`) :
+  FIN en très grand, nom de la série, question ouverte, sans choix A/B.

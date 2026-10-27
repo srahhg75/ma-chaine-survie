@@ -1,0 +1,54 @@
+# H+72 — Partie 4 « Le conseil de l'immeuble » (même texte que script.md, section 1, avec les marqueurs du pipeline)
+# Reprend à la dernière image de la Partie 3 : J4 · 23:10, Inès au palier du 7e, lampe éteinte serrée dans la main,
+# une lampe en haut (porte du toit), une lampe en bas (cage d'escalier).
+# Voix : sans marqueur = narrateur ; [Inès] ou [Morel] en début de phrase = réplique dite par ce personnage.
+# Chiffres écrits en chiffres (affichés tels quels) ; la voix les lit en lettres, l'alignement fait le lien.
+@hook Que feriez-vous si on vous coinçait dans l'escalier ?
+@hook2 Une lampe au-dessus. Une en dessous.
+@recap1 Jour 4 sans électricité dans la ville.
+@recap2 Au 6e, on a volé l'eau d'Inès.
+@recap3 Le voleur a les _clés du 6e_.
+@recap4 Et ce soir, il a un _complice_.
+@b1 Si elle éteint et se tait…
+@b2 Personne ne sait qu'elle est là.
+@b3 _Sauf eux_.
+@stop Stop. On rembobine.
+# « >> » : 1,5 s de silence dans la voix pour le son du rembobinage (tools/mix.py), puis :
+@crie >> Elle crie.
+@i_cri [Inès] Au voleur ! Au 7e !
+@t1 1 : faites du _bruit_.
+@t1a Un voleur veut du silence.
+@t1b Des cris, des portes, des lampes.
+@t1c Les deux lampes s'enfuient.
+@police La police arrive. Escalier vide.
+@m_heure [Morel] Encore vous ? Il est 23 heures !
+@i_aussi [Inès] Bonsoir à vous aussi.
+@conseil Minuit, chez les voisins du 7e.
+@conseil2 Inès réunit l'immeuble.
+@t2 2 : la liste des _fragiles_.
+@t2a Qui vit seul. Qui est malade.
+@t2b La mairie tient le même registre.
+@m_fragile [Morel] Je ne suis pas fragile.
+@i_70 [Inès] Vous avez 70 ans, Morel.
+@t3 3 : les médicaments.
+@t3a Morel veut les cachets d'un voisin.
+@m_coeur [Morel] Il a le même cœur comme moi.
+@t3b _Jamais_ ceux d'un autre.
+@t3c Même avec les mêmes symptômes.
+@t3d L'insuline entamée tient *4 semaines* sans frigo.
+@liste Inès note tout. Qui a quoi.
+@liste2 L'eau, les piles, sa trousse d'infirmière.
+@laisse La liste reste au 7e, sur la table.
+@calme Elle redescend enfin dormir.
+@porte Sous sa porte, un papier.
+@mot Écrit dessus : on sait ce que tu as.
+@rappel Vous vous souvenez de la serrure ?
+@rappel2 _Jamais_ forcée. Ils ont une clé.
+@papier Et ce papier…
+@papier2 C'est une page de sa liste.
+@fin > Il était à la réunion.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Le complice est un voisin. Inès…
+@carton2 A : elle lit le mot devant tous.
+@carton3 B : elle se tait et observe.
+@carton4 Répondez en commentaire !

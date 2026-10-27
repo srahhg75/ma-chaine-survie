@@ -213,6 +213,22 @@ const Trait: React.FC<{ de: { x: number; y: number }; vers: { x: number; y: numb
 // ---------- Carton de fin « PARTIE N » (+ choix A/B en grand pour faire commenter) ----------
 export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
   const entree = interpolate(f - e.fDe, [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  // Version « fin de série » : fond assombri, FIN en très grand, nom de la série, question ouverte pour les commentaires
+  if (e.fin) {
+    const apparait = (i: number) => interpolate(f - e.fDe, [6 + i * 6, 16 + i * 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    return (
+      <>
+        <div style={{ position: "absolute", inset: 0, background: `rgba(5,6,8,${0.7 * entree})` }} />
+        <div style={boite(r, { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 34, fontFamily: POLICE_TEXTE, color: "white", textAlign: "center" })}>
+          <div style={{ fontWeight: 900, fontSize: 210, lineHeight: 0.9, letterSpacing: 8, textShadow: "0 10px 40px rgba(0,0,0,0.9)", transform: `scale(${0.85 + 0.15 * entree})`, opacity: entree }}>FIN</div>
+          <div style={{ background: JAUNE, color: "#141414", fontWeight: 900, fontSize: 46, padding: "10px 30px", borderRadius: 12, opacity: apparait(0) }}>{e.titre.toUpperCase()}</div>
+          {e.question && <div style={{ fontWeight: 900, fontSize: 78, lineHeight: 1.04, textTransform: "uppercase", textShadow: "0 8px 30px rgba(0,0,0,0.9)", opacity: apparait(1) }}>{e.question}</div>}
+          <div style={{ fontWeight: 900, fontSize: 46, color: JAUNE, textShadow: "0 4px 16px rgba(0,0,0,0.9)", opacity: apparait(2) }}>RÉPONDS EN COMMENTAIRE ↓</div>
+          <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>Fiction · conseils vérifiés le {e.verifie}</div>
+        </div>
+      </>
+    );
+  }
   if (!e.question) {
     return (
       <div style={boite(r, { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 22, fontFamily: POLICE_TEXTE, color: "white", textAlign: "center" })}>

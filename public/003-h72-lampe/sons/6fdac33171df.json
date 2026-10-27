@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/6fdac33171df.wav: pro_impact/short seed 0: 0.667 s, onset 0.000 s, peak at 0.181 s, end 0.637 s, -1.0 dBFS, -14.8 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/6fdac33171df.wav",
+ "meta": {
+  "id": "pro_impact/short",
+  "seed": 0,
+  "sr": 48000,
+  "onset_s": 0.0,
+  "peak_s": 0.1815,
+  "end_s": 0.637,
+  "dur_s": 0.6668,
+  "peak_db": -1.0,
+  "lufs_m_max": -14.83,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "pro_impact/short: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -76.4,
+    "ring_z": 10.9,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 5.6,
+    "attack_ms": 8.25,
+    "t40_ms": 470.0,
+    "crest_db": 9.9,
+    "res_db": 1.7,
+    "res_hz": 8667,
+    "peak_dbfs": -1.0,
+    "live_ms": 603.75
+   },
+   "glide": {
+    "tonal_share": 0.93,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.172
+    ],
+    "count": 1,
+    "pre_swell_ms": 10.0
+   },
+   "context": {
+    "category": "pro_impact",
+    "sound": "pro_impact/short"
+   }
+  }
+ }
+}

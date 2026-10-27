@@ -24,6 +24,7 @@ export type Apparence = {
   bandeau: string | null; // serre-tête tricoté (couleur), ou rien
   echarpe: string | null;
   sac: string | null; // petit sac à dos de survie
+  gants: string | null; // gants (couleur), ou mains nues
 };
 
 export const APPARENCE_DEFAUT: Apparence = {
@@ -46,6 +47,7 @@ export const APPARENCE_DEFAUT: Apparence = {
   bandeau: null,
   echarpe: null,
   sac: null,
+  gants: null,
 };
 
 // Inès, 34 ans, infirmière de nuit : la tenue de la partie 1 (parka bleu-vert, pantalon prune, bottines marron,

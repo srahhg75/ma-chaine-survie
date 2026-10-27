@@ -9,6 +9,7 @@ Cibles (entre deux mots, seulement si l'écart est une vraie pause ≥ 0,1 s) :
   - fin de phrase (. ? ! …) ou changement de ligne du script : 0,30 s
   - hésitation au milieu d'une phrase (> 0,25 s) : 0,15 s
   - juste avant une phrase-chute (« > » dans le script) : 0,60 s (on ajoute du silence si besoin)
+  - juste avant une pause longue (« >> » dans le script) : 0,60 s (place d'un bruitage, ex. le rembobinage)
 Chaque raccord a un fondu enchaîné de 12 ms ; une coupe n'est faite que dans un trou de parole confirmé
 (au moins 40 ms de marge autour de chaque mot reconnu, énergie basse). Ensuite : réalignement -> mots.json.
 """
@@ -39,9 +40,17 @@ def charger(chemin: Path) -> np.ndarray:
     return audio
 
 
+def pause_voulue(mot_a: dict, mot_b: dict, phrases: list[dict]) -> float | None:
+    """Silence imposé avant mot_b s'il ouvre une phrase-chute (« > ») ou une pause longue (« >> »)."""
+    if mot_b["phrase"] == mot_a["phrase"]:
+        return None
+    p = phrases[mot_b["phrase"]]
+    return p.get("pause") or (0.60 if p["chute"] else None)
+
+
 def cible(mot_a: dict, mot_b: dict, phrases: list[dict]) -> float | None:
-    if mot_b["phrase"] != mot_a["phrase"] and phrases[mot_b["phrase"]]["chute"]:
-        return 0.60
+    if (p := pause_voulue(mot_a, mot_b, phrases)) is not None:
+        return p
     fin = mot_a["mot"].rstrip("»  ")
     if mot_b["phrase"] != mot_a["phrase"] or fin.endswith((".", "?", "!", "…")):
         return 0.30
@@ -85,11 +94,12 @@ def main() -> None:
         if ma["source"] == "interpole" or mb["source"] == "interpole":
             # Temps incertains : on ne coupe rien. Seule exception : la pause avant une chute, insérée au point
             # le plus calme juste avant le 1er mot de la chute (s'il est fiable et si l'endroit est silencieux).
-            if mb["source"] == "vosk" and mb["phrase"] != ma["phrase"] and phrases[mb["phrase"]]["chute"]:
+            voulue = pause_voulue(ma, mb, phrases)
+            if mb["source"] == "vosk" and voulue is not None:
                 p = point_calme(audio, max(0.0, mb["debut"] - 0.25), mb["debut"] - 0.01)
                 fen = audio[int((p - 0.01) * SR):int((p + 0.01) * SR)]
                 if len(fen) and np.sqrt(np.mean(fen ** 2)) < seuil * 3:
-                    editions.append(("inserer", p, 0.6 - max(0.0, mb["debut"] - p)))
+                    editions.append(("inserer", p, voulue - max(0.0, mb["debut"] - p)))
             continue
         ecart = mb["debut"] - ma["fin"]
         c = cible(ma, mb, phrases)

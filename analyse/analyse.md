@@ -210,6 +210,8 @@ rembobine » → bonne branche (≈ 30-40 s) avec un faux répit puis une nouvel
 2. **Les deux branches montrées** : la mauvaise en **fantôme rouge** (notre signature), la bonne en vrai.
 3. **Un signal de « retour en arrière »** à nous, différent du leur (ex. : l'image se rembobine en noir et blanc
    avec un bruit de bande et le mot **« STOP »** dans le HUD, sans l'expression « on rembobine »).
+   *Mise à jour du 26/10 (demande de la chaîne, à partir de la Partie 4) : le narrateur dit « Stop. On rembobine. »
+   (expression courante, notre texte autour reste entièrement réécrit), avec un vrai son de bande rembobinée.*
 4. **Une règle écrite plantée tôt** (ex. : l'affiche de l'immeuble, la liste d'Inès) qui revient en partie suivante.
 5. **Un enjeu chiffré dès les 5 s** (litres, degrés, % de batterie) — déjà notre jauge.
 6. **Rafale de publication** : quand une partie dépasse sa moyenne, publier la suivante dans les 6-12 h.

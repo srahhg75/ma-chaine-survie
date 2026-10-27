@@ -1,0 +1,62 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/c62a76987879.wav: whoosh_big/gust seed 1003958671: 1.886 s, onset 0.202 s, peak at 0.603 s, end 1.604 s, -1.0 dBFS, -13.7 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/c62a76987879.wav",
+ "meta": {
+  "id": "whoosh_big/gust",
+  "seed": 1003958671,
+  "sr": 48000,
+  "onset_s": 0.2018,
+  "peak_s": 0.6025,
+  "end_s": 1.604,
+  "dur_s": 1.886,
+  "peak_db": -1.0,
+  "lufs_m_max": -13.67,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [
+    {
+     "code": "tail",
+     "msg": "the tail rises again by 7 dB (a second event, a roll or a double member)"
+    }
+   ],
+   "summary": "whoosh_big/gust: clean (the tail rises again by 7 dB (a second event, a roll or a double member))",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -122.4,
+    "ring_z": 5.1,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 7.4,
+    "attack_ms": 10.25,
+    "t40_ms": 710.0,
+    "crest_db": 9.4,
+    "res_db": 5.4,
+    "res_hz": 3592,
+    "peak_dbfs": -1.0,
+    "live_ms": 937.5
+   },
+   "glide": {
+    "tonal_share": 0.3,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.522
+    ],
+    "count": 1,
+    "pre_swell_ms": 300.0
+   },
+   "context": {
+    "category": "whoosh_big",
+    "sound": "whoosh_big/gust"
+   }
+  }
+ }
+}

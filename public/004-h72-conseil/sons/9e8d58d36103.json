@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/9e8d58d36103.wav: downlifter/air_fall seed 1367864807: 2.060 s, onset 0.015 s, peak at 0.148 s, end 1.826 s, -1.0 dBFS, -10.0 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/9e8d58d36103.wav",
+ "meta": {
+  "id": "downlifter/air_fall",
+  "seed": 1367864807,
+  "sr": 48000,
+  "onset_s": 0.015,
+  "peak_s": 0.1485,
+  "end_s": 1.826,
+  "dur_s": 2.0601,
+  "peak_db": -1.0,
+  "lufs_m_max": -9.96,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "downlifter/air_fall: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -170.0,
+    "ring_z": 4.0,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 4.0,
+    "attack_ms": 101.25,
+    "t40_ms": 1420.0,
+    "crest_db": 8.0,
+    "res_db": 2.7,
+    "res_hz": 2977,
+    "peak_dbfs": -1.0,
+    "live_ms": 1330.25
+   },
+   "glide": {
+    "tonal_share": 0.06,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.142
+    ],
+    "count": 1,
+    "pre_swell_ms": 50.0
+   },
+   "context": {
+    "category": "downlifter",
+    "sound": "downlifter/air_fall"
+   }
+  }
+ }
+}

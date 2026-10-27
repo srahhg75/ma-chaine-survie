@@ -4,6 +4,10 @@ Chaîne TikTok **en français**, sans visage : séries de **survie apocalyptique
 « **Que feriez-vous si…** ». La personne qui gère la chaîne ne code pas : Claude fait tout, explique simplement ce
 qu'il fait, et ne pose que les questions indispensables.
 **Claude répond TOUJOURS en français**, dans chaque message, et donne les heures à l'heure de Paris (le serveur est en UTC).
+**Tout ce que la personne doit lire ou faire s'écrit DANS LE MESSAGE** (demande du 26/10) : elle n'ouvre jamais les
+dossiers ni les fichiers. Textes à coller dans ElevenLabs, réglages, légende, hashtags, commentaire épinglé, retours de
+contrôle : tout est recopié en entier dans la réponse, prêt à copier. Les fichiers restent la mémoire de Claude ; ne
+jamais répondre « c'est dans tel fichier ».
 
 ## ⚠️ Règle n°1 : les leçons
 - **Avant chaque épisode et avant chaque rendu : relire `qc/lecons.md` en entier.**
@@ -14,6 +18,7 @@ qu'il fait, et ne pose que les questions indispensables.
 | Sujet | Décision |
 |---|---|
 | Format | vertical **1080×1920**, **30 i/s**, H.264 + AAC, épisodes de **70 à 120 s** |
+| Cadrage / sous-titres | comme @chroniques_flippantes (`analyse/cadrages.md`) : personnage petit (médiane ≤ 35 % de la hauteur), `cadrage.*` de `camera.ts` ; sous-titres à **69 %** de la hauteur, **68 px** |
 | Vidéo | **Remotion** (React + TypeScript) + **@remotion/three / three / @react-three/fiber** pour la 3D |
 | Polices | Google Fonts copiées **en local** dans `public/polices/` (`npx tsx tools/telecharger_polices.ts`), chargées par `src/systeme/polices.ts` ; jamais de chargement réseau pendant un rendu |
 | Rendu 3D | `remotion.config.ts` choisit seul : `angle` (carte graphique) ou `swangle` (serveur Linux sans GPU) |
@@ -56,7 +61,10 @@ Ex. : `@m1 [Morel] C'est mon chauffage central !`
 
 ## Pipeline d'un épisode
 0. **Relire `qc/lecons.md`.** Choisir `NNN-nom`, créer `videos/`, `public/`, `src/episodes/` à ce nom.
-1. **Script** → `videos/NNN-nom/script.txt` (format ci-dessus). Accroche « Que feriez-vous si… » dès la 1re phrase,
+1. **Script** → `videos/NNN-nom/script.txt` (format ci-dessus). Accroche dès la 1re phrase, en **alternant** d'un épisode
+   à l'autre (jamais la même ouverture que l'épisode précédent) : « Que feriez-vous si… », « Si… » (au « tu » : « Si on
+   frappe chez toi… »), « Alors, t'as choisi A ou B ? » (suite d'un choix), « Imagine… », un chiffre choc (« Il te reste
+   9 litres. ») ;
    ~170 mots/minute (70–120 s ≈ 200–340 mots). Faits de survie **vérifiés**, aucun conseil dangereux présenté comme sûr.
 2. **Voix** → `videos/NNN-nom/voix_brute.wav` (fournie). Pour monter avant la vraie voix :
    `.venv/bin/python tools/voix_provisoire.py videos/NNN-nom/script.txt videos/NNN-nom/voix_brute.wav` (jamais publiée).

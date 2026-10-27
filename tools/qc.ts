@@ -5,7 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { chargerEpisode } from "./charger";
 import { etatCamera, project } from "../src/systeme/camera";
 import {
-  BANDE_SUJET, CAMERA_ROTATION_MAX_DEG_S, DUREE_MAX_S, DUREE_MIN_S, ETIQUETTE_MIN_S, HAUTEUR, HUD_BLOCS_MAX, LARGEUR,
+  BANDE_SUJET, CADRAGE, CAMERA_ROTATION_MAX_DEG_S, DUREE_MAX_S, DUREE_MIN_S, ETIQUETTE_MIN_S, HAUTEUR, HUD_BLOCS_MAX, LARGEUR,
   RYTHME_MAX_S, VITESSE_MAX_M_S, ZONE_SURE,
 } from "../src/systeme/format";
 import { boiteHud, boiteSousTitre, chevauche, contient, Rect } from "../src/systeme/hud/boites";
@@ -92,6 +92,8 @@ const meubles = donnees.decor.meubles.filter((m) => m.type !== "tapis").map(boit
 const blocs = blocsSousTitres(alignement.mots, alignement.phrases);
 let dirPrec: Vec3 | null = null;
 const posPrec = new Map<string, Vec3>();
+// Taille à l'écran du plus grand personnage visible, image par image (0 = aucun personnage : plan d'objet, carton)
+const tailles: number[] = [];
 
 for (let f = 0; f < r.duree; f++) {
   const cam = etatCamera(r.camera, f, fps);
@@ -151,6 +153,23 @@ for (let f = 0; f < r.duree; f++) {
     })
     .filter((x): x is { id: string; b: Rect } => x !== null);
   for (const { id: nom, b } of silhouettes) if (b.y < 0) signaler("Sujet coupé", `le haut de la tête de ${nom} sort du cadre`, f);
+
+  // Taille du plus grand personnage dont le corps est à l'image (sujet ou non, fantômes compris).
+  // Non mesuré : carton de fin (il couvre l'image) et plans d'OBJET (sujet déclaré par un point : carnet, serrure…),
+  // où un personnage peut traverser le champ sans être filmé.
+  let plusGrand = 0;
+  const planObjet = r.sujets.some((s) => !s.personnage && f >= s.fDe && f < s.fA);
+  const carton = r.hud.some((e) => e.type === "carton" && f >= e.fDe && f < e.fA);
+  for (const x of planObjet || carton ? [] : etats.values()) {
+    const k = x.p.taille;
+    const [px, py, pz] = x.e.position;
+    const pieds = project([px, py + 0.02, pz], cam);
+    const tete = project([px, py + (hauteurBassin(x.e.pose, x.p.variante) + hautTete(x.p.variante) + 0.06) * k, pz], cam);
+    const milieu = project([px, py + 0.7 * k, pz], cam);
+    if (!milieu.devant || milieu.x < 0 || milieu.x > LARGEUR || milieu.y < 0 || milieu.y > HAUTEUR) continue;
+    plusGrand = Math.max(plusGrand, Math.abs(pieds.y - tete.y) / HAUTEUR);
+  }
+  tailles.push(plusGrand);
 
   // HUD actif
   const actifs = r.hud.filter((e) => f >= e.fDe && f < e.fA);
@@ -212,6 +231,21 @@ for (let f = 0; f < r.duree; f++) {
   }
 }
 
+// ---------- Cadrage : assez large pour voir le décor (analyse/cadrages.md) ----------
+const avecPerso = tailles.filter((x) => x > 0).sort((a, b) => a - b);
+const pc = (x: number) => `${Math.round(x * 100)} %`;
+let statsCadrage = "Aucun personnage à l'image.";
+if (avecPerso.length) {
+  const mediane = avecPerso[Math.floor(avecPerso.length / 2)];
+  const partGros = avecPerso.filter((x) => x > CADRAGE.grosPlanSeuil).length / avecPerso.length;
+  const tranche = (a: number, b: number) => pc(avecPerso.filter((x) => x >= a && x < b).length / avecPerso.length);
+  statsCadrage =
+    `Taille du personnage à l'écran (images avec personnage) : médiane ${pc(mediane)} de la hauteur ; ` +
+    `plans larges < 35 % : ${tranche(0, 0.35)} · moyens 35-60 % : ${tranche(0.35, 0.6)} · gros plans > 60 % : ${pc(partGros)}`;
+  if (mediane > CADRAGE.medianeMax) signaler("Cadrage trop serré", `personnage médian à ${pc(mediane)} de la hauteur (max ${pc(CADRAGE.medianeMax)}) : dézoomer`, 0);
+  if (partGros > CADRAGE.grosPlanPartMax) signaler("Trop de gros plans", `${pc(partGros)} des images en gros plan (max ${pc(CADRAGE.grosPlanPartMax)})`, 0);
+}
+
 // ---------- Rapport ----------
 const erreurs = problemes.filter((p) => p.grave);
 const avert = problemes.filter((p) => !p.grave);
@@ -220,6 +254,8 @@ const rapport = [
   `# Contrôle qualité — ${id}`,
   "",
   `Durée ${dureeS.toFixed(2)} s · ${r.duree} images · ${erreurs.length} erreur(s) · ${avert.length} avertissement(s)`,
+  "",
+  statsCadrage,
   "",
   "## Erreurs",
   ...(erreurs.length ? erreurs.map(ligne) : ["Aucune."]),
@@ -234,5 +270,7 @@ const rapport = [
 ].join("\n");
 mkdirSync(`qc/${id}`, { recursive: true });
 writeFileSync(`qc/${id}/rapport_qc.md`, rapport + "\n");
+// Taille du plus grand personnage image par image : pour trouver les plans trop serrés
+writeFileSync(`qc/${id}/cadrage.tsv`, "t\ttaille\n" + tailles.map((x, f) => `${(f / fps).toFixed(2)}\t${x.toFixed(3)}`).join("\n") + "\n");
 console.log(rapport);
 process.exit(erreurs.length ? 1 : 0);

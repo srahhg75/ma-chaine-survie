@@ -1,0 +1,67 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/80f0d431469c.wav: pro_impact/deep seed 0: 1.315 s, onset 0.005 s, peak at 0.213 s, end 1.284 s, -1.0 dBFS, -15.4 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/004-h72-conseil/sons/80f0d431469c.wav",
+ "meta": {
+  "id": "pro_impact/deep",
+  "seed": 0,
+  "sr": 48000,
+  "onset_s": 0.0048,
+  "peak_s": 0.2135,
+  "end_s": 1.284,
+  "dur_s": 1.3148,
+  "peak_db": -1.0,
+  "lufs_m_max": -15.38,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [
+    {
+     "code": "tail",
+     "msg": "the tail rises again by 10 dB (a second event, a roll or a double member)"
+    },
+    {
+     "code": "stacked",
+     "msg": "2 separate attacks (0.21, 0.41 s): layers stacked where one clean hit reads better"
+    }
+   ],
+   "summary": "pro_impact/deep: clean (the tail rises again by 10 dB (a second event, a roll or a double member); 2 separate attacks (0.21, 0.41 s): layers stacked where one clean hit reads better)",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -94.6,
+    "ring_z": 6.5,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 10.0,
+    "attack_ms": 3.5,
+    "t40_ms": 1010.0,
+    "crest_db": 10.8,
+    "res_db": 3.2,
+    "res_hz": 5620,
+    "peak_dbfs": -1.0,
+    "live_ms": 1134.5
+   },
+   "glide": {
+    "tonal_share": 0.87,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.212,
+     0.407
+    ],
+    "count": 2,
+    "pre_swell_ms": 30.0
+   },
+   "context": {
+    "category": "pro_impact",
+    "sound": "pro_impact/deep"
+   }
+  }
+ }
+}

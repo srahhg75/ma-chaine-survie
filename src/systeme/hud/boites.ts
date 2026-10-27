@@ -13,11 +13,11 @@ export const HUD = {
   tactique: { x: 380, y: 196, l: ZONE_SURE.droite - 380, h: 112 },
   moodles: { x: ZONE_SURE.gauche, y: 324, taille: 84, ecart: 12 },
   fiche: { l: 400, h: 236 },
-  inventaire: { y: 1340, h: 140, case: 112 },
-  compte: { l: 300, h: 170, y: 1316 },
+  inventaire: { y: 1080, h: 140, case: 112 }, // au-dessus des sous-titres (abaissés à 69 %)
+  compte: { l: 300, h: 170, y: 1060 },
   etiquette: { h: 62, parCaractere: 21, rembourrage: 44 },
   carton: { x: 70, y: 240, l: 840, h: 1240 },
-  sousTitres: { taille: 84, interligne: 96, largeurMax: ZONE_SURE.droite - ZONE_SURE.gauche, parCaractere: 0.7 },
+  sousTitres: { taille: 68, interligne: 78, largeurMax: ZONE_SURE.droite - ZONE_SURE.gauche, parCaractere: 0.7 },
 } as const;
 
 export const largeurEtiquette = (texte: string) => HUD.etiquette.rembourrage + HUD.etiquette.parCaractere * texte.length;

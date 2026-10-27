@@ -1,0 +1,163 @@
+{
+ "lufs": -13.99,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "voisins.",
+   "t": 0.3,
+   "baisse_db": 1.3
+  },
+  {
+   "mot": "plus",
+   "t": 3.45,
+   "baisse_db": 6.3
+  },
+  {
+   "mot": "bas.",
+   "t": 3.63,
+   "baisse_db": 4.4
+  },
+  {
+   "mot": "Le",
+   "t": 15.33,
+   "baisse_db": 6.8
+  },
+  {
+   "mot": "C'est",
+   "t": 42.87,
+   "baisse_db": 1.6
+  },
+  {
+   "mot": "6.",
+   "t": 56.46,
+   "baisse_db": 6.4
+  },
+  {
+   "mot": "Les",
+   "t": 62.43,
+   "baisse_db": 4.0
+  },
+  {
+   "mot": "du",
+   "t": 68.1,
+   "baisse_db": 1.7
+  },
+  {
+   "mot": "4e.",
+   "t": 68.22,
+   "baisse_db": 3.2
+  },
+  {
+   "mot": "Sauf",
+   "t": 71.76,
+   "baisse_db": 9.3
+  },
+  {
+   "mot": "sur",
+   "t": 76.71,
+   "baisse_db": 1.1
+  },
+  {
+   "mot": "la",
+   "t": 76.86,
+   "baisse_db": 2.9
+  },
+  {
+   "mot": "cale.",
+   "t": 76.98,
+   "baisse_db": 8.5
+  },
+  {
+   "mot": "Au",
+   "t": 77.31,
+   "baisse_db": 2.0
+  },
+  {
+   "mot": "Fin",
+   "t": 94.05,
+   "baisse_db": 5.5
+  }
+ ],
+ "sons": [
+  "pro_impact/short",
+  "whoosh_big/deep",
+  "pro_sub_drop/low",
+  "cut_hit/sub",
+  "whoosh_big/swell",
+  "cut_hit/sub",
+  "toggle/latch",
+  "pro_impact/short",
+  "swipe/cloth",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "reverse_swell/dark",
+  "swipe/cloth",
+  "pro_sub_drop/low",
+  "click/thock",
+  "cut_hit/punch",
+  "click/thock",
+  "pro_impact/short",
+  "swish/soft",
+  "knock/wood",
+  "knock/wood",
+  "fit/land.light/finger_wood",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "swipe/cloth",
+  "swipe/cloth",
+  "click/thock",
+  "tap/table",
+  "cut_hit/sub",
+  "toggle/latch",
+  "pro_impact/short",
+  "swipe/cloth",
+  "whoosh_fast/heavy",
+  "tap/table",
+  "cut_hit/sub",
+  "swish/soft",
+  "cut_hit/sub",
+  "swish/soft",
+  "cut_hit/sub",
+  "swipe/cloth",
+  "pro_impact/short",
+  "tap/table",
+  "whoosh_big/swell",
+  "cut_hit/sub",
+  "knock/wood",
+  "whoosh_big/deep",
+  "click/thock",
+  "pro_impact/deep",
+  "click/thock",
+  "reverse_swell/dark",
+  "tap/knuckle",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "cut_hit/sub",
+  "tap/knuckle",
+  "pro_sub_drop/low",
+  "cut_hit/sub",
+  "toggle/latch",
+  "knock/wood",
+  "pro_impact/deep",
+  "pro_impact/deep",
+  "cut_hit/punch",
+  "knock/desk",
+  "tap/knuckle",
+  "cut_hit/sub",
+  "swish/soft",
+  "cut_hit/sub",
+  "fit/snap/switch_flip",
+  "fit/snap/switch_flip",
+  "cut_hit/sub",
+  "riser/dark",
+  "cut_hit/sub",
+  "drip/bubble",
+  "drip/drop",
+  "drip/drop",
+  "impact/deep",
+  "whoosh_fast/heavy",
+  "cut_hit/sub"
+ ],
+ "pas": 13,
+ "rembobinages": 1
+}

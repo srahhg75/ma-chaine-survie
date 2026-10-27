@@ -178,6 +178,34 @@ def amb_eau(n: int, g: str) -> np.ndarray:
     return normaliser_rms(_turbulence(n, g) + 0.5 * amb_glouglou(n, g + "g") + 0.4 * _bulles_aigues(n, g + "b"), 0)
 
 
+def rembobinage(source: np.ndarray, n: int, g: str) -> np.ndarray:
+    """Son du STOP : une bande qu'on rembobine. `source` = audio de la mauvaise branche (dans l'ordre) ; il est
+    rejoué À L'ENVERS (le plus récent d'abord) en accélérant de ×1 à ×4-12 (voix aiguës et incompréhensibles),
+    avec le scintillement de la bande, le moteur qui monte dans les aigus et le souffle ; arrêt net à la fin
+    (le « clac » du bouton est un bruitage earshot posé dans les données de l'épisode)."""
+    t = np.arange(n) / SR
+    u = t / max(t[-1], 1e-3)
+    duree, longueur = n / SR, len(source) / SR
+    k = 1.6  # la vitesse monte en douceur puis s'emballe
+    s0 = 1.0
+    s1 = float(np.clip(s0 + (longueur / duree - s0) * (k + 1), 4.0, 12.0))
+    vitesse = s0 + (s1 - s0) * u ** k
+    inverse = passe_bas(source[::-1], SR / 2 / s1 * 0.9, 4)  # anti-repliement avant accélération
+    position = np.cumsum(vitesse) - vitesse[0]
+    bande = np.interp(position, np.arange(len(inverse)), inverse, right=0.0)
+    # tête de lecture : medium seulement, et scintillement qui accélère (8 -> 30 Hz)
+    bande = passe_bande(bande, 250, 7000) * (1 + 0.3 * np.sin(2 * np.pi * np.cumsum(8 + 22 * u ** k) / SR))
+    # moteur : fondamentale qui suit la vitesse (55 -> ≈ 400 Hz) + harmoniques
+    phase = 2 * np.pi * np.cumsum(55 * vitesse) / SR
+    moteur = sum(a * np.sin(h * phase) for h, a in ((1, 1.0), (2, 0.5), (3, 0.3), (5, 0.12)))
+    souffle = passe_bande(rng(g).standard_normal(n), 1800, 7000) * (0.3 + 0.7 * u)
+    x = normaliser_rms(bande, 0) + 0.3 * normaliser_rms(moteur, 0) * (0.4 + 0.6 * u) + 0.25 * normaliser_rms(souffle, 0)
+    entree, sortie = int(0.025 * SR), int(0.03 * SR)
+    x[:entree] *= np.linspace(0, 1, entree)
+    x[-sortie:] *= np.linspace(1, 0, sortie)
+    return x / (np.max(np.abs(x)) + 1e-12)
+
+
 AMBIANCES = {"vent": amb_vent, "drone": amb_drone, "coeur": amb_coeur, "ville": amb_ville, "eau": amb_eau, "glouglou": amb_glouglou, "grincement": amb_grincement}
 
 
@@ -296,6 +324,16 @@ def main() -> None:
             x[-fondu:] *= rampe[::-1]
         amb[i:j] += x
 
+    # Rembobinage du STOP : l'audio de la mauvaise branche (voix + fond) rejoué à l'envers (episode.ts, `retours`)
+    for k, r in enumerate(tl.get("rembobinages", [])):
+        # assez d'audio pour accélérer jusqu'à ×6 sans tomber à court (sinon : on remonte plus loin que la branche)
+        besoin = (r["a"] - r["de"]) * (1 + 5 / 2.6)
+        i0, i, j = int(max(0.0, min(r["depuis"], r["de"] - besoin)) * SR), int(r["de"] * SR), min(n, int(r["a"] * SR))
+        if j - i < int(0.3 * SR) or i - i0 < int(0.5 * SR):
+            sys.exit(f"mix.py : rembobinage {k} trop court (branche {r['de'] - r['depuis']:.1f} s, son {r['a'] - r['de']:.1f} s)")
+        x = rembobinage((voix + sfx + amb)[i0:i], j - i, f"{ep}rembobinage{k}")
+        sfx[i:j] += x * gain(BASE_SFX_DB + r.get("gain", 0))
+
     # Ducking : le fond baisse quand la voix parle (attaque 30 ms, relâchement 350 ms)
     env_voix = enveloppe_db(voix, 0.03)
     parle = (env_voix > db(np.sqrt(np.mean(voix ** 2))) - 18).astype(float)
@@ -354,6 +392,7 @@ def main() -> None:
         "corrections_mot_par_mot": corrections,
         "sons": [s["id"] for s in tl["sons"]],
         "pas": len(tl["pas"]),
+        "rembobinages": len(tl.get("rembobinages", [])),
     }
     (RACINE / "qc" / ep).mkdir(parents=True, exist_ok=True)
     (RACINE / "qc" / ep / "mix.json").write_text(json.dumps(rapport, ensure_ascii=False, indent=1), encoding="utf-8")

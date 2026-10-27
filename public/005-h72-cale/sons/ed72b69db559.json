@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/005-h72-cale/sons/ed72b69db559.wav: fit/snap/switch_flip seed 0: 0.185 s, onset 0.001 s, peak at 0.035 s, end 0.107 s, -1.0 dBFS, -22.3 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/005-h72-cale/sons/ed72b69db559.wav",
+ "meta": {
+  "id": "fit/snap/switch_flip",
+  "seed": 0,
+  "sr": 48000,
+  "onset_s": 0.0008,
+  "peak_s": 0.0355,
+  "end_s": 0.107,
+  "dur_s": 0.185,
+  "peak_db": -1.0,
+  "lufs_m_max": -22.31,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "fit/snap/switch_flip: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -64.1,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -124.3,
+    "ring_z": null,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 4.25,
+    "t40_ms": 70.0,
+    "crest_db": 13.8,
+    "res_db": 16.5,
+    "res_hz": 3805,
+    "peak_dbfs": -1.0,
+    "live_ms": 89.75
+   },
+   "glide": {
+    "tonal_share": 0.38,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.043
+    ],
+    "count": 1,
+    "pre_swell_ms": 10.0
+   },
+   "context": {
+    "category": "fit",
+    "sound": "fit/snap/switch_flip"
+   }
+  }
+ }
+}

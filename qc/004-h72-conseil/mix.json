@@ -1,0 +1,156 @@
+{
+ "lufs": -14.0,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "Et",
+   "t": 12.03,
+   "baisse_db": 2.2
+  },
+  {
+   "mot": "complice.",
+   "t": 13.23,
+   "baisse_db": 1.2
+  },
+  {
+   "mot": "Sauf",
+   "t": 17.49,
+   "baisse_db": 7.7
+  },
+  {
+   "mot": "eux.",
+   "t": 17.841,
+   "baisse_db": 1.2
+  },
+  {
+   "mot": "Stop.",
+   "t": 18.33,
+   "baisse_db": 4.8
+  },
+  {
+   "mot": "bruit.",
+   "t": 25.2,
+   "baisse_db": 4.6
+  },
+  {
+   "mot": "Écrit",
+   "t": 73.95,
+   "baisse_db": 3.5
+  },
+  {
+   "mot": "une",
+   "t": 78.9,
+   "baisse_db": 1.8
+  },
+  {
+   "mot": "clé.",
+   "t": 79.05,
+   "baisse_db": 4.9
+  },
+  {
+   "mot": "Et",
+   "t": 79.65,
+   "baisse_db": 2.8
+  },
+  {
+   "mot": "C'est",
+   "t": 80.67,
+   "baisse_db": 1.2
+  },
+  {
+   "mot": "liste.",
+   "t": 81.45,
+   "baisse_db": 2.2
+  },
+  {
+   "mot": "Le",
+   "t": 83.97,
+   "baisse_db": 3.6
+  },
+  {
+   "mot": "complice",
+   "t": 84.18,
+   "baisse_db": 1.6
+  },
+  {
+   "mot": "est",
+   "t": 84.57,
+   "baisse_db": 2.5
+  },
+  {
+   "mot": "un",
+   "t": 84.684,
+   "baisse_db": 1.4
+  },
+  {
+   "mot": "tous.",
+   "t": 87.48,
+   "baisse_db": 1.3
+  }
+ ],
+ "sons": [
+  "whoosh_big/deep",
+  "click/thock",
+  "click/thock",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "reverse_swell/dark",
+  "pro_sub_drop/low",
+  "click/thock",
+  "cut_hit/punch",
+  "click/thock",
+  "pro_impact/deep",
+  "pro_impact/short",
+  "knock/wood",
+  "knock/wood",
+  "knock/wood",
+  "whoosh_big/swell",
+  "toggle/latch",
+  "toggle/latch",
+  "click/thock",
+  "downlifter/air_fall",
+  "knock/wood",
+  "whoosh_big/deep",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "whoosh_big/swell",
+  "pro_impact/short",
+  "swipe/cloth",
+  "swish/soft",
+  "swish/soft",
+  "tap/table",
+  "pro_impact/short",
+  "tap/table",
+  "reverse_swell/dark",
+  "tap/table",
+  "tap/table",
+  "whoosh_fast/heavy",
+  "click/thock",
+  "swipe/cloth",
+  "tap/table",
+  "whoosh_big/swell",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "toggle/latch",
+  "swish/soft",
+  "pro_sub_drop/low",
+  "toggle/latch",
+  "reverse_swell/dark",
+  "pro_impact/deep",
+  "swipe/cloth",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "whoosh_big/thump_deep",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "impact/deep",
+  "whoosh_fast/heavy",
+  "cut_hit/punch",
+  "cut_hit/sub"
+ ],
+ "pas": 115,
+ "rembobinages": 1
+}

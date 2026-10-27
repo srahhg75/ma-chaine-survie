@@ -1,0 +1,59 @@
+# H+72 — Partie 5 « La cale » : DERNIER ÉPISODE de la série (demande du 27/10 : arrêter la série ; vraie fin, pas de cliffhanger)
+# Reprend à la dernière image de la Partie 4 : J5 · 02:00, Inès dans son entrée, le papier « on sait ce que tu as »
+# dans la main, la page arrachée de sa liste.
+# Voix : sans marqueur = narrateur ; [Inès] ou [Morel] en début de phrase = réplique dite par ce personnage.
+# Chiffres écrits en chiffres (affichés tels quels) ; la voix les lit en lettres, l'alignement fait le lien.
+# Accroche « chiffre choc » (la Partie 4 ouvrait sur « Que feriez-vous si… »).
+@hook *5 voisins*. Et l'un d'eux vous _vole_.
+@hook2 Il dort deux étages plus bas.
+@recap1 Jour 5 sans électricité. Inès, au 6e.
+@recap2 On a vidé son eau. Avec une clé.
+@recap3 Un mot : on sait ce que tu as.
+@recap4 Arraché à sa liste des voisins.
+@a1 Si elle lit le mot devant tous…
+@a2 Le complice sait qu'elle sait.
+@stop Stop. On rembobine.
+# « >> » : 0,6 s de silence dans la voix pour la fin du son de rembobinage (tools/mix.py), puis :
+@tait >> Elle se tait. Elle observe.
+@t1 1 : bloquez la porte.
+@t1a Une clé ouvre la serrure.
+@t1b Une *cale* bloque la porte.
+@t1c Glissée dessous, côté intérieur.
+@i_entrez [Inès] Essayez d'entrer, maintenant.
+@t2 2 : gardez la preuve.
+@t2a Le papier dans une enveloppe.
+@t2b Une photo. La date. L'heure.
+@matin 8 heures. Elle descend chez Morel.
+@t3 3 : ne gardez pas tout chez vous.
+@t3a Ce qu'elle a, c'est sa trousse.
+@t3b Elle en cache la moitié ici.
+@m_drogue [Morel] C'est quoi ? De la drogue ?
+@i_compresses [Inès] Des compresses. Ne touchez à rien.
+@m_soupcon [Morel] Vous me soupçonnez, moi ?
+@i_dormiez [Inès] Vous dormiez pendant la réunion.
+@piege Puis elle ajoute une ligne à sa liste.
+@piege2 Une fausse : trousse d'Inès, cave 6.
+@piege3 Seul un voleur ira voir.
+@nuit 3 heures. Porte calée, elle attend.
+@cave Une lampe descend à la cave.
+@attente Les policiers l'attendaient.
+@rappel Vous vous souvenez des gants ?
+@rappel2 Ceux de la main au trousseau.
+@gants Les mêmes. Sur le voisin du 4e.
+@poche Dans sa poche, les doubles de l'immeuble.
+@sauf > Sauf une. Celle du _6e_.
+@poignee Chez Inès, la poignée tourne.
+@bute La porte bute sur la _cale_.
+@i_cri [Inès] Au voleur ! Au 6e !
+@pris Le 2e est pris. Avec sa clé.
+@m_heure [Morel] Encore vous ? Il est 3 heures !
+@i_nuit [Inès] Bonne nuit, Morel.
+@jour Jour 6. Le courant revient.
+@pompe La pompe repart.
+@robinet Au 6e, le robinet crache de l'air.
+@fin > Puis de l'eau.
+# Carton de FIN DE SÉRIE (pas de choix A/B : la série s'arrête), lu par le narrateur à la suite du récit
+# (même fichier « narrateur.mp3 ») ; pas de sous-titres, le carton affiche le texte
+@carton1 > Fin de H+72.
+@carton2 Et vous, vous auriez tenu combien de jours ?
+@carton3 Répondez en commentaire !

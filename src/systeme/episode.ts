@@ -44,8 +44,12 @@ export type DonneesEpisode = {
   dureeFixe?: number; // durée imposée en secondes (sinon : dernier mot + queue)
   // Signal « STOP » (retour en arrière après la mauvaise branche d'un choix A/B) : image en noir et blanc qui
   // tremble comme une bande rembobinée, mot STOP en grand ; dessiné par EpisodeStandard
-  retours?: { de: Ancre; a: Ancre }[];
+  retours?: Retour[];
 };
+
+// `depuis` (début de la mauvaise branche) active le SON de rembobinage (tools/mix.py) : l'audio de la branche
+// rejoué à l'envers en accélérant, moteur et souffle de bande qui montent ; `gain` en dB
+export type Retour = { de: Ancre; a: Ancre; depuis?: Ancre; gain?: number };
 
 export const idComposition = (d: DonneesEpisode) => d.composition ?? `ep${d.id}`;
 export const dureeSecondes = (d: DonneesEpisode, al: Alignement) => d.dureeFixe ?? instant("fin", al) + (d.queue ?? 2);
@@ -60,6 +64,7 @@ export type EpisodeResolu = {
   sons: (Son & { t: number })[];
   ambiances: (Ambiance & { tDe: number; tA: number })[];
   sujets: (Sujet & { fDe: number; fA: number })[];
+  retours: { de: number; a: number; depuis?: number; gain: number }[]; // en secondes
 };
 
 export const resoudreEpisode = (d: DonneesEpisode, al: Alignement, fps: number): EpisodeResolu => {
@@ -81,6 +86,12 @@ export const resoudreEpisode = (d: DonneesEpisode, al: Alignement, fps: number):
     sons: d.sons.map((s) => ({ ...s, t: instant(s.a, al) })),
     ambiances: d.ambiances.map((a) => ({ ...a, tDe: instant(a.de, al), tA: Math.min(fin, instant(a.a, al)) })),
     sujets: d.sujets.map((s) => ({ ...s, fDe: image(s.de, al, fps), fA: image(s.a, al, fps) })),
+    retours: (d.retours ?? []).map((x) => ({
+      de: instant(x.de, al),
+      a: instant(x.a, al),
+      depuis: x.depuis !== undefined ? instant(x.depuis, al) : undefined,
+      gain: x.gain ?? 0,
+    })),
   };
 };
 
@@ -92,4 +103,5 @@ export const exportMixage = (r: EpisodeResolu) => ({
   sons: r.sons.map(({ t, id, gain, duree, pitch }) => ({ t, id, gain: gain ?? 0, duree, pitch })),
   ambiances: r.ambiances.map(({ type, tDe, tA, niveau, fondu, bpm }) => ({ type, de: tDe, a: tA, niveau: niveau ?? 0, fondu: fondu ?? 1.0, bpm })),
   pas: r.personnages.flatMap((p) => contactsPas(p, r.fps).map((t) => ({ t, personnage: p.id }))),
+  rembobinages: r.retours.filter((x) => x.depuis !== undefined).map(({ de, a, depuis, gain }) => ({ de, a, depuis, gain })),
 });

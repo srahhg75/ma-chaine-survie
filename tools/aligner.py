@@ -154,7 +154,7 @@ def aligner(voix: Path, script_txt: str, fps: int = 30) -> dict:
     for p in phrases:
         idx = [k for k, w in enumerate(sortie) if w["phrase"] == p.index]
         a, b = sortie[idx[0]], sortie[idx[-1]]
-        sortie_phrases.append({"id": p.id, "index": p.index, "chute": p.chute, "voix": p.voix, "texte": p.texte,
+        sortie_phrases.append({"id": p.id, "index": p.index, "chute": p.chute, "pause": p.pause, "voix": p.voix, "texte": p.texte,
                                "debut": a["debut"], "fin": b["fin"], "fDebut": a["fDebut"], "fFin": b["fFin"],
                                "premierMot": idx[0], "dernierMot": idx[-1]})
     return {"fps": fps, "duree": round(duree, 3), "phrases": sortie_phrases, "mots": sortie}

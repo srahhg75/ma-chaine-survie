@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/00c67aa2b8b7.wav: tap/knuckle seed 1826701615: 0.152 s, onset 0.001 s, peak at 0.005 s, end 0.130 s, -1.0 dBFS, -21.1 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Documents/Studio/ma-chaine-survie/public/003-h72-lampe/sons/00c67aa2b8b7.wav",
+ "meta": {
+  "id": "tap/knuckle",
+  "seed": 1826701615,
+  "sr": 48000,
+  "onset_s": 0.0012,
+  "peak_s": 0.0055,
+  "end_s": 0.13,
+  "dur_s": 0.152,
+  "peak_db": -1.0,
+  "lufs_m_max": -21.09,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "tap/knuckle: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -89.3,
+    "ring_z": 3.8,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 4.25,
+    "t40_ms": 100.0,
+    "crest_db": 13.1,
+    "res_db": 6.6,
+    "res_hz": 526,
+    "peak_dbfs": -1.0,
+    "live_ms": 55.25
+   },
+   "glide": {
+    "tonal_share": 1.0,
+    "rise_st": 1.4,
+    "from_s": 0.016,
+    "to_s": 0.036
+   },
+   "layers": {
+    "attacks": [
+     0.013
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "tap",
+    "sound": "tap/knuckle"
+   }
+  }
+ }
+}

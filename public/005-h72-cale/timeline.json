@@ -1,0 +1,548 @@
+{
+ "episode": "005-h72-cale",
+ "fps": 30,
+ "duree": 101.43333333333334,
+ "sons": [
+  {
+   "t": 1.95,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 2.55,
+   "id": "whoosh_big/deep",
+   "gain": -9
+  },
+  {
+   "t": 3.63,
+   "id": "pro_sub_drop/low",
+   "gain": -7
+  },
+  {
+   "t": 4.17,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 6.24,
+   "id": "whoosh_big/swell",
+   "gain": -12
+  },
+  {
+   "t": 7.89,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 9.39,
+   "id": "toggle/latch",
+   "gain": -9
+  },
+  {
+   "t": 9.99,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 9.99,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 11.82,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 11.82,
+   "id": "pro_impact/deep",
+   "gain": -7
+  },
+  {
+   "t": 13.56,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 14.19,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 15.33,
+   "id": "pro_sub_drop/low",
+   "gain": -6
+  },
+  {
+   "t": 16.95,
+   "id": "click/thock",
+   "gain": -4
+  },
+  {
+   "t": 16.95,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 18.91,
+   "id": "click/thock",
+   "gain": -4
+  },
+  {
+   "t": 20.79,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 22.56,
+   "id": "swish/soft",
+   "gain": -11
+  },
+  {
+   "t": 24.3,
+   "id": "knock/wood",
+   "gain": -6
+  },
+  {
+   "t": 25.2,
+   "id": "knock/wood",
+   "gain": -5
+  },
+  {
+   "t": 25.89,
+   "id": "fit/land.light/finger_wood",
+   "gain": -9
+  },
+  {
+   "t": 27.63,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 29.79,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 30.49,
+   "id": "swipe/cloth",
+   "gain": -9
+  },
+  {
+   "t": 32.28,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 33.21,
+   "id": "click/thock",
+   "gain": -9
+  },
+  {
+   "t": 34.77,
+   "id": "tap/table",
+   "gain": -11
+  },
+  {
+   "t": 35.52,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 37.05,
+   "id": "toggle/latch",
+   "gain": -9
+  },
+  {
+   "t": 37.74,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 40.74,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 41.52,
+   "id": "whoosh_fast/heavy",
+   "gain": -13
+  },
+  {
+   "t": 42.15,
+   "id": "tap/table",
+   "gain": -10
+  },
+  {
+   "t": 42.87,
+   "id": "cut_hit/sub",
+   "gain": -12
+  },
+  {
+   "t": 45.45,
+   "id": "swish/soft",
+   "gain": -12
+  },
+  {
+   "t": 48.15,
+   "id": "cut_hit/sub",
+   "gain": -12
+  },
+  {
+   "t": 50.22,
+   "id": "swish/soft",
+   "gain": -12
+  },
+  {
+   "t": 52.29,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 53.04,
+   "id": "swipe/cloth",
+   "gain": -10
+  },
+  {
+   "t": 54.21,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 56.04,
+   "id": "tap/table",
+   "gain": -10
+  },
+  {
+   "t": 56.97,
+   "id": "whoosh_big/swell",
+   "gain": -11
+  },
+  {
+   "t": 58.44,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 59.61,
+   "id": "knock/wood",
+   "gain": -10
+  },
+  {
+   "t": 60.84,
+   "id": "whoosh_big/deep",
+   "gain": -10
+  },
+  {
+   "t": 61.02,
+   "id": "click/thock",
+   "gain": -9
+  },
+  {
+   "t": 62.43,
+   "id": "pro_impact/deep",
+   "gain": -7
+  },
+  {
+   "t": 62.93,
+   "id": "click/thock",
+   "gain": -9
+  },
+  {
+   "t": 63.84,
+   "id": "reverse_swell/dark",
+   "gain": -8
+  },
+  {
+   "t": 65.91,
+   "id": "tap/knuckle",
+   "gain": -10
+  },
+  {
+   "t": 66.72,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 68.22,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 69,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 70.2,
+   "id": "tap/knuckle",
+   "gain": -8
+  },
+  {
+   "t": 71.76,
+   "id": "pro_sub_drop/low",
+   "gain": -5
+  },
+  {
+   "t": 73.71,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
+   "t": 75.24,
+   "id": "toggle/latch",
+   "gain": -6
+  },
+  {
+   "t": 75.9,
+   "id": "knock/wood",
+   "gain": -3
+  },
+  {
+   "t": 76.98,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 77.31,
+   "id": "pro_impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 79.74,
+   "id": "cut_hit/punch",
+   "gain": -7
+  },
+  {
+   "t": 80.49,
+   "id": "knock/desk",
+   "gain": -6
+  },
+  {
+   "t": 81.48,
+   "id": "tap/knuckle",
+   "gain": -9
+  },
+  {
+   "t": 82.05,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 84.99,
+   "id": "swish/soft",
+   "gain": -12
+  },
+  {
+   "t": 86.25,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 87.75,
+   "id": "fit/snap/switch_flip",
+   "gain": -6
+  },
+  {
+   "t": 88.05,
+   "id": "fit/snap/switch_flip",
+   "gain": -9
+  },
+  {
+   "t": 88.8,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 89.282,
+   "id": "riser/dark",
+   "gain": -12
+  },
+  {
+   "t": 90.03,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 91.02,
+   "id": "drip/bubble",
+   "gain": -9
+  },
+  {
+   "t": 91.8,
+   "id": "drip/drop",
+   "gain": -9
+  },
+  {
+   "t": 93.42,
+   "id": "drip/drop",
+   "gain": -10
+  },
+  {
+   "t": 94.12,
+   "id": "impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 94.32000000000001,
+   "id": "whoosh_fast/heavy",
+   "gain": -9
+  },
+  {
+   "t": 94.72,
+   "id": "cut_hit/sub",
+   "gain": -6
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 86.25,
+   "niveau": -1,
+   "fondu": 1.2
+  },
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 86.25,
+   "niveau": -5,
+   "fondu": 1
+  },
+  {
+   "type": "coeur",
+   "de": 0,
+   "a": 16.95,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 98
+  },
+  {
+   "type": "ville",
+   "de": 4.17,
+   "a": 7.89,
+   "niveau": 0,
+   "fondu": 0.6
+  },
+  {
+   "type": "coeur",
+   "de": 60.84,
+   "a": 62.43,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 110
+  },
+  {
+   "type": "coeur",
+   "de": 73.71,
+   "a": 79.74,
+   "niveau": 0,
+   "fondu": 1,
+   "bpm": 120
+  },
+  {
+   "type": "grincement",
+   "de": 75.24,
+   "a": 75.83999999999999,
+   "niveau": -5,
+   "fondu": 0.1
+  },
+  {
+   "type": "grincement",
+   "de": 75.9,
+   "a": 76.4,
+   "niveau": -5,
+   "fondu": 0.1
+  },
+  {
+   "type": "ville",
+   "de": 86.25,
+   "a": 88.8,
+   "niveau": -2,
+   "fondu": 0.8
+  },
+  {
+   "type": "glouglou",
+   "de": 91.8,
+   "a": 93.42,
+   "niveau": -6,
+   "fondu": 0.3
+  },
+  {
+   "type": "eau",
+   "de": 93.42,
+   "a": 101.42,
+   "niveau": -6,
+   "fondu": 0.4
+  },
+  {
+   "type": "drone",
+   "de": 94.12,
+   "a": 101.42,
+   "niveau": -3,
+   "fondu": 0.8
+  }
+ ],
+ "pas": [
+  {
+   "t": 21.933333333333334,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 22.166666666666668,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 22.533333333333335,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 29.933333333333334,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 30.166666666666668,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 30.366666666666667,
+   "personnage": "ines-maison"
+  },
+  {
+   "t": 60.7,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 60.96666666666667,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 61.2,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 61.46666666666667,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 61.733333333333334,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 61.96666666666667,
+   "personnage": "complice-lampe"
+  },
+  {
+   "t": 62.233333333333334,
+   "personnage": "complice-lampe"
+  }
+ ],
+ "rembobinages": [
+  {
+   "de": 17.932,
+   "a": 18.99,
+   "depuis": 13.56,
+   "gain": 0
+  }
+ ]
+}

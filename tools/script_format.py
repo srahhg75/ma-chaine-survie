@@ -4,6 +4,8 @@ Une ligne = une phrase de la timeline. Syntaxe :
   # commentaire                       ignoré
   @hook Jour 3 sans courant.          « hook » = identifiant de la phrase, lettres/chiffres/_ (sinon p1, p2…)
   @chute > Jamais de barbecue…        « > » = phrase-chute : 0,6 s de silence juste avant
+  @crie >> Elle crie.                 « >> » = pause longue : 1,5 s de silence juste avant (place d'un bruitage,
+                                      ex. le rembobinage du STOP), sans le style « chute » des sous-titres
   … une *bougie* …                    *mot* ou *plusieurs mots* = mot-clé ressource/chiffre (jaune)
   … le _monoxyde_ tue …               _mot_ = mot-clé danger (rouge)
   [indication de jeu]                 non lue, retirée
@@ -17,6 +19,8 @@ from dataclasses import dataclass, field
 UNITES = ["zero", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf", "dix", "onze", "douze",
           "treize", "quatorze", "quinze", "seize"]
 DIZAINES = {2: "vingt", 3: "trente", 4: "quarante", 5: "cinquante", 6: "soixante"}
+PAUSE_CHUTE = 0.6  # « > »
+PAUSE_LONGUE = 0.6  # « >> » (1,5 s avant le 27/10 : rembobinage jugé trop long)
 
 
 def nombre_en_lettres(n: int) -> str:
@@ -81,6 +85,7 @@ class Phrase:
     texte: str
     mots: list[Mot] = field(default_factory=list)
     voix: str = "narrateur"
+    pause: float | None = None  # silence voulu juste avant la phrase (0,6 s pour une chute, 1,5 s pour « >> »)
 
 
 def lire_script(texte: str) -> list[Phrase]:
@@ -93,7 +98,9 @@ def lire_script(texte: str) -> list[Phrase]:
         pid = m.group(1) if m else f"p{len(phrases) + 1}"
         if m:
             ligne = ligne[m.end():]
-        chute = ligne.startswith(">")
+        longue = ligne.startswith(">>")
+        chute = ligne.startswith(">") and not longue
+        pause = PAUSE_LONGUE if longue else PAUSE_CHUTE if chute else None
         ligne = ligne.lstrip("> ").strip()
         voix = "narrateur"
         if mv := re.match(r"^\[(\w+)\]\s*", ligne):
@@ -103,7 +110,7 @@ def lire_script(texte: str) -> list[Phrase]:
         # Typographie française : la ponctuation haute reste collée au mot (espace insécable)
         ligne = re.sub(r"\s+([?!:;»…])", " \\1", ligne)
         ligne = re.sub(r"«\s+", "« ", ligne)
-        ph = Phrase(pid, len(phrases), chute, "", voix=voix)
+        ph = Phrase(pid, len(phrases), chute, "", voix=voix, pause=pause)
         style_ouvert = "normal"
         for jeton in ligne.split():
             style = style_ouvert
