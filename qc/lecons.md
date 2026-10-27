@@ -429,3 +429,9 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   opposé au personnage (rappel du 24/10) ; un appareil se filme assez large pour voir son voyant ou son mouvement.
 - **2026-10-27 — Dernier épisode : carton « FIN » ajouté au moteur** (`fin: true` dans le carton, `hud/Composants.tsx`) :
   FIN en très grand, nom de la série, question ouverte, sans choix A/B.
+- **2026-10-27 — Couverture : la 2e ligne (« PAS LA CALE ») sortait de l'image.** Règle : avec `tools/couverture.sh`, la
+  grande ligne jaune fait au plus 8 caractères (espaces compris) ; regarder la couverture avant de livrer (rappel).
+- **2026-10-27 — Envoi GitHub impossible depuis le PC Windows avec la version téléphone (45 Mo) dans le commit**
+  (« failed to push some refs », même avec `http.postBuffer` agrandi). Règle : sur le PC, la vidéo est déjà copiée dans
+  « Vidéos TikTok » sur le bureau : ne pas versionner la version téléphone ; la faire seulement en session cloud
+  (leçon du 24/10), et vérifier `git status -sb` (« ahead » = rien n'est parti) après chaque envoi.

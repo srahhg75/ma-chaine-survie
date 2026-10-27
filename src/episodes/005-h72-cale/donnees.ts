@@ -433,6 +433,11 @@ export const donnees: DonneesEpisode = {
     { a: "a1", id: "reverse_swell/dark", gain: -9 },
     { a: "a1:mot", id: "swipe/cloth", gain: -10 },
     { a: "a2", id: "pro_sub_drop/low", gain: -6 },
+    // coupes sans son repérées par earshot sur la vidéo finale (instants mesurés)
+    { a: "stop-0.22", id: "cut_hit/sub", gain: -11 },
+    { a: "m_soupcon-0.28", id: "cut_hit/sub", gain: -12 },
+    { a: "bute-0.27", id: "cut_hit/punch", gain: -9 },
+    { a: "i_dormiez-0.32", id: "cut_hit/punch", gain: -13 },
     { a: "stop", id: "click/thock", gain: -4 },
     { a: "stop", id: "cut_hit/punch", gain: -6 },
     { a: "tait-0.08", id: "click/thock", gain: -4 },

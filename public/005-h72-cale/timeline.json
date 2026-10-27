@@ -74,6 +74,26 @@
    "gain": -6
   },
   {
+   "t": 16.73,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 47.87,
+   "id": "cut_hit/sub",
+   "gain": -12
+  },
+  {
+   "t": 75.63000000000001,
+   "id": "cut_hit/punch",
+   "gain": -9
+  },
+  {
+   "t": 49.9,
+   "id": "cut_hit/punch",
+   "gain": -13
+  },
+  {
    "t": 16.95,
    "id": "click/thock",
    "gain": -4
