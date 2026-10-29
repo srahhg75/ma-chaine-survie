@@ -70,6 +70,24 @@ def point_calme(audio: np.ndarray, t0: float, t1: float) -> float:
     return t0 + (int(np.argmin(e)) + w / 2) / SR
 
 
+def silences(audio: np.ndarray, t0: float, t1: float, seuil: float, mini: float = 0.45) -> list[tuple[float, float]]:
+    """Plages vraiment silencieuses (fenêtres de 20 ms sous `seuil`) d'au moins `mini` s entre t0 et t1."""
+    w = int(0.02 * SR)
+    a, b = int(max(0.0, t0) * SR), int(t1 * SR)
+    plages, debut = [], None
+    for i in range(a, max(a, b - w), w):
+        calme = np.sqrt(np.mean(audio[i:i + w] ** 2)) < seuil
+        if calme and debut is None:
+            debut = i
+        elif not calme and debut is not None:
+            if (i - debut) / SR >= mini:
+                plages.append((debut / SR, i / SR))
+            debut = None
+    if debut is not None and (b - debut) / SR >= mini:
+        plages.append((debut / SR, b / SR))
+    return plages
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("entree", type=Path)
@@ -100,6 +118,13 @@ def main() -> None:
                 fen = audio[int((p - 0.01) * SR):int((p + 0.01) * SR)]
                 if len(fen) and np.sqrt(np.mean(fen ** 2)) < seuil * 3:
                     editions.append(("inserer", p, voulue - max(0.0, mb["debut"] - p)))
+            elif voulue is None:
+                # Mots mal reconnus (voix chuchotée…) : on raccourcit quand même les VRAIS silences (aucun son mesuré,
+                # donc aucun mot dedans) à 0,3 s ; sinon des blancs de 1 à 2 s restaient dans les répliques
+                for s0, s1 in silences(audio, ma["debut"], mb["fin"], seuil * 3):
+                    if s1 - s0 > 0.45:
+                        m = (s0 + s1) / 2
+                        editions.append(("couper", m - (s1 - s0 - 0.3) / 2, m + (s1 - s0 - 0.3) / 2))
             continue
         ecart = mb["debut"] - ma["fin"]
         c = cible(ma, mb, phrases)
@@ -127,7 +152,8 @@ def main() -> None:
     for e in editions:
         if e[0] == "couper":
             for m in mots:
-                assert not (e[1] < m["fin"] and e[2] > m["debut"]), f"coupe dans le mot {m['mot']!r}"
+                if m["source"] == "vosk":
+                    assert not (e[1] < m["fin"] and e[2] > m["debut"]), f"coupe dans le mot {m['mot']!r}"
 
     # Application avec fondus enchaînés
     rampe = np.linspace(0, 1, FONDU, dtype=np.float32)

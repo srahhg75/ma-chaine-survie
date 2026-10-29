@@ -9,7 +9,7 @@ import {
   RYTHME_MAX_S, VITESSE_MAX_M_S, ZONE_SURE,
 } from "../src/systeme/format";
 import { boiteHud, boiteSousTitre, chevauche, contient, Rect } from "../src/systeme/hud/boites";
-import { boiteMeuble, dansBoite, murTraverse, obstacles, segmentTraverse } from "../src/systeme/kit3d/decor";
+import { boiteMeuble, dansBoite, murTraverse, obstacles, passeParOuverture, segmentTraverse } from "../src/systeme/kit3d/decor";
 import { angleEntre, distance, soustrait, Vec3 } from "../src/systeme/maths";
 import { blocsSousTitres } from "../src/systeme/mots";
 import { corpsDe, hautTete, hauteurBassin } from "../src/systeme/personnage/poses";
@@ -110,7 +110,7 @@ for (let f = 0; f < r.duree; f++) {
   // Caméra jamais dans un mur, jamais derrière un mur plein
   for (const b of obs) {
     if (dansBoite(cam.position, b, 0.15)) signaler("Caméra dans un mur/meuble", `caméra dans ${b.id}`, f);
-    else if (b.nature === "mur" && b.plein && derriere(b, cam.position) && segmentTraverse(cam.position, finVisee, b)) signaler("Caméra derrière un mur", `la caméra voit le dos de ${b.id}`, f);
+    else if (b.nature === "mur" && b.plein && derriere(b, cam.position) && segmentTraverse(cam.position, finVisee, b) && !passeParOuverture(donnees.decor, b.id, cam.position, finVisee)) signaler("Caméra derrière un mur", `la caméra voit le dos de ${b.id}`, f);
   }
   // Vitesse de rotation (une coupe nette n'est pas un mouvement)
   const coupeIci = r.camera.some((c) => c.coupe && c.fArrivee === f);
@@ -214,7 +214,7 @@ for (let f = 0; f < r.duree; f++) {
 
   // Sujets : visibles, jamais cachés par le HUD ou les sous-titres
   for (const { nom, p, point } of sujetsEcran) {
-    for (const b of obs) if (b.nature === "mur" && b.plein && segmentTraverse(cam.position, point, b)) signaler("Sujet derrière un mur", `${nom} caché par ${b.id}`, f);
+    for (const b of obs) if (b.nature === "mur" && b.plein && segmentTraverse(cam.position, point, b) && !passeParOuverture(donnees.decor, b.id, cam.position, point)) signaler("Sujet derrière un mur", `${nom} caché par ${b.id}`, f);
     // Meubles (visibles ou dessinés à part) entre la caméra et le sujet : on raccourcit le segment de 12 cm
     // côté sujet (le sujet peut être posé sur le meuble ou contre lui)
     const d = distance(cam.position, point);

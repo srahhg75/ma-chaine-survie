@@ -1,0 +1,422 @@
+{
+ "episode": "006-appel",
+ "fps": 30,
+ "duree": 94.03333333333333,
+ "sons": [
+  {
+   "t": 2.52,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 2.52,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 2.64,
+   "id": "tap/table",
+   "gain": -10
+  },
+  {
+   "t": 2.76,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 4.47,
+   "id": "pro_sub_drop/low",
+   "gain": -7
+  },
+  {
+   "t": 5.22,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 8.25,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 10.44,
+   "id": "swish/soft",
+   "gain": -12
+  },
+  {
+   "t": 11.04,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 12,
+   "id": "tap/table",
+   "gain": -12
+  },
+  {
+   "t": 12.78,
+   "id": "cut_hit/punch",
+   "gain": -8
+  },
+  {
+   "t": 13.41,
+   "id": "tap/table",
+   "gain": -7
+  },
+  {
+   "t": 13.53,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 13.65,
+   "id": "tap/table",
+   "gain": -7
+  },
+  {
+   "t": 14.01,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 14.13,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 14.73,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 15.3,
+   "id": "cut_hit/sub",
+   "gain": -11
+  },
+  {
+   "t": 15.100000000000001,
+   "id": "swipe/cloth",
+   "gain": -12
+  },
+  {
+   "t": 18.33,
+   "id": "reverse_swell/breath",
+   "gain": -8
+  },
+  {
+   "t": 19.74,
+   "id": "click/thock",
+   "gain": -8
+  },
+  {
+   "t": 20.64,
+   "id": "swish/soft",
+   "gain": -12
+  },
+  {
+   "t": 23.82,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 24.9,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 26.82,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 28.62,
+   "id": "pro_sub_drop/low",
+   "gain": -7
+  },
+  {
+   "t": 30.03,
+   "id": "whoosh_big/deep",
+   "gain": -9
+  },
+  {
+   "t": 31.83,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 33.12,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 33.9,
+   "id": "downlifter/sub_sink",
+   "gain": -9
+  },
+  {
+   "t": 34.845,
+   "id": "cut_hit/sub",
+   "gain": -10
+  },
+  {
+   "t": 37.83,
+   "id": "fit/snap/switch_flip",
+   "gain": -6
+  },
+  {
+   "t": 38.61,
+   "id": "swipe/cloth",
+   "gain": -7
+  },
+  {
+   "t": 38.86,
+   "id": "swipe/cloth",
+   "gain": -8
+  },
+  {
+   "t": 39.69,
+   "id": "tap/table",
+   "gain": -9
+  },
+  {
+   "t": 40.86,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 41.97,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 42.99,
+   "id": "pro_sub_drop/low",
+   "gain": -6
+  },
+  {
+   "t": 43.71,
+   "id": "reverse_swell/dark",
+   "gain": -7
+  },
+  {
+   "t": 43.71,
+   "id": "cut_hit/punch",
+   "gain": -8
+  },
+  {
+   "t": 45.45,
+   "id": "toggle/latch",
+   "gain": -8
+  },
+  {
+   "t": 46.11,
+   "id": "swipe/cloth",
+   "gain": -11
+  },
+  {
+   "t": 47.79,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 48.81,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 49.62,
+   "id": "pro_sub_drop/low",
+   "gain": -6
+  },
+  {
+   "t": 50.791,
+   "id": "reverse_swell/dark",
+   "gain": -9
+  },
+  {
+   "t": 50.940999999999995,
+   "id": "cut_hit/punch",
+   "gain": -9
+  },
+  {
+   "t": 56.94,
+   "id": "swish/soft",
+   "gain": -13
+  },
+  {
+   "t": 61.26,
+   "id": "pro_impact/short",
+   "gain": -9
+  },
+  {
+   "t": 63.93,
+   "id": "riser/tension",
+   "gain": -12
+  },
+  {
+   "t": 67.555,
+   "id": "swish/soft",
+   "gain": -13
+  },
+  {
+   "t": 72.24,
+   "id": "click/thock",
+   "gain": -6
+  },
+  {
+   "t": 73.68,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 75.24,
+   "id": "pro_impact/deep",
+   "gain": -6
+  },
+  {
+   "t": 76.56,
+   "id": "whoosh_big/swell",
+   "gain": -11
+  },
+  {
+   "t": 78.42,
+   "id": "cut_hit/sub",
+   "gain": -9
+  },
+  {
+   "t": 79.98,
+   "id": "tap/table",
+   "gain": -7
+  },
+  {
+   "t": 80.10000000000001,
+   "id": "tap/table",
+   "gain": -8
+  },
+  {
+   "t": 80.22,
+   "id": "tap/table",
+   "gain": -7
+  },
+  {
+   "t": 82.44,
+   "id": "pro_impact/short",
+   "gain": -8
+  },
+  {
+   "t": 85.62,
+   "id": "pro_sub_drop/low",
+   "gain": -4
+  },
+  {
+   "t": 86.32000000000001,
+   "id": "impact/deep",
+   "gain": -8
+  },
+  {
+   "t": 86.52000000000001,
+   "id": "whoosh_fast/heavy",
+   "gain": -9
+  },
+  {
+   "t": 86.85000000000001,
+   "id": "cut_hit/punch",
+   "gain": -6
+  },
+  {
+   "t": 87.02000000000001,
+   "id": "cut_hit/sub",
+   "gain": -5
+  }
+ ],
+ "ambiances": [
+  {
+   "type": "drone",
+   "de": 0,
+   "a": 94.02000000000001,
+   "niveau": -1,
+   "fondu": 1
+  },
+  {
+   "type": "vent",
+   "de": 0,
+   "a": 78.42,
+   "niveau": -6,
+   "fondu": 1.5
+  },
+  {
+   "type": "ville",
+   "de": 30.03,
+   "a": 37.32,
+   "niveau": -3,
+   "fondu": 0.8
+  },
+  {
+   "type": "coeur",
+   "de": 26.82,
+   "a": 43.71,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 96
+  },
+  {
+   "type": "coeur",
+   "de": 61.26,
+   "a": 72.24,
+   "niveau": -2,
+   "fondu": 1,
+   "bpm": 104
+  },
+  {
+   "type": "coeur",
+   "de": 82.44,
+   "a": 94.02000000000001,
+   "niveau": -1,
+   "fondu": 1,
+   "bpm": 110
+  }
+ ],
+ "pas": [
+  {
+   "t": 28.333333333333332,
+   "personnage": "nathan"
+  },
+  {
+   "t": 28.6,
+   "personnage": "nathan"
+  },
+  {
+   "t": 28.866666666666667,
+   "personnage": "nathan"
+  },
+  {
+   "t": 29.133333333333333,
+   "personnage": "nathan"
+  },
+  {
+   "t": 29.4,
+   "personnage": "nathan"
+  },
+  {
+   "t": 29.666666666666668,
+   "personnage": "nathan"
+  },
+  {
+   "t": 29.933333333333334,
+   "personnage": "nathan"
+  },
+  {
+   "t": 30.2,
+   "personnage": "nathan"
+  },
+  {
+   "t": 30.466666666666665,
+   "personnage": "nathan"
+  },
+  {
+   "t": 39.63333333333333,
+   "personnage": "nathan"
+  }
+ ],
+ "rembobinages": []
+}

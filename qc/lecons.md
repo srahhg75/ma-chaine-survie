@@ -450,3 +450,18 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   restent : la couleur de la menace, des indices) ; SMS et appels montrés par l'élément HUD `telephone`
   (`ecran: "appel" | "sms"`, bulle `menace` en rouge), placé sous le visage, jamais dessus. Le rouge reste rare :
   1 ou 2 éléments par plan. Banc d'essai : `npx tsx tools/images.ts banc-style-appel 0.1 1.5 1.75 1.95`.
+- **2026-10-29 — Voix chuchotée (Léa) : 1 à 2 s de blanc restaient dans ses répliques** (« Chez Sarah. … Je dors. » :
+  4,7 s). Vosk reconnaît mal le chuchotement, les mots sont « interpolés » et `tools/couper_blancs.py` ne coupait rien
+  entre eux. Règle : entre mots interpolés, l'outil raccourcit désormais les VRAIS silences (aucun son mesuré) à 0,3 s ;
+  après l'alignement d'une voix chuchotée, vérifier la durée de chaque réplique (≈ 0,35 s par mot au plus).
+- **2026-10-29 — Fichier de voix nommé « léa.mp3 » (accent) : introuvable par l'outil.** Règle : les fichiers de voix
+  s'appellent sans accent (`lea.mp3`) ; Claude renomme lui-même et le dit.
+- **2026-10-29 — « Le dernier appel » P1, 1re revue : écran de téléphone (HUD) qui cachait Nathan, poses debout sur le
+  canapé, plans noirs.** Règles : (1) le HUD `telephone` est petit, en bas à gauche (403×572, contenu réduit), et le
+  personnage est cadré à droite (`x` ≈ 640) ; (2) un personnage assis qui téléphone ou lit utilise `assisTelephone` /
+  `assisMain` (jamais `telephone` / `mainTendue`, qui sont debout) ; (3) téléphone à l'oreille : écran éteint (sinon le
+  halo brûle la tête) ; (4) en noir et blanc, un plafonnier très faible garde chaque pièce lisible, et une façade sombre
+  reçoit une légère émission pour rester visible la nuit ; (5) un gros plan d'objet sur un vêtement sombre se filme à
+  ≥ 1,5 m (sinon le vêtement remplit l'écran en noir) et l'objet dépasse DEVANT le vêtement.
+- **2026-10-29 — `tools/qc.ts` interdisait de filmer à travers une fenêtre** (les murs étaient des boîtes pleines).
+  Corrigé : `passeParOuverture` (`kit3d/decor.ts`) laisse passer le regard par une fenêtre, une porte ou un passage.

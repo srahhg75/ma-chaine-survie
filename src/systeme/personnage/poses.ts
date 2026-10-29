@@ -14,7 +14,7 @@ export type Pose = {
   sourcils: number; // -1 inquiet, 0 neutre, +1 décidé
 };
 
-export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "boutonCote" | "lampe" | "froid" | "inquiet" | "assis" | "telephone" | "frappe" | "affale" | "bras";
+export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "boutonCote" | "lampe" | "froid" | "inquiet" | "assis" | "telephone" | "frappe" | "affale" | "bras" | "assisTelephone" | "assisMain";
 
 const DEBOUT: Pose = {
   tronc: [2, 0, 0],
@@ -48,6 +48,9 @@ export const POSES: Record<Exclude<NomPose, "marche">, Pose> = {
   // bras écartés (indignation)
   bras: { ...DEBOUT, tronc: [-3, 0, 0], tete: [-6, 0], epauleG: [30, 55], coudeG: 25, epauleD: [30, 55], coudeD: 25, sourcils: 0.8 },
   assis: { ...DEBOUT, tronc: [6, 0, 0], hancheG: [88, 6], genouG: 90, hancheD: [88, 6], genouD: 90, epauleG: [25, 8], coudeG: 45, epauleD: [25, 8], coudeD: 45 },
+  // assis, téléphone à l'oreille / regardé dans la main (saison « Le dernier appel »)
+  assisTelephone: { ...DEBOUT, tronc: [6, 0, 0], hancheG: [88, 6], genouG: 90, hancheD: [88, 6], genouD: 90, tete: [4, -8], epauleD: [40, 38], coudeD: 150, epauleG: [25, 8], coudeG: 45, sourcils: 0.4 },
+  assisMain: { ...DEBOUT, tronc: [10, 0, 0], hancheG: [88, 6], genouG: 90, hancheD: [88, 6], genouD: 90, tete: [16, 0], epauleD: [50, 6], coudeD: 70, epauleG: [25, 8], coudeG: 45 },
 };
 
 // Cycle de marche : phase 0..1 = 2 pas (≈ 0,6 m pour un personnage de taille 1)

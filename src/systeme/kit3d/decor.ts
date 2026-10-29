@@ -127,6 +127,26 @@ export const boiteMeuble = (m: DonneesMeuble, i: number): Boite => {
   return { min: [x - lx / 2, y, z - lz / 2], max: [x + lx / 2, y + h, z + lz / 2], nature: "meuble", id: m.id ?? `${m.type}${i}`, plein: true };
 };
 
+// Le segment a -> b traverse-t-il le mur `idMur` (« piece/cote ») PAR une ouverture (fenêtre, porte, passage) ?
+// Sert aux contrôles : on peut filmer à travers une fenêtre (les boîtes de murs, elles, sont pleines).
+export const passeParOuverture = (d: DonneesDecor, idMur: string, a: Vec3, b: Vec3): boolean => {
+  const [idPiece, cote] = idMur.split("/") as [string, CoteMur];
+  const p = d.pieces.find((x) => x.id === idPiece);
+  if (!p) return false;
+  const [cx, cz] = p.centre;
+  const nordSud = cote === "nord" || cote === "sud";
+  const plan = cote === "nord" ? cz - p.profondeur / 2 : cote === "sud" ? cz + p.profondeur / 2 : cote === "ouest" ? cx - p.largeur / 2 : cx + p.largeur / 2;
+  const ia = nordSud ? 2 : 0;
+  if (Math.abs(b[ia] - a[ia]) < 1e-6) return false;
+  const t = (plan - a[ia]) / (b[ia] - a[ia]);
+  if (t < 0 || t > 1) return false;
+  const x = a[0] + (b[0] - a[0]) * t;
+  const y = a[1] + (b[1] - a[1]) * t;
+  const z = a[2] + (b[2] - a[2]) * t;
+  const u = nordSud ? x - cx : -(z - cz); // le long du mur : vers l'est (nord/sud), vers le nord (ouest/est)
+  return (p.ouvertures ?? []).some((o) => o.mur === cote && Math.abs(u - o.centre) < o.largeur / 2 - 0.05 && y > basOuverture(o) + 0.05 && y < basOuverture(o) + o.hauteur - 0.05);
+};
+
 export const obstacles = (d: DonneesDecor): Boite[] => [
   ...d.pieces.flatMap(mursPiece),
   ...d.meubles.filter((m) => m.type !== "tapis").map(boiteMeuble),

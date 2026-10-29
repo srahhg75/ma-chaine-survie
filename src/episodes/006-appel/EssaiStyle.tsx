@@ -9,24 +9,15 @@ import { ElementHudResolu } from "../../systeme/hud/types";
 import { Arrondi } from "../../systeme/kit3d/Arrondi";
 import { Environnement } from "../../systeme/kit3d/Lumieres";
 import { PostProcess } from "../../systeme/kit3d/PostProcess";
-import { Apparence } from "../../systeme/personnage/apparence";
 import { Humain } from "../../systeme/personnage/Humain";
 import { EXPRESSIONS, POSES } from "../../systeme/personnage/poses";
+import { LEA, NATHAN } from "./personnages";
 
 /*
  * Image d'essai du style de la saison « Le dernier appel » (à valider avant tout épisode, leçon du 24/10) :
  * personnages « adulte » (anime adulte, ≈ 1,75 m), image noir et blanc + rouge, écran de téléphone en grand.
  * Image 0 : Nathan et Léa dans leur salon, la nuit. Image 30 : Nathan seul dans le noir, le SMS rouge.
  */
-export const NATHAN: Partial<Apparence> = {
-  femme: false, age: 0.12, peau: "#e9bf9e", joues: "#e09080", iris: "#3a2a1c", cheveux: "#1a1412", coiffure: "meches",
-  haut: "pull", couleurHaut: "#3d5f8f", couleurCol: "#dfe6ee", pantalon: "#23272e", chaussures: "baskets", couleurChaussures: "#e9e6df",
-};
-export const LEA: Partial<Apparence> = {
-  femme: true, age: 0.08, peau: "#f1cbb0", joues: "#e88e86", iris: "#2a1a10", cheveux: "#4a3428", coiffure: "long",
-  haut: "cardigan", couleurHaut: "#2b2b2e", couleurCol: "#efe9e0", pantalon: "#1c1c20", chaussures: "bottines", couleurChaussures: "#1a1414",
-  echarpe: "#c8141c", // le rouge : seule couleur qui reste à l'image
-};
 
 const Cam: React.FC<{ pos: [number, number, number]; vise: [number, number, number]; fov: number }> = ({ pos, vise, fov }) => {
   const camera = useThree((s) => s.camera) as PerspectiveCamera;

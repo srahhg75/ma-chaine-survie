@@ -296,7 +296,7 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
           </div>
         ))}
         <div style={{ fontWeight: 900, fontSize: 46, color: JAUNE, textShadow: "0 4px 16px rgba(0,0,0,0.9)", opacity: apparait(2) }}>RÉPONDS A OU B EN COMMENTAIRE ↓</div>
-        <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>Réponse dans la partie {e.partie} · Fiction · conseils vérifiés le {e.verifie}</div>
+        <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>Réponse dans la partie {e.partie} · {e.verifie ? `Fiction · conseils vérifiés le ${e.verifie}` : "Fiction"}</div>
       </div>
     </>
   );
@@ -306,11 +306,14 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
 export const Telephone: React.FC<Props<"telephone"> & { fMessages: number[] }> = ({ e, r, f, fMessages }) => {
   const bord = 26;
   const ecran: React.CSSProperties = { position: "absolute", inset: bord, borderRadius: 44, background: "#0b0b0c", overflow: "hidden", fontFamily: POLICE_TEXTE, color: "white" };
+  // dessiné à la taille de référence 620×880 puis réduit à la boîte
+  const k = r.l / 620;
   const coque = (
-    <div style={boite(r, { borderRadius: 70, background: "linear-gradient(160deg,#3a3a3c,#151516)", boxShadow: "0 30px 70px rgba(0,0,0,0.75), inset 0 0 0 3px #505052" })}>
+    <div style={{ ...boite({ x: r.x, y: r.y, l: 620, h: 880 }, { borderRadius: 70, background: "linear-gradient(160deg,#3a3a3c,#151516)", boxShadow: "0 30px 70px rgba(0,0,0,0.75), inset 0 0 0 3px #505052" }), transform: `scale(${k})`, transformOrigin: "0 0" }}>
       <div style={ecran}>
-        {/* encoche */}
+        {/* encoche, heure */}
         <div style={{ position: "absolute", top: 18, left: "50%", width: 150, height: 38, marginLeft: -75, borderRadius: 20, background: "#000" }} />
+        {e.heure && <div style={{ position: "absolute", top: 22, left: 44, fontSize: 26, fontWeight: 800 }}>{e.heure}</div>}
         {e.ecran === "appel" ? <EcranAppel e={e} f={f} /> : <EcranSms e={e} f={f} fMessages={fMessages} />}
       </div>
     </div>
@@ -323,17 +326,20 @@ const EcranAppel: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>
   const onde = (i: number) => ((k + i * 15) % 45) / 45; // anneaux qui s'élargissent autour de l'avatar
   return (
     <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 150 }}>
-      <div style={{ fontSize: 30, fontWeight: 700, opacity: 0.6, letterSpacing: 2 }}>APPEL ENTRANT</div>
+      <div style={{ fontSize: 30, fontWeight: 700, opacity: 0.6, letterSpacing: 2 }}>
+        {e.enCours ? `EN COURS · ${String(Math.floor(k / 30 / 60)).padStart(2, "0")}:${String(Math.floor(k / 30) % 60).padStart(2, "0")}` : "APPEL ENTRANT"}
+      </div>
       <div style={{ position: "relative", width: 220, height: 220, marginTop: 60 }}>
-        {[0, 1, 2].map((i) => (
-          <div key={i} style={{ position: "absolute", inset: -80 * onde(i), borderRadius: "50%", border: `3px solid rgba(255,59,48,${0.7 * (1 - onde(i))})` }} />
-        ))}
+        {!e.enCours &&
+          [0, 1, 2].map((i) => (
+            <div key={i} style={{ position: "absolute", inset: -80 * onde(i), borderRadius: "50%", border: `3px solid rgba(255,59,48,${0.7 * (1 - onde(i))})` }} />
+          ))}
         <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#2a2a2c", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 110, fontWeight: 900, color: "#8e8e93" }}>?</div>
       </div>
       <div style={{ fontSize: 64, fontWeight: 900, marginTop: 70, textAlign: "center", padding: "0 30px", lineHeight: 1.05 }}>{e.contact}</div>
       {e.numero && <div style={{ fontSize: 40, fontWeight: 700, marginTop: 18, color: ROUGE, letterSpacing: 1 }}>{e.numero}</div>}
       <div style={{ position: "absolute", bottom: 90, left: 0, right: 0, display: "flex", justifyContent: "space-around" }}>
-        {["#5a5a5e", "#f2f2f2"].map((c, i) => (
+        {(e.enCours ? [ROUGE] : ["#5a5a5e", "#f2f2f2"]).map((c, i) => (
           <div key={i} style={{ width: 130, height: 130, borderRadius: "50%", background: c, transform: `scale(${1 + (i === 1 ? 0.06 * Math.sin(k / 4) : 0)})`, boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }} />
         ))}
       </div>
