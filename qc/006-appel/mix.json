@@ -60,7 +60,7 @@
   {
    "mot": "Léa",
    "t": 49.62,
-   "baisse_db": 5.1
+   "baisse_db": 5.7
   },
   {
    "mot": "dors.",
@@ -140,6 +140,10 @@
   "tap/table",
   "pro_impact/short",
   "pro_sub_drop/low",
+  "cut_hit/punch",
+  "cut_hit/punch",
+  "cut_hit/punch",
+  "cut_hit/punch",
   "impact/deep",
   "whoosh_fast/heavy",
   "cut_hit/punch",

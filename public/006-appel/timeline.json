@@ -309,6 +309,26 @@
    "gain": -4
   },
   {
+   "t": 16.37,
+   "id": "cut_hit/punch",
+   "gain": -12
+  },
+  {
+   "t": 26.5,
+   "id": "cut_hit/punch",
+   "gain": -12
+  },
+  {
+   "t": 37.074999999999996,
+   "id": "cut_hit/punch",
+   "gain": -11
+  },
+  {
+   "t": 49.62,
+   "id": "cut_hit/punch",
+   "gain": -10
+  },
+  {
    "t": 86.32000000000001,
    "id": "impact/deep",
    "gain": -8

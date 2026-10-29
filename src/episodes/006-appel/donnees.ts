@@ -330,6 +330,11 @@ export const donnees: DonneesEpisode = {
     { a: "matin:vibre+0.24", id: "tap/table", gain: -7 },
     { a: "sarah2", id: "pro_impact/short", gain: -8 },
     { a: "fin", id: "pro_sub_drop/low", gain: -4 },
+    // coupes sans son repérées par earshot sur la vidéo finale (instants mesurés)
+    { a: "n_allo+1.07", id: "cut_hit/punch", gain: -12 },
+    { a: "sms+2.68", id: "cut_hit/punch", gain: -12 },
+    { a: "n_drole+2.23", id: "cut_hit/punch", gain: -11 },
+    { a: "mardi4", id: "cut_hit/punch", gain: -10 },
     // carton à choix
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
     { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -9 },
