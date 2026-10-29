@@ -34,8 +34,8 @@ const Personnages: React.FC<{ r: ReturnType<typeof resoudreEpisode> }> = ({ r })
         if (p.invisible || !present(p, frame)) return null;
         const e = etatPersonnage(p, frame, fps);
         const corps =
-          p.variante === "humain" ? (
-            <Humain key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} apparence={e.apparence} />
+          p.variante === "humain" || p.variante === "adulte" ? (
+            <Humain key={p.id} variante={p.variante} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} apparence={e.apparence} />
           ) : (
             <Bonhomme key={p.id} pose={e.pose} position={e.position} orientation={e.orientation} lampe={e.lampe} puissanceLampe={p.puissanceLampe} visage={e.visage} taille={p.taille} variante={p.variante} />
           );

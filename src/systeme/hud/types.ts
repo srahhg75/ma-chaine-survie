@@ -19,6 +19,9 @@ export type ElementHud =
   | (Base & { type: "inventaire"; objets: { icone: NomIcone; quantite?: number; unite?: string; nom?: string }[]; surligne?: number })
   | (Base & { type: "compte"; secondes: number; titre?: string })
   | (Base & { type: "etiquette"; texte: string; point: Vec3; style?: StyleMot })
+  // Écran de téléphone en grand (saison « Le dernier appel ») : appel entrant, ou fil de SMS dont chaque bulle
+  // apparaît à son ancre ; `menace` = bulle rouge (la seule couleur de l'image), `envoye` = bulle de droite
+  | (Base & { type: "telephone"; ecran: "appel" | "sms"; contact: string; numero?: string; messages?: { a: Ancre; texte: string; envoye?: boolean; menace?: boolean }[] })
   | (Base & { type: "carton"; partie: number; titre: string; verifie: string; question?: string; choix?: [string, string]; fin?: boolean }); // fin : dernier épisode d'une série (pas de choix A/B)
 
 export type TypeHud = ElementHud["type"];

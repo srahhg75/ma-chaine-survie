@@ -1,6 +1,6 @@
 // Apparence d'un personnage « humain » (données pures : lues par le rendu ET par les données d'épisode).
 // Tout reste en formes simples ; ces réglages donnent le réalisme (coupe, couches de vêtements, âge, accessoires).
-export type Coiffure = "carre" | "couronne" | "court";
+export type Coiffure = "carre" | "couronne" | "court" | "meches" | "long"; // meches, long : style « adulte »
 export type Haut = "pull" | "cardigan" | "polaire" | "tshirt" | "parka";
 export type Chaussures = "baskets" | "chaussons" | "bottines";
 

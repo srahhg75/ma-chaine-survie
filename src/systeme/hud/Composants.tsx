@@ -301,3 +301,84 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
     </>
   );
 };
+
+// ---------- Écran de téléphone en grand : appel entrant ou fil de SMS (noir, gris, blanc ; le rouge = la menace) ----------
+export const Telephone: React.FC<Props<"telephone"> & { fMessages: number[] }> = ({ e, r, f, fMessages }) => {
+  const bord = 26;
+  const ecran: React.CSSProperties = { position: "absolute", inset: bord, borderRadius: 44, background: "#0b0b0c", overflow: "hidden", fontFamily: POLICE_TEXTE, color: "white" };
+  const coque = (
+    <div style={boite(r, { borderRadius: 70, background: "linear-gradient(160deg,#3a3a3c,#151516)", boxShadow: "0 30px 70px rgba(0,0,0,0.75), inset 0 0 0 3px #505052" })}>
+      <div style={ecran}>
+        {/* encoche */}
+        <div style={{ position: "absolute", top: 18, left: "50%", width: 150, height: 38, marginLeft: -75, borderRadius: 20, background: "#000" }} />
+        {e.ecran === "appel" ? <EcranAppel e={e} f={f} /> : <EcranSms e={e} f={f} fMessages={fMessages} />}
+      </div>
+    </div>
+  );
+  return coque;
+};
+
+const EcranAppel: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>; f: number }> = ({ e, f }) => {
+  const k = f - e.fDe;
+  const onde = (i: number) => ((k + i * 15) % 45) / 45; // anneaux qui s'élargissent autour de l'avatar
+  return (
+    <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 150 }}>
+      <div style={{ fontSize: 30, fontWeight: 700, opacity: 0.6, letterSpacing: 2 }}>APPEL ENTRANT</div>
+      <div style={{ position: "relative", width: 220, height: 220, marginTop: 60 }}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} style={{ position: "absolute", inset: -80 * onde(i), borderRadius: "50%", border: `3px solid rgba(255,59,48,${0.7 * (1 - onde(i))})` }} />
+        ))}
+        <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: "#2a2a2c", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 110, fontWeight: 900, color: "#8e8e93" }}>?</div>
+      </div>
+      <div style={{ fontSize: 64, fontWeight: 900, marginTop: 70, textAlign: "center", padding: "0 30px", lineHeight: 1.05 }}>{e.contact}</div>
+      {e.numero && <div style={{ fontSize: 40, fontWeight: 700, marginTop: 18, color: ROUGE, letterSpacing: 1 }}>{e.numero}</div>}
+      <div style={{ position: "absolute", bottom: 90, left: 0, right: 0, display: "flex", justifyContent: "space-around" }}>
+        {["#5a5a5e", "#f2f2f2"].map((c, i) => (
+          <div key={i} style={{ width: 130, height: 130, borderRadius: "50%", background: c, transform: `scale(${1 + (i === 1 ? 0.06 * Math.sin(k / 4) : 0)})`, boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const EcranSms: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>; f: number; fMessages: number[] }> = ({ e, f, fMessages }) => {
+  const visibles = (e.messages ?? []).map((m, i) => ({ m, f0: fMessages[i] ?? e.fDe })).filter((x) => f >= x.f0);
+  return (
+    <div style={{ position: "absolute", inset: 0 }}>
+      {/* en-tête : le contact */}
+      <div style={{ position: "absolute", top: 70, left: 0, right: 0, height: 120, display: "flex", flexDirection: "column", alignItems: "center", borderBottom: "2px solid #1f1f21" }}>
+        <div style={{ width: 64, height: 64, borderRadius: "50%", background: "#2a2a2c", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 34, fontWeight: 900, color: "#8e8e93" }}>?</div>
+        <div style={{ fontSize: 30, fontWeight: 800, marginTop: 6 }}>{e.contact}</div>
+      </div>
+      {/* bulles : les plus récentes en bas */}
+      <div style={{ position: "absolute", top: 210, bottom: 40, left: 28, right: 28, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 18 }}>
+        {visibles.slice(-5).map(({ m, f0 }, i) => {
+          const u = interpolate(f - f0, [0, 6], [0, 1], { extrapolateRight: "clamp" });
+          return (
+            <div
+              key={i}
+              style={{
+                alignSelf: m.envoye ? "flex-end" : "flex-start",
+                maxWidth: "82%",
+                padding: "18px 26px",
+                borderRadius: 30,
+                borderBottomLeftRadius: m.envoye ? 30 : 8,
+                borderBottomRightRadius: m.envoye ? 8 : 30,
+                background: m.menace ? ROUGE : m.envoye ? "#e9e9eb" : "#2a2a2c",
+                color: m.envoye ? "#111" : "white",
+                fontSize: 40,
+                fontWeight: 800,
+                lineHeight: 1.15,
+                opacity: u,
+                transform: `translateY(${(1 - u) * 30}px) scale(${0.92 + 0.08 * u})`,
+                boxShadow: m.menace ? "0 0 40px rgba(255,59,48,0.45)" : "none",
+              }}
+            >
+              {m.texte}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

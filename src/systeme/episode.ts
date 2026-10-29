@@ -80,7 +80,7 @@ export const resoudreEpisode = (d: DonneesEpisode, al: Alignement, fps: number):
       index,
       fDe: e.de !== undefined ? image(e.de, al, fps) : 0,
       fA: e.a !== undefined ? image(e.a, al, fps) : duree,
-      fChangements: e.type === "montre" ? (e.changements ?? []).map((c) => image(c.a, al, fps)) : undefined,
+      fChangements: e.type === "montre" ? (e.changements ?? []).map((c) => image(c.a, al, fps)) : e.type === "telephone" ? (e.messages ?? []).map((m) => image(m.a, al, fps)) : undefined,
     })) as EpisodeResolu["hud"],
     personnages: d.personnages.map((p) => resoudrePersonnage(p, al, fps)),
     sons: d.sons.map((s) => ({ ...s, t: instant(s.a, al) })),

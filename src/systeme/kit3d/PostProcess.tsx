@@ -23,6 +23,7 @@ const VignetteGrain = {
     vignette: { value: 0.45 },
     grain: { value: 0.05 },
     image: { value: 0 },
+    noirRouge: { value: 0 },
   },
   vertexShader: /* glsl */ `
     varying vec2 vUv;
@@ -32,10 +33,18 @@ const VignetteGrain = {
     uniform float vignette;
     uniform float grain;
     uniform float image;
+    uniform float noirRouge;
     varying vec2 vUv;
     float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233)) + image * 0.6180339) * 43758.5453); }
     void main() {
       vec4 c = texture2D(tDiffuse, vUv);
+      // « noir et blanc + rouge » : tout passe en gris contrasté, sauf les rouges francs (la couleur de la menace)
+      if (noirRouge > 0.0) {
+        float g = dot(c.rgb, vec3(0.299, 0.587, 0.114));
+        g = clamp((g - 0.5) * 1.18 + 0.5, 0.0, 1.0);
+        float rouge = smoothstep(0.08, 0.22, c.r - max(c.g, c.b)) * smoothstep(0.12, 0.3, c.r);
+        c.rgb = mix(c.rgb, mix(vec3(g), c.rgb * vec3(1.15, 0.9, 0.9), rouge), noirRouge);
+      }
       vec2 d = vUv - 0.5;
       d.x *= 0.5625; // format vertical : vignette ronde
       float v = smoothstep(0.75, 0.18, length(d) * 1.6);
@@ -48,7 +57,7 @@ const VignetteGrain = {
     }`,
 };
 
-export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 0.92, vignette = 0.45, grain = 0.05, occlusion = true, exposition = 1 }) => {
+export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 0.92, vignette = 0.45, grain = 0.05, occlusion = true, exposition = 1, noirRouge = 0 }) => {
   const { gl, scene, camera, size } = useThree();
   const frame = useCurrentFrame();
 
@@ -72,9 +81,10 @@ export const PostProcess: React.FC<OptionsPost> = ({ bloom = 0.35, seuilBloom = 
     const g = new ShaderPass(VignetteGrain);
     g.uniforms.vignette.value = vignette;
     g.uniforms.grain.value = grain;
+    g.uniforms.noirRouge.value = noirRouge;
     c.addPass(g);
     return { composer: c, passeGrain: g };
-  }, [gl, scene, camera, size.width, size.height, bloom, seuilBloom, vignette, grain, occlusion]);
+  }, [gl, scene, camera, size.width, size.height, bloom, seuilBloom, vignette, grain, occlusion, noirRouge]);
 
   useEffect(() => () => composer.dispose(), [composer]);
 

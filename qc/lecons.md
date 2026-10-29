@@ -439,3 +439,14 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   chaque rendu final, faire la version téléphone (`ffmpeg -crf 23 -maxrate 2M -bufsize 4M`, AAC 160k, < 30 Mo = limite d envoi,
   `videos/NNN-nom/<série>-partieN-telephone.mp4`) et l'ENVOYER DANS LA CONVERSATION (outil d'envoi de fichier),
   sans attendre qu'on la demande ; pas par GitHub.
+- **2026-10-27 — DEMANDE (série « Le dernier appel ») : « je ne veux pas de conseils, je veux juste qu'on regarde une
+  histoire drama ».** Règle : pour cette série, AUCUN conseil ni tactique « Un / Deux / Trois », pas de fiches ni de
+  HUD de survie : une histoire (horreur + drama de couple) avec répliques, montée de tension, fausse accalmie, twist et
+  choix A/B. Le gabarit chiffré reste (200-260 mots, phrases de 2 à 8 mots, hook de 2 phrases, carton lu). Avant
+  d'écrire une nouvelle série, demander si elle est « survie » (conseils) ou « histoire » (sans conseils).
+- **2026-10-29 — STYLE VALIDÉ pour la saison « Le dernier appel » (image d'essai `qc/banc-style-appel/essai.jpg`).**
+  Règle : personnages `variante: "adulte"` (≈ 1,75 m, tête ≈ 1/7, yeux en amande, coiffures `meches` / `long`,
+  `CORPS_ADULTE` dans `personnage/poses.ts`) ; image `post.noirRouge: 1` (noir et blanc, seuls les rouges francs
+  restent : la couleur de la menace, des indices) ; SMS et appels montrés par l'élément HUD `telephone`
+  (`ecran: "appel" | "sms"`, bulle `menace` en rouge), placé sous le visage, jamais dessus. Le rouge reste rare :
+  1 ou 2 éléments par plan. Banc d'essai : `npx tsx tools/images.ts banc-style-appel 0.1 1.5 1.75 1.95`.

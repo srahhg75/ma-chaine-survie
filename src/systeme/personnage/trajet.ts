@@ -1,7 +1,7 @@
 import { Alignement } from "../mots";
 import { clamp, distance, lerp, tresDoux, Vec3 } from "../maths";
 import { Ancre, image } from "../timeline";
-import { EXPRESSIONS, FOULEE, melanger, melangerVisage, NomExpression, NomPose, Pose, poseMarche, POSES, Variante, Visage, visageDePose } from "./poses";
+import { estHumain, EXPRESSIONS, FOULEE, melanger, melangerVisage, NomExpression, NomPose, Pose, poseMarche, POSES, Variante, Visage, visageDePose } from "./poses";
 import { Apparence } from "./apparence";
 import { bruit } from "../maths";
 
@@ -117,7 +117,7 @@ const motsDits = (voix: string, al: Alignement): [number, number][] => {
 // léger balancement du poids d'une jambe sur l'autre, petits mouvements de tête ; en marchant, bras qui se plient
 // davantage et tête qui compense le balancier du buste. Le Bonhomme et l'héroïne de la partie 1 ne changent pas.
 const vivant = (r: PersonnageResolu, p: Pose, frame: number, fps: number, marche: boolean): Pose => {
-  if (r.variante !== "humain") return p;
+  if (!estHumain(r.variante)) return p;
   const t = frame / fps + (r.id.length % 7) * 0.9;
   const s = (periode: number, d = 0) => Math.sin((2 * Math.PI * t) / periode + d);
   if (marche)

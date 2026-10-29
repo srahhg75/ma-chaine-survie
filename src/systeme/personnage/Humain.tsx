@@ -1,10 +1,10 @@
-import React, { useMemo } from "react";
+import React, { createContext, useContext, useMemo } from "react";
 import { LatheGeometry, SplineCurve, Vector2 } from "three";
 import { Vec3 } from "../maths";
 import { Arrondi } from "../kit3d/Arrondi";
 import { LampeTorche } from "../kit3d/Lumieres";
 import { Apparence, APPARENCE_DEFAUT } from "./apparence";
-import { CORPS_HUMAIN as C, hauteurBassin, Pose, Visage, visageDePose } from "./poses";
+import { corpsDe, CORPS_HUMAIN, hauteurBassin, Pose, Proportions, Variante, Visage, visageDePose } from "./poses";
 
 /*
  * Personnage « humain » : réalisme en formes simples (direction artistique à partir de H+72 partie 2).
@@ -14,6 +14,9 @@ import { CORPS_HUMAIN as C, hauteurBassin, Pose, Visage, visageDePose } from "./
  * Il regarde vers +Z. Mêmes poses et mêmes conventions d'angles que le Bonhomme (poses.ts).
  */
 const rad = (d: number) => (d * Math.PI) / 180;
+// Proportions du corps et style du visage, transmis à tous les morceaux du personnage (« humain » ou « adulte »)
+const Style = createContext<{ C: Proportions; adulte: boolean }>({ C: CORPS_HUMAIN, adulte: false });
+const useStyle = () => useContext(Style);
 const RAYON_DESSIN = 0.112; // la tête est dessinée à ce rayon puis agrandie (C.rayonTete)
 const Tissu: React.FC<{ c: string; r?: number }> = ({ c, r = 0.92 }) => <meshStandardMaterial color={c} roughness={r} />;
 const Peau: React.FC<{ c: string }> = ({ c }) => <meshStandardMaterial color={c} roughness={0.55} />;
@@ -163,13 +166,14 @@ const Main: React.FC<{ a: Apparence; cote: 1 | -1 }> = ({ a, cote }) => {
 };
 
 const Bras: React.FC<{ a: Apparence; cote: 1 | -1; epaule: [number, number]; coude: number; lampe?: boolean; puissanceLampe?: number }> = ({ a, cote, epaule, coude, lampe, puissanceLampe = 1 }) => {
+  const { C, adulte } = useStyle();
   const manche = <Tissu c={a.couleurHaut} />;
-  const ep = a.haut === "parka" ? 0.014 : a.haut === "polaire" ? 0.008 : 0;
+  const ep = (a.haut === "parka" ? 0.014 : a.haut === "polaire" ? 0.008 : 0) + (adulte ? 0.008 : 0);
   return (
     <group position={[cote * C.ecartEpaules, 0, 0]} rotation={[-rad(epaule[0]), 0, cote * rad(epaule[1])]}>
       {/* épaule arrondie */}
       <mesh castShadow>
-        <sphereGeometry args={[0.047 + ep, 16, 12]} />
+        <sphereGeometry args={[(adulte ? 0.036 : 0.047) + ep, 16, 12]} />
         {manche}
       </mesh>
       <Segment long={C.brasHaut} r0={0.05 + ep} r1={0.043 + ep} c={manche} />
@@ -196,6 +200,7 @@ const Bras: React.FC<{ a: Apparence; cote: 1 | -1; epaule: [number, number]; cou
 };
 
 const Chaussure: React.FC<{ a: Apparence }> = ({ a }) => {
+  const { C } = useStyle();
   const sole = a.chaussures === "baskets" ? "#f4f2ee" : a.chaussures === "chaussons" ? "#3a2a22" : "#2a201a";
   return (
     <group position={[0, -C.semelle + 0.004, 0.035]}>
@@ -223,18 +228,20 @@ const Chaussure: React.FC<{ a: Apparence }> = ({ a }) => {
 };
 
 const Jambe: React.FC<{ a: Apparence; cote: 1 | -1; hanche: [number, number]; genou: number }> = ({ a, cote, hanche, genou }) => {
+  const { C, adulte } = useStyle();
+  const e = adulte ? 1.3 : 1; // jambes d'adulte : plus longues, donc plus épaisses
   const tissu = <Tissu c={a.pantalon} r={0.95} />;
   return (
     <group position={[cote * C.ecartHanches, 0, 0]} rotation={[-rad(hanche[0]), 0, cote * rad(hanche[1])]}>
-      <Segment long={C.cuisse} r0={a.femme ? 0.066 : 0.064} r1={0.05} c={tissu} />
+      <Segment long={C.cuisse} r0={(a.femme ? 0.066 : 0.064) * e} r1={0.05 * e} c={tissu} />
       <group position={[0, -C.cuisse, 0]} rotation={[rad(genou), 0, 0]}>
-        <Segment long={C.tibia} r0={0.05} r1={0.04} c={tissu} />
+        <Segment long={C.tibia} r0={0.05 * e} r1={0.04 * e} c={tissu} />
         {/* bas du pantalon */}
         <mesh position={[0, -C.tibia + 0.02, 0]}>
-          <cylinderGeometry args={[0.044, 0.046, 0.035, 14]} />
+          <cylinderGeometry args={[0.044 * e, 0.046 * e, 0.035, 14]} />
           <Tissu c={teinte(a.pantalon, -0.2)} />
         </mesh>
-        <group position={[0, -C.tibia, 0]} rotation={[-rad(genou - hanche[0]), 0, 0]} scale={0.8}>
+        <group position={[0, -C.tibia, 0]} rotation={[-rad(genou - hanche[0]), 0, 0]} scale={adulte ? 1.05 : 0.8}>
           <Chaussure a={a} />
         </group>
       </group>
@@ -317,6 +324,30 @@ const Cheveux: React.FC<{ a: Apparence; R: number }> = ({ a, R }) => {
   }
   // Carré : volume lisse sculpté au tour, ouvert devant (lathe : angle 0 = devant), pointes légèrement rentrées ;
   // coupe courte : même volume arrêté aux oreilles. Quelques mèches fines en surface pour la matière.
+  if (a.coiffure === "long") return <Carre R={R} bas={-2.5} c={c} clair={clair} sombre={sombre} frange />;
+  if (a.coiffure === "meches") {
+    // coupe courte « anime » : volume court + mèches en pointes sur le dessus et sur le front
+    const meches: [number, number, number, number, number][] = [
+      [-0.05, 0.98, 0.45, 1.0, -0.5], [-0.018, 1.02, 0.55, 1.15, -0.15], [0.02, 1.02, 0.55, 1.2, 0.2], [0.052, 0.96, 0.45, 1.0, 0.55],
+      [-0.035, 0.7, 0.85, 1.55, -0.35], [0.0, 0.74, 0.88, 1.65, 0.05], [0.035, 0.7, 0.85, 1.5, 0.4],
+    ];
+    return (
+      <group>
+        <mesh position={[0, 0.006, -0.012]} rotation={[-0.78, 0, 0]} scale={[1.05, 1.06, 1.1]} castShadow>
+          <sphereGeometry args={[R, 36, 16, 0, Math.PI * 2, 0, Math.PI * 0.56]} />
+          <meshStandardMaterial color={c} roughness={0.48} />
+        </mesh>
+        {meches.map(([x, y, z, rx, rz], i) => (
+          <group key={i} position={[x, R * y, R * z]} rotation={[rx, 0, rz]}>
+            <mesh position={[0, 0.022, 0]} scale={[1.3, 1, 0.55]}>
+              <coneGeometry args={[0.018, 0.06, 8]} />
+              <meshStandardMaterial color={i % 2 ? clair : c} roughness={0.48} />
+            </mesh>
+          </group>
+        ))}
+      </group>
+    );
+  }
   const bas = a.coiffure === "carre" ? -0.85 : -0.1;
   return <Carre R={R} bas={bas} c={c} clair={clair} sombre={sombre} frange={a.coiffure === "carre"} />;
 };
@@ -369,7 +400,7 @@ const Couronne: React.FC<{ R: number; c: string }> = ({ R, c }) => {
 };
 
 // Tête au tour : front rond, pommettes, joues qui se resserrent vers un petit menton (une seule surface lisse)
-const TeteForme: React.FC<{ R: number; peau: string }> = ({ R, peau }) => {
+const TeteForme: React.FC<{ R: number; peau: string; adulte?: boolean }> = ({ R, peau, adulte = false }) => {
   const geo = useMemo(() => {
     // du menton vers le sommet (ordre ascendant : faces tournées vers l'extérieur)
     const prof = [[0.001, -1.0], [0.36, -0.93], [0.62, -0.74], [0.82, -0.48], [0.93, -0.2], [0.96, 0.08], [0.9, 0.38], [0.72, 0.7], [0.42, 0.92], [0.001, 1.0]];
@@ -377,7 +408,7 @@ const TeteForme: React.FC<{ R: number; peau: string }> = ({ R, peau }) => {
     return new LatheGeometry(courbe.getPoints(48), 72);
   }, [R]);
   return (
-    <mesh geometry={geo} scale={[0.9, 1, 0.95]} castShadow>
+    <mesh geometry={geo} scale={adulte ? [0.82, 1.08, 0.92] : [0.9, 1, 0.95]} castShadow>
       <Peau c={peau} />
     </mesh>
   );
@@ -467,6 +498,7 @@ const Bouche: React.FC<{ v: Visage; R: number; a: Apparence }> = ({ v, R, a }) =
 };
 
 const Tete: React.FC<{ pose: Pose; a: Apparence; visage?: Visage }> = ({ pose, a, visage }) => {
+  const { C, adulte } = useStyle();
   const R = RAYON_DESSIN;
   const k = C.rayonTete / RAYON_DESSIN;
   const v = visage ?? visageDePose(pose);
@@ -476,12 +508,12 @@ const Tete: React.FC<{ pose: Pose; a: Apparence; visage?: Visage }> = ({ pose, a
     <group rotation={[rad(pose.tete[0]), rad(pose.tete[1]), 0]}>
       {/* cou */}
       <mesh position={[0, C.cou / 2 + 0.01, -0.035]} castShadow>
-        <cylinderGeometry args={[0.04, 0.05, C.cou + 0.04, 14]} />
+        <cylinderGeometry args={adulte ? [0.052, 0.062, C.cou + 0.04, 14] : [0.04, 0.05, C.cou + 0.04, 14]} />
         <Peau c={a.peau} />
       </mesh>
       <group position={[0, C.cou + C.rayonTete * 0.86, 0.008 * k]} scale={k}>
         {/* crâne + mâchoire : visage ovale */}
-        <TeteForme R={R} peau={a.peau} />
+        <TeteForme R={R} peau={a.peau} adulte={adulte} />
         {/* oreilles */}
         {[-1, 1].map((k) => (
           <mesh key={k} position={[k * R * 0.86, -R * 0.08, -R * 0.02]} scale={[0.32, 1, 0.62]}>
@@ -489,8 +521,8 @@ const Tete: React.FC<{ pose: Pose; a: Apparence; visage?: Visage }> = ({ pose, a
             <Peau c={teinte(a.peau, -0.05)} />
           </mesh>
         ))}
-        {/* joues rosées */}
-        {[-1, 1].map((k) => (
+        {/* joues rosées (pas en style adulte : taches grises en noir et blanc) */}
+        {!adulte && [-1, 1].map((k) => (
           <mesh key={k} position={[k * R * 0.42, -R * 0.3, R * 0.74]}>
             <sphereGeometry args={[R * 0.13, 12, 10]} />
             <meshStandardMaterial color={a.joues} roughness={0.7} transparent opacity={0.16} depthWrite={false} />
@@ -499,7 +531,20 @@ const Tete: React.FC<{ pose: Pose; a: Apparence; visage?: Visage }> = ({ pose, a
         {/* yeux + sourcils */}
         {[-1, 1].map((k) => (
           <group key={k} position={[k * R * 0.34, R * 0.02, R * 0.84]} rotation={[0, k * 0.36, 0]}>
-            <Oeil k={k} ouverture={v.yeux} iris={a.iris} />
+            {adulte ? (
+              // œil en amande (style adulte) : plus petit, étiré, paupière supérieure marquée d'un trait épais
+              <group position={[0, -0.004, -0.004]}>
+                <group scale={[0.92, 0.4, 0.9]}>
+                  <Oeil k={k} ouverture={v.yeux} iris={a.iris} />
+                </group>
+                <mesh position={[k * 0.003, 0.0145 * Math.min(1, v.yeux), 0.012]} rotation={[0, 0, Math.PI / 2 - k * 0.14]}>
+                  <capsuleGeometry args={[0.0034, 0.05, 3, 8]} />
+                  <meshStandardMaterial color="#1a0f0b" roughness={0.6} />
+                </mesh>
+              </group>
+            ) : (
+              <Oeil k={k} ouverture={v.yeux} iris={a.iris} />
+            )}
             <mesh position={[0, 0.043 + 0.012 * Math.max(0, v.yeux - 1) - 0.003 * Math.max(0, s), 0.006]} rotation={[0, 0, Math.PI / 2 + k * rad(16 * s)]} scale={[a.age > 0.6 ? 1.7 : 1, 1, 1]}>
               <capsuleGeometry args={[0.0035, 0.028, 3, 6]} />
               <meshStandardMaterial color={sourcil} roughness={0.8} />
@@ -507,7 +552,7 @@ const Tete: React.FC<{ pose: Pose; a: Apparence; visage?: Visage }> = ({ pose, a
           </group>
         ))}
         {/* nez */}
-        <mesh position={[0, -R * 0.24, R * 0.9]} scale={[1.15, 0.9, 0.85]}>
+        <mesh position={[0, -R * 0.24, R * 0.9]} scale={adulte ? [0.55, 1.2, 0.85] : [1.15, 0.9, 0.85]}>
           <sphereGeometry args={[0.0115, 14, 10]} />
           <Peau c={teinte(a.peau, -0.03)} />
         </mesh>
@@ -565,22 +610,26 @@ export const Humain: React.FC<{
   taille?: number;
   apparence?: Partial<Apparence>;
   visage?: Visage;
-}> = ({ pose, position, orientation, lampe = false, puissanceLampe = 1, taille = 1, apparence, visage }) => {
+  variante?: Variante; // "humain" (figurine, défaut) ou "adulte"
+}> = ({ pose, position, orientation, lampe = false, puissanceLampe = 1, taille = 1, apparence, visage, variante = "humain" }) => {
   const a: Apparence = { ...APPARENCE_DEFAUT, ...apparence };
-  const yBassin = hauteurBassin(pose, "humain");
+  const C = corpsDe(variante);
+  const style = useMemo(() => ({ C, adulte: variante === "adulte" }), [C, variante]);
+  const yBassin = hauteurBassin(pose, variante);
   const voute = 10 * a.age * a.age; // dos voûté avec l'âge
   return (
+    <Style.Provider value={style}>
     <group position={position} rotation={[0, rad(orientation), 0]} scale={taille}>
       <group position={[0, yBassin, 0]}>
         <Jambe a={a} cote={1} hanche={pose.hancheG} genou={pose.genouG} />
         <Jambe a={a} cote={-1} hanche={pose.hancheD} genou={pose.genouD} />
         <group rotation={[rad(pose.tronc[0] + voute), rad(pose.tronc[1]), rad(pose.tronc[2])]}>
           {/* bassin (ceinture du pantalon) */}
-          <mesh position={[0, -0.04, 0]} scale={[1, 0.62, 0.68]} castShadow>
+          <mesh position={[0, -0.04, 0]} scale={variante === "adulte" ? [1.12, 0.62, 0.74] : [1, 0.62, 0.68]} castShadow>
             <sphereGeometry args={[0.135, 20, 14]} />
             <Tissu c={a.pantalon} r={0.95} />
           </mesh>
-          <group scale={[1, C.bassinVersEpaules / 0.5, 1]}>
+          <group scale={[variante === "adulte" ? 1.12 : 1, C.bassinVersEpaules / 0.5, variante === "adulte" ? 1.1 : 1]}>
             <Torse a={a} />
           </group>
           {a.echarpe && (
@@ -620,5 +669,6 @@ export const Humain: React.FC<{
         </group>
       </group>
     </group>
+    </Style.Provider>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { CleCameraResolue, etatCamera } from "../camera";
 import { boiteHud } from "./boites";
-import { Carton, Compte, Etiquette, Fiche, Inventaire, Montre, Moodles, Tactique } from "./Composants";
+import { Carton, Compte, Etiquette, Fiche, Inventaire, Montre, Moodles, Tactique, Telephone } from "./Composants";
 import { ElementHudResolu } from "./types";
 
 // Valeurs courantes de la montre (l'heure avance aux ancres prévues)
@@ -62,6 +62,9 @@ export const Hud: React.FC<{ elements: ElementHudResolu[]; camera: CleCameraReso
               break;
             case "carton":
               contenu = <Carton e={e} r={r} f={f} />;
+              break;
+            case "telephone":
+              contenu = <Telephone e={e} r={r} f={f} fMessages={(e as { fChangements?: number[] }).fChangements ?? []} />;
               break;
           }
           return (

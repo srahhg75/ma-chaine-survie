@@ -115,13 +115,29 @@ export const CORPS_HUMAIN = {
   cou: 0.045,
 } as const;
 
-export type Variante = "bonhomme" | "heroine" | "humain";
+// Proportions « adulte » (saison « Le dernier appel », style anime adulte) : ≈ 1,75 m, tête ≈ 1/7 de la hauteur,
+// jambes et bras longs, cou visible. Même dessin que Humain.tsx (visage, mains, vêtements), yeux en amande.
+export const CORPS_ADULTE = {
+  cuisse: 0.42,
+  tibia: 0.4,
+  semelle: 0.07,
+  bassinVersEpaules: 0.52,
+  ecartHanches: 0.09,
+  ecartEpaules: 0.2,
+  brasHaut: 0.29,
+  avantBras: 0.26,
+  rayonTete: 0.118,
+  cou: 0.06,
+} as const;
+
+export type Variante = "bonhomme" | "heroine" | "humain" | "adulte";
+export const estHumain = (v?: Variante) => v === "humain" || v === "adulte";
 export type Proportions = { [K in keyof typeof CORPS]: number };
-export const corpsDe = (v: Variante = "bonhomme"): Proportions => (v === "humain" ? CORPS_HUMAIN : CORPS);
+export const corpsDe = (v: Variante = "bonhomme"): Proportions => (v === "adulte" ? CORPS_ADULTE : v === "humain" ? CORPS_HUMAIN : CORPS);
 // Sommet du crâne (au-dessus du bassin) : sert au cadrage et au contrôle « sujet coupé »
 export const hautTete = (v: Variante = "bonhomme") => {
   const c = corpsDe(v);
-  return c.bassinVersEpaules + c.cou + 2 * c.rayonTete * (v === "humain" ? 1.12 : 1);
+  return c.bassinVersEpaules + c.cou + 2 * c.rayonTete * (estHumain(v) ? 1.12 : 1);
 };
 
 const rad = (d: number) => (d * Math.PI) / 180;

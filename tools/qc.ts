@@ -207,7 +207,7 @@ for (let f = 0; f < r.duree; f++) {
         signaler("Personnage dans un meuble", `${p.id} traverse ${m.id}${e.marche ? " en marchant" : ""}`, f, e.marche && !p.fantome);
     // Murs pleins OU arasés : on ne passe que par une porte ou un passage (jamais par-dessus une cloison).
     // Rayon du corps : 0,22 m pour un personnage « humain » (épaules, bras, sac, lampe), 0,12 m sinon.
-    const rayon = p.variante === "humain" ? 0.22 : 0.12;
+    const rayon = p.variante === "humain" || p.variante === "adulte" ? 0.22 : 0.12;
     const mur = p.fantome ? null : murTraverse(donnees.decor, e.position[0], e.position[2], rayon);
     if (mur) signaler("Personnage à travers un mur", `${p.id} traverse ${mur} (pas de porte ni de passage à cet endroit)`, f);
   }

@@ -1,0 +1,53 @@
+# « Le dernier appel » — Partie 1 « 3 h 12 » : horreur + drama de couple, SANS CONSEILS (demande du 27/10 : « juste une histoire »)
+# Nathan, 27 ans, seul dans le premier appartement du couple (3e étage) ; Léa, 26 ans, censée dormir chez sa sœur Sarah.
+# Voix : sans marqueur = narrateur ; [Nathan] ou [Léa] en début de phrase = réplique dite par ce personnage.
+# Chiffres écrits en chiffres (affichés tels quels) ; la voix les lit en lettres, l'alignement fait le lien.
+# Accroche « Que feriez-vous si… » (H+72 partie 5 ouvrait sur un chiffre choc).
+@hook Que feriez-vous si votre téléphone vous appelait ?
+@hook2 À *3 h 12*. Depuis votre propre numéro.
+@ctx1 Nathan, 27 ans. Seul cette nuit.
+@ctx2 Léa, sa copine, dort chez sa sœur.
+@ctx3 Ils viennent d'emménager ensemble.
+@sonne Le téléphone sonne. Son numéro à lui.
+@n_allo [Nathan] Allô ? C'est qui ?
+@souffle Juste un souffle. Puis on raccroche.
+@n_super [Nathan] Super. Mon téléphone me harcèle.
+@sms Un SMS arrive. Depuis son numéro.
+@sms2 Jolie chemise bleue, Nathan.
+@bleue Il porte une chemise bleue.
+@fenetre Il regarde l'immeuble d'en face.
+@lueur Au 3e, un écran s'allume.
+@eteint Puis s'éteint.
+@n_drole [Nathan] OK. Ça, c'est pas drôle.
+@lumiere Il coupe la lumière. Rideaux tirés.
+@sms3 Nouveau message.
+@sms4 Tu crois la connaître ?
+@sms5 Demande-lui où elle était _mardi_.
+@mardi Mardi. Léa était rentrée à minuit.
+@mardi2 Elle avait dit : le bureau.
+@mardi3 Ses cheveux sentaient la cigarette.
+@mardi4 Léa ne fume pas.
+@appel Il appelle Léa.
+@l_heure [Léa] T'as vu l'heure, chéri ?
+@n_ou [Nathan] T'es où, là ?
+@l_sarah [Léa] Chez Sarah. Je dors.
+@n_chuchote [Nathan] Pourquoi tu chuchotes ?
+@l_genie [Léa] Parce qu'il est 3 heures, génie.
+@n_mardi [Nathan] Mardi soir. T'étais où ?
+@silence Long silence.
+@l_pourquoi [Léa] Pourquoi tu me demandes ça ?
+@n_reponds [Nathan] Réponds-moi, Léa.
+@l_demain [Léa] Demain. Je t'expliquerai tout.
+@l_aime [Léa] Je t'aime. Raccroche.
+@raccroche Elle raccroche la première.
+@sms6 Dernier SMS : bonne nuit, Nathan.
+@nuit Il fixe les rideaux jusqu'à l'aube.
+@matin 7 heures. Son téléphone vibre.
+@sarah C'est Sarah, la sœur de Léa.
+@sarah2 Léa a dormi chez toi ?
+@fin > Léa n'était _pas_ chez sa sœur.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Léa a menti. Nathan…
+@carton2 A : il fonce chez Sarah.
+@carton3 B : il fouille les affaires de Léa.
+@carton4 Répondez en commentaire !

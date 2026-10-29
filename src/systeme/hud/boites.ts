@@ -17,6 +17,7 @@ export const HUD = {
   compte: { l: 300, h: 170, y: 1060 },
   etiquette: { h: 62, parCaractere: 21, rembourrage: 44 },
   carton: { x: 70, y: 240, l: 840, h: 1240 },
+  telephone: { x: 150, y: 250, l: 620, h: 980 }, // à gauche de la colonne des boutons, au-dessus des sous-titres
   sousTitres: { taille: 68, interligne: 78, largeurMax: ZONE_SURE.droite - ZONE_SURE.gauche, parCaractere: 0.7 },
 } as const;
 
@@ -68,6 +69,8 @@ export const boiteHud = (e: ElementHudResolu, cam?: EtatCamera): Rect & { ancre?
     }
     case "carton":
       return { ...HUD.carton };
+    case "telephone":
+      return { ...HUD.telephone };
   }
 };
 

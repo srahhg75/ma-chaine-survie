@@ -7,4 +7,5 @@ export type OptionsPost = {
   occlusion?: boolean; // occlusion ambiante, défaut true
   exposition?: number; // exposition du tone mapping, défaut 1
   ombresDouces?: boolean; // ombres plus douces (rayon de flou), défaut true
+  noirRouge?: number; // 0..1 : noir et blanc sauf les rouges francs (saison « Le dernier appel »), défaut 0
 };
