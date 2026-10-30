@@ -465,3 +465,14 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   ≥ 1,5 m (sinon le vêtement remplit l'écran en noir) et l'objet dépasse DEVANT le vêtement.
 - **2026-10-29 — `tools/qc.ts` interdisait de filmer à travers une fenêtre** (les murs étaient des boîtes pleines).
   Corrigé : `passeParOuverture` (`kit3d/decor.ts`) laisse passer le regard par une fenêtre, une porte ou un passage.
+- **2026-10-30 — Plans de rappel illisibles (P2 de « Le dernier appel ») : façade grise du matin et portemanteau vide
+  ne racontaient rien.** Règle : un rappel de l'épisode précédent se montre par ce qui le racontait (l'écran du téléphone :
+  appel de « MOI », SMS de Sarah) sur un plan du héros, pas par un décor vide dont le sens est implicite.
+- **2026-10-30 — Ancre « rec2:soeur » introuvable** (le mot du script est « sœur »). Règle : dans une ancre, éviter les mots
+  avec « œ » ou « æ » ; prendre un mot voisin de la phrase.
+- **2026-10-30 — Texte au dos d'une photo posée par terre lu à l'envers** depuis la caméra. Règle : un écrit posé à plat se
+  dessine le haut tourné vers la caméra du plan (vers le sud si la caméra filme depuis le sud) ; le vérifier en image fixe.
+- **2026-10-30 — Câlin qui ressemblait à un salut** (bras levé dans le vide : les deux personnages assis à 0,85 m). Règle :
+  pose `assisCalin` seulement à ≤ 0,6 m l'un de l'autre, bras à hauteur d'épaule ; vérifier en image fixe.
+- **2026-10-30 — Personnage debout entre la caméra et celle qui parle** (Nathan devant Léa assise pendant l'aveu). Règle :
+  quand un personnage s'assoit pour parler, l'autre se déplace sur le côté (hors de l'axe caméra → visage) avant sa réplique.

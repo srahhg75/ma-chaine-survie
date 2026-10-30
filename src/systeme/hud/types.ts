@@ -20,8 +20,8 @@ export type ElementHud =
   | (Base & { type: "compte"; secondes: number; titre?: string })
   | (Base & { type: "etiquette"; texte: string; point: Vec3; style?: StyleMot })
   // Écran de téléphone en grand (saison « Le dernier appel ») : appel entrant, ou fil de SMS dont chaque bulle
-  // apparaît à son ancre ; `menace` = bulle rouge (la seule couleur de l'image), `envoye` = bulle de droite
-  | (Base & { type: "telephone"; ecran: "appel" | "sms"; contact: string; numero?: string; heure?: string; enCours?: boolean; messages?: { a: Ancre; texte: string; envoye?: boolean; menace?: boolean }[] })
+  // apparaît à son ancre ; `menace` = bulle rouge (la seule couleur de l'image), `envoye` = bulle de droite, `photo` = photo prise de loin (deux silhouettes derrière une fenêtre)
+  | (Base & { type: "telephone"; ecran: "appel" | "sms"; contact: string; numero?: string; heure?: string; enCours?: boolean; messages?: { a: Ancre; texte: string; envoye?: boolean; menace?: boolean; photo?: boolean }[] })
   | (Base & { type: "carton"; partie: number; titre: string; verifie: string; question?: string; choix?: [string, string]; fin?: boolean }); // fin : dernier épisode d'une série (pas de choix A/B)
 
 export type TypeHud = ElementHud["type"];

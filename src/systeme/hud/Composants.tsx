@@ -347,6 +347,34 @@ const EcranAppel: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>
   );
 };
 
+// Photo reçue, prise de loin : une fenêtre éclairée dans une façade sombre, deux silhouettes enlacées derrière la vitre
+const BullePhoto: React.FC<{ u: number; legende: string }> = ({ u, legende }) => {
+  const silhouette = (x: number, h: number): React.ReactNode => (
+    <div style={{ position: "absolute", left: x, bottom: 0, width: 70, height: h }}>
+      <div style={{ position: "absolute", left: 17, top: 0, width: 36, height: 40, borderRadius: "50%", background: "#141416" }} />
+      <div style={{ position: "absolute", left: 0, top: 36, width: 70, height: h - 36, borderRadius: "30px 30px 0 0", background: "#141416" }} />
+    </div>
+  );
+  return (
+    <div style={{ alignSelf: "flex-start", width: "86%", opacity: u, transform: `translateY(${(1 - u) * 30}px) scale(${0.92 + 0.08 * u})`, borderRadius: 26, overflow: "hidden", border: `5px solid ${ROUGE}`, boxShadow: "0 0 40px rgba(255,59,48,0.45)" }}>
+      <div style={{ position: "relative", height: 330, background: "radial-gradient(ellipse at 50% 60%, #3a3a3e 0%, #101012 75%)", filter: "blur(1.2px)" }}>
+        {/* la façade et la fenêtre de leur salon, éclairée */}
+        <div style={{ position: "absolute", left: 70, right: 70, top: 50, bottom: 40, background: "linear-gradient(180deg,#9a9a9e,#6e6e72)", boxShadow: "inset 0 0 0 10px #1c1c1e" }}>
+          <div style={{ position: "absolute", left: "50%", top: 0, bottom: 0, width: 8, marginLeft: -4, background: "#1c1c1e" }} />
+          <div style={{ position: "absolute", left: 70, bottom: 0, width: 150, height: 170 }}>
+            {silhouette(0, 170)}
+            {silhouette(48, 160)}
+          </div>
+        </div>
+        {/* repère de visée */}
+        <div style={{ position: "absolute", left: 14, top: 14, width: 40, height: 40, borderLeft: "4px solid #e9e9eb", borderTop: "4px solid #e9e9eb", opacity: 0.6 }} />
+        <div style={{ position: "absolute", right: 14, bottom: 14, width: 40, height: 40, borderRight: "4px solid #e9e9eb", borderBottom: "4px solid #e9e9eb", opacity: 0.6 }} />
+      </div>
+      {legende && <div style={{ background: ROUGE, color: "white", fontSize: 36, fontWeight: 800, padding: "12px 22px" }}>{legende}</div>}
+    </div>
+  );
+};
+
 const EcranSms: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>; f: number; fMessages: number[] }> = ({ e, f, fMessages }) => {
   const visibles = (e.messages ?? []).map((m, i) => ({ m, f0: fMessages[i] ?? e.fDe })).filter((x) => f >= x.f0);
   return (
@@ -360,6 +388,7 @@ const EcranSms: React.FC<{ e: Extract<ElementHudResolu, { type: "telephone" }>; 
       <div style={{ position: "absolute", top: 210, bottom: 40, left: 28, right: 28, display: "flex", flexDirection: "column", justifyContent: "flex-end", gap: 18 }}>
         {visibles.slice(-5).map(({ m, f0 }, i) => {
           const u = interpolate(f - f0, [0, 6], [0, 1], { extrapolateRight: "clamp" });
+          if (m.photo) return <BullePhoto key={i} u={u} legende={m.texte} />;
           return (
             <div
               key={i}

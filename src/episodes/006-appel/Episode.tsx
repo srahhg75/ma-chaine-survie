@@ -15,10 +15,10 @@ import { donnees, FENETRE, FENETRE_ROUGE, LAMPE, POCHE, PORTEMANTEAU, TELEPHONE_
  * cigarettes rouge), le téléphone (sur la table, à l'oreille, dans la main) dont l'écran éclaire le visage.
  * L'image passe en noir et blanc au post-traitement : seuls les rouges francs restent.
  */
-const ROUGE = "#d0121a";
+export const ROUGE = "#d0121a";
 
 // Façade de l'immeuble d'en face, de l'autre côté de la rue (fenêtres éteintes, quelques-unes faiblement allumées)
-const ImmeubleEnFace: React.FC<{ rouge: number; aube: number }> = ({ rouge, aube }) => {
+export const ImmeubleEnFace: React.FC<{ rouge: number; aube: number }> = ({ rouge, aube }) => {
   const z = -11;
   const fenetres = useMemo(() => {
     const f: { x: number; y: number; allumee: boolean }[] = [];
@@ -58,7 +58,7 @@ const ImmeubleEnFace: React.FC<{ rouge: number; aube: number }> = ({ rouge, aube
   );
 };
 
-const LampeSurPied: React.FC<{ allumee: boolean }> = ({ allumee }) => (
+export const LampeSurPied: React.FC<{ allumee: boolean }> = ({ allumee }) => (
   <group position={LAMPE}>
     <Arrondi taille={[0.3, 0.03, 0.3]} position={[0, 0.015, 0]} rayon={0.01} couleur="#222226" />
     <Arrondi taille={[0.03, 1.5, 0.03]} position={[0, 0.77, 0]} rayon={0.01} couleur="#222226" metal={0.6} />
@@ -71,16 +71,20 @@ const LampeSurPied: React.FC<{ allumee: boolean }> = ({ allumee }) => (
 );
 
 // Portemanteau : l'écharpe rouge de Léa (toujours là) ; mardi, son manteau et, dans la poche, le paquet de cigarettes
-const Portemanteau: React.FC<{ manteau: boolean }> = ({ manteau }) => (
+export const Portemanteau: React.FC<{ manteau: boolean; echarpe?: boolean }> = ({ manteau, echarpe = true }) => (
   <group position={PORTEMANTEAU}>
     <Arrondi taille={[0.32, 0.03, 0.32]} position={[0, 0.015, 0]} rayon={0.01} couleur="#2a2420" />
     <Arrondi taille={[0.035, 1.75, 0.035]} position={[0, 0.89, 0]} rayon={0.012} couleur="#3a2e24" />
     {[0, 1, 2].map((k) => (
       <Arrondi key={k} taille={[0.02, 0.02, 0.16]} position={[Math.sin(k * 2.1) * 0.06, 1.7, Math.cos(k * 2.1) * 0.06]} rotation={[0.5, k * 2.1, 0]} rayon={0.008} couleur="#3a2e24" />
     ))}
-    {/* l'écharpe rouge, pendue en deux pans */}
-    <Arrondi taille={[0.13, 0.62, 0.05]} position={[-0.06, 1.38, 0.0]} rotation={[0, -0.4, 0.04]} rayon={0.02} couleur={ROUGE} rugosite={1} />
-    <Arrondi taille={[0.13, 0.5, 0.05]} position={[0.02, 1.43, -0.06]} rotation={[0, 0.5, -0.05]} rayon={0.02} couleur={ROUGE} rugosite={1} />
+    {/* l’écharpe rouge, pendue en deux pans (absente quand Léa la porte) */}
+    {echarpe && (
+      <>
+        <Arrondi taille={[0.13, 0.62, 0.05]} position={[-0.06, 1.38, 0.0]} rotation={[0, -0.4, 0.04]} rayon={0.02} couleur={ROUGE} rugosite={1} />
+        <Arrondi taille={[0.13, 0.5, 0.05]} position={[0.02, 1.43, -0.06]} rotation={[0, 0.5, -0.05]} rayon={0.02} couleur={ROUGE} rugosite={1} />
+      </>
+    )}
     {manteau && (
       <group>
         <Arrondi taille={[0.42, 0.95, 0.16]} position={[-0.05, 1.18, 0.02]} rotation={[0, -0.25, 0]} rayon={0.06} couleur="#1e1e22" rugosite={0.9} />
@@ -92,7 +96,7 @@ const Portemanteau: React.FC<{ manteau: boolean }> = ({ manteau }) => (
 );
 
 // Téléphone : boîtier noir, écran qui éclaire (blanc bleuté)
-const Telephone3D: React.FC<{ position: Vec3; rotation?: [number, number, number]; allume: boolean }> = ({ position, rotation = [0, 0, 0], allume }) => (
+export const Telephone3D: React.FC<{ position: Vec3; rotation?: [number, number, number]; allume: boolean }> = ({ position, rotation = [0, 0, 0], allume }) => (
   <group position={position} rotation={rotation}>
     <Arrondi taille={[0.075, 0.15, 0.009]} rayon={0.008} couleur="#111114" metal={0.4} rugosite={0.3} />
     <mesh position={[0, 0, 0.0052]}>
