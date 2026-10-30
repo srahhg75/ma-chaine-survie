@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/317e462b4ba2.wav: knock/wood seed 1: 0.154 s, onset 0.012 s, peak at 0.015 s, end 0.130 s, -1.0 dBFS, -22.9 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/317e462b4ba2.wav",
+ "meta": {
+  "id": "knock/wood",
+  "seed": 1,
+  "sr": 48000,
+  "onset_s": 0.0122,
+  "peak_s": 0.0155,
+  "end_s": 0.13,
+  "dur_s": 0.1536,
+  "peak_db": -1.0,
+  "lufs_m_max": -22.85,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "knock/wood: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -122.3,
+    "ring_z": 5.4,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 1.0,
+    "t40_ms": 100.0,
+    "crest_db": 15.1,
+    "res_db": 4.5,
+    "res_hz": 1165,
+    "peak_dbfs": -1.0,
+    "live_ms": 77.75
+   },
+   "glide": {
+    "tonal_share": 0.4,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.022
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "knock",
+    "sound": "knock/wood"
+   }
+  }
+ }
+}

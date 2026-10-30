@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/6f1d34788ab1.wav: fit/land.light/finger_wood seed 0: 0.339 s, onset 0.005 s, peak at 0.009 s, end 0.222 s, -1.0 dBFS, -20.0 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/6f1d34788ab1.wav",
+ "meta": {
+  "id": "fit/land.light/finger_wood",
+  "seed": 0,
+  "sr": 48000,
+  "onset_s": 0.005,
+  "peak_s": 0.0095,
+  "end_s": 0.222,
+  "dur_s": 0.339,
+  "peak_db": -1.0,
+  "lufs_m_max": -19.96,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "fit/land.light/finger_wood: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -70.8,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -121.4,
+    "ring_z": 4.5,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 5.25,
+    "t40_ms": 200.0,
+    "crest_db": 12.6,
+    "res_db": 6.3,
+    "res_hz": 163,
+    "peak_dbfs": -1.0,
+    "live_ms": 149.0
+   },
+   "glide": {
+    "tonal_share": 1.0,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.018
+    ],
+    "count": 1,
+    "pre_swell_ms": 0.0
+   },
+   "context": {
+    "category": "fit",
+    "sound": "fit/land.light/finger_wood"
+   }
+  }
+ }
+}

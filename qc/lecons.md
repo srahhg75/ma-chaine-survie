@@ -476,3 +476,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   pose `assisCalin` seulement à ≤ 0,6 m l'un de l'autre, bras à hauteur d'épaule ; vérifier en image fixe.
 - **2026-10-30 — Personnage debout entre la caméra et celle qui parle** (Nathan devant Léa assise pendant l'aveu). Règle :
   quand un personnage s'assoit pour parler, l'autre se déplace sur le côté (hors de l'axe caméra → visage) avant sa réplique.
+- **2026-10-30 — Mot « interpolé » placé dans un blanc coupé (« Eux » de « Eux deux », voix −17,9 dB sous le fond).**
+  Vosk avait entendu « de » ; le mot existait bien (vérifié par une reconnaissance Vosk à grammaire fermée
+  `["eux deux", "deux", "[unk]"]` sur l'extrait). Règle : une erreur « voix sous le fond » sur un mot interpolé = vérifier
+  l'extrait avec une grammaire fermée, puis recaler le mot dans `mots.json` (debut/fin + fDebut/fFin) et refaire le mixage.

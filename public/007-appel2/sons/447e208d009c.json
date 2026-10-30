@@ -1,0 +1,62 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/447e208d009c.wav: riser/tension seed 1367864807: 2.800 s, onset 0.005 s, peak at 2.771 s, end 2.800 s, -1.0 dBFS, -4.7 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/007-appel2/sons/447e208d009c.wav",
+ "meta": {
+  "id": "riser/tension",
+  "seed": 1367864807,
+  "sr": 48000,
+  "onset_s": 0.005,
+  "peak_s": 2.7705,
+  "end_s": 2.8,
+  "dur_s": 2.8,
+  "peak_db": -1.0,
+  "lufs_m_max": -4.74,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [
+    {
+     "code": "truncated",
+     "msg": "tail cut at -2 dB re peak (the stop is the design)"
+    }
+   ],
+   "summary": "riser/tension: clean (tail cut at -2 dB re peak (the stop is the design))",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -103.4,
+    "ring_z": null,
+    "trunc_db": -1.9,
+    "silence_ms": 0.0,
+    "bump_db": 0.0,
+    "attack_ms": 323.75,
+    "t40_ms": 30.0,
+    "crest_db": 3.5,
+    "res_db": 7.7,
+    "res_hz": 2230,
+    "peak_dbfs": -1.0,
+    "live_ms": 2782.75
+   },
+   "glide": {
+    "tonal_share": 0.49,
+    "rise_st": 0.7,
+    "from_s": 2.216,
+    "to_s": 2.246
+   },
+   "layers": {
+    "attacks": [
+     2.783
+    ],
+    "count": 1,
+    "pre_swell_ms": 2420.0
+   },
+   "context": {
+    "category": "riser",
+    "sound": "riser/tension"
+   }
+  }
+ }
+}

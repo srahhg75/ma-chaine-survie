@@ -2783,22 +2783,22 @@
    "mot": "Eux",
    "phrase": 38,
    "style": "normal",
-   "debut": 73.17,
-   "fin": 73.417,
-   "conf": 0.0,
-   "source": "interpole",
-   "fDebut": 2195,
-   "fFin": 2203
+   "debut": 73.42,
+   "fin": 73.51,
+   "conf": 0.92,
+   "source": "vosk-grammaire",
+   "fDebut": 2203,
+   "fFin": 2205
   },
   {
    "mot": "deux.",
    "phrase": 38,
    "style": "normal",
-   "debut": 73.417,
-   "fin": 73.783,
+   "debut": 73.51,
+   "fin": 73.78,
    "conf": 0.5,
    "source": "vosk",
-   "fDebut": 2203,
+   "fDebut": 2205,
    "fFin": 2213
   },
   {
