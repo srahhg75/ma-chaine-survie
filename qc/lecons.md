@@ -484,3 +484,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   plein milieu d'un mot, et la protection mot par mot de la voix baissait le son de coupe. Règle : si une coupe tombe sur un
   mot, garder le son (même masqué : la voix passe avant) au lieu de monter son volume ; mieux, à l'écriture de la caméra,
   caler les coupes sur un début de phrase ou un blanc.
+- **2026-10-30 — RETOUR : version téléphone de la P2 impossible à lire sur le téléphone** (H.264 High niveau 5.0,
+  couleurs `yuvj420p` « plein écart » héritées du rendu). Règle : la version téléphone s'encode toujours en
+  `-vf "scale=720:1280:in_range=full:out_range=tv,format=yuv420p" -profile:v main -level 4.0 -tag:v avc1 -crf 23
+  -maxrate 1500k -bufsize 3M`, AAC 128k 44,1 kHz stéréo, `+faststart` (≈ 7 Mo) ; vérifier `ffprobe` : Main, 40, yuv420p.
