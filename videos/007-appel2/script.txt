@@ -1,0 +1,49 @@
+# « Le dernier appel » — Partie 2 « Mardi » : histoire SANS CONSEILS. Choix B gagnant en partie 1 : il fouille les affaires de Léa.
+# Voix : sans marqueur = narrateur ; [Nathan] ou [Léa] en début de phrase = réplique dite par ce personnage.
+# Accroche « Alors, t'as choisi… » (partie 1 ouvrait sur « Que feriez-vous si… »).
+@hook Vous avez choisi *B*. Il fouille.
+@hook2 *7 h 04*. Léa ne répond plus.
+@rec1 Cette nuit, son propre numéro l'a appelé.
+@rec2 Et Léa n'était pas chez sa sœur.
+@tiroir Il ouvre la commode de Léa.
+@rien Pulls. Chaussettes. Rien.
+@n_honte [Nathan] Génial. Je fouille ma copine, maintenant.
+@placard Au fond du placard, son vieux sac.
+@briquet Dedans, un briquet _rouge_.
+@initiale Une lettre gravée dessus : *H*.
+@n_fume [Nathan] Tu fumes pas, toi.
+@enveloppe Sous le briquet, une enveloppe.
+@photos *12 photos*. Toutes de Léa.
+@photos2 Léa au café. Léa au bureau.
+@photos3 Léa endormie. Dans _leur_ lit.
+@n_quoi [Nathan] Attends… Quoi ?
+@dos Au dos, quatre mots.
+@dos2 Tu es à _moi_.
+@porte La porte d'entrée s'ouvre.
+@lea Léa. Les yeux rouges. Pas dormi.
+@l_fouilles [Léa] Tu fouilles mes affaires, sérieux ?
+@n_photos [Nathan] Et toi, tu caches ça ?
+@n_mardi [Nathan] Mardi. La cigarette. Ce briquet.
+@n_qui [Nathan] C'est qui, H ?
+@silence Elle s'assoit. Elle tremble.
+@l_hugo [Léa] Hugo. Mon ex.
+@l_suit [Léa] Il me suit depuis *3 mois*.
+@l_mardi [Léa] Mardi, je l'ai vu. Pour qu'il arrête.
+@l_fume [Léa] Il m'a soufflé sa fumée au visage.
+@l_nuit [Léa] Cette nuit, j'étais au commissariat.
+@l_chuchote [Léa] Voilà pourquoi je chuchotais.
+@n_pourquoi [Nathan] Et pourquoi tu m'as rien dit ?
+@l_peur [Léa] Parce que tu l'aurais cherché, idiot.
+@n_vrai [Nathan] Ouais. Pas faux.
+@calin Il la prend dans ses bras.
+@calme Pour la première fois, tout est calme.
+@vibre Puis son téléphone vibre.
+@numero Son propre numéro. Encore.
+@photo Une photo. Eux deux. Maintenant.
+@angle Prise depuis l'immeuble d'en face.
+@fin > Les rideaux sont _ouverts_.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Il les regarde. Nathan…
+@carton2 A : il traverse la rue.
+@carton3 B : il appelle la police.
+@carton4 Répondez en commentaire !
