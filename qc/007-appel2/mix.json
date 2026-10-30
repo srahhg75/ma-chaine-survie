@@ -5,12 +5,12 @@
   {
    "mot": "l'a",
    "t": 6.33,
-   "baisse_db": 3.5
+   "baisse_db": 4.8
   },
   {
    "mot": "appelé.",
    "t": 6.51,
-   "baisse_db": 6.5
+   "baisse_db": 7.9
   },
   {
    "mot": "pas",
@@ -30,7 +30,7 @@
   {
    "mot": "maintenant.",
    "t": 14.823,
-   "baisse_db": 5.5
+   "baisse_db": 13.5
   },
   {
    "mot": "Au",
@@ -95,7 +95,12 @@
   {
    "mot": "briquet.",
    "t": 44.13,
-   "baisse_db": 3.2
+   "baisse_db": 7.8
+  },
+  {
+   "mot": "C'est",
+   "t": 44.52,
+   "baisse_db": 6.4
   },
   {
    "mot": "H ?",
@@ -247,6 +252,9 @@
   "pro_impact/deep",
   "whoosh_big/deep",
   "pro_sub_drop/low",
+  "cut_hit/punch",
+  "cut_hit/punch",
+  "cut_hit/punch",
   "impact/deep",
   "whoosh_fast/heavy",
   "cut_hit/punch",

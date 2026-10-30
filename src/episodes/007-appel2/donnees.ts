@@ -326,6 +326,10 @@ export const donnees: DonneesEpisode = {
     { a: "angle:face", id: "pro_impact/deep", gain: -5 },
     { a: "fin:les", id: "whoosh_big/deep", gain: -9 },
     { a: "fin:ouverts", id: "pro_sub_drop/low", gain: -4 },
+    // coupes sans son repérées par earshot sur la vidéo finale (instants mesurés)
+    { a: "rec1+1.7", id: "cut_hit/punch", gain: -5 },
+    { a: "n_honte+2.02", id: "cut_hit/punch", gain: -5 },
+    { a: "n_qui", id: "cut_hit/punch", gain: -5 },
     // carton à choix
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
     { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -9 },

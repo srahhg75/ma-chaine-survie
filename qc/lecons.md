@@ -480,3 +480,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   Vosk avait entendu « de » ; le mot existait bien (vérifié par une reconnaissance Vosk à grammaire fermée
   `["eux deux", "deux", "[unk]"]` sur l'extrait). Règle : une erreur « voix sous le fond » sur un mot interpolé = vérifier
   l'extrait avec une grammaire fermée, puis recaler le mot dans `mots.json` (debut/fin + fDebut/fFin) et refaire le mixage.
+- **2026-10-30 — 3 coupes « sans son » pour earshot malgré un son ajouté (P2 « Mardi »)** : les 3 instants tombaient en
+  plein milieu d'un mot, et la protection mot par mot de la voix baissait le son de coupe. Règle : si une coupe tombe sur un
+  mot, garder le son (même masqué : la voix passe avant) au lieu de monter son volume ; mieux, à l'écriture de la caméra,
+  caler les coupes sur un début de phrase ou un blanc.
