@@ -1,0 +1,45 @@
+# « Le dernier appel » — Partie 3 « En face » : histoire SANS CONSEILS. Choix B gagnant en partie 2 : il appelle la police.
+# Voix : sans marqueur = narrateur ; [Nathan] ou [Léa] en début de phrase = réplique dite par ce personnage.
+# Accroche « chiffre choc » (partie 2 ouvrait sur « Vous avez choisi… », partie 1 sur « Que feriez-vous si… »).
+@hook Il leur reste *9 minutes*.
+@hook2 Avant que la police arrive.
+@rec1 Vous avez choisi *B*. Il appelle le *17*.
+@rec2 Hugo, l'ex de Léa, la harcèle.
+@rec3 Il les photographie depuis l'immeuble d'en face.
+@appel Au bout du fil, une voix calme.
+@n_photo [Nathan] Un homme nous photographie. D'en face.
+@n_3e [Nathan] Au 3e. La fenêtre sans rideaux.
+@consigne Consigne : rester enfermés. Ne pas sortir.
+@verrou Il ferme la porte à double tour.
+@l_rideaux [Léa] Ferme ces rideaux, Nathan.
+@n_non [Nathan] Non. Je veux le voir partir.
+@vibre Son téléphone vibre. Son propre numéro.
+@sms La police ? Tu me _déçois_, Nathan.
+@l_entend [Léa] Attends… Il nous entend ?
+@n_lit [Nathan] Ou il lit mon téléphone.
+@giro *7 h 39*. Un gyrophare, en bas.
+@entrent Deux policiers entrent en face.
+@torche Au 3e, une lampe balaie la pièce.
+@attente Une minute. Deux. Trois.
+@n_alors [Nathan] Alors ? Ils l'ont eu ?
+@rappel Le policier rappelle.
+@vide L'appartement d'en face est _vide_.
+@trepied Juste un trépied. Et un vieux téléphone.
+@auto Il prenait une photo toutes les *5 minutes*.
+@seul Tout seul.
+@l_ou [Léa] Alors il est où, lui ?
+@repartent Les policiers repartent avec l'appareil.
+@ferme Nathan ferme enfin les rideaux.
+@souffle Léa respire. Pour la première fois.
+@l_bien [Léa] T'as bien fait d'appeler. Pour une fois.
+@n_sympa [Nathan] Pour une fois ? Sympa.
+@vibre2 Un téléphone vibre.
+@pas Ni le sien. Ni celui de Léa.
+@chambre Ça vient de la chambre.
+@lit De sous leur lit.
+@fin > Hugo n'était _pas_ en face.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Il est sous le lit. Nathan…
+@carton2 A : il fuit avec Léa.
+@carton3 B : il soulève la couette.
+@carton4 Répondez en commentaire !
