@@ -1,7 +1,8 @@
 # Publication — Le dernier appel · Partie 3 « En face »
 
-Fichier vidéo : `videos/008-appel3/final.mp4` (1080×1920, 30 i/s) ; copie dans « Vidéos TikTok » sur le bureau
-(`008-appel3.mp4`). Version téléphone envoyée dans la conversation.
+Fichier vidéo : `videos/008-appel3/final.mp4` (1080×1920, 30 i/s, 80,8 s, −14,0 LUFS) ; copie dans « Vidéos TikTok » sur le bureau
+(`008-appel3.mp4`). Version téléphone (5,9 Mo) envoyée dans la conversation. Couverture :
+`videos/008-appel3/couverture.jpg` (« IL EST / DESSOUS / LE DERNIER APPEL · 3 »).
 
 ## Légende
 

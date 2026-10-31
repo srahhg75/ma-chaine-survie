@@ -357,6 +357,7 @@ export const donnees: DonneesEpisode = {
     { a: "vibre2:vibre", id: "knock/wood", gain: -8 },
     { a: "vibre2:vibre+0.12", id: "knock/wood", gain: -9 },
     { a: "vibre2:vibre+0.24", id: "knock/wood", gain: -8 },
+    { a: "pas-0.3", id: "cut_hit/sub", gain: -8 }, // coupe sans son repérée par earshot sur la vidéo finale (66,0 s)
     { a: "pas:sien", id: "pro_impact/short", gain: -9 },
     { a: "pas:lea", id: "pro_impact/short", gain: -8 },
     { a: "chambre", id: "cut_hit/punch", gain: -7 },

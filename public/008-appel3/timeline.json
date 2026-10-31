@@ -349,6 +349,11 @@
    "gain": -8
   },
   {
+   "t": 66,
+   "id": "cut_hit/sub",
+   "gain": -8
+  },
+  {
    "t": 66.6,
    "id": "pro_impact/short",
    "gain": -9
