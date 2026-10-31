@@ -17,6 +17,8 @@ import { donnees as d006 } from "./006-appel/donnees";
 import { Episode as E006 } from "./006-appel/Episode";
 import { donnees as d007 } from "./007-appel2/donnees";
 import { Episode as E007 } from "./007-appel2/Episode";
+import { donnees as d008 } from "./008-appel3/donnees";
+import { Episode as E008 } from "./008-appel3/Episode";
 import { donnees as dTestDA } from "./testda/donnees";
 import { Episode as ETestDA } from "./testda/Episode";
 
@@ -31,4 +33,5 @@ export const EPISODES: { donnees: DonneesEpisode; Composant: React.FC<PropsEpiso
   { donnees: d005, Composant: E005 },
   { donnees: d006, Composant: E006 },
   { donnees: d007, Composant: E007 },
+  { donnees: d008, Composant: E008 },
 ];

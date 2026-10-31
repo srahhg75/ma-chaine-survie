@@ -121,7 +121,10 @@ def main() -> None:
             elif voulue is None:
                 # Mots mal reconnus (voix chuchotée…) : on raccourcit quand même les VRAIS silences (aucun son mesuré,
                 # donc aucun mot dedans) à 0,3 s ; sinon des blancs de 1 à 2 s restaient dans les répliques
-                for s0, s1 in silences(audio, ma["debut"], mb["fin"], seuil * 3):
+                # bornes : jamais à moins de MARGE d'un mot fiable (sinon la coupe touche sa fin à 1 ms près)
+                b0 = ma["fin"] + MARGE if ma["source"] == "vosk" else ma["debut"]
+                b1 = mb["debut"] - MARGE if mb["source"] == "vosk" else mb["fin"]
+                for s0, s1 in silences(audio, b0, b1, seuil * 3):
                     if s1 - s0 > 0.45:
                         m = (s0 + s1) / 2
                         editions.append(("couper", m - (s1 - s0 - 0.3) / 2, m + (s1 - s0 - 0.3) / 2))
@@ -153,7 +156,7 @@ def main() -> None:
         if e[0] == "couper":
             for m in mots:
                 if m["source"] == "vosk":
-                    assert not (e[1] < m["fin"] and e[2] > m["debut"]), f"coupe dans le mot {m['mot']!r}"
+                    assert not (e[1] < m["fin"] and e[2] > m["debut"]), f"coupe dans le mot {m['mot']!r} ({m['debut']:.2f}-{m['fin']:.2f}) : {e}"
 
     # Application avec fondus enchaînés
     rampe = np.linspace(0, 1, FONDU, dtype=np.float32)
