@@ -1,0 +1,262 @@
+{
+ "lufs": -14.01,
+ "true_peak_dbtp": -1.5,
+ "corrections_mot_par_mot": [
+  {
+   "mot": "9",
+   "t": 0.72,
+   "baisse_db": 1.1
+  },
+  {
+   "mot": "minutes.",
+   "t": 0.93,
+   "baisse_db": 3.3
+  },
+  {
+   "mot": "d'en",
+   "t": 9.54,
+   "baisse_db": 6.2
+  },
+  {
+   "mot": "face.",
+   "t": 9.66,
+   "baisse_db": 8.5
+  },
+  {
+   "mot": "rideaux.",
+   "t": 16.23,
+   "baisse_db": 3.1
+  },
+  {
+   "mot": "propre",
+   "t": 27.3,
+   "baisse_db": 2.3
+  },
+  {
+   "mot": "numéro.",
+   "t": 27.66,
+   "baisse_db": 3.1
+  },
+  {
+   "mot": "Tu",
+   "t": 29.31,
+   "baisse_db": 2.9
+  },
+  {
+   "mot": "me",
+   "t": 29.46,
+   "baisse_db": 2.4
+  },
+  {
+   "mot": "déçois,",
+   "t": 29.55,
+   "baisse_db": 2.6
+  },
+  {
+   "mot": "Nathan.",
+   "t": 29.94,
+   "baisse_db": 2.6
+  },
+  {
+   "mot": "Attends…",
+   "t": 30.14,
+   "baisse_db": 4.3
+  },
+  {
+   "mot": "Il",
+   "t": 30.879,
+   "baisse_db": 18.9
+  },
+  {
+   "mot": "entend ?",
+   "t": 31.513,
+   "baisse_db": 7.9
+  },
+  {
+   "mot": "Ou",
+   "t": 32.147,
+   "baisse_db": 10.3
+  },
+  {
+   "mot": "lit",
+   "t": 32.514,
+   "baisse_db": 4.1
+  },
+  {
+   "mot": "mon",
+   "t": 32.67,
+   "baisse_db": 10.6
+  },
+  {
+   "mot": "téléphone.",
+   "t": 32.82,
+   "baisse_db": 11.8
+  },
+  {
+   "mot": "face",
+   "t": 46.44,
+   "baisse_db": 2.8
+  },
+  {
+   "mot": "est",
+   "t": 46.74,
+   "baisse_db": 6.4
+  },
+  {
+   "mot": "vide.",
+   "t": 46.796,
+   "baisse_db": 6.5
+  },
+  {
+   "mot": "trépied.",
+   "t": 47.76,
+   "baisse_db": 1.1
+  },
+  {
+   "mot": "Tout",
+   "t": 52.14,
+   "baisse_db": 9.3
+  },
+  {
+   "mot": "seul.",
+   "t": 52.35,
+   "baisse_db": 2.1
+  },
+  {
+   "mot": "sien.",
+   "t": 66.6,
+   "baisse_db": 2.2
+  },
+  {
+   "mot": "de",
+   "t": 67.77,
+   "baisse_db": 2.0
+  },
+  {
+   "mot": "Léa.",
+   "t": 67.89,
+   "baisse_db": 4.9
+  },
+  {
+   "mot": "De",
+   "t": 69.87,
+   "baisse_db": 4.1
+  },
+  {
+   "mot": "lit.",
+   "t": 70.38,
+   "baisse_db": 7.3
+  },
+  {
+   "mot": "pas",
+   "t": 71.7,
+   "baisse_db": 3.3
+  },
+  {
+   "mot": "en",
+   "t": 71.88,
+   "baisse_db": 9.6
+  },
+  {
+   "mot": "face.",
+   "t": 71.97,
+   "baisse_db": 12.5
+  },
+  {
+   "mot": "Il",
+   "t": 72.96,
+   "baisse_db": 1.9
+  },
+  {
+   "mot": "lit.",
+   "t": 73.471,
+   "baisse_db": 2.2
+  }
+ ],
+ "sons": [
+  "pro_impact/short",
+  "pro_sub_drop/low",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "cut_hit/punch",
+  "tap/table",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "cut_hit/punch",
+  "pro_sub_drop/low",
+  "cut_hit/sub",
+  "swish/soft",
+  "swipe/cloth",
+  "cut_hit/punch",
+  "pro_impact/short",
+  "cut_hit/sub",
+  "swipe/cloth",
+  "cut_hit/punch",
+  "toggle/latch",
+  "toggle/latch",
+  "click/thock",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "tap/table",
+  "tap/table",
+  "tap/table",
+  "pro_sub_drop/low",
+  "pro_impact/deep",
+  "cut_hit/punch",
+  "cut_hit/sub",
+  "pro_impact/short",
+  "cut_hit/punch",
+  "whoosh_big/deep",
+  "knock/wood",
+  "toggle/latch",
+  "cut_hit/sub",
+  "fit/snap/switch_flip",
+  "swish/soft",
+  "cut_hit/sub",
+  "knock/desk",
+  "knock/desk",
+  "knock/desk",
+  "swish/soft",
+  "tap/table",
+  "tap/table",
+  "cut_hit/punch",
+  "pro_sub_drop/low",
+  "cut_hit/sub",
+  "pro_impact/deep",
+  "pro_impact/short",
+  "click/thock",
+  "click/thock",
+  "pro_sub_drop/low",
+  "cut_hit/punch",
+  "cut_hit/sub",
+  "whoosh_big/swell",
+  "cut_hit/sub",
+  "swipe/cloth",
+  "swipe/cloth",
+  "whoosh_big/swell",
+  "swipe/cloth",
+  "cut_hit/sub",
+  "cut_hit/sub",
+  "swipe/cloth",
+  "cut_hit/punch",
+  "knock/wood",
+  "knock/wood",
+  "knock/wood",
+  "pro_impact/short",
+  "pro_impact/short",
+  "cut_hit/punch",
+  "knock/wood",
+  "knock/wood",
+  "pro_sub_drop/low",
+  "pro_impact/deep",
+  "whoosh_big/deep",
+  "pro_sub_drop/low",
+  "impact/deep",
+  "whoosh_fast/heavy",
+  "cut_hit/punch",
+  "cut_hit/sub"
+ ],
+ "pas": 59,
+ "rembobinages": 0
+}

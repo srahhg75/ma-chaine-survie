@@ -93,15 +93,24 @@ const ImmeubleEnFace: React.FC<{ torche: number | null; voyant: number; flash: n
         <pointLight position={[0, 2.2, 0.6]} intensity={0.5} distance={4} color="#c4cbe0" decay={2} />
       </group>
       <Trepied voyant={voyant} flash={flash} sol={sol} />
-      {/* la lampe d'un policier : un point lumineux qui balaie la pièce */}
+      {/* la lampe d'un policier : un point lumineux qui balaie le fond de la pièce (jamais sur le trépied) */}
       {torche !== null && (
-        <pointLight position={[piece.x + 1.2 * Math.sin(torche * 2.2), sol + 1.3, piece.z + 0.4]} intensity={4} distance={3.2} color="#eef2ff" decay={2} />
+        <pointLight position={[piece.x + 1.2 * Math.sin(torche * 2.2), sol + 1.4, piece.z - 0.9]} intensity={6} distance={2.6} color="#eef2ff" decay={2} />
       )}
-      {/* porte de l'immeuble d'en face (hall allumé) */}
+      {/* porte de l'immeuble d'en face (hall allumé) et sa lumière sur le trottoir */}
       <mesh position={[ENTREE_FACE[0], ENTREE_FACE[1] + 1.1, Z_FACADE + 0.03]}>
         <planeGeometry args={[1.3, 2.2]} />
-        <meshBasicMaterial color="#8a8a8e" />
+        <meshBasicMaterial color="#b0b0b4" />
       </mesh>
+      <pointLight position={[ENTREE_FACE[0], ENTREE_FACE[1] + 2.4, Z_FACADE + 1.2]} intensity={4} distance={8} color="#e8ecf4" decay={1.6} />
+      {/* réverbère : la rue reste lisible */}
+      <Arrondi taille={[0.08, 4.2, 0.08]} position={[-3.2, -4.4, -8.6]} rayon={0.02} couleur="#2a2a2e" metal={0.5} />
+      <Arrondi taille={[0.5, 0.12, 0.22]} position={[-3.0, -2.3, -8.6]} rayon={0.04} couleur="#2a2a2e" />
+      <mesh position={[-2.95, -2.37, -8.6]}>
+        <boxGeometry args={[0.36, 0.03, 0.16]} />
+        <meshBasicMaterial color="#e8ecf4" toneMapped={false} />
+      </mesh>
+      <pointLight position={[-2.95, -2.6, -8.6]} intensity={6} distance={13} color="#d8e0f0" decay={1.5} />
       {/* la rue, en bas */}
       <mesh position={[1, -6.5, -6]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[30, 12]} />
@@ -137,7 +146,7 @@ const Trepied: React.FC<{ voyant: number; flash: number; sol: number }> = ({ voy
           <meshBasicMaterial color={ROUGE} toneMapped={false} transparent opacity={0.25 + 0.75 * voyant} />
         </mesh>
         <pointLight position={[0.02, 0.06, 0.08]} intensity={0.35 * voyant} distance={1.6} color={ROUGE} decay={2} />
-        {flash > 0 && <pointLight position={[-0.022, 0.05, 0.2]} intensity={6 * flash} distance={4} color="#ffffff" decay={2} />}
+        {flash > 0 && <pointLight position={[-0.022, 0.05, 0.2]} intensity={3 * flash} distance={3} color="#ffffff" decay={2} />}
         {flash > 0 && (
           <mesh position={[-0.022, 0.05, 0.014]}>
             <circleGeometry args={[0.02 + 0.03 * flash, 16]} />
@@ -151,10 +160,17 @@ const Trepied: React.FC<{ voyant: number; flash: number; sol: number }> = ({ voy
 
 // Voiture de police : caisse sombre, bande claire, rampe de gyrophare (rouge qui tourne)
 const Voiture: React.FC<{ position: Vec3; gyro: number; allume: boolean }> = ({ position, gyro, allume }) => (
-  <group position={position} rotation={[0, Math.PI / 2, 0]}>
-    <Arrondi taille={[1.8, 0.7, 4.3]} position={[0, 0.55, 0]} rayon={0.12} couleur="#2a2a2e" metal={0.3} rugosite={0.4} />
-    <Arrondi taille={[1.6, 0.55, 2.2]} position={[0, 1.15, -0.2]} rayon={0.12} couleur="#202024" metal={0.3} rugosite={0.3} />
-    <Arrondi taille={[1.82, 0.14, 4.32]} position={[0, 0.62, 0]} rayon={0.04} couleur="#d8d8dc" />
+  <group position={position} rotation={[0, -Math.PI / 2, 0]}>
+    <Arrondi taille={[1.8, 0.7, 4.3]} position={[0, 0.55, 0]} rayon={0.12} couleur="#8a8a90" metal={0.2} rugosite={0.5} />
+    <Arrondi taille={[1.6, 0.55, 2.2]} position={[0, 1.15, -0.2]} rayon={0.12} couleur="#18181c" metal={0.3} rugosite={0.2} />
+    {/* feux arrière (vers la caméra) */}
+    {[-0.6, 0.6].map((xx) => (
+      <mesh key={xx} position={[xx, 0.7, -2.16]}>
+        <boxGeometry args={[0.3, 0.12, 0.02]} />
+        <meshBasicMaterial color={ROUGE} toneMapped={false} />
+      </mesh>
+    ))}
+    <Arrondi taille={[1.82, 0.16, 4.32]} position={[0, 0.62, 0]} rayon={0.04} couleur="#1a1a1e" />
     {[-1.4, 1.4].map((zz) =>
       [-0.85, 0.85].map((xx) => (
         <mesh key={`${zz}${xx}`} position={[xx, 0.32, zz]} rotation={[0, 0, Math.PI / 2]}>
@@ -221,19 +237,43 @@ const LitSurPieds: React.FC<{ ecran: number }> = ({ ecran }) => (
       <Arrondi taille={[0.55, 0.12, 0.35]} position={[0.33, 0.68, -0.72]} rayon={0.05} couleur="#ece8de" rugosite={1} />
       <Arrondi taille={[1.45, 1.1, 0.06]} position={[0, 0.55, -0.98]} rayon={0.02} couleur={BOIS} />
     </group>
-    {/* Hugo sous le lit : silhouette sombre allongée, une main près du téléphone */}
-    <Arrondi taille={[1.55, 0.2, 0.42]} position={[LIT[0] - 0.05, 0.11, LIT[2] + 0.05]} rayon={0.09} couleur="#141416" rugosite={1} />
-    <Arrondi taille={[0.24, 0.2, 0.22]} position={[LIT[0] - 0.85, 0.12, LIT[2] + 0.05]} rayon={0.1} couleur="#101012" rugosite={1} />
-    <Arrondi taille={[0.16, 0.05, 0.09]} position={[SOUS_LIT[0] - 0.12, 0.03, SOUS_LIT[2] - 0.02]} rayon={0.02} couleur="#2a2020" rugosite={1} />
-    {/* son téléphone, posé par terre : l'écran s'allume en rouge quand il vibre */}
-    <group position={[SOUS_LIT[0], 0.008, SOUS_LIT[2]]} rotation={[-Math.PI / 2, 0, 0.5]}>
+    {/* Hugo sous le lit : allongé, le corps vers la tête du lit, le visage tourné vers nous (au pied du lit) */}
+    <Arrondi taille={[1.5, 0.2, 0.42]} position={[SOUS_LIT[0] - 0.95, 0.11, SOUS_LIT[2] - 0.15]} rayon={0.09} couleur="#141416" rugosite={1} />
+    <group position={SOUS_LIT}>
+      <mesh scale={[0.92, 1.12, 0.9]}>
+        <sphereGeometry args={[0.11, 24, 18]} />
+        <meshStandardMaterial color="#3a2e2a" roughness={0.95} />
+      </mesh>
+      {/* cheveux sombres */}
+      <mesh position={[-0.02, 0.03, -0.02]} scale={[1.05, 0.85, 0.95]}>
+        <sphereGeometry args={[0.116, 20, 14, 0, Math.PI * 2, 0, Math.PI / 1.7]} />
+        <meshStandardMaterial color="#121214" roughness={1} />
+      </mesh>
+      {/* les yeux grands ouverts, qui fixent la caméra */}
+      {[-0.035, 0.035].map((dx) => (
+        <group key={dx} position={[dx, 0.0, 0.092]}>
+          <mesh scale={[1, 0.45, 0.5]}>
+            <sphereGeometry args={[0.016, 14, 10]} />
+            <meshBasicMaterial color="#cfc9be" />
+          </mesh>
+          <mesh position={[0, 0, 0.007]}>
+            <sphereGeometry args={[0.0055, 10, 8]} />
+            <meshBasicMaterial color="#050506" />
+          </mesh>
+        </group>
+      ))}
+    </group>
+    {/* la main posée près du téléphone */}
+    <Arrondi taille={[0.09, 0.04, 0.16]} position={[SOUS_LIT[0] - 0.18, 0.025, SOUS_LIT[2] + 0.12]} rayon={0.02} couleur="#b8927a" rugosite={1} />
+    {/* son téléphone, posé par terre devant son visage : l'écran s'allume en rouge quand il vibre */}
+    <group position={[SOUS_LIT[0] - 0.02, 0.008, SOUS_LIT[2] + 0.2]} rotation={[-Math.PI / 2, 0, 0.5]}>
       <Arrondi taille={[0.075, 0.15, 0.009]} rayon={0.008} couleur="#111114" metal={0.4} rugosite={0.3} />
       <mesh position={[0, 0, 0.0052]}>
         <planeGeometry args={[0.066, 0.138]} />
         <meshBasicMaterial color={ecran > 0 ? ROUGE : "#0c0c0e"} toneMapped={false} transparent opacity={ecran > 0 ? 0.35 + 0.65 * ecran : 1} />
       </mesh>
     </group>
-    {ecran > 0 && <pointLight position={[SOUS_LIT[0], 0.14, SOUS_LIT[2] + 0.1]} intensity={1.6 * ecran} distance={1.8} color={ROUGE} decay={2} />}
+    {ecran > 0 && <pointLight position={[SOUS_LIT[0], 0.06, SOUS_LIT[2] + 0.3]} intensity={0.45 * ecran} distance={1.4} color={ROUGE} decay={2} />}
     {/* table de chevet */}
     <Arrondi taille={[0.45, 0.5, 0.4]} position={[-6.9, 0.25, -1.0]} rayon={0.02} couleur="#3a2e24" />
   </group>
@@ -256,10 +296,10 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
   const police = t >= a("giro") - 0.3;
   const gyro = 0.5 + 0.5 * Math.sin(t * 2 * Math.PI * 1.6);
   const depart = entre("repartent+0.3", 2.2);
-  const voiture: Vec3 = [VOITURE[0] + depart * 14, VOITURE[1], VOITURE[2]];
-  const torche = t >= a("torche:lampe") && t < a("repartent") ? t - a("torche") : null;
+  const voiture: Vec3 = [VOITURE[0] - depart * 14, VOITURE[1], VOITURE[2]];
+  const torche = t >= a("torche:lampe") && t < a("trepied") ? t - a("torche") : null;
   const voyant = Math.sin(t * 2 * Math.PI * 0.9) > 0 ? 1 : 0.15;
-  const flash = Math.max(1 - Math.min(1, Math.abs(t - a("auto:photo")) / 0.12), 1 - Math.min(1, Math.abs(t - a("auto:minutes")) / 0.12), 0);
+  const flash = Math.max(1 - Math.min(1, Math.abs(t - a("auto:photo")) / 0.08), 1 - Math.min(1, Math.abs(t - a("auto:minutes")) / 0.08), 0);
 
   // ---- rideaux ouverts, puis tirés à « ferme » ----
   const fermes = entre("ferme:rideaux", 0.8);

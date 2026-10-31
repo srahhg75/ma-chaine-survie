@@ -488,3 +488,21 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   couleurs `yuvj420p` « plein écart » héritées du rendu). Règle : la version téléphone s'encode toujours en
   `-vf "scale=720:1280:in_range=full:out_range=tv,format=yuv420p" -profile:v main -level 4.0 -tag:v avc1 -crf 23
   -maxrate 1500k -bufsize 3M`, AAC 128k 44,1 kHz stéréo, `+faststart` (≈ 7 Mo) ; vérifier `ffprobe` : Main, 40, yuv420p.
+- **2026-10-31 — `tools/couper_blancs.py` refusait la voix de la P3 (« coupe dans le mot 'rideaux.' ») : une coupe de silence
+  démarrait 0,02 ms avant la fin d'un mot fiable (arrondi).** Règle : entre un mot interpolé et un mot fiable, la recherche de
+  silence s'arrête à `MARGE` du mot fiable ; le message d'erreur donne désormais le mot, ses temps et la coupe fautive.
+- **2026-10-31 — Caméra DANS la tête de Nathan (P3, 0:08)** : l'angle « fenêtre d'en face » de la P2 était recopié alors que
+  Nathan se tenait cette fois devant la fenêtre. Règle : un cadrage repris d'un autre épisode se revérifie avec les positions
+  de CET épisode ; un plan sur l'immeuble d'en face se filme depuis la rue (caméra entre les deux immeubles), pas du salon.
+- **2026-10-31 — Voiture de police illisible (masse noire plein cadre)** : en vertical, l'image ne fait que 0,56 fois sa
+  hauteur en largeur (≈ 3,9 m de large à 9,5 m, fov 40). Règle : un objet long (voiture, lit, canapé) se filme par son petit
+  côté, ou à une distance ≥ 2,5 fois sa longueur ; dehors la nuit, une source visible (réverbère, hall allumé) éclaire la rue.
+- **2026-10-31 — Plan « sous le lit » : la caméra basse filmait le muret arasé du côté ouvert (sud) de la chambre.** Règle :
+  une caméra plus basse que le muret d'un côté ouvert (`devant`) se place À L'INTÉRIEUR de la pièce (`tools/qc.ts` le signale
+  « Caméra dans un mur ») ; un dessous de meuble à montrer = meuble sur pieds dessiné à part (le `lit` du kit est plein).
+- **2026-10-31 — Lampe du policier qui brûlait le gros plan du trépied (0:50, image blanche 2 s).** Règle : une lumière qui
+  bouge (lampe torche) s'éteint avant le gros plan de l'objet qu'elle éclairait, ou balaie le fond de la pièce, jamais à
+  moins de 1 m de l'objet filmé de près.
+- **2026-10-31 — Révélation ratée : le visage d'Hugo éclairé en plein (« boule rouge » de dessin animé, sourcils d'émoji).**
+  Règle : un visage qui fait peur reste dans le noir : peau sombre, lumière faible et basse, on ne voit que les yeux (petits,
+  sans sourcils) ; le vérifier en image fixe pleine résolution avant la boucle.

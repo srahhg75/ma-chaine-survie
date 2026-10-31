@@ -24,7 +24,7 @@ export const PLACARD: Vec3 = [-2.66, 0, -0.75];
 export const PORTEMANTEAU: Vec3 = [2.72, 0, 0.75];
 export const PASSAGE_Z = 0.85; // passage salon -> chambre (mur ouest)
 export const LIT: Vec3 = [-6.2, 0, 0.1]; // tête contre le mur ouest de la chambre
-export const SOUS_LIT: Vec3 = [-6.0, 0.12, 0.45]; // la lueur rouge sous le lit
+export const SOUS_LIT: Vec3 = [-5.5, 0.13, 0.55]; // le visage d'Hugo sous le lit, éclairé en rouge par son téléphone
 
 const N_VITRE = [0.75, 0, -1.85] as Vec3; // au téléphone devant la fenêtre
 const N_PORTE = [2.45, 0, -0.2] as Vec3; // devant la porte, le verrou à portée de main
@@ -223,16 +223,16 @@ export const donnees: DonneesEpisode = {
     // HOOK — Nathan au téléphone avec le 17, devant la fenêtre ; Léa sur le canapé
     { a: 0, ...moyen(N_VITRE, 22, { distance: 4.6, y: 580 }) },
     { a: "hook2", ...moyen(N_VITRE, 16, { distance: 4.0, y: 570 }), deplacement: 0.9 },
-    { a: "rec1", ...deux(N_VITRE, L_ASSIS, 2, { distance: 6.6, x: 660 }), coupe: true },
-    { a: "rec1:appelle", ...deux(N_VITRE, L_ASSIS, -2, { distance: 6.1, x: 660 }), deplacement: 0.8 },
+    { a: "rec1", ...deux(N_VITRE, L_ASSIS, 2, { distance: 7.6, x: 520 }), coupe: true },
+    { a: "rec1:appelle", ...deux(N_VITRE, L_ASSIS, -2, { distance: 7.1, x: 520 }), deplacement: 0.8 },
     // rappel : la photo reçue en partie 2, sur l'écran de Léa ; puis la fenêtre d'en face
     { a: "rec2", ...assis(L_ASSIS, 12, { distance: 4.4, y: 620 }), coupe: true },
-    { a: "rec3", ...plan(FENETRE_FACE, { azimut: -8, elevation: 0, distance: 9.4, fov: 46, y: 600, x: 540 }), coupe: true },
-    { a: "rec3:face", ...plan(FENETRE_FACE, { azimut: -6, elevation: 0, distance: 9.6, fov: 34, y: 600, x: 540 }), deplacement: 0.8 },
+    { a: "rec3", ...plan(FENETRE_FACE, { azimut: 0, elevation: 2, distance: 6.5, fov: 46, y: 600, x: 540 }), coupe: true },
+    { a: "rec3:face", ...plan(FENETRE_FACE, { azimut: 0, elevation: 2, distance: 6.5, fov: 32, y: 600, x: 540 }), deplacement: 0.8 },
     // l'appel
     { a: "appel", ...moyen(N_VITRE, 26, { distance: 4.4, y: 570 }), coupe: true },
     { a: "n_photo", ...moyen(N_VITRE, 18, { distance: 3.9, y: 560 }), deplacement: 0.8 },
-    { a: "n_3e", ...plan(FENETRE_FACE, { azimut: -6, elevation: 0, distance: 9.4, fov: 26, y: 600, x: 540 }), coupe: true },
+    { a: "n_3e", ...plan(FENETRE_FACE, { azimut: 2, elevation: 2, distance: 6.5, fov: 22, y: 600, x: 540 }), coupe: true },
     // la consigne : il traverse le salon jusqu'à la porte ; le verrou, double tour
     { a: "consigne", ...pied([1.7, 0, -0.9], 4, { distance: 7.0, y: 720, x: 540 }), coupe: true },
     { a: "verrou", ...objet(VERROU, -125, { distance: 1.3, elevation: 15, y: 600 }), coupe: true },
@@ -244,22 +244,22 @@ export const donnees: DonneesEpisode = {
     { a: "l_entend", ...assis(L_ASSIS, -4, { distance: 4.0, y: 630, x: 600 }), coupe: true },
     { a: "n_lit", ...moyen(N_CENTRE, 22, { distance: 3.9, y: 560 }), coupe: true },
     // 7 h 39 : la voiture de police en bas, les deux policiers entrent en face, la lampe au 3e
-    { a: "giro", ...plan([VOITURE[0], VOITURE[1] + 0.8, VOITURE[2]], { azimut: 8, elevation: 22, distance: 6.4, fov: 44, y: 700, x: 540 }), coupe: true },
-    { a: "entrent", ...plan([ENTREE_FACE[0], ENTREE_FACE[1] + 1.0, ENTREE_FACE[2] + 1.2], { azimut: 4, elevation: 14, distance: 6.2, fov: 44, y: 680, x: 540 }), deplacement: 1.0 },
+    { a: "giro", ...plan([VOITURE[0] + 0.4, VOITURE[1] + 1.2, VOITURE[2] - 1.0], { azimut: 72, elevation: 12, distance: 10.0, fov: 40, y: 780, x: 600 }), coupe: true },
+    { a: "entrent", ...plan([ENTREE_FACE[0], ENTREE_FACE[1] + 1.0, ENTREE_FACE[2] + 1.4], { azimut: 4, elevation: 16, distance: 8.6, fov: 42, y: 700, x: 540 }), coupe: true },
     { a: "torche", ...plan(FENETRE_FACE, { azimut: 0, elevation: 2, distance: 5.2, fov: 40, y: 600, x: 540 }), coupe: true },
     // l'attente, vus de dehors à travers la vitre
     { a: "attente", ...dehors(FENETRES_MILIEU, { distance: 5.8 }), coupe: true },
-    { a: "n_alors", ...dehors(N_FEN, { distance: 4.8, x: 560 }), deplacement: 0.9 },
-    { a: "rappel", ...dehors(N_FEN, { distance: 4.4, x: 560 }), deplacement: 0.8 },
+    { a: "n_alors", ...dehors(N_FEN, { distance: 4.8, x: 700 }), deplacement: 0.9 },
+    { a: "rappel", ...dehors(N_FEN, { distance: 4.4, x: 700 }), deplacement: 0.8 },
     // l'appartement d'en face : vide, le trépied, le vieux téléphone
     { a: "vide", ...plan(FENETRE_FACE, { azimut: 2, elevation: 0, distance: 3.6, fov: 40, y: 600, x: 540 }), coupe: true },
     { a: "trepied", ...plan(TREPIED, { azimut: 0, elevation: 4, distance: 1.9, fov: 34, y: 600, x: 540 }), coupe: true },
     { a: "auto", ...plan(TREPIED, { azimut: 3, elevation: 4, distance: 1.35, fov: 34, y: 600, x: 540 }), deplacement: 0.9 },
     { a: "seul", ...plan(TREPIED, { azimut: 5, elevation: 4, distance: 1.15, fov: 34, y: 600, x: 540 }), deplacement: 0.4 },
     { a: "l_ou", ...dehors(L_FEN, { distance: 4.4, x: 520 }), coupe: true },
-    { a: "repartent", ...plan([VOITURE[0] + 0.8, VOITURE[1] + 0.6, VOITURE[2]], { azimut: 10, elevation: 26, distance: 8.0, fov: 46, y: 720, x: 540 }), coupe: true },
+    { a: "repartent", ...plan([VOITURE[0] + 0.4, VOITURE[1] + 1.2, VOITURE[2] - 1.0], { azimut: 66, elevation: 12, distance: 10.0, fov: 40, y: 780, x: 600 }), coupe: true },
     // les rideaux se ferment ; le canapé, enfin calme
-    { a: "ferme", ...pied(N_FEN, -30, { distance: 5.4, y: 700, x: 560 }), coupe: true },
+    { a: "ferme", ...deux(L_FEN, N_FEN, -20, { distance: 6.4, y: 700 }), coupe: true },
     { a: "souffle", ...deux(L_ASSIS, N_ASSIS, 0, { distance: 6.8, y: 700 }), coupe: true },
     { a: "l_bien", ...assis(L_ASSIS, -10, { distance: 4.2, y: 640, x: 580 }), coupe: true },
     { a: "n_sympa", ...assis(N_ASSIS, 10, { distance: 4.2, y: 640, x: 620 }), coupe: true },
@@ -267,8 +267,8 @@ export const donnees: DonneesEpisode = {
     { a: "vibre2", ...assis(CANAPE_MILIEU, 0, { distance: 5.6, y: 690, x: 540 }), coupe: true },
     { a: "pas", ...assis(CANAPE_MILIEU, 4, { distance: 4.6, y: 680, x: 540 }), deplacement: 0.6 },
     { a: "chambre", ...plan([-5.6, 0.7, 0.4], { azimut: 12, elevation: 8, distance: 6.6, fov: 46, y: 700, x: 540 }), coupe: true },
-    { a: "lit", ...plan(SOUS_LIT, { azimut: 6, elevation: 3, distance: 3.2, fov: 40, y: 760, x: 540 }), coupe: true },
-    { a: "fin:face", ...plan(SOUS_LIT, { azimut: 4, elevation: 2, distance: 2.1, fov: 40, y: 760, x: 540 }), deplacement: 1.0 },
+    { a: "lit", ...plan(SOUS_LIT, { azimut: 0, elevation: 4, distance: 1.35, fov: 40, y: 700, x: 540 }), coupe: true },
+    { a: "fin:face", ...plan(SOUS_LIT, { azimut: 2, elevation: 3, distance: 0.95, fov: 40, y: 700, x: 540 }), deplacement: 1.0 },
   ],
   hud: [
     { type: "telephone", de: 0, a: "rec1-0.05", ecran: "appel", contact: "POLICE SECOURS", numero: "17", heure: "07:30", enCours: true },
@@ -312,8 +312,8 @@ export const donnees: DonneesEpisode = {
     { a: "vibre:vibre+0.24", id: "tap/table", gain: -7 },
     { a: "vibre:numero", id: "pro_sub_drop/low", gain: -7 },
     { a: "sms:decois", id: "pro_impact/deep", gain: -6 },
-    { a: "l_entend", id: "cut_hit/punch", gain: -10 },
-    { a: "l_entend:entend", id: "riser/tension", gain: -13 },
+    { a: "l_entend", id: "cut_hit/punch", gain: -13 },
+    
     { a: "n_lit", id: "cut_hit/sub", gain: -10 },
     { a: "n_lit:telephone", id: "pro_impact/short", gain: -9 },
     // la police
@@ -340,7 +340,7 @@ export const donnees: DonneesEpisode = {
     { a: "auto:photo", id: "click/thock", gain: -7 },
     { a: "auto:minutes", id: "click/thock", gain: -8 },
     { a: "seul", id: "pro_sub_drop/low", gain: -5 },
-    { a: "l_ou", id: "cut_hit/punch", gain: -10 },
+    { a: "l_ou-0.1", id: "cut_hit/punch", gain: -14 },
     { a: "repartent", id: "cut_hit/sub", gain: -10 },
     { a: "repartent:repartent", id: "whoosh_big/swell", gain: -11 },
     // les rideaux, le calme
@@ -368,15 +368,15 @@ export const donnees: DonneesEpisode = {
     { a: "fin:face", id: "pro_sub_drop/low", gain: -4 },
     // carton à choix
     { a: "fin+0.7", id: "impact/deep", gain: -8 },
-    { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -9 },
-    { a: "fin+1.23", id: "cut_hit/punch", gain: -6 },
-    { a: "fin+1.4", id: "cut_hit/sub", gain: -5 },
+    { a: "fin+0.9", id: "whoosh_fast/heavy", gain: -12 },
+    { a: "fin+1.23", id: "cut_hit/punch", gain: -10 },
+    { a: "fin+1.4", id: "cut_hit/sub", gain: -9 },
   ],
   ambiances: [
     { type: "drone", de: 0, a: "fin+8.4", niveau: -1 },
     { type: "ville", de: 0, a: "ferme+0.6", niveau: -9, fondu: 1.5 },
     { type: "ville", de: "ferme+0.6", a: "fin+8.4", niveau: -15, fondu: 1.0 },
-    { type: "coeur", de: "sms", a: "giro", niveau: -2, bpm: 100 },
+    { type: "coeur", de: "sms", a: "giro", niveau: -5, bpm: 100 },
     { type: "coeur", de: "vibre2", a: "fin+8.4", niveau: -1, bpm: 116 },
   ],
   sujets: [

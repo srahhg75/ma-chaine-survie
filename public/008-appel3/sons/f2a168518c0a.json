@@ -1,0 +1,57 @@
+{
+ "summary": "wrote C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/008-appel3/sons/f2a168518c0a.wav: whoosh_big/swell seed 696394185: 1.355 s, onset 0.059 s, peak at 0.436 s, end 1.141 s, -1.0 dBFS, -14.4 LUFS momentary max; checks: clean",
+ "file": "C:/Users/mengx/Desktop/Studio/ma-chaine-survie/public/008-appel3/sons/f2a168518c0a.wav",
+ "meta": {
+  "id": "whoosh_big/swell",
+  "seed": 696394185,
+  "sr": 48000,
+  "onset_s": 0.0592,
+  "peak_s": 0.4365,
+  "end_s": 1.141,
+  "dur_s": 1.3547,
+  "peak_db": -1.0,
+  "lufs_m_max": -14.41,
+  "edits": {},
+  "checks": {
+   "ok": true,
+   "warnings": [],
+   "notes": [],
+   "summary": "whoosh_big/swell: clean",
+   "measures": {
+    "clicks": 0,
+    "edge_db": -240.0,
+    "clip_runs": 0,
+    "overs": 0,
+    "dc_db": -121.8,
+    "ring_z": 3.7,
+    "trunc_db": null,
+    "silence_ms": 0.0,
+    "bump_db": 2.7,
+    "attack_ms": 17.75,
+    "t40_ms": 500.0,
+    "crest_db": 10.0,
+    "res_db": 3.9,
+    "res_hz": 1425,
+    "peak_dbfs": -1.0,
+    "live_ms": 749.5
+   },
+   "glide": {
+    "tonal_share": 0.68,
+    "rise_st": 0.0,
+    "from_s": null,
+    "to_s": null
+   },
+   "layers": {
+    "attacks": [
+     0.432
+    ],
+    "count": 1,
+    "pre_swell_ms": 285.0
+   },
+   "context": {
+    "category": "whoosh_big",
+    "sound": "whoosh_big/swell"
+   }
+  }
+ }
+}

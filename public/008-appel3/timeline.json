@@ -151,11 +151,6 @@
   {
    "t": 30.14,
    "id": "cut_hit/punch",
-   "gain": -10
-  },
-  {
-   "t": 31.513,
-   "id": "riser/tension",
    "gain": -13
   },
   {
@@ -279,9 +274,9 @@
    "gain": -5
   },
   {
-   "t": 52.597,
+   "t": 52.8,
    "id": "cut_hit/punch",
-   "gain": -10
+   "gain": -14
   },
   {
    "t": 54.36,
@@ -406,17 +401,17 @@
   {
    "t": 73.26,
    "id": "whoosh_fast/heavy",
-   "gain": -9
+   "gain": -12
   },
   {
    "t": 73.59,
    "id": "cut_hit/punch",
-   "gain": -6
+   "gain": -10
   },
   {
    "t": 73.76,
    "id": "cut_hit/sub",
-   "gain": -5
+   "gain": -9
   }
  ],
  "ambiances": [
@@ -445,7 +440,7 @@
    "type": "coeur",
    "de": 28.38,
    "a": 33.6,
-   "niveau": -2,
+   "niveau": -5,
    "fondu": 1,
    "bpm": 100
   },
