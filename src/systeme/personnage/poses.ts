@@ -14,7 +14,7 @@ export type Pose = {
   sourcils: number; // -1 inquiet, 0 neutre, +1 décidé
 };
 
-export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "boutonCote" | "lampe" | "froid" | "inquiet" | "assis" | "telephone" | "frappe" | "affale" | "bras" | "assisTelephone" | "assisMain" | "assisCalin" | "assisTriste";
+export type NomPose = "debout" | "marche" | "accroupi" | "mainTendue" | "boutonCote" | "lampe" | "froid" | "inquiet" | "assis" | "telephone" | "frappe" | "affale" | "bras" | "assisTelephone" | "assisMain" | "assisCalin" | "assisTriste" | "chut";
 
 const DEBOUT: Pose = {
   tronc: [2, 0, 0],
@@ -55,6 +55,8 @@ export const POSES: Record<Exclude<NomPose, "marche">, Pose> = {
   assisCalin: { ...DEBOUT, tronc: [8, 12, 12], hancheG: [88, 6], genouG: 90, hancheD: [88, 6], genouD: 90, tete: [6, 22], epauleG: [28, 82], coudeG: 35, epauleD: [45, -10], coudeD: 80, sourcils: -0.3 },
   // assis, tête basse, mains jointes sur les genoux (aveu, larmes)
   assisTriste: { ...DEBOUT, tronc: [16, 0, 0], hancheG: [88, 6], genouG: 90, hancheD: [88, 6], genouD: 90, tete: [20, 0], epauleG: [38, -6], coudeG: 60, epauleD: [38, -6], coudeD: 60, sourcils: -0.8 },
+  // index levé devant la bouche (« chut »)
+  chut: { ...DEBOUT, tete: [6, 0], epauleD: [42, -20], coudeD: 150, epauleG: [6, 8], coudeG: 18, sourcils: -0.6 },
 };
 
 // Cycle de marche : phase 0..1 = 2 pas (≈ 0,6 m pour un personnage de taille 1)

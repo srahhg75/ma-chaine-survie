@@ -20,7 +20,7 @@ const BOIS = "#5a4636";
 const Z_FACADE = -11; // face avant de l'immeuble d'en face
 
 // Façade d'en face en 4 morceaux autour de la fenêtre percée ; pièce vide derrière ; porte d'entrée en bas
-const ImmeubleEnFace: React.FC<{ torche: number | null; voyant: number; flash: number }> = ({ torche, voyant, flash }) => {
+export const ImmeubleEnFace: React.FC<{ torche: number | null; voyant: number; flash: number; trepied?: boolean }> = ({ torche, voyant, flash, trepied = true }) => {
   const fenetres = useMemo(() => {
     const f: { x: number; y: number; allumee: boolean }[] = [];
     for (let i = -5; i <= 6; i++)
@@ -92,7 +92,7 @@ const ImmeubleEnFace: React.FC<{ torche: number | null; voyant: number; flash: n
         {/* lueur faible du jour : la pièce reste lisible */}
         <pointLight position={[0, 2.2, 0.6]} intensity={0.5} distance={4} color="#c4cbe0" decay={2} />
       </group>
-      <Trepied voyant={voyant} flash={flash} sol={sol} />
+      {trepied && <Trepied voyant={voyant} flash={flash} sol={sol} />}
       {/* la lampe d'un policier : un point lumineux qui balaie le fond de la pièce (jamais sur le trépied) */}
       {torche !== null && (
         <pointLight position={[piece.x + 1.2 * Math.sin(torche * 2.2), sol + 1.4, piece.z - 0.9]} intensity={6} distance={2.6} color="#eef2ff" decay={2} />
@@ -159,7 +159,7 @@ const Trepied: React.FC<{ voyant: number; flash: number; sol: number }> = ({ voy
 };
 
 // Voiture de police : caisse sombre, bande claire, rampe de gyrophare (rouge qui tourne)
-const Voiture: React.FC<{ position: Vec3; gyro: number; allume: boolean }> = ({ position, gyro, allume }) => (
+export const Voiture: React.FC<{ position: Vec3; gyro: number; allume: boolean }> = ({ position, gyro, allume }) => (
   <group position={position} rotation={[0, -Math.PI / 2, 0]}>
     <Arrondi taille={[1.8, 0.7, 4.3]} position={[0, 0.55, 0]} rayon={0.12} couleur="#8a8a90" metal={0.2} rugosite={0.5} />
     <Arrondi taille={[1.6, 0.55, 2.2]} position={[0, 1.15, -0.2]} rayon={0.12} couleur="#18181c" metal={0.3} rugosite={0.2} />
@@ -214,7 +214,7 @@ const PorteEntree: React.FC<{ tour: number }> = ({ tour }) => (
 );
 
 // Placard à portes coulissantes, fermé (repris de la partie 2)
-const Placard: React.FC = () => (
+export const Placard: React.FC = () => (
   <group position={PLACARD}>
     <Arrondi taille={[0.55, 2.0, 1.0]} position={[0, 1.0, 0]} rayon={0.01} couleur={BOIS} />
     <Arrondi taille={[0.03, 1.96, 0.5]} position={[0.26, 1.0, -0.25]} rayon={0.006} couleur="#9a8a78" />
@@ -224,7 +224,7 @@ const Placard: React.FC = () => (
 );
 
 // Lit sur pieds (on voit dessous), tête contre le mur ouest ; dessous : Hugo, allongé dans le noir, et son téléphone
-const LitSurPieds: React.FC<{ ecran: number }> = ({ ecran }) => (
+export const LitSurPieds: React.FC<{ ecran: number; hugo?: boolean }> = ({ ecran, hugo = true }) => (
   <group>
     <group position={LIT} rotation={[0, Math.PI / 2, 0]}>
       {[-0.66, 0.66].map((xx) =>
@@ -237,6 +237,7 @@ const LitSurPieds: React.FC<{ ecran: number }> = ({ ecran }) => (
       <Arrondi taille={[0.55, 0.12, 0.35]} position={[0.33, 0.68, -0.72]} rayon={0.05} couleur="#ece8de" rugosite={1} />
       <Arrondi taille={[1.45, 1.1, 0.06]} position={[0, 0.55, -0.98]} rayon={0.02} couleur={BOIS} />
     </group>
+    {hugo && (<>
     {/* Hugo sous le lit : allongé, le corps vers la tête du lit, le visage tourné vers nous (au pied du lit) */}
     <Arrondi taille={[1.5, 0.2, 0.42]} position={[SOUS_LIT[0] - 0.95, 0.11, SOUS_LIT[2] - 0.15]} rayon={0.09} couleur="#141416" rugosite={1} />
     <group position={SOUS_LIT}>
@@ -274,6 +275,7 @@ const LitSurPieds: React.FC<{ ecran: number }> = ({ ecran }) => (
       </mesh>
     </group>
     {ecran > 0 && <pointLight position={[SOUS_LIT[0], 0.06, SOUS_LIT[2] + 0.3]} intensity={0.45 * ecran} distance={1.4} color={ROUGE} decay={2} />}
+    </>)}
     {/* table de chevet */}
     <Arrondi taille={[0.45, 0.5, 0.4]} position={[-6.9, 0.25, -1.0]} rayon={0.02} couleur="#3a2e24" />
   </group>
