@@ -42,43 +42,47 @@ B : jure qu'il ne la connaît pas.
 Répondez en commentaire !
 ```
 
-### Clara (`clara.mp3`) — Eleven v3
+### Clara (`clara.mp3`) — Eleven Multilingual v2
 
 ```
-[firm, controlled anger] Excuse-toi auprès de mon fils.
-[calm, cold] Votre fils doit des excuses.
-[shocked, voice breaking] Adrien ? C'est qui, cette femme ?
+Excuse-toi auprès de mon fils.
+Votre fils doit des excuses.
+Adrien ? C'est qui, cette femme ?
 ```
 
-### Victoria (`victoria.mp3`) — Eleven v3
+### Victoria (`victoria.mp3`) — Eleven Multilingual v2
 
 ```
-[arrogant, sharp] On ne parle pas à mon fils.
-[mocking, contemptuous] Regarde-toi. Un pull à vingt euros.
-[cold, dismissive] Tu n'as rien à faire ici.
-[smug, slow] Tu sais qui est mon mari ?
-[proud, smug] L'homme le plus puissant du pays.
-[fake crying, whiny] Chéri, une folle agresse Enzo.
-[suspicious, sweet] Tu la connais, chéri ?
+On ne parle pas à mon fils.
+Regarde-toi. Un pull à vingt euros.
+Tu n'as rien à faire ici.
+Tu sais qui est mon mari ?
+L'homme le plus puissant du pays.
+Chéri, une folle agresse Enzo.
+Tu la connais, chéri ?
 ```
 
-### Noé (`noe.mp3`) — voix d'enfant, Eleven v3
+### Noé (`noe.mp3`) — voix d'enfant, Eleven Multilingual v2
 
 ```
-[excited child] Papa va être trop content !
-[small, scared child voice] Maman… C'est la voix de papa ?
+Papa va être trop content !
+Maman… C'est la voix de papa ?
 ```
 
-### Enzo (`enzo.mp3`) — voix d'enfant, Eleven v3
+### Enzo (`enzo.mp3`) — voix d'enfant, Eleven Multilingual v2
 
 ```
-[bratty child, mocking] Fais attention, le pauvre !
+Fais attention, le pauvre !
 ```
 
-### Adrien (`adrien.mp3`) — Eleven v3
+### Adrien (`adrien.mp3`) — Eleven Multilingual v2
 
 ```
-[deep, cold, menacing, on the phone] J'arrive. Elle va le regretter.
+J'arrive. Elle va le regretter.
 ```
+
+Personnages en **Eleven Multilingual v2** (demande du 01/11) : v2 ne comprend pas les balises « [en anglais] » (il les
+lirait à voix haute) ; le ton se règle avec les curseurs : Stabilité 35-45 %, Similarité 75 %, Style 30-45 %,
+Speaker boost activé. Une ligne = une réplique, séparées par un retour à la ligne.
 
 Dépôt : les 6 MP3 dans `videos/010-heritiere/` (noms sans accent).

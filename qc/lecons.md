@@ -506,3 +506,7 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
 - **2026-10-31 — Révélation ratée : le visage d'Hugo éclairé en plein (« boule rouge » de dessin animé, sourcils d'émoji).**
   Règle : un visage qui fait peur reste dans le noir : peau sombre, lumière faible et basse, on ne voit que les yeux (petits,
   sans sourcils) ; le vérifier en image fixe pleine résolution avant la boucle.
+- **2026-11-01 — DEMANDE (« L'héritière cachée ») : voix des personnages en Eleven Multilingual v2, pas v3.** v2 ne
+  comprend pas les balises d'émotion « [angry] » : il les lirait à voix haute. Règle : pour une voix en v2, le texte à
+  coller n'a AUCUNE balise entre crochets ; l'émotion passe par la ponctuation (« … », « ! », « ? ») et les réglages
+  donnés dans le message (Stabilité, Similarité, Style). Avant de livrer, vérifier qu'aucune ligne ne commence par « [ ».
