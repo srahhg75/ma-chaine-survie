@@ -529,3 +529,8 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   sur un mot interpolé placé dans un silence).** Vérifié par Vosk en grammaire fermée sur le fichier BRUT : la réplique
   s'arrête à « protéger ». Règle : un petit mot de fin (« hein », « quoi », « hé ») que la voix avale se retire du
   `script.txt` (les sous-titres suivent la voix), puis relancer `couper_blancs.py` ; le signaler à la personne.
+- **2026-11-01 — Deux sessions dans le MÊME dossier : mon `git add -A src` a enregistré les fichiers en cours de l'autre
+  session (010-heritiere), et son fichier inachevé `tools/qc2d.ts` a bloqué mon rendu final (typecheck).** Règle : avant
+  chaque commit, `git status --short` et n'ajouter QUE les chemins de son épisode (`src/episodes/NNN-nom`, fichiers du
+  moteur modifiés nommément) ; jamais `git add -A` ; si un fichier d'une autre session casse le typecheck, prévenir cette
+  session et la personne, sans toucher au fichier.
