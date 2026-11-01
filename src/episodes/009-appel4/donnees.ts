@@ -477,7 +477,7 @@ export const donnees: DonneesEpisode = {
     { a: "doigt:levres", id: "swipe/cloth", gain: -10 },
     { a: "main", id: "cut_hit/sub", gain: -12 },
     { a: "main:main", id: "swipe/cloth", gain: -10 },
-    { a: "l_quoi", id: "cut_hit/sub", gain: -13 },
+    { a: "l_quoi-0.03", id: "cut_hit/punch", gain: -9 }, // coupe sans son repérée par earshot (13,3 s)
     { a: "ecran", id: "cut_hit/sub", gain: -11 },
     { a: "ecran:ecran", id: "tap/table", gain: -10 },
     { a: "ecran2", id: "cut_hit/punch", gain: -10 },
@@ -487,7 +487,7 @@ export const donnees: DonneesEpisode = {
     { a: "entree:bruit", id: "swipe/cloth", gain: -11 },
     { a: "crochet", id: "cut_hit/punch", gain: -9 },
     { a: "crochet:crochet", id: "pro_sub_drop/low", gain: -7 },
-    { a: "verrou", id: "cut_hit/sub", gain: -10 },
+    { a: "verrou", id: "cut_hit/punch", gain: -8 },
     { a: "verrou:porte", id: "toggle/latch", gain: -6 },
     { a: "verrou:porte+0.2", id: "toggle/latch", gain: -7 },
     { a: "verrou:tour", id: "pro_impact/short", gain: -8 },
