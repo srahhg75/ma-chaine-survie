@@ -224,7 +224,7 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
           <div style={{ background: JAUNE, color: "#141414", fontWeight: 900, fontSize: 46, padding: "10px 30px", borderRadius: 12, opacity: apparait(0) }}>{e.titre.toUpperCase()}</div>
           {e.question && <div style={{ fontWeight: 900, fontSize: 78, lineHeight: 1.04, textTransform: "uppercase", textShadow: "0 8px 30px rgba(0,0,0,0.9)", opacity: apparait(1) }}>{e.question}</div>}
           <div style={{ fontWeight: 900, fontSize: 46, color: JAUNE, textShadow: "0 4px 16px rgba(0,0,0,0.9)", opacity: apparait(2) }}>RÉPONDS EN COMMENTAIRE ↓</div>
-          <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>Fiction · conseils vérifiés le {e.verifie}</div>
+          <div style={{ fontWeight: 700, fontSize: 26, opacity: 0.8 * apparait(2) }}>{e.verifie ? `Fiction · conseils vérifiés le ${e.verifie}` : "Fiction"}</div>
         </div>
       </>
     );
@@ -237,7 +237,7 @@ export const Carton: React.FC<Props<"carton">> = ({ e, r, f }) => {
         </div>
         <div style={{ fontWeight: 900, fontSize: 76, lineHeight: 1.02, textTransform: "uppercase", textShadow: "0 6px 24px rgba(0,0,0,0.8)" }}>{e.titre}</div>
         <div style={{ fontWeight: 800, fontSize: 34, marginTop: 10, padding: "14px 26px", border: "2px solid rgba(255,255,255,0.6)", borderRadius: 999 }}>ABONNE-TOI POUR LA SUITE</div>
-        <div style={{ fontWeight: 600, fontSize: 22, opacity: 0.75 }}>Fiction · conseils vérifiés le {e.verifie}</div>
+        <div style={{ fontWeight: 600, fontSize: 22, opacity: 0.75 }}>{e.verifie ? `Fiction · conseils vérifiés le ${e.verifie}` : "Fiction"}</div>
       </div>
     );
   }

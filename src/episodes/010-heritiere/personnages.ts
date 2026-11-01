@@ -1,4 +1,4 @@
-import { Apparence2D } from "../../systeme/dessin2d/Personnage2D";
+import { Apparence2D } from "../../systeme/dessin2d/types2d";
 
 // Série « L'héritière cachée » : personnages dessinés en 2D (style webtoon). Mêmes couleurs dans toute la série.
 const PEAU = { peau: "#f6dccb", ombrePeau: "#e3b5a0" };
@@ -15,6 +15,7 @@ export const CLARA: Apparence2D = {
   bas: "#6f8db3",
   ombreBas: "#55708f",
   chaussures: "#f4f4f4",
+  bague: "#e2b04a",
 };
 
 // Noé, 6 ans, son fils
@@ -85,3 +86,9 @@ export const ADRIEN: Apparence2D = {
   chemise: "#f3f3f5",
   cravate: "#7a1d2e",
 };
+
+// Figurants du hall (employés de la tour), un peu effacés
+export const EMPLOYE: Apparence2D = { ...ADRIEN, cheveux: "#5a4636", ombreCheveux: "#3d2f24", haut: "#55606e", ombreHaut: "#424b57", bas: "#55606e", ombreBas: "#424b57", cravate: "#2f3d5c" };
+export const EMPLOYEE: Apparence2D = { ...CLARA, bague: undefined, cheveux: "#1f1b22", ombreCheveux: "#0f0d12", coiffure: "carre", haut: "#2f3440", ombreHaut: "#23272f", bas: "#2f3440", ombreBas: "#23272f", robe: true, chaussures: "#121216" };
+
+export const APPARENCES = { clara: CLARA, noe: NOE, victoria: VICTORIA, enzo: ENZO, adrien: ADRIEN, employe: EMPLOYE, employee: EMPLOYEE };

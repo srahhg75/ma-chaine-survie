@@ -510,3 +510,22 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   comprend pas les balises d'émotion « [angry] » : il les lirait à voix haute. Règle : pour une voix en v2, le texte à
   coller n'a AUCUNE balise entre crochets ; l'émotion passe par la ponctuation (« … », « ! », « ? ») et les réglages
   donnés dans le message (Stabilité, Similarité, Style). Avant de livrer, vérifier qu'aucune ligne ne commence par « [ ».
+- **2026-11-01 — « Le dernier appel » P4, 1re revue : plan noir des voitures de police (caméra à 13,5 m, derrière la façade
+  d'en face).** Règle : dans une rue (≈ 8 m entre deux façades), la caméra reste ENTRE les façades : azimut le long de la
+  rue (≈ 90-110° ou −90°) ou plongée haute ; calculer la position caméra (`cible + distance × (sin az, cos az)`) avant de
+  rendre ; une rue de nuit a sa propre lumière (réverbère côté caméra, lueur du gyrophare), sinon les visages sont à
+  contre-jour devant le hall éclairé.
+- **2026-11-01 — RÉCIDIVE caméra dans un personnage (P4, gros plan du crochet à clés : la tête de Nathan remplissait
+  l'écran).** Règle (rappel du 24/10) : pour un gros plan d'objet au mur, vérifier où se tient chaque personnage À CET
+  INSTANT et choisir l'azimut du côté libre.
+- **2026-11-01 — Gros plan du téléphone « sur la table basse » qui montrait une chaussure** : le téléphone était posé à
+  0,30 m, sous le plateau (table du kit 0,76 m × échelle 0,55 = 0,42 m). Règle : la hauteur d'un objet posé se calcule
+  depuis `TAILLES` de `kit3d/decor.ts` × `echelle` ; un objet sombre sur meuble sombre reçoit un support clair (magazine).
+- **2026-11-01 — Course dans l'escalier refusée (« plus de 2,2 m/s »).** Un étage de la cage H+72 ≈ 6,4 m de chemin.
+  Règle : prévoir ≤ 2,1 m/s (≈ 3 s par étage) ; pour « dévaler 3 étages » en 4,6 s, montrer un étage et demi et couper.
+- **2026-11-01 — Geste « chut » : la main restait au menton, sur le côté.** Pose `chut` (`poses.ts`) : épaule [42, −20],
+  coude 150 (le bras croise vers le centre du visage) ; vérifier en image fixe pleine résolution.
+- **2026-11-01 — « hein » écrit dans le script mais pas dit par la voix ElevenLabs (P4, erreur « voix −3 dB sous le fond »
+  sur un mot interpolé placé dans un silence).** Vérifié par Vosk en grammaire fermée sur le fichier BRUT : la réplique
+  s'arrête à « protéger ». Règle : un petit mot de fin (« hein », « quoi », « hé ») que la voix avale se retire du
+  `script.txt` (les sous-titres suivent la voix), puis relancer `couper_blancs.py` ; le signaler à la personne.

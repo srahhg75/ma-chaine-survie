@@ -9,35 +9,8 @@ import React from "react";
 
 export const TRAIT = "#2a1e2c";
 
-export type Coiffure = "longue" | "carre" | "courte" | "enfant";
-export type Expression = "neutre" | "sourire" | "fache" | "mepris" | "triste" | "choque";
-export type Point = [number, number];
-// Bras : une pose connue ou des points explicites (coude, poignet), en repère local
-export type PoseBras = "bas" | "hanche" | "croise" | "telephone" | "tend" | { coude: Point; poignet: Point };
-
-export type Apparence2D = {
-  peau: string;
-  ombrePeau: string;
-  cheveux: string;
-  ombreCheveux: string;
-  coiffure: Coiffure;
-  yeux: string;
-  homme?: boolean;
-  enfant?: boolean;
-  levres?: string;
-  haut: string;
-  ombreHaut: string;
-  bas: string;
-  ombreBas: string;
-  robe?: boolean; // le bas est une jupe jusqu'aux genoux (jambes nues)
-  brasNus?: boolean;
-  chaussures: string;
-  chemise?: string; // col de chemise visible (costume)
-  cravate?: string;
-  fourrure?: string; // étole sur les épaules
-  bijoux?: string; // boucles d'oreilles + collier
-  capuche?: boolean;
-};
+import type { Apparence2D, Expression, Point, PoseBras } from "./types2d";
+export type { Apparence2D, Coiffure, Expression, Point, PoseBras } from "./types2d";
 
 type Squelette = { sx: number; sy: number; wx: number; wy: number; hx: number; hy: number; ky: number; ay: number; pied: number; jambe: number };
 
@@ -74,6 +47,8 @@ const brasPoints = (pose: PoseBras, cote: -1 | 1, k: Squelette): { epaule: Point
       return { epaule, coude: [cote * (sx - 4), sy + 150 * enf], poignet: [-cote * (sx - 24), sy + 112 * enf] };
     case "telephone":
       return { epaule, coude: [cote * (sx + 22), sy + 95 * enf], poignet: [cote * 50, 128] };
+    case "porte":
+      return { epaule, coude: [cote * (sx + 4), sy + 140 * enf], poignet: [cote * 16, wy - 30] };
     case "tend":
       return { epaule, coude: [cote * (sx + 18), sy + 140 * enf], poignet: [cote * (sx + 60), sy + 300 * enf] };
     default:
@@ -99,6 +74,7 @@ const Bras: React.FC<{ a: Apparence2D; k: Squelette; pose: PoseBras; cote: -1 | 
         <circle cx={poignet[0] * 0.92 + coude[0] * 0.08} cy={poignet[1] * 0.92 + coude[1] * 0.08} r={(l - 4) / 2 + 1} fill={a.ombreHaut} />
       )}
       <circle cx={poignet[0]} cy={poignet[1] + 6} r={main} fill={a.peau} stroke={TRAIT} strokeWidth={4} />
+      {cote === 1 && a.bague && <rect x={poignet[0] - main * 0.9} y={poignet[1] + 2} width={main * 1.8} height={5} rx={2} fill={a.bague} stroke={TRAIT} strokeWidth={1.5} />}
       {pose === "telephone" && <rect x={poignet[0] - 9 + cote * 4} y={poignet[1] - 44} width={18} height={40} rx={4} fill="#1c1c22" stroke={TRAIT} strokeWidth={3} />}
     </g>
   );
@@ -240,9 +216,11 @@ export type Props2D = {
   brasG?: PoseBras; // bras à gauche de l'écran
   brasD?: PoseBras;
   miroir?: boolean;
+  yeuxFermes?: boolean; // clignement
+  pale?: boolean; // « il devient blanc » : visage bleuté + traits de choc sur le front
 };
 
-export const Personnage2D: React.FC<Props2D> = ({ a, x, y, echelle, id, expr = "neutre", bouche = 0, regard = 0, brasG = "bas", brasD = "bas", miroir }) => {
+export const Personnage2D: React.FC<Props2D> = ({ a, x, y, echelle, id, expr = "neutre", bouche = 0, regard = 0, brasG = "bas", brasD = "bas", miroir, yeuxFermes, pale }) => {
   const k = squelette(a);
   const { sx, sy, wx, wy, hx, hy, ky, ay, pied, jambe } = k;
   const dx = regard * 9; // les traits du visage glissent du côté du regard (trois-quarts)
@@ -337,10 +315,11 @@ export const Personnage2D: React.FC<Props2D> = ({ a, x, y, echelle, id, expr = "
         <clipPath id={`${id}-visage`}>
           <path d={visage(a)} />
         </clipPath>
-        <path d={visage(a)} fill={a.peau} stroke={TRAIT} strokeWidth={4} strokeLinejoin="round" />
+        <path d={visage(a)} fill={pale ? "#e4ecf3" : a.peau} stroke={TRAIT} strokeWidth={4} strokeLinejoin="round" />
         <g clipPath={`url(#${id}-visage)`}>
           <path d="M 30 0 C 50 60, 52 120, 20 190 L 100 190 L 100 0 Z" fill={a.ombrePeau} opacity={0.55} />
           <rect x={-60} y={0} width={120} height={52} fill={a.ombrePeau} opacity={0.6} />
+          {pale && [-24, -12, 0, 12, 24].map((x) => <line key={x} x1={x + dx} y1={20} x2={x + dx} y2={74} stroke="#5d7fb8" strokeWidth={3} opacity={0.8} />)}
         </g>
         {a.bijoux && (
           <>
@@ -357,7 +336,11 @@ export const Personnage2D: React.FC<Props2D> = ({ a, x, y, echelle, id, expr = "
         )}
         {([-1, 1] as const).map((c) => (
           <g key={c} transform={`translate(${c * ecart + dx} 0) scale(${loin(c)} 1) translate(${-(c * ecart + dx)} 0)`}>
-            <Oeil cx={c * ecart + dx} cy={oeilY} cote={c} l={lo} h={ho} a={a} expr={expr} id={id} />
+            {yeuxFermes ? (
+              <path d={`M ${c * ecart + dx - lo * 0.9} ${oeilY + 2} Q ${c * ecart + dx} ${oeilY + 8} ${c * ecart + dx + lo} ${oeilY}`} fill="none" stroke={TRAIT} strokeWidth={a.homme ? 4.5 : 5.5} strokeLinecap="round" />
+            ) : (
+              <Oeil cx={c * ecart + dx} cy={oeilY} cote={c} l={lo} h={ho} a={a} expr={expr} id={id} />
+            )}
             <Sourcil cx={c * ecart + dx} cy={oeilY - (a.homme ? 24 : 27)} cote={c} expr={expr} homme={a.homme} />
           </g>
         ))}

@@ -39,7 +39,7 @@ export const RUE_Y = -6.5;
 export const Z_FACADE_NOUS = -2.55;
 export const HALL: Vec3 = [-1.0, RUE_Y, Z_FACADE_NOUS];
 export const VOITURE1: Vec3 = [-4.2, RUE_Y, -6.3];
-export const VOITURE2: Vec3 = [-9.8, RUE_Y, -7.6];
+export const VOITURE2: Vec3 = [3.5, RUE_Y, -8.7];
 export const CAPOT: Vec3 = [VOITURE1[0] - 1.5, RUE_Y + 0.92, VOITURE1[2]]; // le double des clés et le téléphone d'Hugo, sur le capot
 
 const N_ASSIS = [-0.45, 0, -1.05] as Vec3;
@@ -436,7 +436,7 @@ export const donnees: DonneesEpisode = {
     { a: "rue", ...rue([SORTIE[0] + 0.6, RUE_Y, -3.8], { distance: 7.6, y: 700 }), coupe: true },
     { a: "rue:passants", ...rue(RUE_MILIEU, { distance: 6.8, y: 700 }), deplacement: 1.0 },
     { a: "n_17", ...rue(N_RUE, { distance: 5.2, y: 600, x: 600 }), coupe: true },
-    { a: "police", ...plan([0.5, RUE_Y + 0.8, -6.4], { azimut: 100, elevation: 10, distance: 11.5, fov: 44, y: 700, x: 540 }), coupe: true },
+    { a: "police", ...plan([0.0, RUE_Y + 0.8, -6.8], { azimut: -80, elevation: 10, distance: 11.5, fov: 44, y: 700, x: 540 }), coupe: true },
     { a: "sort", ...plan([-2.4, RUE_Y + 1.0, -4.2], { azimut: 100, elevation: 30, distance: 9.5, fov: 44, y: 720, x: 540 }), coupe: true },
     { a: "poches", ...objet(CAPOT, 150, { distance: 1.3, elevation: 24, y: 600 }), coupe: true },
     { a: "juillet", ...rue(L_RUE, { distance: 5.2, y: 600, x: 520 }), coupe: true },

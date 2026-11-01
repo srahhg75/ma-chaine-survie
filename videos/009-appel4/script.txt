@@ -32,7 +32,7 @@
 @juillet Volé dans le sac de Léa, en juillet.
 @numero Et l'appli qui imitait le numéro de Nathan.
 @l_fuir [Léa] Tu vois ? Fuir, c'est pas lâche.
-@n_courir [Nathan] Je courais pour te protéger, hein.
+@n_courir [Nathan] Je courais pour te protéger.
 @l_menteur [Léa] T'étais devant moi, menteur.
 @serrure Le soir même, la serrure est changée.
 @nuit *3 h 12*. Nathan ne dort pas.

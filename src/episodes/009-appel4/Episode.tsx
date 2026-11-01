@@ -275,6 +275,8 @@ const Scene: React.FC<{ al: Alignement }> = ({ al }) => {
       <pointLight position={[2.4, 2.3, 0.0]} intensity={0.55} distance={3.2} color="#c9d2ea" decay={2} />
       {/* la rue : réverbère côté trottoir (visages lisibles face au nord), lueur des gyrophares */}
       {t >= a("rue") && t < a("serrure") && <pointLight position={[0.4, RUE_Y + 3.2, -7.2]} intensity={5} distance={9} color="#dfe6f4" decay={1.6} />}
+      {/* l'arrestation : le hall et la portière ouverte éclairent le trajet d'Hugo (silhouettes lisibles, visage baissé) */}
+      {t >= a("sort") && t < a("poches") && <pointLight position={[-2.0, RUE_Y + 2.6, -3.8]} intensity={4} distance={6} color="#dfe6f4" decay={1.6} />}
       {police && <pointLight position={[-1.0, RUE_Y + 1.8, -6.0]} intensity={3 * gyro} distance={7} color={ROUGE} decay={1.6} />}
       {nuit && <pointLight position={[-0.8, 1.2, 0.3]} intensity={0.5} distance={2.5} color="#a9b8de" decay={2} />}
       <ImmeubleEnFace torche={null} voyant={0} flash={0} trepied={false} />
