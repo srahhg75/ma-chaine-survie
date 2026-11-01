@@ -1,0 +1,45 @@
+# « Le dernier appel » — Partie 4 « La fuite » : DERNIER ÉPISODE de la série (demande du 01/11 : « épisode 4 final »).
+# Histoire SANS CONSEILS. Choix A gagnant en partie 3 : il fuit avec Léa. Vraie fin : pas de cliffhanger ni de choix A/B.
+# Voix : sans marqueur = narrateur ; [Nathan] ou [Léa] en début de phrase = réplique dite par ce personnage.
+# Accroche « Si… » au tu (P3 : chiffre choc, P2 : « Vous avez choisi », P1 : « Que feriez-vous si… »).
+@hook Si quelqu'un respire sous ton lit…
+@hook2 Tu cours. Sans te retourner.
+@rec1 Vous avez choisi *A*. Il fuit avec Léa.
+@rec2 Hugo, l'ex de Léa, est sous leur lit.
+@rec3 À *4 mètres* d'eux.
+@doigt Nathan pose un doigt sur ses lèvres.
+@main Il prend la main de Léa.
+@l_quoi [Léa] Nathan ? Qu'est-ce que t'as ?
+@ecran Il lui montre son écran.
+@ecran2 Trois mots : il est _là_.
+@entree Ils marchent vers l'entrée. Sans un bruit.
+@crochet Les clés ne sont plus au crochet.
+@verrou La porte est fermée à double tour.
+@n_cles [Nathan] Il a pris nos clés.
+@sac Léa fouille son sac. Son trousseau.
+@tombe Il tombe sur le carrelage.
+@grince Dans la chambre, le sommier _grince_.
+@l_vite [Léa] Ouvre. Ouvre. Ouvre !
+@tour Un tour. Deux tours.
+@ombre Derrière eux, une ombre sort de la chambre.
+@escalier Ils dévalent les *3 étages*.
+@pas Au-dessus, des pas. Qui accélèrent.
+@rue La rue. Le froid. Des passants.
+@n_17 [Nathan] Allô, le 17 ? Il est chez nous !
+@police *4 minutes* plus tard, deux voitures.
+@sort Hugo sort du hall. Entre deux policiers.
+@poches Dans sa poche : un double de leurs clés.
+@juillet Volé dans le sac de Léa, en juillet.
+@numero Et l'appli qui imitait le numéro de Nathan.
+@l_fuir [Léa] Tu vois ? Fuir, c'est pas lâche.
+@n_courir [Nathan] Je courais pour te protéger, hein.
+@l_menteur [Léa] T'étais devant moi, menteur.
+@serrure Le soir même, la serrure est changée.
+@nuit *3 h 12*. Nathan ne dort pas.
+@pose Son téléphone est posé à côté de lui.
+@fin > Cette fois, il ne sonne _pas_.
+# Carton de FIN DE SÉRIE (pas de choix A/B : la série s'arrête), lu par le narrateur à la suite du récit
+# (même fichier « narrateur.mp3 ») ; pas de sous-titres, le carton affiche le texte
+@carton1 > Fin du Dernier appel.
+@carton2 Et vous, vous auriez soulevé la couette ?
+@carton3 Répondez en commentaire !
