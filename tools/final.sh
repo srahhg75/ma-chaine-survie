@@ -9,6 +9,7 @@ EP="${1:?Episode manquant, ex. : bash tools/final.sh 000-demo}"
 PY=.venv/bin/python; [ -x .venv/Scripts/python.exe ] && PY=.venv/Scripts/python.exe
 COMP=$(npx tsx tools/composition.ts "$EP") || exit 1
 QC="qc/$EP"; OUT="videos/$EP"; mkdir -p "$QC" "$OUT"
+QCTS=tools/qc.ts; grep -q "export const scene" "src/episodes/$EP/donnees.ts" && QCTS=tools/qc2d.ts # épisode dessiné en 2D
 etape() { printf "\n\033[1m== %s\033[0m\n" "$1"; }
 
 etape "0. Relire qc/lecons.md"
@@ -17,7 +18,7 @@ cat qc/lecons.md
 etape "1. Contrôles bloquants"
 npx tsc --noEmit || exit 1
 npx tsx tools/timeline.ts "$EP" || exit 1
-npx tsx tools/qc.ts "$EP" > /dev/null || { echo "Contrôle visuel en échec : voir $QC/rapport_qc.md"; exit 1; }
+npx tsx "$QCTS" "$EP" > /dev/null || { echo "Contrôle visuel en échec : voir $QC/rapport_qc.md"; exit 1; }
 "$PY" tools/mix.py "$EP" || exit 1
 "$PY" tools/qc_audio.py "$EP" > /dev/null || { echo "Contrôle audio en échec : voir $QC/rapport_audio.md"; exit 1; }
 

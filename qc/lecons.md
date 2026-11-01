@@ -534,3 +534,19 @@ Chaque erreur trouvée (par Claude ou par la personne qui gère la chaîne) ajou
   chaque commit, `git status --short` et n'ajouter QUE les chemins de son épisode (`src/episodes/NNN-nom`, fichiers du
   moteur modifiés nommément) ; jamais `git add -A` ; si un fichier d'une autre session casse le typecheck, prévenir cette
   session et la personne, sans toucher au fichier.
+- **2026-11-01 — « L'héritière cachée » P1 : `adrien.mp3` absent au dépôt des voix.** Une voix de synthèse Windows
+  provisoire (`videos/010-heritiere/adrien.wav`, voix Hortense) a permis de monter. ATTENTION : `tools/assembler_voix.py`
+  préfère un `.wav` à un `.mp3` du même nom. Règle : au dépôt de la vraie voix, SUPPRIMER le `.wav` provisoire, puis
+  relancer `assembler_voix.py` et `couper_blancs.py` (et refaire les recalages manuels de `mots.json`) ; une voix
+  provisoire est toujours signalée à la personne et notée dans `script.md`.
+- **2026-11-01 — Premier épisode dessiné en 2D : cadrage médian à 55 % et 26 % de gros plans au 1er passage.** Règle : en
+  2D, plan large = zoom 1,0 (personnage ≈ 32 % de l'image), plan moyen 1,3-1,6, gros plan ≥ 1,9 réservé aux moments
+  forts (≤ 15 % du temps) ; contrôler avec `npx tsx tools/qc2d.ts NNN-nom` (choisi tout seul par `tools/boucle.sh` et
+  `tools/final.sh` quand `donnees.ts` exporte `scene`). En gros plan d'un adulte, la tête d'un enfant voisin tombe
+  sous les sous-titres : viser plus bas (y de la caméra ≈ 680-700).
+- **2026-11-01 — Personnage dans la colonne des boutons TikTok sur 6 plans (enfant à côté de sa mère, à droite).**
+  Règle : un personnage secondaire se place du côté du centre (ou derrière le principal) ; chaque plan centré sur la
+  gauche se vérifie pour les personnages de droite (x écran = (x − cx) × zoom + 540 < 920).
+- **2026-11-01 — Session parallèle sur la même branche : un `git add -A src` d'une autre session a embarqué mes fichiers
+  en cours, et mon `tools/qc2d.ts` non fini a cassé son `npx tsc --noEmit`.** Règle : ne committer que des chemins
+  précis ; un fichier d'outil nouveau doit passer le typecheck avant d'être laissé sur le disque.

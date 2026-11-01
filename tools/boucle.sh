@@ -11,6 +11,7 @@ ECHEC=0
 # Exécutables des environnements Python : bin/ sous Linux et Mac, Scripts/*.exe sous Windows
 PY=.venv/bin/python; [ -x .venv/Scripts/python.exe ] && PY=.venv/Scripts/python.exe
 EARSHOT=tools/earshot/.venv/bin/earshot; [ -x tools/earshot/.venv/Scripts/earshot.exe ] && EARSHOT=tools/earshot/.venv/Scripts/earshot.exe
+QCTS=tools/qc.ts; grep -q "export const scene" "src/episodes/$EP/donnees.ts" && QCTS=tools/qc2d.ts # épisode dessiné en 2D
 etape() { printf "\n\033[1m== %s\033[0m\n" "$1"; }
 
 etape "0. Relire qc/lecons.md (règles en vigueur)"
@@ -23,7 +24,7 @@ etape "2. Timeline (ancres -> instants)"
 npx tsx tools/timeline.ts "$EP" || exit 1
 
 etape "3. Contrôle visuel automatique (tools/qc.ts)"
-npx tsx tools/qc.ts "$EP" > /dev/null; [ $? -eq 0 ] && echo "OK : aucune erreur" || { ECHEC=1; sed -n '/## Erreurs/,/## Avertissements/p' "$QC/rapport_qc.md"; }
+npx tsx "$QCTS" "$EP" > /dev/null; [ $? -eq 0 ] && echo "OK : aucune erreur" || { ECHEC=1; sed -n '/## Erreurs/,/## Avertissements/p' "$QC/rapport_qc.md"; }
 
 etape "4. Mixage + contrôle audio"
 "$PY" tools/mix.py "$EP" || exit 1

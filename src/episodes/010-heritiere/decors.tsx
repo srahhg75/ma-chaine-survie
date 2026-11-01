@@ -101,6 +101,10 @@ export const Hall: React.FC<PropsDecor> = ({ f, fps, etats }) => {
       {[1060, 1160, 1300, 1500, 1780].map((y) => (
         <line key={y} x1={-400} y1={y} x2={1480} y2={y} stroke="#b8a68a" strokeWidth={3} opacity={0.6} />
       ))}
+      {/* tapis rouge de l'ascenseur jusqu'à l'entrée, bordé d'or */}
+      <path d="M 445 1000 L 635 1000 L 820 1920 L 260 1920 Z" fill="#7a1626" />
+      <path d="M 445 1000 L 260 1920 M 635 1000 L 820 1920" stroke="url(#h-or)" strokeWidth={10} />
+      <path d="M 468 1000 L 300 1920 M 612 1000 L 780 1920" stroke="#6d1220" strokeWidth={4} opacity={0.7} />
       <path d="M 0 0 L 260 0 L 760 1300 L 420 1300 Z" fill="url(#h-rayon)" opacity={0.45} />
       <path d="M 380 0 L 470 0 L 980 1250 L 860 1250 Z" fill="url(#h-rayon)" opacity={0.3} />
     </g>
@@ -238,3 +242,30 @@ export const Gateau: React.FC<PropsObjet> = ({ etat, f }) => {
     </g>
   );
 };
+
+// Gros plan : le gâteau dans les mains de Clara (fond du hall flou et doré)
+export const GrosGateau: React.FC<PropsDecor> = ({ f }) => (
+  <g>
+    <defs>
+      <radialGradient id="gg-fond" cx="0.5" cy="0.4" r="0.8">
+        <stop offset="0" stopColor="#fbf1dc" />
+        <stop offset="0.7" stopColor="#d9c09a" />
+        <stop offset="1" stopColor="#a8875a" />
+      </radialGradient>
+    </defs>
+    <rect x={-400} y={-200} width={1880} height={2300} fill="url(#gg-fond)" />
+    {[180, 420, 700, 900].map((x, i) => (
+      <circle key={x} cx={x} cy={300 + (i % 2) * 260} r={60 + i * 12} fill="#fff6d6" opacity={0.25} />
+    ))}
+    {/* pull crème + mains qui tiennent l'assiette */}
+    <path d="M -100 1500 C 60 1180, 300 1100, 420 1050 L 660 1050 C 780 1100, 1020 1180, 1180 1500 Z" fill="#efe5d6" stroke={TRAIT} strokeWidth={8} />
+    <path d="M 700 1060 C 820 1110, 1000 1200, 1180 1500 L 1180 1200 Z" fill="#d2c3ad" />
+    <g transform="translate(540 1010) scale(4.2)">
+      <Gateau etat="normal" f={f} />
+    </g>
+    {[-1, 1].map((c) => (
+      <ellipse key={c} cx={540 + c * 250} cy={1040} rx={62} ry={46} fill="#f6dccb" stroke={TRAIT} strokeWidth={8} />
+    ))}
+    <rect x={770} y={1022} width={46} height={18} rx={6} fill="#e2b04a" stroke={TRAIT} strokeWidth={4} />
+  </g>
+);

@@ -7,7 +7,7 @@ import type { Expression, PoseBras } from "./types2d";
  * Repère « scène » : 1080×1920 (le décor dessiné à l'échelle 1). La caméra 2D montre le point (x, y) de la scène
  * au point ECRAN_CADRE de l'image, avec un zoom (1 = toute la scène). Fichier SANS JSX (lu par tools/qc2d.ts).
  */
-export const ECRAN_CADRE = { x: 540, y: 760 } as const;
+export const ECRAN_CADRE = { x: 540, y: 880 } as const;
 
 // Plan de caméra : arrive à l'ancre `a` (déplacement doux de `deplacement` s avant), ou coupe nette (`coupe`)
 export type Plan2D = { a: Ancre; decor: string; x: number; y: number; zoom: number; coupe?: boolean; deplacement?: number };

@@ -86,3 +86,10 @@ lirait à voix haute) ; le ton se règle avec les curseurs : Stabilité 35-45 %,
 Speaker boost activé. Une ligne = une réplique, séparées par un retour à la ligne.
 
 Dépôt : les 6 MP3 dans `videos/010-heritiere/` (noms sans accent).
+
+## Voix déposées (01/11)
+- narrateur, clara, victoria, noe, enzo : OK (Eleven v2 pour les personnages).
+- **adrien : ABSENT** → `adrien.wav` = voix de synthèse Windows PROVISOIRE (à supprimer quand `adrien.mp3` arrive,
+  puis relancer assembler_voix.py + couper_blancs.py).
+- Recalage manuel dans `public/010-heritiere/mots.json` : « Fais attention » (Enzo) 19,62-20,25 s (Vosk l'avait
+  interpolé dans le blanc). À refaire après tout nouvel alignement.
