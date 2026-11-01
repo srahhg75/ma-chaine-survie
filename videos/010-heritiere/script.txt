@@ -1,0 +1,47 @@
+# « L'héritière cachée » — Partie 1 « Le hall » : histoire SANS CONSEILS, drama de couple, style 2D webtoon.
+# Voix : sans marqueur = narrateur ; [Clara], [Noé], [Victoria], [Enzo], [Adrien] = réplique dite par ce personnage.
+# Accroche « Imagine… » (dernier épisode publié, « Le dernier appel » P4 : « Si… »).
+# Objet planté : la vieille bague gravée d'un A (Aurel), qui servira en partie 3.
+@hook Imagine… Ton mari a une autre femme.
+@hook2 Et c'est elle qui t'humilie.
+@entre Clara entre dans la tour Valmont.
+@fils Avec Noé, son fils de *6 ans*.
+@anniv C'est l'anniversaire de son mari, Adrien.
+@gateau Un gâteau fait maison. *35* bougies.
+@n_papa [Noé] Papa va être trop content !
+@hall Le hall brille d'or et de marbre.
+@bouscule Un garçon bouscule Noé.
+@ecrase Le gâteau s'écrase par terre.
+@e_pauvre [Enzo] Fais attention, le pauvre !
+@c_excuse [Clara] Excuse-toi auprès de mon fils.
+@talons Des talons claquent sur le marbre.
+@rouge Une femme en rouge. Couverte d'or.
+@v_parle [Victoria] On ne parle pas à mon fils.
+@v_pull [Victoria] Regarde-toi. Un pull à *20 €*.
+@v_rien [Victoria] Tu n'as rien à faire ici.
+@c_doit [Clara] Votre fils doit des excuses.
+@rit Victoria éclate de rire.
+@regard Tout le hall les regarde.
+@bague Clara serre sa vieille bague. Gravée d'un *A*.
+@v_mari [Victoria] Tu sais qui est mon mari ?
+@v_puissant [Victoria] L'homme le plus _puissant_ du pays.
+@tel Elle appelle. Haut-parleur.
+@v_cheri [Victoria] Chéri, une folle agresse Enzo.
+@voix Au bout du fil, une voix grave.
+@a_tel [Adrien] J'arrive. Elle va le _regretter_.
+@fige Clara se fige.
+@connait Elle connaît cette voix.
+@n_voix [Noé] Maman… C'est la voix de papa ?
+@descend L'ascenseur descend du *40e* étage.
+@portes Les portes dorées s'ouvrent.
+@costume Costume bleu. Cravate rouge.
+@mari C'est Adrien. Son mari.
+@blanc Il voit Clara. Il devient blanc.
+@c_qui [Clara] Adrien ? C'est qui, cette femme ?
+@v_connais [Victoria] Tu la connais, chéri ?
+@fin > Il a _deux_ femmes. Face à face.
+# Carton de fin, lu par le narrateur (même fichier « narrateur.mp3 », à la fin) : pas de sous-titres, le carton affiche le texte
+@carton1 > Devant ses deux femmes, Adrien…
+@carton2 A : dit la vérité.
+@carton3 B : jure qu'il ne la connaît pas.
+@carton4 Répondez en commentaire !
